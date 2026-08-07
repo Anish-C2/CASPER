@@ -1,0 +1,3690 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CASPER — Competitive Athletics & Sports Promotion</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Wikipedia-inspired encyclopedic theme */
+    :root {
+      --bg: #ffffff;
+      --panel: #f8f9fa;
+      --border: #a2a9b1;
+      --border-light: #c8ccd1;
+      --text: #202122;
+      --accent: #3366cc;
+      --muted: #54595d;
+      --link: #0645ad;
+      --link-visited: #0b0080;
+      --table-header: #eaecf0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Linux Libertine", "Georgia", "Times New Roman", Times, serif;
+      background: #fff;
+      color: #202122;
+      line-height: 1.6;
+      font-size: 14px;
+      min-height: 100vh;
+    }
+
+    a {
+      color: #0645ad;
+      text-decoration: none;
+    }
+
+    a:visited {
+      color: #0b0080;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      background: #fff;
+      border-bottom: 1px solid #c8ccd1;
+    }
+
+    .header-bar {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6px 12px 4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 18px;
+      color: #000;
+      font-weight: normal;
+    }
+
+    .logo-mark {
+      width: 28px;
+      height: 28px;
+      border: 1px solid #a2a9b1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      color: #202122;
+      font-family: sans-serif;
+      background: #f8f9fa;
+    }
+
+    .logo span.tag {
+      color: #54595d;
+      font-size: 11px;
+      font-weight: normal;
+      border-left: 1px solid #c8ccd1;
+      padding-left: 8px;
+      font-family: sans-serif;
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-top: 1px solid #c8ccd1;
+      background: #f8f9fa;
+      padding: 0 6px;
+      font-family: sans-serif;
+      font-size: 12px;
+      max-width: 100%;
+      line-height: 1.2;
+    }
+
+    nav a {
+      color: #202122;
+      padding: 5px 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
+    }
+
+    nav a i {
+      font-size: 0.9em;
+      opacity: 0.85;
+    }
+
+    nav a:hover {
+      background: #eaecf0;
+      text-decoration: none;
+      color: #202122;
+    }
+
+    nav a.active {
+      background: #fff;
+      border: 1px solid #c8ccd1;
+      border-bottom-color: #fff;
+      margin-bottom: -1px;
+      font-weight: bold;
+      color: #202122;
+    }
+
+    @media (max-width: 900px) {
+      nav a {
+        padding: 4px 6px;
+        font-size: 11px;
+      }
+
+      .logo span.tag {
+        display: none;
+      }
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px 16px 48px;
+    }
+
+    h1 {
+      font-family: "Linux Libertine", Georgia, "Times New Roman", serif;
+      font-size: 1.8em;
+      font-weight: normal;
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 3px;
+      margin: 0 0 12px;
+      color: #000;
+    }
+
+    h2,
+    .section-title {
+      font-family: "Linux Libertine", Georgia, "Times New Roman", serif;
+      font-size: 1.3em;
+      font-weight: normal;
+      border-bottom: 1px solid #a2a9b1;
+      padding-bottom: 2px;
+      margin: 18px 0 8px;
+      color: #000;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    h3 {
+      font-family: "Linux Libertine", Georgia, serif;
+      font-size: 1.15em;
+      font-weight: bold;
+      margin: 12px 0 6px;
+      color: #000;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid #c8ccd1;
+      border-radius: 2px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .split-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .split-4 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 900px) {
+
+      .grid2,
+      .grid3,
+      .grid4,
+      .split-3,
+      .split-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin: 6px 0 10px;
+      font-family: sans-serif;
+    }
+
+    th,
+    td {
+      border: 1px solid #a2a9b1;
+      padding: 4px 8px;
+      text-align: left;
+    }
+
+    th {
+      background: #eaecf0;
+      color: #202122;
+      font-weight: bold;
+      font-size: 12px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    tr:nth-child(even) td {
+      background: #f8f9fa;
+    }
+
+    tr:hover td {
+      background: #eaecf0;
+    }
+
+    .muted {
+      color: #54595d;
+    }
+
+    .accent {
+      color: #000;
+      font-weight: bold;
+    }
+
+    .stat-box,
+    .mini-stat,
+    .mega-strip .cell {
+      background: #f8f9fa;
+      border: 1px solid #c8ccd1;
+      border-radius: 2px;
+      padding: 8px 6px;
+      text-align: center;
+    }
+
+    .stat-box .num,
+    .mini-stat .n,
+    .mega-strip .cell .n {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      display: block;
+      line-height: 1.2;
+      font-family: sans-serif;
+    }
+
+    .stat-box .lbl,
+    .mini-stat .l,
+    .mega-strip .cell .l {
+      font-size: 11px;
+      color: #54595d;
+      display: block;
+      font-family: sans-serif;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .dense-grid,
+    .mega-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .badge,
+    .status,
+    .stage-tag,
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      padding: 1px 6px;
+      border: 1px solid #a2a9b1;
+      border-radius: 2px;
+      background: #f8f9fa;
+      color: #202122;
+      margin-right: 3px;
+      font-family: sans-serif;
+    }
+
+    .status.completed {
+      border-color: #14866d;
+      color: #14866d;
+      background: #eef9f5;
+    }
+
+    .status.ongoing {
+      border-color: #3366cc;
+      color: #3366cc;
+      background: #f0f5ff;
+    }
+
+    .status.scheduled,
+    .status.tobeplayed {
+      border-color: #a2a9b1;
+      color: #54595d;
+    }
+
+    .status.cancelled {
+      border-color: #b32424;
+      color: #b32424;
+      background: #fef0f0;
+    }
+
+    .stage-tag {
+      border-color: #3366cc;
+      color: #3366cc;
+      background: #f0f5ff;
+      font-weight: bold;
+    }
+
+    .match-score {
+      font-weight: bold;
+      color: #000;
+      font-family: sans-serif;
+    }
+
+    .cards {
+      font-size: 12px;
+      color: #54595d;
+      font-family: sans-serif;
+    }
+
+    .search-box {
+      width: 100%;
+      max-width: 420px;
+      padding: 6px 8px;
+      background: #fff;
+      border: 1px solid #a2a9b1;
+      border-radius: 2px;
+      color: #202122;
+      font-family: sans-serif;
+      font-size: 14px;
+    }
+
+    .search-box:focus {
+      outline: 1px solid #3366cc;
+      border-color: #3366cc;
+    }
+
+    .timeline-item {
+      border-left: 2px solid #c8ccd1;
+      padding: 4px 0 4px 12px;
+      margin-left: 4px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: #202122;
+      border-radius: 50%;
+      position: absolute;
+      left: -4.5px;
+      top: 10px;
+    }
+
+    .news-item {
+      border-bottom: 1px solid #c8ccd1;
+      padding: 8px 0;
+    }
+
+    .news-item:last-child {
+      border-bottom: none;
+    }
+
+    .news-item .date {
+      color: #54595d;
+      font-size: 12px;
+      font-family: sans-serif;
+    }
+
+    .news-item .title {
+      color: #000;
+      font-size: 15px;
+      font-weight: bold;
+      margin: 2px 0;
+    }
+
+    .award-line {
+      padding: 4px 0;
+      border-bottom: 1px solid #c8ccd1;
+      display: flex;
+      gap: 8px;
+      align-items: baseline;
+      flex-wrap: wrap;
+    }
+
+    .award-line .count {
+      color: #000;
+      font-weight: bold;
+    }
+
+    .copy-btn,
+    button.btn {
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      color: #202122;
+      padding: 3px 9px;
+      border-radius: 2px;
+      font-family: sans-serif;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover,
+    button.btn:hover {
+      background: #eaecf0;
+    }
+
+    .bracket {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 6px 0;
+    }
+
+    .bracket-round {
+      min-width: 140px;
+    }
+
+    .bracket-round h4 {
+      color: #54595d;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-family: sans-serif;
+      text-transform: uppercase;
+      border: none;
+      font-weight: bold;
+      padding: 0;
+    }
+
+    .bracket-match {
+      border: 1px solid #c8ccd1;
+      background: #f8f9fa;
+      border-radius: 2px;
+      padding: 6px 8px;
+      margin-bottom: 6px;
+      font-size: 12px;
+      font-family: sans-serif;
+    }
+
+    .bracket-match .score {
+      color: #000;
+      font-weight: bold;
+    }
+
+    pre.csn-raw {
+      background: #f8f9fa;
+      border: 1px solid #c8ccd1;
+      border-radius: 2px;
+      padding: 10px;
+      font-size: 12px;
+      overflow: auto;
+      max-height: 280px;
+      white-space: pre-wrap;
+      font-family: "Courier New", monospace;
+    }
+
+    .back {
+      font-size: 13px;
+      margin-bottom: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      color: #0645ad;
+      font-family: sans-serif;
+    }
+
+    .empty {
+      color: #54595d;
+      font-style: italic;
+      padding: 8px;
+    }
+
+    .error {
+      color: #b32424;
+      padding: 10px;
+      border: 1px solid #b32424;
+      background: #fef0f0;
+      border-radius: 2px;
+      font-family: sans-serif;
+    }
+
+    .loading {
+      color: #54595d;
+      padding: 40px;
+      text-align: center;
+    }
+
+    footer {
+      border-top: 1px solid #c8ccd1;
+      padding: 12px 16px;
+      text-align: center;
+      color: #54595d;
+      font-size: 12px;
+      margin-top: 20px;
+      font-family: sans-serif;
+      background: #f8f9fa;
+    }
+
+    ul.plain {
+      list-style: none;
+    }
+
+    ul.plain li {
+      padding: 3px 0;
+      border-bottom: 1px solid #c8ccd1;
+    }
+
+    .career-top {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      border-radius: 2px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 2px;
+      background: #eaecf0;
+      border: 1px solid #a2a9b1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      font-weight: bold;
+      color: #54595d;
+      flex-shrink: 0;
+      font-family: sans-serif;
+    }
+
+    .career-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      margin: 8px 0;
+      font-size: 12px;
+      color: #54595d;
+      font-family: sans-serif;
+    }
+
+    .career-meta strong {
+      color: #000;
+      display: block;
+      font-size: 13px;
+    }
+
+    .big-stats {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 700px) {
+      .big-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .career-top {
+        flex-direction: column;
+      }
+    }
+
+    .big-stats .cell {
+      background: #fff;
+      border: 1px solid #c8ccd1;
+      border-radius: 2px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    .big-stats .cell .n {
+      font-size: 20px;
+      font-weight: bold;
+      color: #000;
+      font-family: sans-serif;
+    }
+
+    .big-stats .cell .l {
+      font-size: 11px;
+      color: #54595d;
+      font-family: sans-serif;
+    }
+
+    .quick-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 6px;
+      background: #f8f9fa;
+      border: 1px solid #c8ccd1;
+      border-radius: 2px;
+      padding: 8px;
+      margin-bottom: 12px;
+    }
+
+    @media (max-width: 800px) {
+      .quick-row {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .quick-row .q {
+      text-align: center;
+      padding: 4px;
+    }
+
+    .quick-row .q .n {
+      font-size: 15px;
+      font-weight: bold;
+      color: #000;
+      font-family: sans-serif;
+    }
+
+    .quick-row .q .l {
+      font-size: 10px;
+      color: #54595d;
+      font-family: sans-serif;
+      text-transform: uppercase;
+    }
+
+    .trophy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+      gap: 6px;
+    }
+
+    .trophy {
+      background: #fff;
+      border: 1px solid #c8ccd1;
+      border-radius: 2px;
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    .trophy .n {
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      font-family: sans-serif;
+    }
+
+    .trophy .l {
+      font-size: 11px;
+      color: #54595d;
+      font-family: sans-serif;
+    }
+
+    .club-line {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid #c8ccd1;
+    }
+
+    .club-line:last-child {
+      border-bottom: none;
+    }
+
+    .club-dot {
+      width: 32px;
+      height: 32px;
+      border-radius: 2px;
+      background: #eaecf0;
+      border: 1px solid #a2a9b1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      color: #202122;
+      flex-shrink: 0;
+      font-family: sans-serif;
+    }
+
+    .i {
+      margin-right: 5px;
+      opacity: 0.7;
+      font-size: 0.85em;
+      color: #54595d;
+    }
+
+    .inline-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      font-size: 13px;
+      margin: 4px 0 8px;
+      font-family: sans-serif;
+    }
+
+    .inline-stats b {
+      color: #000;
+    }
+
+    .kv-table td:first-child {
+      color: #54595d;
+      width: 42%;
+    }
+
+    .pyramid-wrap {
+      background: #f8f9fa;
+      border: 1px solid #a2a9b1;
+      padding: 14px 10px;
+      margin: 12px 0;
+      overflow-x: auto;
+    }
+
+    .pyramid-wrap pre {
+      font-family: "Courier New", ui-monospace, monospace;
+      font-size: 12px;
+      line-height: 1.35;
+      color: #202122;
+      margin: 0;
+      white-space: pre;
+      text-align: left;
+    }
+
+    .pyramid-title {
+      text-align: center;
+      font-family: sans-serif;
+      font-weight: bold;
+      font-size: 14px;
+      margin-bottom: 8px;
+      letter-spacing: 0.04em;
+    }
+
+    .pyramid-legend {
+      font-family: sans-serif;
+      font-size: 12px;
+      color: #54595d;
+      margin-top: 10px;
+      border-top: 1px solid #c8ccd1;
+      padding-top: 8px;
+    }
+
+    .pyramid-legend table {
+      font-size: 12px;
+    }
+
+
+    /* CASPER Football Pyramid diagram */
+    .pyramid {
+      font-family: sans-serif;
+      font-size: 13px;
+      margin: 12px 0 16px;
+    }
+
+    .pyramid-title {
+      text-align: center;
+      font-family: "Linux Libertine", Georgia, serif;
+      font-size: 1.4em;
+      font-weight: normal;
+      margin-bottom: 14px;
+      letter-spacing: 0.04em;
+    }
+
+    .pyr-flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .pyr-node {
+      border: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      padding: 10px 16px;
+      text-align: center;
+      min-width: 220px;
+      max-width: 520px;
+      width: 100%;
+    }
+
+    .pyr-node.primary {
+      background: #fff;
+      border-width: 2px;
+      border-color: #202122;
+    }
+
+    .pyr-node .name {
+      font-weight: bold;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .pyr-node .detail {
+      color: #54595d;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .pyr-arrow {
+      color: #54595d;
+      font-size: 18px;
+      line-height: 1.2;
+      padding: 2px 0;
+    }
+
+    .pyr-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+      max-width: 640px;
+    }
+
+    .pyr-branch {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pyr-label {
+      font-size: 11px;
+      color: #54595d;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .pyr-section {
+      border: 1px solid #c8ccd1;
+      background: #fff;
+      padding: 12px 14px;
+      margin-top: 16px;
+    }
+
+    .pyr-section h3 {
+      margin: 0 0 10px;
+      font-size: 1.05em;
+      border-bottom: 1px solid #c8ccd1;
+      padding-bottom: 4px;
+    }
+
+    .pyr-path {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 8px;
+      margin: 6px 0;
+      font-size: 13px;
+    }
+
+    .pyr-chip {
+      border: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      padding: 3px 8px;
+      font-size: 12px;
+    }
+
+    .pyr-chip.final {
+      border-color: #202122;
+      border-width: 2px;
+      background: #fff;
+      font-weight: bold;
+    }
+
+    .pyr-trophies {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .pyr-trophy {
+      border: 1px solid #c8ccd1;
+      padding: 8px 10px;
+      background: #f8f9fa;
+    }
+
+    .pyr-trophy .t-name {
+      font-weight: bold;
+    }
+
+    .pyr-trophy .t-note {
+      color: #54595d;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .pyr-trophy.crown {
+      border-left: 3px solid #202122;
+    }
+
+    .pyr-trophy.gold {
+      border-left: 3px solid #a2a9b1;
+    }
+
+    .pyr-trophy.silver {
+      border-left: 3px solid #c8ccd1;
+    }
+
+    .pyr-trophy.bronze {
+      border-left: 3px solid #eaecf0;
+    }
+
+    @media (max-width: 640px) {
+      .pyr-split {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+  <header>
+    <div class="header-bar">
+      <div class="logo">
+        <div class="logo-mark">CA</div>
+        CASPER
+        <span class="tag" id="site-tagline">Competitive Athletics &amp; Sports Promotion</span>
+      </div>
+    </div>
+    <nav id="main-nav">
+      <a href="#home" data-view="home"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="#archive" data-view="archive"><i class="fa-solid fa-box-archive"></i> Archive</a>
+      <a href="#competitions" data-view="competitions"><i class="fa-solid fa-trophy"></i> Competitions</a>
+      <a href="#news" data-view="news"><i class="fa-solid fa-newspaper"></i> News</a>
+      <a href="#players" data-view="players"><i class="fa-solid fa-users"></i> Players</a>
+      <a href="#teams" data-view="teams"><i class="fa-solid fa-shield-halved"></i> Teams</a>
+      <a href="#awards" data-view="awards"><i class="fa-solid fa-trophy"></i> Awards</a>
+      <a href="#records" data-view="records"><i class="fa-solid fa-medal"></i> Records</a>
+      <a href="#statistics" data-view="statistics"><i class="fa-solid fa-chart-column"></i> Statistics</a>
+      <a href="#database" data-view="database"><i class="fa-solid fa-database"></i> Database</a>
+      <a href="#search" data-view="search"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
+      <a href="#structure" data-view="structure"><i class="fa-solid fa-diagram-project"></i> Structure</a>
+      <a href="#about" data-view="about"><i class="fa-solid fa-circle-info"></i> About</a>
+    </nav>
+  </header>
+
+  <main id="app">
+    <div class="loading">Loading archive…</div>
+  </main>
+
+  <footer>
+    CASPER — Competitive Athletics &amp; Sports Promotion · CSN-powered · Local client-side · <a
+      href="#database">Database</a>
+  </footer>
+
+  <script>
+    /* ============================================================
+       CASPER Index — pure vanilla JS, no shared code with fill.html
+       ============================================================ */
+
+    const STATE = {
+      config: null,
+      tournaments: [],
+      players: {},
+      teams: {},
+      matches: [],
+      misc: { news: [], seasonalAwards: [], records: [], seasonNotes: {} },
+      rawById: {},
+      ready: false,
+      metrics: {
+        databaseVersion: '2026.08',
+        csnVersion: '1.2',
+        characters: 0,
+        bytes: 0,
+        lines: 0,
+        parseTimeMs: 0,
+        renderTimeMs: 0,
+        loadSources: 0
+      }
+    };
+
+    /* ---------- CSN PARSER ---------- */
+    function parseCSN(text) {
+      if (!text || typeof text !== 'string') return [];
+      // Strip full-line comments only (so match stage tags like #F are preserved)
+      let cleaned = text.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+      cleaned = cleaned.split('\n').map(line => {
+        if (line.trim().startsWith('#')) return '';
+        return line;
+      }).join('\n');
+
+      const tournaments = [];
+      let i = 0;
+      const len = cleaned.length;
+
+      function skipWS() {
+        while (i < len && /\s/.test(cleaned[i])) i++;
+      }
+      function peek() { return cleaned[i]; }
+      function next() { return cleaned[i++]; }
+
+      function readUntil(chars) {
+        let s = '';
+        while (i < len && chars.indexOf(cleaned[i]) === -1) {
+          s += cleaned[i++];
+        }
+        return s.trim();
+      }
+
+      function parseValue() {
+        skipWS();
+        if (peek() === '(') {
+          next(); // (
+          const body = [];
+          let depth = 1;
+          let start = i;
+          while (i < len && depth > 0) {
+            if (cleaned[i] === '(') depth++;
+            else if (cleaned[i] === ')') depth--;
+            if (depth > 0) i++;
+          }
+          const inner = cleaned.slice(start, i).trim();
+          if (peek() === ')') next();
+          return { type: 'func', body: inner };
+        }
+        // plain value until ; or end of block
+        let val = '';
+        while (i < len && cleaned[i] !== ';' && cleaned[i] !== ']') {
+          val += cleaned[i++];
+        }
+        return { type: 'val', body: val.trim() };
+      }
+
+      function parseTournament() {
+        const t = {
+          meta: {},
+          n: {},          // abbr -> {name, player}
+          grp: {},        // group -> [abbr]
+          m: [],          // matches
+          st: {},         // group -> [{team, pts, gd}]
+          aw: {},         // award -> value
+          ac: [],         // achievements
+          nt: ''
+        };
+        skipWS();
+        if (peek() !== '[') return null;
+        next(); // [
+
+        while (i < len) {
+          skipWS();
+          if (peek() === ']') { next(); break; }
+          if (peek() === ';' || peek() === ',') { next(); continue; }
+
+          // key (letters/digits/underscore)
+          let key = '';
+          while (i < len && /[a-zA-Z0-9_]/.test(cleaned[i])) {
+            key += cleaned[i++];
+          }
+          if (!key) { next(); continue; }
+          skipWS();
+
+          // CSN allows both key=value;  and  key(...);  (no equals for functions)
+          let val;
+          if (peek() === '=') {
+            next(); // consume =
+            skipWS();
+            val = parseValue();
+          } else if (peek() === '(') {
+            // bare function form: n( ... )  /  m( ... )  etc.
+            val = parseValue();
+          } else {
+            // unknown token – skip
+            continue;
+          }
+          if (peek() === ';') next();
+
+          if (val.type === 'val') {
+            t.meta[key] = val.body;
+          } else {
+            // function body
+            const body = val.body;
+            if (key === 'n') {
+              // abbr=TeamName[Player], ...
+              const parts = body.split(',');
+              parts.forEach(p => {
+                p = p.trim();
+                if (!p) return;
+                const m = p.match(/^([^=]+)=([^\[]+)\[([^\]]*)\]/);
+                if (m) {
+                  t.n[m[1].trim()] = { name: m[2].trim(), player: m[3].trim() };
+                }
+              });
+            } else if (key === 'grp') {
+              // A>bbu,kok; B>...
+              const groups = body.split(';');
+              groups.forEach(g => {
+                g = g.trim();
+                if (!g) return;
+                const m = g.match(/^([A-Za-z0-9]+)>(.*)/);
+                if (m) {
+                  t.grp[m[1].trim()] = m[2].split(',').map(s => s.trim()).filter(Boolean);
+                }
+              });
+            } else if (key === 'm') {
+              // matches separated by ;
+              const matches = body.split(';');
+              matches.forEach(raw => {
+                raw = raw.trim();
+                if (!raw) return;
+                const match = parseMatch(raw);
+                if (match) t.m.push(match);
+              });
+            } else if (key === 'st') {
+              // A:\nteam,pts,+gd; ...
+              const blocks = body.split(/(?=[A-Za-z0-9]+:)/);
+              blocks.forEach(b => {
+                b = b.trim();
+                if (!b) return;
+                const m = b.match(/^([A-Za-z0-9]+):\s*([\s\S]*)/);
+                if (m) {
+                  const g = m[1];
+                  t.st[g] = [];
+                  m[2].split(';').forEach(line => {
+                    line = line.trim();
+                    if (!line) return;
+                    const parts = line.split(',');
+                    if (parts.length >= 2) {
+                      t.st[g].push({
+                        team: parts[0].trim(),
+                        pts: parseInt(parts[1], 10) || 0,
+                        gd: parts[2] ? parts[2].trim() : '0'
+                      });
+                    }
+                  });
+                }
+              });
+            } else if (key === 'aw') {
+              body.split(';').forEach(pair => {
+                pair = pair.trim();
+                if (!pair) return;
+                const eq = pair.indexOf('=');
+                if (eq > 0) {
+                  t.aw[pair.slice(0, eq).trim()] = pair.slice(eq + 1).trim();
+                }
+              });
+            } else if (key === 'ac') {
+              t.ac = body.split(';').map(s => s.trim()).filter(Boolean);
+            } else if (key === 'nt') {
+              t.nt = body.trim();
+            } else {
+              // unknown function – store raw
+              t.meta[key] = body;
+            }
+          }
+        }
+        return t;
+      }
+
+      function parseMatch(raw) {
+        // bbu-kok:3-2(et,p2-0,y1-0,r0-1,F)  or  bbu-kok:3-2#F  or  bbu-kok:3-2(p2-0)#SF
+        const STAGE_CODES = {
+          F: 'Final', SF: 'Semi-final', QF: 'Quarter-final',
+          R16: 'Round of 16', R32: 'Round of 32', R64: 'Round of 64',
+          '3P': 'Third Place', TP: 'Third Place', GS: 'Group Stage',
+          FINAL: 'Final', SEMI: 'Semi-final', QUARTER: 'Quarter-final'
+        };
+        let stageFromHash = null;
+        let work = raw;
+        const hashM = work.match(/#([A-Za-z0-9]+)\s*$/);
+        if (hashM) {
+          stageFromHash = hashM[1].toUpperCase();
+          work = work.slice(0, hashM.index).trim();
+        }
+        const m = work.match(/^([a-zA-Z0-9]+)-([a-zA-Z0-9]+):(\d+)-(\d+)(?:\(([^)]*)\))?/);
+        if (!m) return null;
+        const match = {
+          home: m[1],
+          away: m[2],
+          sh: parseInt(m[3], 10),
+          sa: parseInt(m[4], 10),
+          et: false,
+          p: null,
+          y: null,
+          r: null,
+          stage: null,
+          stageLabel: null,
+          raw: raw
+        };
+        if (m[5]) {
+          const extras = m[5].split(',');
+          extras.forEach(e => {
+            e = e.trim();
+            if (e === 'et') match.et = true;
+            else if (e.startsWith('p') && /p\d+-\d+/.test(e)) {
+              const pm = e.match(/p(\d+)-(\d+)/);
+              if (pm) match.p = [parseInt(pm[1], 10), parseInt(pm[2], 10)];
+            } else if (e.startsWith('y') && /y\d+-\d+/.test(e)) {
+              const ym = e.match(/y(\d+)-(\d+)/);
+              if (ym) match.y = [parseInt(ym[1], 10), parseInt(ym[2], 10)];
+            } else if (e.startsWith('r') && /r\d+-\d+/.test(e)) {
+              const rm = e.match(/r(\d+)-(\d+)/);
+              if (rm) match.r = [parseInt(rm[1], 10), parseInt(rm[2], 10)];
+            } else {
+              // possible stage code inside paren
+              const code = e.toUpperCase();
+              if (STAGE_CODES[code]) {
+                match.stage = code;
+                match.stageLabel = STAGE_CODES[code];
+              }
+            }
+          });
+        }
+        if (!match.stage && stageFromHash) {
+          match.stage = stageFromHash;
+          match.stageLabel = STAGE_CODES[stageFromHash] || stageFromHash;
+        }
+        return match;
+      }
+
+      while (i < len) {
+        skipWS();
+        if (i >= len) break;
+        if (peek() === '[') {
+          const t = parseTournament();
+          if (t && t.meta.id) tournaments.push(t);
+        } else {
+          i++;
+        }
+      }
+      return tournaments;
+    }
+
+    /* ---------- AGGREGATION ---------- */
+    function buildAggregates(tournaments) {
+      const players = {};
+      const teams = {};
+      const matches = []; // flat index of all matches with context
+
+      function ensurePlayer(name) {
+        const key = name.toLowerCase();
+        if (!players[key]) {
+          players[key] = {
+            name,
+            teams: new Set(),
+            goals: 0, conceded: 0,
+            matches: 0,
+            wins: 0, draws: 0, losses: 0,
+            yellow: 0, red: 0,
+            titles: 0, runnerUps: 0,
+            awards: [],
+            tournaments: [],
+            cleanSheets: 0,
+            failedToScore: 0,
+            penaltiesWon: 0, penaltiesLost: 0,
+            biggestWin: 0,
+            highestScoring: 0,
+            etMatches: 0, etWins: 0,
+            groupMatches: 0, groupWins: 0,
+            knockoutMatches: 0, knockoutWins: 0,
+            goalsByStage: {},
+            matchIds: [],
+            elo: 1500,
+            peakElo: 1500
+          };
+        }
+        return players[key];
+      }
+      function ensureTeam(abbr, info) {
+        if (!teams[abbr]) {
+          teams[abbr] = {
+            abbr,
+            name: info ? info.name : abbr,
+            player: info ? info.player : '',
+            goalsFor: 0, goalsAgainst: 0,
+            matches: 0,
+            wins: 0, draws: 0, losses: 0,
+            yellow: 0, red: 0,
+            titles: 0, runnerUps: 0,
+            tournaments: [],
+            cleanSheets: 0,
+            failedToScore: 0,
+            penaltiesWon: 0, penaltiesLost: 0,
+            biggestWin: 0,
+            highestScoring: 0,
+            etMatches: 0, etWins: 0,
+            groupMatches: 0, groupWins: 0,
+            knockoutMatches: 0, knockoutWins: 0,
+            matchIds: [],
+            elo: 1500,
+            peakElo: 1500
+          };
+        }
+        return teams[abbr];
+      }
+
+      function isKnockout(stage) {
+        if (!stage || stage === 'GS') return false;
+        return true;
+      }
+
+      tournaments.forEach(t => {
+        Object.keys(t.n).forEach(abbr => {
+          const info = t.n[abbr];
+          const team = ensureTeam(abbr, info);
+          team.name = info.name;
+          team.player = info.player;
+          if (info.player) ensurePlayer(info.player).teams.add(abbr);
+        });
+
+        t.m.forEach((m, mi) => {
+          const matchId = t.meta.id + '/' + mi;
+          const th = ensureTeam(m.home);
+          const ta = ensureTeam(m.away);
+          th.matches++; ta.matches++;
+          th.goalsFor += m.sh; th.goalsAgainst += m.sa;
+          ta.goalsFor += m.sa; ta.goalsAgainst += m.sh;
+          th.matchIds.push(matchId); ta.matchIds.push(matchId);
+
+          let homeWin = false, awayWin = false, draw = false;
+          if (m.p) {
+            homeWin = m.p[0] > m.p[1];
+            awayWin = m.p[1] > m.p[0];
+          } else if (m.sh > m.sa) homeWin = true;
+          else if (m.sa > m.sh) awayWin = true;
+          else draw = true;
+
+          if (homeWin) { th.wins++; ta.losses++; }
+          else if (awayWin) { ta.wins++; th.losses++; }
+          else { th.draws++; ta.draws++; }
+
+          if (m.y) { th.yellow += m.y[0]; ta.yellow += m.y[1]; }
+          if (m.r) { th.red += m.r[0]; ta.red += m.r[1]; }
+
+          // clean sheets / failed to score
+          if (m.sa === 0) th.cleanSheets++;
+          if (m.sh === 0) ta.cleanSheets++;
+          if (m.sh === 0) th.failedToScore++;
+          if (m.sa === 0) ta.failedToScore++;
+
+          // margins
+          const margin = Math.abs(m.sh - m.sa);
+          const totalG = m.sh + m.sa;
+          if (homeWin && margin > th.biggestWin) th.biggestWin = margin;
+          if (awayWin && margin > ta.biggestWin) ta.biggestWin = margin;
+          if (totalG > th.highestScoring) th.highestScoring = totalG;
+          if (totalG > ta.highestScoring) ta.highestScoring = totalG;
+
+          // ET / pens
+          if (m.et) {
+            th.etMatches++; ta.etMatches++;
+            if (homeWin) th.etWins++;
+            if (awayWin) ta.etWins++;
+          }
+          if (m.p) {
+            if (m.p[0] > m.p[1]) { th.penaltiesWon++; ta.penaltiesLost++; }
+            else { ta.penaltiesWon++; th.penaltiesLost++; }
+          }
+
+          // stage buckets
+          const ko = isKnockout(m.stage);
+          if (ko) {
+            th.knockoutMatches++; ta.knockoutMatches++;
+            if (homeWin) th.knockoutWins++;
+            if (awayWin) ta.knockoutWins++;
+          } else {
+            th.groupMatches++; ta.groupMatches++;
+            if (homeWin) th.groupWins++;
+            if (awayWin) ta.groupWins++;
+          }
+
+          const ph = t.n[m.home] && t.n[m.home].player;
+          const pa = t.n[m.away] && t.n[m.away].player;
+
+          function applyPlayer(name, scored, conceded, won, lost, drew, y, r) {
+            if (!name) return;
+            const p = ensurePlayer(name);
+            p.goals += scored;
+            p.conceded += conceded;
+            p.matches++;
+            if (won) p.wins++;
+            else if (lost) p.losses++;
+            else p.draws++;
+            if (y) p.yellow += y;
+            if (r) p.red += r;
+            if (conceded === 0) p.cleanSheets++;
+            if (scored === 0) p.failedToScore++;
+            if (won && Math.abs(scored - conceded) > p.biggestWin) p.biggestWin = Math.abs(scored - conceded);
+            if (scored + conceded > p.highestScoring) p.highestScoring = scored + conceded;
+            if (m.et) {
+              p.etMatches++;
+              if (won) p.etWins++;
+            }
+            if (m.p) {
+              if (won) p.penaltiesWon++;
+              else if (lost) p.penaltiesLost++;
+            }
+            if (ko) {
+              p.knockoutMatches++;
+              if (won) p.knockoutWins++;
+            } else {
+              p.groupMatches++;
+              if (won) p.groupWins++;
+            }
+            const st = m.stage || 'GS';
+            if (!p.goalsByStage[st]) p.goalsByStage[st] = 0;
+            p.goalsByStage[st] += scored;
+            p.matchIds.push(matchId);
+          }
+
+          applyPlayer(ph, m.sh, m.sa, homeWin, awayWin, draw, m.y ? m.y[0] : 0, m.r ? m.r[0] : 0);
+          applyPlayer(pa, m.sa, m.sh, awayWin, homeWin, draw, m.y ? m.y[1] : 0, m.r ? m.r[1] : 0);
+
+          matches.push({
+            id: matchId,
+            tourneyId: t.meta.id,
+            index: mi,
+            home: m.home, away: m.away,
+            sh: m.sh, sa: m.sa,
+            et: m.et, p: m.p, y: m.y, r: m.r,
+            stage: m.stage, stageLabel: m.stageLabel,
+            event: t.meta.e, season: t.meta.s,
+            homeWin, awayWin, draw,
+            homePlayer: ph || '', awayPlayer: pa || '',
+            homeName: t.n[m.home] ? t.n[m.home].name : m.home,
+            awayName: t.n[m.away] ? t.n[m.away].name : m.away
+          });
+        });
+
+        if (t.aw.ch) {
+          const abbr = t.aw.ch;
+          ensureTeam(abbr).titles++;
+          const info = t.n[abbr];
+          if (info && info.player) {
+            ensurePlayer(info.player).titles++;
+            ensurePlayer(info.player).awards.push({ tourney: t.meta.id, award: 'Champion' });
+          }
+        }
+        if (t.aw.ru) {
+          const abbr = t.aw.ru;
+          ensureTeam(abbr).runnerUps++;
+          const info = t.n[abbr];
+          if (info && info.player) {
+            ensurePlayer(info.player).runnerUps++;
+            ensurePlayer(info.player).awards.push({ tourney: t.meta.id, award: 'Runner-up' });
+          }
+        }
+        Object.keys(t.aw).forEach(k => {
+          if (k === 'ch' || k === 'ru') return;
+          const val = t.aw[k];
+          let p = players[val.toLowerCase()];
+          if (!p && t.n[val] && t.n[val].player) p = ensurePlayer(t.n[val].player);
+          if (p) p.awards.push({ tourney: t.meta.id, award: getAwardLabel(k) });
+        });
+
+        Object.keys(t.n).forEach(abbr => {
+          ensureTeam(abbr).tournaments.push(t.meta.id);
+          const info = t.n[abbr];
+          if (info && info.player) ensurePlayer(info.player).tournaments.push(t.meta.id);
+        });
+      });
+
+      Object.values(players).forEach(p => { p.teams = Array.from(p.teams); });
+
+      // ELO — chronological, player-centric (base 1500, K=32)
+      const chrono = tournaments.slice().sort((a, b) => {
+        const da = (a.meta.dos || a.meta.doc || '00000000');
+        const db = (b.meta.dos || b.meta.doc || '00000000');
+        const sa = da.slice(4) + da.slice(2, 4) + da.slice(0, 2);
+        const sb = db.slice(4) + db.slice(2, 4) + db.slice(0, 2);
+        return sa.localeCompare(sb);
+      });
+      const K = 32;
+      function expectedScore(ra, rb) {
+        return 1 / (1 + Math.pow(10, (rb - ra) / 400));
+      }
+      chrono.forEach(t => {
+        t.m.forEach(m => {
+          const ph = t.n[m.home] && t.n[m.home].player;
+          const pa = t.n[m.away] && t.n[m.away].player;
+          if (!ph || !pa) return;
+          const pHome = ensurePlayer(ph);
+          const pAway = ensurePlayer(pa);
+          const th = ensureTeam(m.home);
+          const ta = ensureTeam(m.away);
+          let scoreH = 0.5, scoreA = 0.5;
+          if (m.p) {
+            if (m.p[0] > m.p[1]) { scoreH = 1; scoreA = 0; }
+            else if (m.p[1] > m.p[0]) { scoreH = 0; scoreA = 1; }
+          } else if (m.sh > m.sa) { scoreH = 1; scoreA = 0; }
+          else if (m.sa > m.sh) { scoreH = 0; scoreA = 1; }
+          const expH = expectedScore(pHome.elo, pAway.elo);
+          const newH = Math.round(pHome.elo + K * (scoreH - expH));
+          const newA = Math.round(pAway.elo + K * (scoreA - (1 - expH)));
+          pHome.elo = newH; pAway.elo = newA;
+          if (newH > pHome.peakElo) pHome.peakElo = newH;
+          if (newA > pAway.peakElo) pAway.peakElo = newA;
+          th.elo = newH; ta.elo = newA;
+          if (newH > th.peakElo) th.peakElo = newH;
+          if (newA > ta.peakElo) ta.peakElo = newA;
+        });
+      });
+
+      return { players, teams, matches };
+    }
+
+    /* ---------- UTILITIES ---------- */
+    function fmtDate(ddmmyyyy) {
+      if (!ddmmyyyy || ddmmyyyy.length !== 8) return ddmmyyyy || '—';
+      return ddmmyyyy.slice(0, 2) + '/' + ddmmyyyy.slice(2, 4) + '/' + ddmmyyyy.slice(4);
+    }
+    function escapeHtml(s) {
+      if (s == null) return '';
+      return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function sortByDate(tours, newestFirst) {
+      return tours.slice().sort((a, b) => {
+        const da = a.meta.doc || a.meta.dos || '00000000';
+        const db = b.meta.doc || b.meta.dos || '00000000';
+        // convert DDMMYYYY to sortable
+        const sa = da.slice(4) + da.slice(2, 4) + da.slice(0, 2);
+        const sb = db.slice(4) + db.slice(2, 4) + db.slice(0, 2);
+        return newestFirst ? sb.localeCompare(sa) : sa.localeCompare(sb);
+      });
+    }
+    function playerWinRate(p) {
+      if (!p.matches) return '—';
+      return ((p.wins / p.matches) * 100).toFixed(1) + '%';
+    }
+    function teamGD(t) {
+      return t.goalsFor - t.goalsAgainst;
+    }
+
+    function getStatus(t) {
+      const sts = (t.meta.sts || '').trim();
+      if (sts) {
+        const low = sts.toLowerCase();
+        if (low.includes('complet')) return { key: 'completed', label: 'Completed' };
+        if (low.includes('ongoing') || low.includes('live')) return { key: 'ongoing', label: 'Ongoing' };
+        if (low.includes('cancel')) return { key: 'cancelled', label: 'Cancelled' };
+        if (low.includes('schedul') || low.includes('to be') || low.includes('upcoming')) return { key: 'scheduled', label: 'To be played' };
+        return { key: 'scheduled', label: sts };
+      }
+      // Infer from dates
+      const today = '06082026'; // fallback; real sites can use new Date
+      try {
+        const now = new Date();
+        const dd = String(now.getDate()).padStart(2, '0');
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const yyyy = String(now.getFullYear());
+        const todayStr = dd + mm + yyyy;
+        const dos = t.meta.dos || '';
+        const doc = t.meta.doc || '';
+        const toSort = d => d && d.length === 8 ? d.slice(4) + d.slice(2, 4) + d.slice(0, 2) : '';
+        const ts = toSort(todayStr), s = toSort(dos), e = toSort(doc);
+        if (e && ts > e) return { key: 'completed', label: 'Completed' };
+        if (s && e && ts >= s && ts <= e) return { key: 'ongoing', label: 'Ongoing' };
+        if (s && ts < s) return { key: 'scheduled', label: 'To be played' };
+        if (doc) return { key: 'completed', label: 'Completed' };
+      } catch (e) { }
+      return { key: 'completed', label: 'Completed' };
+    }
+
+    function statusBadge(t) {
+      const st = getStatus(t);
+      return `<span class="status ${st.key}">${escapeHtml(st.label)}</span>`;
+    }
+
+    function calcStandings(t) {
+      // If explicit st() exists, use it
+      if (t.st && Object.keys(t.st).length) return t.st;
+      // Otherwise compute from group matches
+      if (!t.grp || !Object.keys(t.grp).length) return {};
+      const result = {};
+      Object.keys(t.grp).forEach(g => {
+        const teams = t.grp[g];
+        const table = {};
+        teams.forEach(abbr => {
+          table[abbr] = { team: abbr, pts: 0, gf: 0, ga: 0, w: 0, d: 0, l: 0 };
+        });
+        t.m.forEach(m => {
+          // Prefer GS-tagged matches; if no stage tags at all, use any intra-group match
+          if (m.stage && m.stage !== 'GS') return;
+          const inGroup = teams.includes(m.home) && teams.includes(m.away);
+          if (!inGroup) return;
+          if (!table[m.home] || !table[m.away]) return;
+          table[m.home].gf += m.sh; table[m.home].ga += m.sa;
+          table[m.away].gf += m.sa; table[m.away].ga += m.sh;
+          let hw = false, aw = false, dr = false;
+          if (m.p) { hw = m.p[0] > m.p[1]; aw = m.p[1] > m.p[0]; }
+          else if (m.sh > m.sa) hw = true;
+          else if (m.sa > m.sh) aw = true;
+          else dr = true;
+          if (hw) { table[m.home].pts += 3; table[m.home].w++; table[m.away].l++; }
+          else if (aw) { table[m.away].pts += 3; table[m.away].w++; table[m.home].l++; }
+          else { table[m.home].pts += 1; table[m.away].pts += 1; table[m.home].d++; table[m.away].d++; }
+        });
+        result[g] = Object.values(table)
+          .map(r => ({
+            team: r.team,
+            pts: r.pts,
+            gd: (r.gf - r.ga >= 0 ? '+' : '') + (r.gf - r.ga),
+            gf: r.gf, ga: r.ga, w: r.w, d: r.d, l: r.l
+          }))
+          .sort((a, b) => b.pts - a.pts || parseInt(b.gd) - parseInt(a.gd));
+      });
+      return result;
+    }
+
+    function groupPlayerAwards(p) {
+      // Group awards as "Pioneer Cup Golden Boot x3"
+      const map = {};
+      (p.awards || []).forEach(a => {
+        const tourney = STATE.tournaments.find(t => t.meta.id === a.tourney);
+        const eventName = tourney ? (tourney.meta.e || a.tourney) : a.tourney;
+        const key = eventName + '|' + a.award;
+        if (!map[key]) map[key] = { event: eventName, award: a.award, count: 0, ids: [] };
+        map[key].count++;
+        map[key].ids.push(a.tourney);
+      });
+      return Object.values(map).sort((a, b) => b.count - a.count || a.event.localeCompare(b.event));
+    }
+
+    function buildBracket(t) {
+      const order = ['R64', 'R32', 'R16', 'QF', 'SF', '3P', 'F'];
+      const labels = {
+        R64: 'Round of 64', R32: 'Round of 32', R16: 'Round of 16',
+        QF: 'Quarter-finals', SF: 'Semi-finals', '3P': 'Third Place', F: 'Final'
+      };
+      const byStage = {};
+      t.m.forEach(m => {
+        if (!m.stage || m.stage === 'GS') return;
+        const s = m.stage === 'TP' ? '3P' : m.stage;
+        if (!byStage[s]) byStage[s] = [];
+        byStage[s].push(m);
+      });
+      const stages = order.filter(s => byStage[s] && byStage[s].length);
+      if (!stages.length) return '';
+      let html = `<div class="panel"><h2><i class="fa-solid fa-sitemap i"></i> Knockout Bracket</h2><div class="bracket">`;
+      stages.forEach(s => {
+        html += `<div class="bracket-round"><h4>${escapeHtml(labels[s] || s)}</h4>`;
+        byStage[s].forEach(m => {
+          const hn = t.n[m.home] ? t.n[m.home].name : m.home;
+          const an = t.n[m.away] ? t.n[m.away].name : m.away;
+          let score = `${m.sh}–${m.sa}`;
+          if (m.p) score += ` (p ${m.p[0]}–${m.p[1]})`;
+          if (m.et) score += ' ET';
+          html += `<div class="bracket-match">
+        <div>${escapeHtml(hn)}</div>
+        <div class="score">${score}</div>
+        <div>${escapeHtml(an)}</div>
+      </div>`;
+        });
+        html += `</div>`;
+      });
+      html += `</div></div>`;
+      return html;
+    }
+
+    /* ---------- RENDER HELPERS ---------- */
+    function setActiveNav(view) {
+      document.querySelectorAll('#main-nav a').forEach(a => {
+        a.classList.toggle('active', a.dataset.view === view);
+      });
+    }
+
+
+    function renderPyramid() {
+      const pyr = (STATE.misc && STATE.misc.pyramid) || null;
+      if (!pyr) return '';
+      let html = `<div class="pyramid">
+    <div class="pyramid-title">${escapeHtml(pyr.title || 'CASPER Football Pyramid')}</div>
+    <div class="pyr-flow">
+      <div class="pyr-label">Start</div>
+      <div class="pyr-arrow">▼</div>
+      <div class="pyr-node primary">
+        <div class="name">Pioneer Cup</div>
+        <div class="detail">12–16 Clubs · Group Stage + Knockout</div>
+      </div>
+      <div class="pyr-arrow">▼</div>
+      <div class="pyr-split">
+        <div class="pyr-branch">
+          <div class="pyr-label">Top 8 Clubs</div>
+          <div class="pyr-arrow">▼</div>
+          <div class="pyr-node">
+            <div class="name">Grande Cup</div>
+            <div class="detail">Top 8 Knockout</div>
+          </div>
+          <div class="pyr-arrow">▼</div>
+          <div class="pyr-split" style="max-width:100%">
+            <div class="pyr-branch">
+              <div class="pyr-label">Top 4</div>
+              <div class="pyr-arrow">▼</div>
+              <div class="pyr-node">
+                <div class="name">Premier League</div>
+                <div class="detail">Double Round-Robin</div>
+              </div>
+            </div>
+            <div class="pyr-branch">
+              <div class="pyr-label">Bottom 4</div>
+              <div class="pyr-arrow">▼</div>
+              <div class="pyr-node">
+                <div class="name">Conference League</div>
+                <div class="detail">Single Round-Robin</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pyr-branch">
+          <div class="pyr-label">Bottom 4–8 Clubs</div>
+          <div class="pyr-arrow">▼</div>
+          <div class="pyr-node">
+            <div class="name">Relegator Cup</div>
+            <div class="detail">Bottom Clubs Knockout</div>
+          </div>
+          <div class="pyr-arrow">▼</div>
+          <div class="pyr-node" style="min-width:auto">
+            <div class="name">Relegator Champion</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pyr-section">
+      <h3>Elite Path</h3>
+      <div class="pyr-path">
+        <span class="pyr-chip">Pioneer Champion</span>
+        <span class="muted">+</span>
+        <span class="pyr-chip">Grande Champion</span>
+        <span class="muted">→</span>
+        <span class="pyr-chip">Cup Finalifier</span>
+      </div>
+      <div class="pyr-path">
+        <span class="pyr-chip">Premier Champion</span>
+        <span class="muted">+</span>
+        <span class="pyr-chip">Conference Champion</span>
+        <span class="muted">→</span>
+        <span class="pyr-chip">League Finalifier</span>
+      </div>
+      <div class="pyr-path">
+        <span class="pyr-chip">Cup Finalifier</span>
+        <span class="muted">+</span>
+        <span class="pyr-chip">League Finalifier</span>
+        <span class="muted">→</span>
+        <span class="pyr-chip final">Finale</span>
+      </div>
+      <p class="muted" style="margin-top:8px;font-size:12px">Ultimate Champion of the CASPER season.</p>
+    </div>
+
+    <div class="pyr-section">
+      <h3>Cascade Path</h3>
+      <div class="pyr-path">
+        <span class="pyr-chip">Conference Champion</span>
+        <span class="muted">+</span>
+        <span class="pyr-chip">Relegator Champion</span>
+        <span class="muted">→</span>
+        <span class="pyr-chip final">Cascade Cup</span>
+      </div>
+    </div>
+
+    <div class="pyr-section">
+      <h3>Trophies</h3>
+      <div class="pyr-trophies">`;
+      const trophies = pyr.trophies || [];
+      trophies.forEach(t => {
+        html += `<div class="pyr-trophy ${escapeHtml(t.level || '')}">
+      <div class="t-name">${escapeHtml(t.name)}</div>
+      <div class="t-note">${escapeHtml(t.note || '')}</div>
+    </div>`;
+      });
+      html += `</div></div></div>`;
+      return html;
+    }
+
+    function renderHome() {
+      const tours = sortByDate(STATE.tournaments, true);
+      const latest = tours[0];
+      const seasons = [...new Set(tours.map(t => t.meta.s).filter(Boolean))];
+      const players = Object.values(STATE.players);
+      const teams = Object.values(STATE.teams);
+      const totalGoals = players.reduce((s, p) => s + p.goals, 0);
+      const totalMatches = tours.reduce((s, t) => s + t.m.length, 0);
+      const totalCardsY = players.reduce((s, p) => s + p.yellow, 0);
+      const totalCardsR = players.reduce((s, p) => s + p.red, 0);
+      const totalTitles = players.reduce((s, p) => s + p.titles, 0);
+      const totalAwards = players.reduce((s, p) => s + p.awards.length, 0) + (STATE.misc.seasonalAwards || []).length;
+      const topScorer = players.slice().sort((a, b) => b.goals - a.goals)[0];
+      const mostTitles = players.slice().sort((a, b) => b.titles - a.titles)[0];
+      const mostWins = players.slice().sort((a, b) => b.wins - a.wins)[0];
+      const avgGpm = totalMatches ? (totalGoals / totalMatches).toFixed(2) : '—';
+      const completed = tours.filter(t => getStatus(t).key === 'completed').length;
+      const ongoing = tours.filter(t => getStatus(t).key === 'ongoing').length;
+      const scheduled = tours.filter(t => getStatus(t).key === 'scheduled').length;
+
+      let html = `<h1><i class="fa-solid fa-gauge-high i"></i>CASPER Dashboard</h1>
+  <p class="muted" style="margin-bottom:8px">${escapeHtml(STATE.config.tagline || '')}</p>
+  <p class="muted" style="margin-bottom:8px;font-family:sans-serif;font-size:12px">
+    <a href="#structure"><i class="fa-solid fa-diagram-project i"></i>Competition pyramid</a>
+    — Pioneer → Grande / Relegator → Premier · Conference · Chroma → Finale
+  </p>`;
+
+      html += `<div class="mega-strip">
+    <div class="cell"><span class="n">${tours.length}</span><span class="l"><i class="fa-solid fa-trophy"></i> Cups</span></div>
+    <div class="cell"><span class="n">${players.length}</span><span class="l"><i class="fa-solid fa-user"></i> Players</span></div>
+    <div class="cell"><span class="n">${teams.length}</span><span class="l"><i class="fa-solid fa-shield"></i> Teams</span></div>
+    <div class="cell"><span class="n">${totalMatches}</span><span class="l"><i class="fa-solid fa-futbol"></i> Matches</span></div>
+    <div class="cell"><span class="n">${totalGoals}</span><span class="l"><i class="fa-solid fa-bullseye"></i> Goals</span></div>
+    <div class="cell"><span class="n">${avgGpm}</span><span class="l"><i class="fa-solid fa-chart-line"></i> G/M</span></div>
+    <div class="cell"><span class="n">${seasons.length}</span><span class="l"><i class="fa-solid fa-calendar"></i> Seasons</span></div>
+    <div class="cell"><span class="n">${totalTitles}</span><span class="l"><i class="fa-solid fa-crown"></i> Titles</span></div>
+    <div class="cell"><span class="n">${totalAwards}</span><span class="l"><i class="fa-solid fa-award"></i> Awards</span></div>
+    <div class="cell"><span class="n">${totalCardsY}</span><span class="l"><i class="fa-solid fa-square" style="color:#eab308"></i> Yellow</span></div>
+    <div class="cell"><span class="n">${totalCardsR}</span><span class="l"><i class="fa-solid fa-square" style="color:#ef4444"></i> Red</span></div>
+    <div class="cell"><span class="n">${completed}</span><span class="l"><i class="fa-solid fa-circle-check"></i> Done</span></div>
+    <div class="cell"><span class="n">${ongoing}</span><span class="l"><i class="fa-solid fa-spinner"></i> Live</span></div>
+    <div class="cell"><span class="n">${scheduled}</span><span class="l"><i class="fa-solid fa-clock"></i> Upcoming</span></div>
+    <div class="cell"><span class="n">${(STATE.misc.news || []).length}</span><span class="l"><i class="fa-solid fa-newspaper"></i> News</span></div>
+  </div>`;
+
+      if (latest) {
+        const chAbbr = latest.aw.ch;
+        const chTeam = STATE.teams[chAbbr];
+        html += `<div class="panel">
+      <div class="section-title"><i class="fa-solid fa-crown i"></i> Latest Champion ${statusBadge(latest)}</div>
+      <div class="inline-stats">
+        <span><b>${escapeHtml(chTeam ? chTeam.name : chAbbr || '—')}</b></span>
+        ${chTeam && chTeam.player ? `<span>· <a href="#player/${encodeURIComponent(chTeam.player)}">${escapeHtml(chTeam.player)}</a></span>` : ''}
+        <span class="muted">· ${escapeHtml(latest.meta.e || '')} (${escapeHtml(latest.meta.s || '')})</span>
+        <span class="muted">· ${fmtDate(latest.meta.doc)}</span>
+        <span>· <a href="#competition/${encodeURIComponent(latest.meta.id)}">Open <i class="fa-solid fa-arrow-right"></i></a></span>
+      </div>
+    </div>`;
+      }
+
+      html += `<div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-newspaper i"></i> News</div>`;
+      const news = (STATE.misc.news || []).slice().sort((a, b) => {
+        const sa = (a.date || '').slice(4) + (a.date || '').slice(2, 4) + (a.date || '').slice(0, 2);
+        const sb = (b.date || '').slice(4) + (b.date || '').slice(2, 4) + (b.date || '').slice(0, 2);
+        return sb.localeCompare(sa);
+      });
+      if (!news.length) html += `<p class="empty">No news.</p>`;
+      news.slice(0, 8).forEach(n => {
+        html += `<div class="news-item">
+      <div class="date"><i class="fa-regular fa-calendar i"></i>${fmtDate(n.date)}</div>
+      <div class="title">${escapeHtml(n.title)}</div>
+      <div class="muted">${escapeHtml(n.body || '')}</div>
+    </div>`;
+      });
+      html += `<div style="margin-top:6px"><a href="#news">All news <i class="fa-solid fa-arrow-right"></i></a></div>
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-list i"></i> Competitions</div>
+      <ul class="plain">`;
+      tours.slice(0, 12).forEach(t => {
+        html += `<li>
+      <a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a>
+      ${statusBadge(t)}
+      <span class="muted"> ${escapeHtml(t.meta.s || '')} · ${fmtDate(t.meta.doc)} · ${t.m.length}m</span>
+    </li>`;
+      });
+      html += `</ul></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-ranking-star i"></i> Leaders</div>
+      <table class="kv-table">
+        <tr><td><i class="fa-solid fa-bullseye i"></i>Top scorer</td><td>${topScorer ? '<a href="#player/' + encodeURIComponent(topScorer.name) + '">' + escapeHtml(topScorer.name) + '</a> <b>' + topScorer.goals + '</b>' : '—'}</td></tr>
+        <tr><td><i class="fa-solid fa-crown i"></i>Most titles</td><td>${mostTitles ? '<a href="#player/' + encodeURIComponent(mostTitles.name) + '">' + escapeHtml(mostTitles.name) + '</a> <b>' + mostTitles.titles + '</b>' : '—'}</td></tr>
+        <tr><td><i class="fa-solid fa-handshake i"></i>Most wins</td><td>${mostWins ? '<a href="#player/' + encodeURIComponent(mostWins.name) + '">' + escapeHtml(mostWins.name) + '</a> <b>' + mostWins.wins + '</b>' : '—'}</td></tr>
+        <tr><td><i class="fa-solid fa-chart-line i"></i>Goals / match</td><td><b>${avgGpm}</b></td></tr>
+        <tr><td><i class="fa-solid fa-users i"></i>Players</td><td><b>${players.length}</b></td></tr>
+        <tr><td><i class="fa-solid fa-shield i"></i>Teams</td><td><b>${teams.length}</b></td></tr>
+        <tr><td><i class="fa-solid fa-futbol i"></i>Matches</td><td><b>${totalMatches}</b></td></tr>
+        <tr><td><i class="fa-solid fa-award i"></i>Awards issued</td><td><b>${totalAwards}</b></td></tr>
+      </table>
+      <div class="section-title" style="margin-top:10px"><i class="fa-solid fa-star i"></i> Seasonal</div>`;
+      const sa = STATE.misc.seasonalAwards || [];
+      if (!sa.length) html += `<p class="empty">None.</p>`;
+      else {
+        html += `<table>`;
+        sa.slice(0, 6).forEach(a => {
+          html += `<tr><td class="accent">${escapeHtml(a.award || '')}</td>
+        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
+        <td class="muted">${escapeHtml(a.season || '')}</td></tr>`;
+        });
+        html += `</table>`;
+      }
+      html += `</div>
+  </div>`;
+
+      // Top scorers mini table + top teams
+      html += `<div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-fire i"></i> Top Scorers</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>G</th><th>M</th><th>G/M</th></tr></thead><tbody>`;
+      players.slice().sort((a, b) => b.goals - a.goals).slice(0, 10).forEach((p, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.goals}</b></td><td>${p.matches}</td><td>${p.matches ? (p.goals / p.matches).toFixed(2) : '—'}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-shield-halved i"></i> Teams by Titles</div>
+      <table><thead><tr><th>#</th><th>Team</th><th>Titles</th><th>W</th><th>GF</th></tr></thead><tbody>`;
+      teams.slice().sort((a, b) => b.titles - a.titles || b.wins - a.wins).slice(0, 10).forEach((t, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#team/${encodeURIComponent(t.abbr)}">${escapeHtml(t.name)}</a></td>
+      <td><b>${t.titles}</b></td><td>${t.wins}</td><td>${t.goalsFor}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-timeline i"></i> Timeline</div>`;
+      tours.forEach(t => {
+        html += `<div class="timeline-item">
+      <a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a>
+      ${statusBadge(t)}
+      <span class="muted"> ${fmtDate(t.meta.dos)}–${fmtDate(t.meta.doc)} · ${escapeHtml(t.meta.s || '')} · ${t.m.length} matches</span>
+      ${t.aw.ch ? ` <span class="badge"><i class="fa-solid fa-crown"></i> ${escapeHtml((STATE.teams[t.aw.ch] || {}).name || t.aw.ch)}</span>` : ''}
+    </div>`;
+      });
+      html += `</div></div>`;
+
+      // Football pyramid schematic
+      html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-diagram-project i"></i>Structure</div>${renderPyramid()}</div>`;
+
+      // curated records strip
+      const curated = STATE.misc.records || [];
+      if (curated.length) {
+        html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-medal i"></i> Highlight Records</div>
+    <div class="split-4">`;
+        curated.slice(0, 8).forEach(r => {
+          html += `<div class="mini-stat"><span class="n">${escapeHtml(r.value || '')}</span>
+        <span class="l">${escapeHtml(r.label || '')}</span>
+        <div class="muted" style="font-size:10px;margin-top:2px">${escapeHtml(r.holder || '')}</div></div>`;
+        });
+        html += `</div></div>`;
+      }
+
+      return html;
+    }
+
+    function renderArchive() {
+      const tours = sortByDate(STATE.tournaments, true);
+      let html = `<h1><i class="fa-solid fa-box-archive i"></i>Archive</h1>
+  <p class="muted">All tournaments in the CSN archive. Status is taken from <code>sts</code> metadata or inferred from dates.</p>
+  <table>
+    <thead><tr>
+      <th>ID</th><th>Event</th><th>Season</th><th>Format</th><th>Teams</th><th>Champion</th><th>Status</th><th>Completed</th>
+    </tr></thead><tbody>`;
+      tours.forEach(t => {
+        const ch = t.aw.ch ? (STATE.teams[t.aw.ch] ? STATE.teams[t.aw.ch].name : t.aw.ch) : '—';
+        html += `<tr>
+      <td><a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.id)}</a></td>
+      <td>${escapeHtml(t.meta.e || '')}</td>
+      <td><a href="#season/${encodeURIComponent(t.meta.s || '')}">${escapeHtml(t.meta.s || '')}</a></td>
+      <td>${escapeHtml(t.meta.fmt || '')}</td>
+      <td>${escapeHtml(t.meta.t || Object.keys(t.n).length)}</td>
+      <td>${escapeHtml(ch)}</td>
+      <td>${statusBadge(t)}</td>
+      <td>${fmtDate(t.meta.doc)}</td>
+    </tr>`;
+      });
+      html += `</tbody></table>`;
+      return html;
+    }
+
+    function renderCompetitions() {
+      return renderCompetitionsOfficial();
+    }
+
+    function renderCompetition(id) {
+      const t = STATE.tournaments.find(x => x.meta.id === id);
+      if (!t) return `<div class="error">Tournament “${escapeHtml(id)}” not found.</div>`;
+
+      let html = `<a class="back" href="#archive"><i class="fa-solid fa-arrow-left"></i> Archive</a>
+  <h1>${escapeHtml(t.meta.e || t.meta.id)} ${statusBadge(t)}</h1>
+  <p class="muted">${escapeHtml(t.meta.s || '')} · Edition ${escapeHtml(t.meta.ed || '1')} · ${escapeHtml(t.meta.fmt || '')} · ${fmtDate(t.meta.dos)} – ${fmtDate(t.meta.doc)}</p>`;
+
+      // Metadata (driven by config.metadataFields)
+      {
+        const fields = (STATE.config && STATE.config.metadataFields) || [];
+        const showUnknown = STATE.config && STATE.config.metadataShowUnknown !== false;
+        const knownKeys = new Set(fields.map(f => f.key));
+        const rows = [];
+
+        // Preferred fields in config order
+        fields.forEach(f => {
+          let val = t.meta[f.key];
+          // sensible fallbacks for a few keys
+          if (f.key === 't' && (val === undefined || val === '')) val = Object.keys(t.n).length || '';
+          if (f.key === 'grp' && (val === undefined || val === '')) val = Object.keys(t.grp).join(',') || '';
+          if (f.key === 'dos' || f.key === 'doc') val = val ? fmtDate(val) : '';
+          if (val !== undefined && val !== null && String(val).trim() !== '') {
+            rows.push({ label: f.label || f.key, value: String(val) });
+          }
+        });
+
+        // Any extra keys present in the CSN but not listed in config
+        if (showUnknown) {
+          Object.keys(t.meta).forEach(k => {
+            if (knownKeys.has(k)) return;
+            const val = t.meta[k];
+            if (val !== undefined && val !== null && String(val).trim() !== '') {
+              rows.push({ label: k, value: String(val) });
+            }
+          });
+        }
+
+        if (rows.length) {
+          html += `<div class="panel"><h2><i class="fa-solid fa-tags i"></i> Metadata</h2><table>`;
+          rows.forEach(r => {
+            html += `<tr><td>${escapeHtml(r.label)}</td><td>${escapeHtml(r.value)}</td></tr>`;
+          });
+          html += `</table></div>`;
+        }
+      }
+
+      // Teams
+      if (Object.keys(t.n).length) {
+        html += `<div class="panel"><h2><i class="fa-solid fa-users i"></i> Teams</h2><table>
+      <thead><tr><th>Abbr</th><th>Team</th><th>Player</th></tr></thead><tbody>`;
+        Object.keys(t.n).forEach(abbr => {
+          const info = t.n[abbr];
+          html += `<tr>
+        <td>${escapeHtml(abbr)}</td>
+        <td><a href="#team/${encodeURIComponent(abbr)}">${escapeHtml(info.name)}</a></td>
+        <td><a href="#player/${encodeURIComponent(info.player)}">${escapeHtml(info.player)}</a></td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
+      // Groups
+      if (Object.keys(t.grp).length) {
+        html += `<div class="panel"><h2>Groups</h2>`;
+        Object.keys(t.grp).forEach(g => {
+          html += `<h3>Group ${escapeHtml(g)}</h3><p>`;
+          t.grp[g].forEach(abbr => {
+            const name = t.n[abbr] ? t.n[abbr].name : abbr;
+            html += `<span class="tag"><a href="#team/${encodeURIComponent(abbr)}">${escapeHtml(name)}</a></span> `;
+          });
+          html += `</p>`;
+        });
+        html += `</div>`;
+      }
+
+      // Standings (explicit or calculated)
+      {
+        const standings = calcStandings(t);
+        if (Object.keys(standings).length) {
+          html += `<div class="panel"><h2><i class="fa-solid fa-table-list i"></i> Group Standings</h2>`;
+          Object.keys(standings).forEach(g => {
+            html += `<h3>Group ${escapeHtml(g)}</h3>
+        <table><thead><tr><th>Pos</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th></tr></thead><tbody>`;
+            standings[g].forEach((row, idx) => {
+              const name = t.n[row.team] ? t.n[row.team].name : row.team;
+              const played = (row.w || 0) + (row.d || 0) + (row.l || 0);
+              html += `<tr><td>${idx + 1}</td>
+            <td><a href="#team/${encodeURIComponent(row.team)}">${escapeHtml(name)}</a></td>
+            <td>${played || '—'}</td>
+            <td>${row.w != null ? row.w : '—'}</td>
+            <td>${row.d != null ? row.d : '—'}</td>
+            <td>${row.l != null ? row.l : '—'}</td>
+            <td>${row.gf != null ? row.gf : '—'}</td>
+            <td>${row.ga != null ? row.ga : '—'}</td>
+            <td>${escapeHtml(String(row.gd))}</td>
+            <td><strong>${row.pts}</strong></td></tr>`;
+            });
+            html += `</tbody></table>`;
+          });
+          html += `</div>`;
+        }
+      }
+
+      // Fixtures with stage tags
+      if (t.m.length) {
+        html += `<div class="panel"><h2><i class="fa-solid fa-futbol i"></i> Fixtures / Results</h2>
+    <table><thead><tr><th>#</th><th>Stage</th><th>Match</th><th>Score</th><th>Details</th></tr></thead><tbody>`;
+        t.m.forEach((m, idx) => {
+          const hn = t.n[m.home] ? t.n[m.home].name : m.home;
+          const an = t.n[m.away] ? t.n[m.away].name : m.away;
+          let details = [];
+          if (m.et) details.push('ET');
+          if (m.p) details.push(`Pen ${m.p[0]}-${m.p[1]}`);
+          if (m.y) details.push(`Y ${m.y[0]}-${m.y[1]}`);
+          if (m.r) details.push(`R ${m.r[0]}-${m.r[1]}`);
+          const stageHtml = m.stage
+            ? `<span class="stage-tag" title="${escapeHtml(m.stageLabel || m.stage)}">${escapeHtml(m.stage)}</span>`
+            : '—';
+          html += `<tr>
+        <td>${idx + 1}</td>
+        <td>${stageHtml}</td>
+        <td><a href="#team/${encodeURIComponent(m.home)}">${escapeHtml(hn)}</a> – <a href="#team/${encodeURIComponent(m.away)}">${escapeHtml(an)}</a></td>
+        <td class="match-score"><a href="#match/${encodeURIComponent(t.meta.id + '/' + idx)}">${m.sh}–${m.sa}</a></td>
+        <td class="cards">${details.join(', ') || '—'} · <a href="#match/${encodeURIComponent(t.meta.id + '/' + idx)}">Report</a></td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
+      // Knockout bracket
+      html += buildBracket(t);
+
+      // Awards
+      if (Object.keys(t.aw).length) {
+        html += `<div class="panel"><h2>Awards</h2><table>`;
+        Object.keys(t.aw).forEach(k => {
+          const label = getAwardLabel(k);
+          let val = t.aw[k];
+          if (STATE.teams[val]) val = STATE.teams[val].name + ' (' + STATE.teams[val].player + ')';
+          else if (STATE.players[val.toLowerCase()]) val = STATE.players[val.toLowerCase()].name;
+          html += `<tr><td>${escapeHtml(label)}</td><td>${escapeHtml(val)}</td></tr>`;
+        });
+        html += `</table></div>`;
+      }
+
+      // Notes
+      if (t.nt) {
+        html += `<div class="panel"><h2>Notes</h2><p>${escapeHtml(t.nt)}</p></div>`;
+      }
+      if (t.ac && t.ac.length) {
+        html += `<div class="panel"><h2>Achievements</h2><p>${t.ac.map(a => `<span class="tag">${escapeHtml(a)}</span>`).join(' ')}</p></div>`;
+      }
+
+      // Raw CSN
+      const raw = STATE.rawById[t.meta.id] || '';
+      if (raw) {
+        const safeId = 'csn-' + t.meta.id.replace(/[^a-zA-Z0-9]/g, '');
+        html += `<div class="panel">
+      <h2><i class="fa-solid fa-code i"></i> Raw CSN <button class="copy-btn" onclick="navigator.clipboard.writeText(document.getElementById('${safeId}').textContent).then(()=>this.textContent='Copied!').catch(()=>{})">Copy</button></h2>
+      <pre class="csn-raw" id="${safeId}">${escapeHtml(raw)}</pre>
+    </div>`;
+      }
+
+      return html;
+    }
+
+    function renderPlayers() {
+      const list = Object.values(STATE.players).sort((a, b) => b.elo - a.elo || b.goals - a.goals);
+      let html = `<h1><i class="fa-solid fa-users i"></i>Players</h1>
+  <p class="muted">All players in the archive. Sorted by ELO. ${list.length} players.</p>
+  <table>
+    <thead><tr>
+      <th>#</th><th>Player</th><th>Team(s)</th><th>ELO</th><th>Peak</th><th>G</th><th>GA</th><th>M</th><th>CS</th><th>W-D-L</th><th>Win%</th><th>Y/R</th><th>Titles</th>
+    </tr></thead><tbody>`;
+      list.forEach((p, i) => {
+        html += `<tr>
+      <td>${i + 1}</td>
+      <td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td>${p.teams.map(a => escapeHtml((STATE.teams[a] || {}).name || a)).join(', ')}</td>
+      <td><b>${p.elo}</b></td>
+      <td>${p.peakElo || p.elo}</td>
+      <td>${p.goals}</td>
+      <td>${p.conceded || 0}</td>
+      <td>${p.matches}</td>
+      <td>${p.cleanSheets || 0}</td>
+      <td>${p.wins}-${p.draws}-${p.losses}</td>
+      <td>${playerWinRate(p)}</td>
+      <td>${p.yellow}/${p.red}</td>
+      <td>${p.titles}</td>
+    </tr>`;
+      });
+      html += `</tbody></table>`;
+      return html;
+    }
+
+    function renderPlayer(name) {
+      const key = decodeURIComponent(name).toLowerCase();
+      const p = STATE.players[key];
+      if (!p) return `<div class="error">Player “${escapeHtml(name)}” not found.</div>`;
+
+      const gpm = p.matches ? (p.goals / p.matches).toFixed(2) : '—';
+      const uniqueTours = [...new Set(p.tournaments)];
+      const initials = (p.name || '?').split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+      const seasons = new Set();
+      uniqueTours.forEach(id => {
+        const t = STATE.tournaments.find(x => x.meta.id === id);
+        if (t && t.meta.s) seasons.add(t.meta.s);
+      });
+      const gbCount = (p.awards || []).filter(a => /golden boot/i.test(a.award)).length;
+      const potCount = (p.awards || []).filter(a => /player of tournament/i.test(a.award)).length;
+
+      const byTour = {};
+      STATE.tournaments.forEach(t => {
+        if (!uniqueTours.includes(t.meta.id)) return;
+        let goals = 0, matches = 0, wins = 0, draws = 0, losses = 0;
+        t.m.forEach(m => {
+          const ph = t.n[m.home] && t.n[m.home].player;
+          const pa = t.n[m.away] && t.n[m.away].player;
+          let isMe = false, myGoals = 0, won = false, lost = false, drew = false;
+          if (ph && ph.toLowerCase() === key) {
+            isMe = true; myGoals = m.sh;
+            if (m.p) { won = m.p[0] > m.p[1]; lost = m.p[1] > m.p[0]; }
+            else if (m.sh > m.sa) won = true; else if (m.sa > m.sh) lost = true; else drew = true;
+          }
+          if (pa && pa.toLowerCase() === key) {
+            isMe = true; myGoals = m.sa;
+            if (m.p) { won = m.p[1] > m.p[0]; lost = m.p[0] > m.p[1]; }
+            else if (m.sa > m.sh) won = true; else if (m.sh > m.sa) lost = true; else drew = true;
+          }
+          if (isMe) {
+            matches++; goals += myGoals;
+            if (won) wins++; else if (lost) losses++; else draws++;
+          }
+        });
+        byTour[t.meta.id] = { event: t.meta.e || t.meta.id, season: t.meta.s, goals, matches, wins, draws, losses, ch: t.aw.ch, fmt: t.meta.fmt };
+      });
+
+      const grouped = groupPlayerAwards(p);
+      const seasonal = (STATE.misc.seasonalAwards || []).filter(a => (a.recipient || '').toLowerCase() === key);
+
+      const trophyMap = {};
+      grouped.forEach(g => { trophyMap[g.award] = (trophyMap[g.award] || 0) + g.count; });
+      seasonal.forEach(a => {
+        const nm = a.award || a.code;
+        trophyMap[nm] = (trophyMap[nm] || 0) + 1;
+      });
+
+      let html = `<a class="back" href="#players"><i class="fa-solid fa-arrow-left"></i> Players</a>
+  <div class="career-top">
+    <div class="avatar">${escapeHtml(initials)}</div>
+    <div style="flex:1;min-width:0">
+      <h1 style="margin:0">${escapeHtml(p.name)}</h1>
+      <div class="muted" style="margin:4px 0 8px">CASPER ID <span class="accent">${escapeHtml(key)}</span></div>
+      <div class="career-meta">
+        <div><span class="muted">Teams</span><strong>${p.teams.map(a => escapeHtml((STATE.teams[a] || {}).name || a)).join(', ') || '—'}</strong></div>
+        <div><span class="muted">Seasons</span><strong>${seasons.size || uniqueTours.length}</strong></div>
+        <div><span class="muted">Tournaments</span><strong>${uniqueTours.length}</strong></div>
+        <div><span class="muted">Record</span><strong>${p.wins}W – ${p.draws}D – ${p.losses}L</strong></div>
+        <div><span class="muted">ELO</span><strong>${p.elo} <span class="muted">(peak ${p.peakElo || p.elo})</span></strong></div>
+      </div>
+      <div class="big-stats">
+        <div class="cell"><div class="n">${p.elo}</div><div class="l">ELO</div></div>
+        <div class="cell"><div class="n">${p.goals}</div><div class="l">Goals</div></div>
+        <div class="cell"><div class="n">${p.matches}</div><div class="l">Matches</div></div>
+        <div class="cell"><div class="n">${p.titles}</div><div class="l">Titles</div></div>
+        <div class="cell"><div class="n">${gbCount || (trophyMap['Golden Boot'] || 0)}</div><div class="l">Golden Boots</div></div>
+        <div class="cell"><div class="n">${seasons.size || uniqueTours.length}</div><div class="l">Seasons Active</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="quick-row">
+    <div class="q"><div class="n">${playerWinRate(p)}</div><div class="l">Win Rate</div></div>
+    <div class="q"><div class="n">${gpm}</div><div class="l">Goals / Match</div></div>
+    <div class="q"><div class="n">${p.conceded || 0}</div><div class="l">Conceded</div></div>
+    <div class="q"><div class="n">${p.cleanSheets || 0}</div><div class="l">Clean Sheets</div></div>
+    <div class="q"><div class="n">${p.failedToScore || 0}</div><div class="l">Blank</div></div>
+    <div class="q"><div class="n">${p.yellow} / ${p.red}</div><div class="l">Y / R</div></div>
+    <div class="q"><div class="n">${p.penaltiesWon || 0}-${p.penaltiesLost || 0}</div><div class="l">Pens W-L</div></div>
+    <div class="q"><div class="n">${p.biggestWin || 0}</div><div class="l">Biggest Win</div></div>
+    <div class="q"><div class="n">${p.knockoutWins || 0}/${p.knockoutMatches || 0}</div><div class="l">KO W/M</div></div>
+    <div class="q"><div class="n">${p.groupWins || 0}/${p.groupMatches || 0}</div><div class="l">GS W/M</div></div>
+    <div class="q"><div class="n">${p.awards.length + seasonal.length}</div><div class="l">Awards</div></div>
+    <div class="q"><div class="n">${p.runnerUps}</div><div class="l">Runner-up</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-timeline i"></i>Competition Career</div>`;
+      uniqueTours.forEach(id => {
+        const row = byTour[id] || { event: id, season: '', goals: 0, matches: 0 };
+        const abbr = (row.event || id).replace(/[^A-Za-z0-9]/g, '').slice(0, 3).toUpperCase();
+        html += `<div class="club-line">
+      <div class="club-dot">${escapeHtml(abbr)}</div>
+      <div style="flex:1">
+        <div><a href="#competition/${encodeURIComponent(id)}">${escapeHtml(row.event)}</a></div>
+        <div class="muted" style="font-size:12px">${escapeHtml(row.season || '')}</div>
+      </div>
+      <div style="text-align:right">
+        <div><strong>${row.matches}</strong> <span class="muted">M</span></div>
+        <div><strong>${row.goals}</strong> <span class="muted">G</span></div>
+      </div>
+    </div>`;
+      });
+      html += `<div class="club-line" style="font-weight:700">
+    <div class="club-dot" style="border-color:var(--muted)">Σ</div>
+    <div style="flex:1">Total</div>
+    <div style="text-align:right"><div>${p.matches} M</div><div>${p.goals} G</div></div>
+  </div></div>
+
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-book-open i"></i>Career Overview</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">
+      ${escapeHtml(p.name)} has ${p.goals} goals in ${p.matches} matches across ${uniqueTours.length} competition(s),
+      with ${p.titles} title(s) and ${p.awards.length + seasonal.length} award(s). Win rate ${playerWinRate(p)}.
+    </p>
+    <div class="section-title"><i class="fa-solid fa-trophy i"></i>Trophy Cabinet</div>
+    <div class="trophy-grid">`;
+      const trophyEntries = Object.keys(trophyMap).length
+        ? Object.entries(trophyMap)
+        : [['Titles', p.titles], ['Awards', p.awards.length]];
+      let anyTrophy = false;
+      trophyEntries.forEach(([label, n]) => {
+        if (!n) return;
+        anyTrophy = true;
+        html += `<div class="trophy"><div class="n">${n}</div><div class="l">${escapeHtml(label)}</div></div>`;
+      });
+      if (!anyTrophy) html += `<div class="muted">No trophies recorded yet.</div>`;
+      html += `</div>
+    <div class="section-title" style="margin-top:16px"><i class="fa-solid fa-chart-simple i"></i>Career Statistics</div>
+    <table>
+      <thead><tr><th>Level</th><th>Matches</th><th>Goals</th><th>W-D-L</th><th>G/M</th></tr></thead>
+      <tbody>
+        <tr><td>All competitions</td><td>${p.matches}</td><td>${p.goals}</td><td>${p.wins}-${p.draws}-${p.losses}</td><td>${gpm}</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <div class="grid3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-award i"></i>Awards</div>`;
+      if (!grouped.length && !seasonal.length) {
+        html += `<p class="empty">No awards yet.</p>`;
+      } else {
+        grouped.forEach(g => {
+          const countStr = g.count > 1 ? ` <span class="count">×${g.count}</span>` : '';
+          html += `<div class="award-line">
+        <span class="accent">${escapeHtml(g.award)}</span>${countStr}
+        <span class="muted">${escapeHtml(g.event)}</span>
+      </div>`;
+        });
+        seasonal.forEach(a => {
+          html += `<div class="award-line">
+        <span class="accent">${escapeHtml(a.award)}</span>
+        <span class="muted">${escapeHtml(a.season || '')} · Seasonal</span>
+      </div>`;
+        });
+      }
+      html += `<div style="margin-top:10px"><a href="#awards">View all awards →</a></div>
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-star i"></i>Career Highlights</div>
+      <ul class="hl-list">`;
+      if (p.titles) html += `<li>${p.titles} competition title${p.titles > 1 ? 's' : ''} won</li>`;
+      if (p.goals) html += `<li>${p.goals} career goals at ${gpm} per match</li>`;
+      if (gbCount) html += `<li>${gbCount} Golden Boot award${gbCount > 1 ? 's' : ''}</li>`;
+      if (p.runnerUps) html += `<li>${p.runnerUps} runner-up finish${p.runnerUps > 1 ? 'es' : ''}</li>`;
+      const best = uniqueTours.map(id => byTour[id]).sort((a, b) => b.goals - a.goals)[0];
+      if (best && best.goals) html += `<li>Best haul: ${best.goals} goals in ${escapeHtml(best.event)}</li>`;
+      seasonal.forEach(a => { html += `<li>${escapeHtml(a.award)} (${escapeHtml(a.season || '')})</li>`; });
+      if (p.matches === 0) html += `<li>No matches recorded yet</li>`;
+      html += `</ul>
+      <div style="margin-top:10px"><a href="#records">View records →</a></div>
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-medal i"></i>Personal Records</div>
+      <table>
+        <tr><td>Career goals</td><td class="accent">${p.goals}</td></tr>
+        <tr><td>Goals conceded</td><td class="accent">${p.conceded || 0}</td></tr>
+        <tr><td>Career matches</td><td class="accent">${p.matches}</td></tr>
+        <tr><td>Win rate</td><td class="accent">${playerWinRate(p)}</td></tr>
+        <tr><td>Clean sheets</td><td class="accent">${p.cleanSheets || 0}</td></tr>
+        <tr><td>Failed to score</td><td class="accent">${p.failedToScore || 0}</td></tr>
+        <tr><td>Biggest win margin</td><td class="accent">${p.biggestWin || 0}</td></tr>
+        <tr><td>Highest-scoring match</td><td class="accent">${p.highestScoring || 0}</td></tr>
+        <tr><td>Penalties W-L</td><td class="accent">${p.penaltiesWon || 0}–${p.penaltiesLost || 0}</td></tr>
+        <tr><td>ET record</td><td class="accent">${p.etWins || 0}/${p.etMatches || 0}</td></tr>
+        <tr><td>Group stage W/M</td><td class="accent">${p.groupWins || 0}/${p.groupMatches || 0}</td></tr>
+        <tr><td>Knockout W/M</td><td class="accent">${p.knockoutWins || 0}/${p.knockoutMatches || 0}</td></tr>
+        <tr><td>Titles</td><td class="accent">${p.titles}</td></tr>
+        <tr><td>Awards</td><td class="accent">${p.awards.length + seasonal.length}</td></tr>
+        <tr><td>Cards (Y/R)</td><td class="accent">${p.yellow} / ${p.red}</td></tr>
+      </table>
+      <div style="margin-top:10px"><a href="#statistics">Full statistics →</a></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-table i"></i>Career by Competition</div>
+    <table>
+      <thead><tr><th>Competition</th><th>Season</th><th>G</th><th>M</th><th>W-D-L</th><th>Title</th></tr></thead><tbody>`;
+      uniqueTours.forEach(id => {
+        const row = byTour[id] || { event: id, season: '', goals: 0, matches: 0, wins: 0, draws: 0, losses: 0 };
+        const wonTitle = row.ch && STATE.teams[row.ch] && STATE.teams[row.ch].player &&
+          STATE.teams[row.ch].player.toLowerCase() === key;
+        html += `<tr>
+      <td><a href="#competition/${encodeURIComponent(id)}">${escapeHtml(row.event)}</a></td>
+      <td>${escapeHtml(row.season || '')}</td>
+      <td>${row.goals}</td><td>${row.matches}</td>
+      <td>${row.wins}-${row.draws}-${row.losses}</td>
+      <td>${wonTitle ? '<span class="accent">Yes</span>' : '—'}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>`;
+
+
+      // Match history
+      const myMatches = STATE.matches.filter(m =>
+        (m.homePlayer && m.homePlayer.toLowerCase() === key) ||
+        (m.awayPlayer && m.awayPlayer.toLowerCase() === key)
+      );
+      if (myMatches.length) {
+        html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-futbol i"></i>Match history (${myMatches.length})</div>
+    <table><thead><tr><th>Competition</th><th>Stage</th><th>Match</th><th>Score</th><th>Result</th></tr></thead><tbody>`;
+        myMatches.forEach(m => {
+          const isHome = m.homePlayer && m.homePlayer.toLowerCase() === key;
+          const res = isHome ? (m.homeWin ? 'W' : m.awayWin ? 'L' : 'D') : (m.awayWin ? 'W' : m.homeWin ? 'L' : 'D');
+          html += `<tr>
+        <td><a href="#competition/${encodeURIComponent(m.tourneyId)}">${escapeHtml(m.event || '')}</a></td>
+        <td>${m.stage ? `<span class="stage-tag">${escapeHtml(m.stage)}</span>` : '—'}</td>
+        <td><a href="#match/${encodeURIComponent(m.id)}">${escapeHtml(m.homeName)} – ${escapeHtml(m.awayName)}</a></td>
+        <td class="match-score">${m.sh}–${m.sa}</td>
+        <td><b>${res}</b></td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
+      return html;
+    }
+
+
+    function renderTeams() {
+      const list = Object.values(STATE.teams).sort((a, b) => b.elo - a.elo || b.titles - a.titles || b.wins - a.wins);
+      let html = `<h1><i class="fa-solid fa-shield-halved i"></i>Teams</h1>
+  <p class="muted">All teams in the archive. Sorted by ELO. ${list.length} teams.</p>
+  <table>
+    <thead><tr>
+      <th>#</th><th>Team</th><th>Player</th><th>ELO</th><th>Peak</th><th>Titles</th><th>GF</th><th>GA</th><th>GD</th><th>CS</th><th>W-D-L</th><th>M</th>
+    </tr></thead><tbody>`;
+      list.forEach((t, i) => {
+        html += `<tr>
+      <td>${i + 1}</td>
+      <td><a href="#team/${encodeURIComponent(t.abbr)}">${escapeHtml(t.name)}</a></td>
+      <td><a href="#player/${encodeURIComponent(t.player)}">${escapeHtml(t.player)}</a></td>
+      <td><b>${t.elo}</b></td>
+      <td>${t.peakElo || t.elo}</td>
+      <td>${t.titles}</td>
+      <td>${t.goalsFor}</td>
+      <td>${t.goalsAgainst}</td>
+      <td>${teamGD(t)}</td>
+      <td>${t.cleanSheets || 0}</td>
+      <td>${t.wins}-${t.draws}-${t.losses}</td>
+      <td>${t.matches}</td>
+    </tr>`;
+      });
+      html += `</tbody></table>`;
+      return html;
+    }
+
+    function renderTeam(abbr) {
+      const t = STATE.teams[decodeURIComponent(abbr)];
+      if (!t) return `<div class="error">Team “${escapeHtml(abbr)}” not found.</div>`;
+
+      let html = `<a class="back" href="#teams"><i class="fa-solid fa-arrow-left"></i> Teams</a>
+  <h1>${escapeHtml(t.name)}</h1>
+  <p class="muted">Player: <a href="#player/${encodeURIComponent(t.player)}">${escapeHtml(t.player)}</a> · Abbr: ${escapeHtml(t.abbr)} · ELO <b>${t.elo}</b> (peak ${t.peakElo || t.elo})</p>
+  <div class="grid3" style="margin:14px 0">
+    <div class="stat-box"><span class="num">${t.elo}</span><span class="lbl">ELO</span></div>
+    <div class="stat-box"><span class="num">${t.titles}</span><span class="lbl">Titles</span></div>
+    <div class="stat-box"><span class="num">${t.goalsFor}</span><span class="lbl">Goals For</span></div>
+    <div class="stat-box"><span class="num">${t.wins}</span><span class="lbl">Wins</span></div>
+  </div>
+  <div class="panel">
+    <table>
+      <tr><td>Current ELO</td><td>${t.elo}</td></tr>
+      <tr><td>Peak ELO</td><td>${t.peakElo || t.elo}</td></tr>
+      <tr><td>Matches</td><td>${t.matches}</td></tr>
+      <tr><td>Record</td><td>${t.wins}W – ${t.draws}D – ${t.losses}L</td></tr>
+      <tr><td>Goals For / Against</td><td>${t.goalsFor} / ${t.goalsAgainst}</td></tr>
+      <tr><td>Goal Difference</td><td>${teamGD(t)}</td></tr>
+      <tr><td>Yellow / Red</td><td>${t.yellow} / ${t.red}</td></tr>
+      <tr><td>Runner-up finishes</td><td>${t.runnerUps}</td></tr>
+    </table>
+  </div>
+  <div class="panel"><h2>Tournament History</h2><p>`;
+      [...new Set(t.tournaments)].forEach(id => {
+        html += `<span class="tag"><a href="#competition/${encodeURIComponent(id)}">${escapeHtml(id)}</a></span> `;
+      });
+      html += `</p></div>`;
+      return html;
+    }
+
+    function renderAwards() {
+      // collect all awards
+      const rows = [];
+      STATE.tournaments.forEach(t => {
+        Object.keys(t.aw).forEach(k => {
+          let val = t.aw[k];
+          if (STATE.teams[val]) val = STATE.teams[val].name;
+          else if (STATE.players[val.toLowerCase()]) val = STATE.players[val.toLowerCase()].name;
+          rows.push({
+            tourney: t.meta.e || t.meta.id,
+            id: t.meta.id,
+            season: t.meta.s,
+            award: getAwardLabel(k),
+            recipient: val
+          });
+        });
+      });
+      rows.sort((a, b) => (b.season || '').localeCompare(a.season || ''));
+
+      let html = `<h1><i class="fa-solid fa-trophy i"></i>Awards</h1>
+  <p class="muted">Tournament awards from CSN + seasonal awards from misc.json.</p>`;
+
+      const sa = STATE.misc.seasonalAwards || [];
+      if (sa.length) {
+        html += `<div class="panel"><h2>Seasonal Awards</h2>
+    <p class="muted">Given mid or late season — not tied to a single tournament (e.g. Tsar Award).</p>
+    <table><thead><tr><th>Season</th><th>Award</th><th>Recipient</th><th>Note</th></tr></thead><tbody>`;
+        sa.forEach(a => {
+          html += `<tr>
+        <td>${escapeHtml(a.season || '')}</td>
+        <td class="accent">${escapeHtml(a.award || a.code || '')}</td>
+        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
+        <td class="muted">${escapeHtml(a.note || '')}</td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
+      html += `<div class="panel"><h2>Tournament Awards</h2>
+  <table>
+    <thead><tr><th>Competition</th><th>Season</th><th>Award</th><th>Recipient</th></tr></thead><tbody>`;
+      rows.forEach(r => {
+        html += `<tr>
+      <td><a href="#competition/${encodeURIComponent(r.id)}">${escapeHtml(r.tourney)}</a></td>
+      <td>${escapeHtml(r.season || '')}</td>
+      <td>${escapeHtml(r.award)}</td>
+      <td>${escapeHtml(r.recipient)}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>`;
+      return html;
+    }
+
+    function renderRecords() {
+      const players = Object.values(STATE.players);
+      const teams = Object.values(STATE.teams);
+      const tours = STATE.tournaments;
+
+      // Most titles (players)
+      const mostTitlesP = players.slice().sort((a, b) => b.titles - a.titles)[0];
+      const mostTitlesT = teams.slice().sort((a, b) => b.titles - a.titles)[0];
+      const mostGoals = players.slice().sort((a, b) => b.goals - a.goals)[0];
+      const mostAwards = players.slice().sort((a, b) => b.awards.length - a.awards.length)[0];
+      const mostRU = players.slice().sort((a, b) => b.runnerUps - a.runnerUps)[0];
+
+      // Largest victory & highest scoring
+      let largest = null, highScore = null;
+      tours.forEach(t => {
+        t.m.forEach(m => {
+          const margin = Math.abs(m.sh - m.sa);
+          const total = m.sh + m.sa;
+          if (!largest || margin > largest.margin) {
+            largest = { margin, match: m, tourney: t };
+          }
+          if (!highScore || total > highScore.total) {
+            highScore = { total, match: m, tourney: t };
+          }
+        });
+      });
+
+      function matchLabel(m, t) {
+        const hn = t.n[m.home] ? t.n[m.home].name : m.home;
+        const an = t.n[m.away] ? t.n[m.away].name : m.away;
+        return `${hn} ${m.sh}–${m.sa} ${an}`;
+      }
+
+      let html = `<h1><i class="fa-solid fa-medal i"></i>Records</h1>
+  <p class="muted">Auto-calculated from the archive + curated records from misc.json.</p>
+  <div class="panel">
+    <h2>Calculated</h2>
+    <table>
+      <tr><td>Most Titles (Player)</td><td>${mostTitlesP ? escapeHtml(mostTitlesP.name) + ' (' + mostTitlesP.titles + ')' : '—'}</td></tr>
+      <tr><td>Most Titles (Team)</td><td>${mostTitlesT ? escapeHtml(mostTitlesT.name) + ' (' + mostTitlesT.titles + ')' : '—'}</td></tr>
+      <tr><td>Most Goals</td><td>${mostGoals ? escapeHtml(mostGoals.name) + ' (' + mostGoals.goals + ')' : '—'}</td></tr>
+      <tr><td>Most Awards</td><td>${mostAwards ? escapeHtml(mostAwards.name) + ' (' + mostAwards.awards.length + ')' : '—'}</td></tr>
+      <tr><td>Most Runner-up</td><td>${mostRU ? escapeHtml(mostRU.name) + ' (' + mostRU.runnerUps + ')' : '—'}</td></tr>
+      <tr><td>Largest Victory</td><td>${largest ? escapeHtml(matchLabel(largest.match, largest.tourney)) + ' (margin ' + largest.margin + ')' : '—'}</td></tr>
+      <tr><td>Highest Scoring Match</td><td>${highScore ? escapeHtml(matchLabel(highScore.match, highScore.tourney)) + ' (' + highScore.total + ' goals)' : '—'}</td></tr>
+      <tr><td>Most Clean Sheets</td><td>${(() => { const x = players.slice().sort((a, b) => (b.cleanSheets || 0) - (a.cleanSheets || 0))[0]; return x ? escapeHtml(x.name) + ' (' + (x.cleanSheets || 0) + ')' : '—'; })()}</td></tr>
+      <tr><td>Best Goals/Match (min 3)</td><td>${(() => { const x = players.filter(p => p.matches >= 3).slice().sort((a, b) => (b.goals / b.matches) - (a.goals / a.matches))[0]; return x ? escapeHtml(x.name) + ' (' + (x.goals / x.matches).toFixed(2) + ')' : '—'; })()}</td></tr>
+      <tr><td>Most Penalties Won</td><td>${(() => { const x = players.slice().sort((a, b) => (b.penaltiesWon || 0) - (a.penaltiesWon || 0))[0]; return x ? escapeHtml(x.name) + ' (' + (x.penaltiesWon || 0) + ')' : '—'; })()}</td></tr>
+      <tr><td>Most Knockout Wins</td><td>${(() => { const x = players.slice().sort((a, b) => (b.knockoutWins || 0) - (a.knockoutWins || 0))[0]; return x ? escapeHtml(x.name) + ' (' + (x.knockoutWins || 0) + ')' : '—'; })()}</td></tr>
+      <tr><td>Total Matches Logged</td><td>${STATE.matches.length}</td></tr>
+      <tr><td>Total Goals Logged</td><td>${players.reduce((s, p) => s + p.goals, 0)}</td></tr>
+      <tr><td>Total Clean Sheets</td><td>${players.reduce((s, p) => s + (p.cleanSheets || 0), 0)}</td></tr>
+    </table>
+  </div>`;
+
+      const curated = STATE.misc.records || [];
+      if (curated.length) {
+        html += `<div class="panel"><h2>Curated Records</h2>
+    <table><thead><tr><th>Record</th><th>Value</th><th>Holder</th><th>Context</th></tr></thead><tbody>`;
+        curated.forEach(r => {
+          html += `<tr>
+        <td>${escapeHtml(r.label || '')}</td>
+        <td class="accent">${escapeHtml(r.value || '')}</td>
+        <td>${escapeHtml(r.holder || '')}</td>
+        <td class="muted">${escapeHtml(r.context || '')}</td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+      return html;
+    }
+
+    function renderStatistics() {
+      const players = Object.values(STATE.players);
+      const teams = Object.values(STATE.teams);
+      const tours = STATE.tournaments;
+      const totalGoals = players.reduce((s, p) => s + p.goals, 0);
+      const totalMatches = tours.reduce((s, t) => s + t.m.length, 0);
+      const avgGoals = totalMatches ? (totalGoals / totalMatches).toFixed(2) : '0';
+      const totalY = players.reduce((s, p) => s + p.yellow, 0);
+      const totalR = players.reduce((s, p) => s + p.red, 0);
+      const totalWins = players.reduce((s, p) => s + p.wins, 0);
+      const totalDraws = players.reduce((s, p) => s + p.draws, 0);
+      const totalLosses = players.reduce((s, p) => s + p.losses, 0);
+      const totalTitles = players.reduce((s, p) => s + p.titles, 0);
+      const seasons = [...new Set(tours.map(t => t.meta.s).filter(Boolean))];
+
+      let html = `<h1><i class="fa-solid fa-chart-column i"></i>Statistics</h1>
+  <p class="muted" style="margin-bottom:8px">Global aggregates from every CSN archive file.</p>
+  <div class="mega-strip">
+    <div class="cell"><span class="n">${tours.length}</span><span class="l"><i class="fa-solid fa-trophy"></i> Cups</span></div>
+    <div class="cell"><span class="n">${totalMatches}</span><span class="l"><i class="fa-solid fa-futbol"></i> Matches</span></div>
+    <div class="cell"><span class="n">${totalGoals}</span><span class="l"><i class="fa-solid fa-bullseye"></i> Goals</span></div>
+    <div class="cell"><span class="n">${avgGoals}</span><span class="l"><i class="fa-solid fa-chart-line"></i> G/M</span></div>
+    <div class="cell"><span class="n">${players.length}</span><span class="l"><i class="fa-solid fa-user"></i> Players</span></div>
+    <div class="cell"><span class="n">${teams.length}</span><span class="l"><i class="fa-solid fa-shield"></i> Teams</span></div>
+    <div class="cell"><span class="n">${seasons.length}</span><span class="l"><i class="fa-solid fa-calendar"></i> Seasons</span></div>
+    <div class="cell"><span class="n">${totalTitles}</span><span class="l"><i class="fa-solid fa-crown"></i> Titles</span></div>
+    <div class="cell"><span class="n">${totalWins}</span><span class="l"><i class="fa-solid fa-check"></i> Wins</span></div>
+    <div class="cell"><span class="n">${totalDraws}</span><span class="l"><i class="fa-solid fa-equals"></i> Draws</span></div>
+    <div class="cell"><span class="n">${totalLosses}</span><span class="l"><i class="fa-solid fa-xmark"></i> Losses</span></div>
+    <div class="cell"><span class="n">${totalY}</span><span class="l"><i class="fa-solid fa-square" style="color:#eab308"></i> Yellow</span></div>
+    <div class="cell"><span class="n">${totalR}</span><span class="l"><i class="fa-solid fa-square" style="color:#ef4444"></i> Red</span></div>
+  </div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-fire i"></i> Top Scorers</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>G</th><th>M</th><th>G/M</th><th>W%</th></tr></thead><tbody>`;
+      players.slice().sort((a, b) => b.goals - a.goals).slice(0, 15).forEach((p, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.goals}</b></td><td>${p.matches}</td>
+      <td>${p.matches ? (p.goals / p.matches).toFixed(2) : '—'}</td>
+      <td>${playerWinRate(p)}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-crown i"></i> Most Successful</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>Titles</th><th>Awards</th><th>W</th></tr></thead><tbody>`;
+      players.slice().sort((a, b) => b.titles - a.titles || b.awards.length - a.awards.length).slice(0, 15).forEach((p, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.titles}</b></td><td>${p.awards.length}</td><td>${p.wins}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-shield-halved i"></i> Teams</div>
+      <table><thead><tr><th>#</th><th>Team</th><th>Titles</th><th>GF</th><th>GA</th><th>W</th></tr></thead><tbody>`;
+      teams.slice().sort((a, b) => b.titles - a.titles || b.wins - a.wins).slice(0, 15).forEach((t, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#team/${encodeURIComponent(t.abbr)}">${escapeHtml(t.name)}</a></td>
+      <td><b>${t.titles}</b></td><td>${t.goalsFor}</td><td>${t.goalsAgainst}</td><td>${t.wins}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+  </div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-percentage i"></i> Win Rate Leaders</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>W%</th><th>W-D-L</th></tr></thead><tbody>`;
+      players.filter(p => p.matches >= 3).slice().sort((a, b) => (b.wins / b.matches) - (a.wins / a.matches)).slice(0, 12).forEach((p, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${playerWinRate(p)}</b></td><td>${p.wins}-${p.draws}-${p.losses}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-hand i"></i> Clean sheets</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>CS</th><th>M</th><th>CS%</th></tr></thead><tbody>`;
+      players.slice().sort((a, b) => (b.cleanSheets || 0) - (a.cleanSheets || 0)).slice(0, 12).forEach((p, i) => {
+        const pct = p.matches ? ((p.cleanSheets || 0) / p.matches * 100).toFixed(0) + '%' : '—';
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.cleanSheets || 0}</b></td><td>${p.matches}</td><td>${pct}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-flag i"></i> Cards</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>Y</th><th>R</th><th>Total</th></tr></thead><tbody>`;
+      players.slice().sort((a, b) => (b.yellow + b.red) - (a.yellow + a.red)).slice(0, 12).forEach((p, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td>${p.yellow}</td><td>${p.red}</td><td><b>${p.yellow + p.red}</b></td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-calendar-days i"></i> By Season</div>
+      <table><thead><tr><th>Season</th><th>Cups</th><th>Matches</th><th>Goals</th></tr></thead><tbody>`;
+      seasons.sort().reverse().forEach(s => {
+        const st = tours.filter(t => t.meta.s === s);
+        const m = st.reduce((a, t) => a + t.m.length, 0);
+        const g = st.reduce((a, t) => a + t.m.reduce((x, m) => x + m.sh + m.sa, 0), 0);
+        html += `<tr><td><b>${escapeHtml(s)}</b></td><td>${st.length}</td><td>${m}</td><td>${g}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+  </div>`;
+      return html;
+    }
+
+    function renderSearch() {
+      return `<h1><i class="fa-solid fa-magnifying-glass i"></i>Search</h1>
+  <p class="muted">Instant search across players, teams, competitions, seasons and awards.</p>
+  <input type="text" class="search-box" id="search-input" placeholder="Type to search…" autocomplete="off">
+  <div id="search-results" style="margin-top:14px"></div>`;
+    }
+
+    function doSearch(q) {
+      q = (q || '').trim().toLowerCase();
+      const box = document.getElementById('search-results');
+      if (!box) return;
+      if (!q) { box.innerHTML = '<p class="empty">Enter a search term.</p>'; return; }
+
+      const results = [];
+      // players
+      Object.values(STATE.players).forEach(p => {
+        if (p.name.toLowerCase().includes(q)) {
+          results.push({ type: 'Player', label: p.name, href: `#player/${encodeURIComponent(p.name)}` });
+        }
+      });
+      // teams
+      Object.values(STATE.teams).forEach(t => {
+        if (t.name.toLowerCase().includes(q) || t.abbr.toLowerCase().includes(q)) {
+          results.push({ type: 'Team', label: t.name, href: `#team/${encodeURIComponent(t.abbr)}` });
+        }
+      });
+      // competitions
+      STATE.tournaments.forEach(t => {
+        if ((t.meta.e || '').toLowerCase().includes(q) || (t.meta.id || '').toLowerCase().includes(q) || (t.meta.s || '').toLowerCase().includes(q)) {
+          results.push({ type: 'Competition', label: (t.meta.e || t.meta.id) + ' (' + (t.meta.s || '') + ')', href: `#competition/${encodeURIComponent(t.meta.id)}` });
+        }
+      });
+      // awards
+      STATE.tournaments.forEach(t => {
+        Object.keys(t.aw).forEach(k => {
+          const val = t.aw[k];
+          if (val.toLowerCase().includes(q) || k.toLowerCase().includes(q)) {
+            results.push({ type: 'Award', label: k + ' → ' + val + ' (' + t.meta.id + ')', href: `#competition/${encodeURIComponent(t.meta.id)}` });
+          }
+        });
+      });
+
+      if (!results.length) {
+        box.innerHTML = '<p class="empty">No matches.</p>';
+        return;
+      }
+      let html = `<table><thead><tr><th>Type</th><th>Result</th></tr></thead><tbody>`;
+      results.slice(0, 40).forEach(r => {
+        html += `<tr><td>${escapeHtml(r.type)}</td><td><a href="${r.href}">${escapeHtml(r.label)}</a></td></tr>`;
+      });
+      html += `</tbody></table>`;
+      box.innerHTML = html;
+    }
+
+
+    function renderNews() {
+      const news = (STATE.misc.news || []).slice().sort((a, b) => {
+        const sa = (a.date || '').slice(4) + (a.date || '').slice(2, 4) + (a.date || '').slice(0, 2);
+        const sb = (b.date || '').slice(4) + (b.date || '').slice(2, 4) + (b.date || '').slice(0, 2);
+        return sb.localeCompare(sa);
+      });
+      const sa = STATE.misc.seasonalAwards || [];
+      let html = `<h1><i class="fa-solid fa-newspaper i"></i>News</h1>
+  <p class="muted" style="margin-bottom:12px">Bulletins and seasonal announcements. Managed via misc.json.</p>
+  <div class="grid2">
+    <div class="panel">
+      <div class="section-title">Latest News (${news.length})</div>`;
+      if (!news.length) html += `<p class="empty">No news items. Add entries in misc.json.</p>`;
+      news.forEach(n => {
+        html += `<div class="news-item">
+      <div class="date">${fmtDate(n.date)}</div>
+      <div class="title">${escapeHtml(n.title)}</div>
+      <div class="muted">${escapeHtml(n.body || '')}</div>
+    </div>`;
+      });
+      html += `</div>
+    <div>
+      <div class="panel">
+        <div class="section-title">Seasonal Awards</div>`;
+      if (!sa.length) html += `<p class="empty">None yet.</p>`;
+      else {
+        html += `<table><thead><tr><th>Season</th><th>Award</th><th>Recipient</th></tr></thead><tbody>`;
+        sa.forEach(a => {
+          html += `<tr>
+        <td>${escapeHtml(a.season || '')}</td>
+        <td class="accent">${escapeHtml(a.award || '')}</td>
+        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
+      </tr>`;
+        });
+        html += `</tbody></table>`;
+      }
+      html += `</div>
+      <div class="panel">
+        <div class="section-title">Archive Pulse</div>
+        <table>
+          <tr><td>Tournaments</td><td class="accent">${STATE.tournaments.length}</td></tr>
+          <tr><td>Players</td><td class="accent">${Object.keys(STATE.players).length}</td></tr>
+          <tr><td>Teams</td><td class="accent">${Object.keys(STATE.teams).length}</td></tr>
+          <tr><td>News items</td><td class="accent">${news.length}</td></tr>
+          <tr><td>Seasonal awards</td><td class="accent">${sa.length}</td></tr>
+        </table>
+      </div>
+      <div class="panel">
+        <div class="section-title">Recent Results</div>
+        <ul class="plain">`;
+      sortByDate(STATE.tournaments, true).slice(0, 6).forEach(t => {
+        html += `<li><a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a>
+      ${statusBadge(t)} <span class="muted">${fmtDate(t.meta.doc)}</span></li>`;
+      });
+      html += `</ul></div>
+    </div>
+  </div>`;
+      return html;
+    }
+
+
+
+    function getPyramidHtml() {
+      const diagram = `
+                    CASPER COMPETITION PYRAMID
+                          START OF SEASON
+                                │
+                                ▼
+                   ┌──────────────────────────┐
+                   │       PIONEER CUP        │
+                   │       12–16 Clubs        │
+                   │  Group Stage + Knockout  │
+                   └──────────┬───────────────┘
+                              │
+          ┌───────────────────┴───────────────────┐
+          │                                       │
+          ▼                                       ▼
+   Top 8 clubs qualify                   Bottom 4–8 clubs
+    for Grande Cup                       enter Relegator Cup
+      ┌───────────────────┐             ┌────────────────────┐
+      │    GRANDE CUP     │             │   RELEGATOR CUP    │
+      │    Top 8 Teams    │             │   Last 4–8 Teams   │
+      │  Direct Knockout  │             │  Direct Knockout   │
+      └───────┬───────────┘             └─────────┬──────────┘
+              │                                   │
+              │                                   │
+              ▼                                   ▼
+       Top 4 Finishers                    Relegator Champion
+       Bottom 4 Finishers
+      ┌───────────────┐               ┌─────────────────────────┐
+      │ PREMIER LEAGUE│               │      CHROMA CUP         │
+      │  Double RR    │◄──────────────┤ Pioneer Champion vs     │
+      │   (Top 4)     │               │ Relegator Champion      │
+      └──────┬────────┘               └─────────────────────────┘
+             │
+             │
+             ▼
+      Premier Champion
+      ┌──────────────────┐
+      │ CONFERENCE LEAGUE│
+      │    Single RR     │
+      │ (Grande 5th–8th) │
+      └──────────────────┘
+
+                    ─────────── FINALE ───────────
+
+          Pioneer Champion ───────────────┐
+                                          ├── Winner A
+           Grande Champion ───────────────┘
+
+          Relegator Champion ─────────────┐
+                                          ├── Winner B
+           Premier Champion ──────────────┘
+
+                    Winner A
+                        │
+                        ▼
+                 ┌───────────────┐
+                 │    FINALE     │
+                 │ Ultimate Match│
+                 └───────────────┘
+                        ▲
+                    Winner B
+`;
+      return `<div class="pyramid-wrap">
+    <div class="pyramid-title">CASPER COMPETITION PYRAMID</div>
+    <pre>${diagram.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
+    <div class="pyramid-legend">
+      <table>
+        <tr><th>Competition</th><th>Who plays</th><th>Format</th></tr>
+        <tr><td><b>Pioneer Cup</b></td><td>12–16 clubs (season openers)</td><td>Groups + Knockout</td></tr>
+        <tr><td><b>Grande Cup</b></td><td>Top 8 from Pioneer</td><td>Direct Knockout</td></tr>
+        <tr><td><b>Relegator Cup</b></td><td>Bottom 4–8 from Pioneer</td><td>Direct Knockout</td></tr>
+        <tr><td><b>Premier League</b></td><td>Top 4 from Grande</td><td>Double Round Robin</td></tr>
+        <tr><td><b>Conference League</b></td><td>Grande 5th–8th</td><td>Single Round Robin</td></tr>
+        <tr><td><b>Chroma Cup</b></td><td>Pioneer Champion vs Relegator Champion</td><td>Special fixture</td></tr>
+        <tr><td><b>Finale</b></td><td>Winners of semi-brackets (A vs B)</td><td>Ultimate Match</td></tr>
+      </table>
+    </div>
+  </div>`;
+    }
+
+    function renderStructure() {
+      return `<h1><i class="fa-solid fa-diagram-project i"></i>Competition Structure</h1>
+  <p class="muted" style="margin-bottom:10px">Season pathway from the opening Pioneer Cup through to the Finale.</p>
+  ${getPyramidHtml()}
+  <div class="panel">
+    <h2>Path notes</h2>
+    <ul>
+      <li><b>Pioneer Cup</b> opens the season for the full field (12–16 clubs).</li>
+      <li>The <b>top 8</b> advance to the <b>Grande Cup</b>; the remainder enter the <b>Relegator Cup</b>.</li>
+      <li><b>Grande</b> top 4 feed the <b>Premier League</b> (double round robin); places 5–8 play the <b>Conference League</b> (single RR).</li>
+      <li><b>Chroma Cup</b> pairs the Pioneer champion with the Relegator champion.</li>
+      <li><b>Finale</b> is the ultimate match between Winner A (Pioneer vs Grande path) and Winner B (Relegator vs Premier path).</li>
+    </ul>
+  </div>`;
+    }
+
+    function renderAbout() {
+      const aboutText = (STATE.config && STATE.config.about) ? STATE.config.about : '';
+      return `<h1><i class="fa-solid fa-circle-info i"></i>About CASPER</h1>
+
+  <div class="panel">
+    <h2>What is CASPER?</h2>
+    <p>CASPER (Competitive Athletics &amp; Sports Promotion) is a local, offline archive and results viewer for a closed football competition system. It is not a live scores site and it does not connect to any external API. Everything you see is generated on your machine from plain-text archive files.</p>
+    ${aboutText ? `<p>${escapeHtml(aboutText)}</p>` : ''}
+    <p>The site is intentionally dense. Tables, standings, match reports, career pages and records are all derived automatically from the same source data so nothing has to be typed twice.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Why it exists</h2>
+    <p>CASPER started as a way to keep a permanent, searchable record of every match, title and award without relying on spreadsheets that go missing or chat logs that scroll away. The goals are simple:</p>
+    <ul>
+      <li>One canonical place for results, careers and history</li>
+      <li>Data that can still be read in ten years (plain text, no database server)</li>
+      <li>A viewer that builds every page from the archive instead of hand-maintained HTML</li>
+      <li>Enough detail for serious record-keeping without turning into a social network</li>
+    </ul>
+  </div>
+
+  <div class="panel">
+    <h2>Competition structure</h2>
+    <p>A full CASPER season is built around a fixed pyramid of cups and leagues. The season always opens with the <b>Pioneer Cup</b> (12–16 clubs, group stage then knockout). From there the field splits:</p>
+    <ul>
+      <li><b>Top 8</b> → <b>Grande Cup</b> (knockout). The top four of Grande enter the <b>Premier League</b> (double round-robin); places 5–8 play the <b>Conference League</b> (single round-robin).</li>
+      <li><b>Bottom clubs</b> → <b>Relegator Cup</b> (knockout). The Relegator champion earns a place in the later special fixtures.</li>
+      <li><b>Chroma Cup</b> — Pioneer champion vs Relegator champion.</li>
+      <li><b>Finale</b> — the ultimate match of the season, contested by the winners of the two main paths (Pioneer/Grande side vs Relegator/Premier side).</li>
+    </ul>
+    <p>Exact formats, number of teams and qualification rules can vary slightly by season; the archive records what actually happened. A full diagram is on the <a href="#structure">Structure</a> page.</p>
+  </div>
+
+  <div class="panel">
+    <h2>CSN — the archive format</h2>
+    <p>Every competition is stored in a compact text format called <b>CSN</b> (CASPER Season Notation). A single tournament is one square-bracket block. Inside the block you write key/value pairs and a few structured functions. A minimal example looks like this:</p>
+    <pre class="csn-raw" style="max-height:none">[ id=pc26s1;
+  e=Pioneer Cup; s=2026; ed=1; fmt=Groups+KO;
+  dos=01032026; doc=15032026; sts=Completed; t=16;
+  n( bbu=Blue Bulls[Alex], kok=Kokomo FC[Sam], ... );
+  grp( A>bbu,kok,rft,mxp; B>... );
+  m( bbu-kok:3-2#GS; kok-rft:1-1#GS; bbu-mxp:2-0(et)#SF; bbu-kok:1-0#F );
+  aw( ch=bbu; ru=kok; gb=Alex );
+  nt( First edition under the new pyramid. );
+]</pre>
+    <p>Key pieces:</p>
+    <table class="kv-table">
+      <tr><td><code>id</code></td><td>Unique tournament ID (used in URLs and cross-references)</td></tr>
+      <tr><td><code>e</code> / <code>s</code></td><td>Event name and season label</td></tr>
+      <tr><td><code>dos</code> / <code>doc</code></td><td>Start and end dates (DDMMYYYY)</td></tr>
+      <tr><td><code>n(...)</code></td><td>Teams: <code>abbr=Full Name[Player]</code></td></tr>
+      <tr><td><code>grp(...)</code></td><td>Group membership: <code>A&gt;team1,team2; B&gt;...</code></td></tr>
+      <tr><td><code>m(...)</code></td><td>Matches: <code>home-away:goals-goals(extras)#STAGE</code></td></tr>
+      <tr><td><code>aw(...)</code></td><td>Awards: <code>ch</code> champion, <code>ru</code> runner-up, plus custom codes</td></tr>
+      <tr><td><code>st(...)</code></td><td>Optional explicit standings (otherwise calculated from group matches)</td></tr>
+      <tr><td><code>nt</code> / <code>ac</code></td><td>Free-text notes and achievement tags</td></tr>
+    </table>
+    <p>Match extras inside parentheses can include <code>et</code> (extra time), <code>p2-1</code> (penalties), <code>y1-0</code> (yellow cards) and <code>r0-1</code> (red cards). Stage tags after <code>#</code> mark Final, SF, QF, R16, GS, etc. Full-line comments starting with <code>#</code> are ignored.</p>
+    <p>The parser is pure JavaScript, runs in the browser, and turns every CSN block into the objects used for standings, brackets, player careers, ELO and records. No server is involved.</p>
+  </div>
+
+  <div class="panel">
+    <h2>How the site is organised</h2>
+    <table class="kv-table">
+      <tr><td><code>config.json</code></td><td>Site title, tagline, theme colours, award labels, archive paths</td></tr>
+      <tr><td><code>data/manifest.json</code></td><td>Ordered list of <code>.csn</code> files to load</td></tr>
+      <tr><td><code>data/*.csn</code></td><td>Tournament archives (one or many files)</td></tr>
+      <tr><td><code>misc.json</code></td><td>News, seasonal awards, curated records, season notes, pyramid trophies</td></tr>
+      <tr><td><code>index.html</code></td><td>This viewer — HTML, CSS and vanilla JS only</td></tr>
+      <tr><td><code>fill.html</code></td><td>Editor used to create and validate CSN + misc content</td></tr>
+    </table>
+    <p>On load the viewer fetches the manifest, parses every listed CSN file, builds player/team aggregates and ELO ratings, then routes by the URL hash (<code>#player/Name</code>, <code>#competition/id</code>, <code>#database</code>, etc.). All of that happens client-side.</p>
+  </div>
+
+  <div class="panel">
+    <h2>What is calculated automatically</h2>
+    <ul>
+      <li>Group standings (when not supplied explicitly)</li>
+      <li>Knockout brackets from stage-tagged matches</li>
+      <li>Career totals for every player and team (goals, clean sheets, win rate, cards, titles…)</li>
+      <li>ELO ratings (base 1500, K=32, chronological)</li>
+      <li>Records (largest win, highest-scoring match, most titles, etc.)</li>
+      <li>Season and competition-series summaries</li>
+    </ul>
+    <p>If a number appears on a page, it came from the archive or was derived from it. Nothing is simulated for display.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Technology</h2>
+    <p>Single HTML file · CSS · vanilla JavaScript · Font Awesome icons. No frameworks, no build step, no backend, no analytics. Open the file (or serve the folder) and it runs. Designed to stay readable and editable by hand.</p>
+  </div>
+
+  <div class="panel">
+    <h2>Editing the archive</h2>
+    <p>Use <a href="fill.html">fill.html</a> to create new tournaments, edit existing CSN, validate syntax and maintain news / seasonal awards / records in <code>misc.json</code>. After saving files into <code>data/</code> and updating the manifest, reload this page.</p>
+  </div>
+
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-diagram-project i"></i>Competition pyramid</div>
+    ${renderPyramid()}
+  </div>`;
+    }
+
+    function renderDatabase() {
+      const players = Object.values(STATE.players);
+      const teams = Object.values(STATE.teams);
+      const tours = STATE.tournaments;
+      const matches = STATE.matches;
+      const totalGoals = players.reduce((s, p) => s + p.goals, 0);
+      const totalAwards = players.reduce((s, p) => s + p.awards.length, 0) + (STATE.misc.seasonalAwards || []).length;
+      const curatedRecords = (STATE.misc.records || []).length;
+      const totalRecords = curatedRecords + 14;
+      const seasons = [...new Set(tours.map(t => t.meta.s).filter(Boolean))];
+      const newsCount = (STATE.misc.news || []).length;
+      const objects = tours.length + matches.length + players.length + teams.length +
+        totalAwards + totalRecords + newsCount + seasons.length + Object.keys(STATE.rawById).length;
+      const fmt = n => (n == null ? '—' : Number(n).toLocaleString('en-US'));
+      const rows = [
+        { k: 'Database Version', v: STATE.metrics.databaseVersion || '2026.08' },
+        { k: 'Database Size', v: fmt(STATE.metrics.bytes) + ' bytes' },
+        { k: 'CSN Version', v: STATE.metrics.csnVersion || '1.2' },
+        { k: 'Objects', v: fmt(objects) },
+        { k: 'Competitions', v: fmt(tours.length) },
+        { k: 'Matches', v: fmt(matches.length) },
+        { k: 'Goals', v: fmt(totalGoals) },
+        { k: 'Players', v: fmt(players.length) },
+        { k: 'Teams', v: fmt(teams.length) },
+        { k: 'Awards', v: fmt(totalAwards) },
+        { k: 'Records', v: fmt(totalRecords) },
+        { k: 'Seasons', v: fmt(seasons.length) },
+        { k: 'News items', v: fmt(newsCount) },
+        { k: 'Characters', v: fmt(STATE.metrics.characters) },
+        { k: 'Bytes', v: fmt(STATE.metrics.bytes) },
+        { k: 'Lines', v: fmt(STATE.metrics.lines) },
+        { k: 'Archive sources', v: fmt(STATE.metrics.loadSources) },
+        { k: 'Parse Time (ms)', v: STATE.metrics.parseTimeMs },
+        { k: 'Render Time (ms)', v: STATE.metrics.renderTimeMs },
+        { k: 'ELO base', v: '1500' },
+        { k: 'ELO K-factor', v: '32' }
+      ];
+      let html = `<h1><i class="fa-solid fa-database i"></i>Database</h1>
+  <p class="muted" style="margin-bottom:10px">Live metrics from the loaded archives, config and misc data. Nothing here is simulated.</p>
+  <div class="panel">
+    <pre class="csn-raw" style="max-height:none;font-size:13px;line-height:1.55">`;
+      rows.forEach(r => {
+        const dots = '.'.repeat(Math.max(2, 22 - r.k.length));
+        html += `${escapeHtml(r.k)}${dots} ${escapeHtml(String(r.v))}\n`;
+      });
+      html += `</pre>
+  </div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title">Object breakdown</div>
+      <table class="kv-table">
+        <tr><td>Competitions</td><td class="accent">${fmt(tours.length)}</td></tr>
+        <tr><td>Matches</td><td class="accent">${fmt(matches.length)}</td></tr>
+        <tr><td>Players</td><td class="accent">${fmt(players.length)}</td></tr>
+        <tr><td>Teams</td><td class="accent">${fmt(teams.length)}</td></tr>
+        <tr><td>Awards</td><td class="accent">${fmt(totalAwards)}</td></tr>
+        <tr><td>Records</td><td class="accent">${fmt(totalRecords)}</td></tr>
+        <tr><td>Seasons</td><td class="accent">${fmt(seasons.length)}</td></tr>
+        <tr><td>News</td><td class="accent">${fmt(newsCount)}</td></tr>
+        <tr><td><b>Total objects</b></td><td class="accent"><b>${fmt(objects)}</b></td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="section-title">Storage</div>
+      <table class="kv-table">
+        <tr><td>Characters</td><td class="accent">${fmt(STATE.metrics.characters)}</td></tr>
+        <tr><td>Bytes</td><td class="accent">${fmt(STATE.metrics.bytes)}</td></tr>
+        <tr><td>Lines</td><td class="accent">${fmt(STATE.metrics.lines)}</td></tr>
+        <tr><td>CSN sources</td><td class="accent">${fmt(STATE.metrics.loadSources)}</td></tr>
+        <tr><td>Raw blocks cached</td><td class="accent">${fmt(Object.keys(STATE.rawById).length)}</td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="section-title">Performance</div>
+      <table class="kv-table">
+        <tr><td>Parse + aggregate</td><td class="accent">${STATE.metrics.parseTimeMs} ms</td></tr>
+        <tr><td>Last render</td><td class="accent">${STATE.metrics.renderTimeMs} ms</td></tr>
+        <tr><td>ELO updates</td><td class="accent">${fmt(matches.length)} matches</td></tr>
+      </table>
+      <p class="muted" style="margin-top:10px;font-size:12px">Measured at runtime from the data currently loaded.</p>
+    </div>
+  </div>`;
+      return html;
+    }
+
+    function renderMatch(param) {
+      // param: tourneyId/index
+      const parts = decodeURIComponent(param).split('/');
+      const tid = parts[0];
+      const idx = parseInt(parts[1], 10);
+      const m = STATE.matches.find(x => x.tourneyId === tid && x.index === idx);
+      if (!m) return `<div class="error">Match not found.</div>`;
+      const t = STATE.tournaments.find(x => x.meta.id === tid);
+      const total = m.sh + m.sa;
+      const margin = Math.abs(m.sh - m.sa);
+      let result = 'Draw';
+      if (m.homeWin) result = escapeHtml(m.homeName) + ' win';
+      if (m.awayWin) result = escapeHtml(m.awayName) + ' win';
+
+      let html = `<a class="back" href="#competition/${encodeURIComponent(tid)}"><i class="fa-solid fa-arrow-left"></i> ${escapeHtml(m.event || tid)}</a>
+  <h1><i class="fa-solid fa-futbol i"></i>Match Report</h1>
+  <div class="panel" style="text-align:center">
+    <div class="muted" style="font-family:sans-serif;font-size:12px;margin-bottom:8px">
+      ${escapeHtml(m.event || '')} · ${escapeHtml(m.season || '')}
+      ${m.stage ? ' · <span class="stage-tag">' + escapeHtml(m.stage) + '</span> ' + escapeHtml(m.stageLabel || '') : ''}
+    </div>
+    <div style="display:flex;justify-content:center;align-items:center;gap:24px;flex-wrap:wrap;font-family:sans-serif">
+      <div style="text-align:center;min-width:140px">
+        <div style="font-size:13px"><a href="#team/${encodeURIComponent(m.home)}">${escapeHtml(m.homeName)}</a></div>
+        <div style="font-size:12px;color:#54595d">${m.homePlayer ? '<a href="#player/' + encodeURIComponent(m.homePlayer) + '">' + escapeHtml(m.homePlayer) + '</a>' : ''}</div>
+      </div>
+      <div style="font-size:36px;font-weight:bold;font-family:sans-serif">${m.sh} – ${m.sa}</div>
+      <div style="text-align:center;min-width:140px">
+        <div style="font-size:13px"><a href="#team/${encodeURIComponent(m.away)}">${escapeHtml(m.awayName)}</a></div>
+        <div style="font-size:12px;color:#54595d">${m.awayPlayer ? '<a href="#player/' + encodeURIComponent(m.awayPlayer) + '">' + escapeHtml(m.awayPlayer) + '</a>' : ''}</div>
+      </div>
+    </div>
+    <div class="muted" style="margin-top:10px;font-family:sans-serif">${result}</div>
+  </div>
+  <div class="mega-strip">
+    <div class="cell"><span class="n">${total}</span><span class="l">Total goals</span></div>
+    <div class="cell"><span class="n">${margin}</span><span class="l">Margin</span></div>
+    <div class="cell"><span class="n">${m.et ? 'Yes' : 'No'}</span><span class="l">Extra time</span></div>
+    <div class="cell"><span class="n">${m.p ? m.p[0] + '–' + m.p[1] : '—'}</span><span class="l">Penalties</span></div>
+    <div class="cell"><span class="n">${m.y ? m.y[0] + '–' + m.y[1] : '0–0'}</span><span class="l">Yellow</span></div>
+    <div class="cell"><span class="n">${m.r ? m.r[0] + '–' + m.r[1] : '0–0'}</span><span class="l">Red</span></div>
+    <div class="cell"><span class="n">${m.sa === 0 ? 'Yes' : 'No'}</span><span class="l">${escapeHtml(m.homeName)} CS</span></div>
+    <div class="cell"><span class="n">${m.sh === 0 ? 'Yes' : 'No'}</span><span class="l">${escapeHtml(m.awayName)} CS</span></div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-chart-simple i"></i>Match facts</div>
+      <table class="kv-table">
+        <tr><td>Competition</td><td><a href="#competition/${encodeURIComponent(tid)}">${escapeHtml(m.event || tid)}</a></td></tr>
+        <tr><td>Season</td><td><a href="#season/${encodeURIComponent(m.season || '')}">${escapeHtml(m.season || '—')}</a></td></tr>
+        <tr><td>Stage</td><td>${m.stage ? escapeHtml(m.stageLabel || m.stage) : '—'}</td></tr>
+        <tr><td>Score (FT)</td><td><b>${m.sh}–${m.sa}</b></td></tr>
+        <tr><td>Result</td><td>${result}</td></tr>
+        <tr><td>Total goals</td><td>${total}</td></tr>
+        <tr><td>Goal difference</td><td>${margin}</td></tr>
+        <tr><td>Clean sheet</td><td>${m.sa === 0 ? escapeHtml(m.homeName) : (m.sh === 0 ? escapeHtml(m.awayName) : 'Neither')}</td></tr>
+        <tr><td>Failed to score</td><td>${m.sh === 0 ? escapeHtml(m.homeName) : ''}${m.sh === 0 && m.sa === 0 ? ' & ' : ''}${m.sa === 0 ? escapeHtml(m.awayName) : ''}${m.sh && m.sa ? 'Neither' : ''}</td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-users i"></i>Participants</div>
+      <table>
+        <thead><tr><th></th><th>Home</th><th>Away</th></tr></thead>
+        <tbody>
+          <tr><td>Team</td>
+            <td><a href="#team/${encodeURIComponent(m.home)}">${escapeHtml(m.homeName)}</a></td>
+            <td><a href="#team/${encodeURIComponent(m.away)}">${escapeHtml(m.awayName)}</a></td></tr>
+          <tr><td>Player</td>
+            <td>${m.homePlayer ? '<a href="#player/' + encodeURIComponent(m.homePlayer) + '">' + escapeHtml(m.homePlayer) + '</a>' : '—'}</td>
+            <td>${m.awayPlayer ? '<a href="#player/' + encodeURIComponent(m.awayPlayer) + '">' + escapeHtml(m.awayPlayer) + '</a>' : '—'}</td></tr>
+          <tr><td>Goals</td><td><b>${m.sh}</b></td><td><b>${m.sa}</b></td></tr>
+          <tr><td>Yellow</td><td>${m.y ? m.y[0] : 0}</td><td>${m.y ? m.y[1] : 0}</td></tr>
+          <tr><td>Red</td><td>${m.r ? m.r[0] : 0}</td><td>${m.r ? m.r[1] : 0}</td></tr>
+          <tr><td>Pens</td><td>${m.p ? m.p[0] : '—'}</td><td>${m.p ? m.p[1] : '—'}</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+
+      // Related matches in same tournament
+      if (t) {
+        html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-list i"></i>Other matches in ${escapeHtml(m.event || tid)}</div>
+    <table><thead><tr><th>#</th><th>Stage</th><th>Match</th><th>Score</th></tr></thead><tbody>`;
+        t.m.forEach((om, oi) => {
+          if (oi === idx) return;
+          const hn = t.n[om.home] ? t.n[om.home].name : om.home;
+          const an = t.n[om.away] ? t.n[om.away].name : om.away;
+          html += `<tr>
+        <td>${oi + 1}</td>
+        <td>${om.stage ? `<span class="stage-tag">${escapeHtml(om.stage)}</span>` : '—'}</td>
+        <td><a href="#match/${encodeURIComponent(tid + '/' + oi)}">${escapeHtml(hn)} – ${escapeHtml(an)}</a></td>
+        <td class="match-score">${om.sh}–${om.sa}</td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+      return html;
+    }
+
+    function renderSeason(param) {
+      const season = decodeURIComponent(param);
+      const tours = STATE.tournaments.filter(t => t.meta.s === season);
+      if (!tours.length) return `<div class="error">Season “${escapeHtml(season)}” not found.</div>`;
+      const matchList = STATE.matches.filter(m => m.season === season);
+      const goals = matchList.reduce((s, m) => s + m.sh + m.sa, 0);
+      const players = {};
+      matchList.forEach(m => {
+        if (m.homePlayer) {
+          if (!players[m.homePlayer]) players[m.homePlayer] = { name: m.homePlayer, g: 0, m: 0, w: 0, cs: 0 };
+          players[m.homePlayer].g += m.sh; players[m.homePlayer].m++;
+          if (m.homeWin) players[m.homePlayer].w++;
+          if (m.sa === 0) players[m.homePlayer].cs++;
+        }
+        if (m.awayPlayer) {
+          if (!players[m.awayPlayer]) players[m.awayPlayer] = { name: m.awayPlayer, g: 0, m: 0, w: 0, cs: 0 };
+          players[m.awayPlayer].g += m.sa; players[m.awayPlayer].m++;
+          if (m.awayWin) players[m.awayPlayer].w++;
+          if (m.sh === 0) players[m.awayPlayer].cs++;
+        }
+      });
+      const plist = Object.values(players).sort((a, b) => b.g - a.g);
+      const note = (STATE.misc.seasonNotes && STATE.misc.seasonNotes[season]) || '';
+      const sa = (STATE.misc.seasonalAwards || []).filter(a => a.season === season);
+
+      let html = `<a class="back" href="#archive"><i class="fa-solid fa-arrow-left"></i> Archive</a>
+  <h1><i class="fa-solid fa-calendar i"></i>Season ${escapeHtml(season)}</h1>
+  ${note ? `<p class="muted">${escapeHtml(note)}</p>` : ''}
+  <div class="mega-strip">
+    <div class="cell"><span class="n">${tours.length}</span><span class="l">Competitions</span></div>
+    <div class="cell"><span class="n">${matchList.length}</span><span class="l">Matches</span></div>
+    <div class="cell"><span class="n">${goals}</span><span class="l">Goals</span></div>
+    <div class="cell"><span class="n">${matchList.length ? (goals / matchList.length).toFixed(2) : '—'}</span><span class="l">G/M</span></div>
+    <div class="cell"><span class="n">${plist.length}</span><span class="l">Players</span></div>
+    <div class="cell"><span class="n">${sa.length}</span><span class="l">Season awards</span></div>
+    <div class="cell"><span class="n">${matchList.filter(m => m.sa === 0 || m.sh === 0).length}</span><span class="l">CS matches</span></div>
+    <div class="cell"><span class="n">${matchList.filter(m => m.p).length}</span><span class="l">Penalties</span></div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-trophy i"></i>Competitions</div>
+      <table><thead><tr><th>Event</th><th>Fmt</th><th>Teams</th><th>Matches</th><th>Champion</th><th>Status</th></tr></thead><tbody>`;
+      tours.forEach(t => {
+        const ch = t.aw.ch ? ((STATE.teams[t.aw.ch] || {}).name || t.aw.ch) : '—';
+        html += `<tr>
+      <td><a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a></td>
+      <td>${escapeHtml(t.meta.fmt || '')}</td>
+      <td>${Object.keys(t.n).length}</td>
+      <td>${t.m.length}</td>
+      <td>${escapeHtml(ch)}</td>
+      <td>${statusBadge(t)}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-fire i"></i>Season scorers</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>G</th><th>M</th><th>CS</th><th>W</th></tr></thead><tbody>`;
+      plist.slice(0, 15).forEach((p, i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.g}</b></td><td>${p.m}</td><td>${p.cs}</td><td>${p.w}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+  </div>`;
+
+      if (sa.length) {
+        html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-award i"></i>Seasonal awards</div>
+    <table><thead><tr><th>Award</th><th>Recipient</th><th>Note</th></tr></thead><tbody>`;
+        sa.forEach(a => {
+          html += `<tr><td class="accent">${escapeHtml(a.award || '')}</td>
+        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
+        <td class="muted">${escapeHtml(a.note || '')}</td></tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
+      html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-futbol i"></i>All matches (${matchList.length})</div>
+  <table><thead><tr><th>Competition</th><th>Stage</th><th>Match</th><th>Score</th><th></th></tr></thead><tbody>`;
+      matchList.forEach(m => {
+        html += `<tr>
+      <td><a href="#competition/${encodeURIComponent(m.tourneyId)}">${escapeHtml(m.event || m.tourneyId)}</a></td>
+      <td>${m.stage ? `<span class="stage-tag">${escapeHtml(m.stage)}</span>` : '—'}</td>
+      <td>${escapeHtml(m.homeName)} – ${escapeHtml(m.awayName)}</td>
+      <td class="match-score">${m.sh}–${m.sa}</td>
+      <td><a href="#match/${encodeURIComponent(m.id)}">View</a></td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>`;
+      return html;
+    }
+
+    function renderSeries(param) {
+      // Official competition series by event name
+      const name = decodeURIComponent(param);
+      const tours = STATE.tournaments.filter(t => (t.meta.e || '') === name || (t.meta.id || '') === name);
+      if (!tours.length) {
+        // try case-insensitive
+        const low = name.toLowerCase();
+        const tours2 = STATE.tournaments.filter(t => (t.meta.e || '').toLowerCase() === low);
+        if (!tours2.length) return `<div class="error">Competition series “${escapeHtml(name)}” not found.</div>`;
+        return renderSeriesInner(name, tours2);
+      }
+      return renderSeriesInner(name, tours);
+    }
+    function renderSeriesInner(name, tours) {
+      tours = sortByDate(tours, false);
+      const matchList = [];
+      tours.forEach(t => {
+        STATE.matches.filter(m => m.tourneyId === t.meta.id).forEach(m => matchList.push(m));
+      });
+      const goals = matchList.reduce((s, m) => s + m.sh + m.sa, 0);
+      const champions = {};
+      tours.forEach(t => {
+        if (t.aw.ch) {
+          const n = (STATE.teams[t.aw.ch] || {}).name || t.aw.ch;
+          champions[n] = (champions[n] || 0) + 1;
+        }
+      });
+      let html = `<a class="back" href="#competitions"><i class="fa-solid fa-arrow-left"></i> Competitions</a>
+  <h1><i class="fa-solid fa-trophy i"></i>${escapeHtml(name)}</h1>
+  <p class="muted">Official competition series · ${tours.length} edition(s)</p>
+  <div class="mega-strip">
+    <div class="cell"><span class="n">${tours.length}</span><span class="l">Editions</span></div>
+    <div class="cell"><span class="n">${matchList.length}</span><span class="l">Matches</span></div>
+    <div class="cell"><span class="n">${goals}</span><span class="l">Goals</span></div>
+    <div class="cell"><span class="n">${matchList.length ? (goals / matchList.length).toFixed(2) : '—'}</span><span class="l">G/M</span></div>
+    <div class="cell"><span class="n">${Object.keys(champions).length}</span><span class="l">Unique champions</span></div>
+    <div class="cell"><span class="n">${matchList.filter(m => m.p).length}</span><span class="l">Penalties</span></div>
+    <div class="cell"><span class="n">${matchList.filter(m => m.sa === 0 || m.sh === 0).length}</span><span class="l">CS matches</span></div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-list-ol i"></i>Editions</div>
+      <table><thead><tr><th>Season</th><th>ID</th><th>Teams</th><th>Matches</th><th>Champion</th><th>Status</th></tr></thead><tbody>`;
+      tours.forEach(t => {
+        const ch = t.aw.ch ? ((STATE.teams[t.aw.ch] || {}).name || t.aw.ch) : '—';
+        html += `<tr>
+      <td><a href="#season/${encodeURIComponent(t.meta.s || '')}">${escapeHtml(t.meta.s || '')}</a></td>
+      <td><a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.id)}</a></td>
+      <td>${Object.keys(t.n).length}</td>
+      <td>${t.m.length}</td>
+      <td>${escapeHtml(ch)}</td>
+      <td>${statusBadge(t)}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-crown i"></i>Honours</div>
+      <table><thead><tr><th>Champion</th><th>Titles</th></tr></thead><tbody>`;
+      Object.entries(champions).sort((a, b) => b[1] - a[1]).forEach(([n, c]) => {
+        html += `<tr><td>${escapeHtml(n)}</td><td><b>${c}</b></td></tr>`;
+      });
+      if (!Object.keys(champions).length) html += `<tr><td colspan="2" class="muted">None yet</td></tr>`;
+      html += `</tbody></table></div>
+  </div>`;
+      return html;
+    }
+
+    function renderCompetitionsOfficial() {
+      // Group tournaments by event name (series)
+      const series = {};
+      STATE.tournaments.forEach(t => {
+        const name = t.meta.e || t.meta.id;
+        if (!series[name]) series[name] = [];
+        series[name].push(t);
+      });
+      // Also list pyramid trophies as official competitions
+      const pyr = (STATE.misc.pyramid && STATE.misc.pyramid.trophies) || [];
+      let html = `<h1><i class="fa-solid fa-trophy i"></i>Competitions</h1>
+  <p class="muted">Official competition series in the archive and pyramid.</p>
+  <div class="mega-strip">
+    <div class="cell"><span class="n">${Object.keys(series).length}</span><span class="l">Series</span></div>
+    <div class="cell"><span class="n">${STATE.tournaments.length}</span><span class="l">Editions</span></div>
+    <div class="cell"><span class="n">${STATE.matches.length}</span><span class="l">Matches</span></div>
+    <div class="cell"><span class="n">${pyr.length}</span><span class="l">Pyramid trophies</span></div>
+  </div>
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-folder-open i"></i>Archive series</div>
+    <table><thead><tr><th>Competition</th><th>Editions</th><th>Seasons</th><th>Matches</th><th>Latest champion</th></tr></thead><tbody>`;
+      Object.entries(series).sort((a, b) => b[1].length - a[1].length).forEach(([name, list]) => {
+        const sorted = sortByDate(list, true);
+        const latest = sorted[0];
+        const ch = latest && latest.aw.ch ? ((STATE.teams[latest.aw.ch] || {}).name || latest.aw.ch) : '—';
+        const seasons = [...new Set(list.map(t => t.meta.s).filter(Boolean))].join(', ');
+        const matches = list.reduce((s, t) => s + t.m.length, 0);
+        html += `<tr>
+      <td><a href="#series/${encodeURIComponent(name)}"><b>${escapeHtml(name)}</b></a></td>
+      <td>${list.length}</td>
+      <td>${escapeHtml(seasons)}</td>
+      <td>${matches}</td>
+      <td>${escapeHtml(ch)}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>`;
+
+      if (pyr.length) {
+        html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-diagram-project i"></i>Pyramid trophies</div>
+    <div class="pyr-trophies">`;
+        pyr.forEach(t => {
+          html += `<div class="pyr-trophy ${escapeHtml(t.level || '')}">
+        <div class="t-name">${escapeHtml(t.name)}</div>
+        <div class="t-note">${escapeHtml(t.note || '')}</div>
+      </div>`;
+        });
+        html += `</div>
+    <div style="margin-top:10px">${renderPyramid()}</div>
+    </div>`;
+      }
+
+      // Seasons index
+      const seasons = [...new Set(STATE.tournaments.map(t => t.meta.s).filter(Boolean))].sort().reverse();
+      html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-calendar i"></i>Seasons</div>
+  <table><thead><tr><th>Season</th><th>Competitions</th><th>Matches</th><th>Goals</th></tr></thead><tbody>`;
+      seasons.forEach(s => {
+        const st = STATE.tournaments.filter(t => t.meta.s === s);
+        const ms = STATE.matches.filter(m => m.season === s);
+        const g = ms.reduce((a, m) => a + m.sh + m.sa, 0);
+        html += `<tr>
+      <td><a href="#season/${encodeURIComponent(s)}"><b>${escapeHtml(s)}</b></a></td>
+      <td>${st.length}</td><td>${ms.length}</td><td>${g}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>`;
+      return html;
+    }
+
+
+    function route() {
+      if (!STATE.ready) return;
+      const hash = (location.hash || '#home').slice(1);
+      const [view, ...rest] = hash.split('/');
+      const param = rest.join('/');
+
+      setActiveNav(
+        view === 'competition' || view === 'match' ? 'archive' :
+          view === 'series' || view === 'season' ? 'competitions' :
+            view === 'player' ? 'players' :
+              view === 'team' ? 'teams' :
+                view
+      );
+
+      const app = document.getElementById('app');
+      const renderStart = performance.now();
+      let html = '';
+      switch (view) {
+        case 'home': html = renderHome(); break;
+        case 'news': html = renderNews(); break;
+        case 'structure': html = renderStructure(); break;
+        case 'archive': html = renderArchive(); break;
+        case 'competitions': html = renderCompetitions(); break;
+        case 'competition': html = renderCompetition(param); break;
+        case 'series': html = renderSeries(param); break;
+        case 'season': html = renderSeason(param); break;
+        case 'match': html = renderMatch(param); break;
+        case 'players': html = renderPlayers(); break;
+        case 'player': html = renderPlayer(param); break;
+        case 'teams': html = renderTeams(); break;
+        case 'team': html = renderTeam(param); break;
+        case 'awards': html = renderAwards(); break;
+        case 'records': html = renderRecords(); break;
+        case 'statistics': html = renderStatistics(); break;
+        case 'database': html = renderDatabase(); break;
+        case 'search': html = renderSearch(); break;
+        case 'about': html = renderAbout(); break;
+        default: html = renderHome();
+      }
+      app.innerHTML = html;
+      STATE.metrics.renderTimeMs = +(performance.now() - renderStart).toFixed(1);
+
+      if (view === 'search') {
+        const input = document.getElementById('search-input');
+        if (input) {
+          input.focus();
+          input.addEventListener('input', () => doSearch(input.value));
+        }
+      }
+    }
+
+    /* ---------- BOOT ---------- */
+    function extractRawBlocks(text) {
+      const blocks = {};
+      // Match each [...] tournament block that starts with id=
+      const re = /\[\s*id\s*=\s*([^;]+);[\s\S]*?\]/gi;
+      let m;
+      while ((m = re.exec(text)) !== null) {
+        blocks[m[1].trim()] = m[0].trim();
+      }
+      return blocks;
+    }
+
+    async function loadAllArchives(config) {
+      const allTournaments = [];
+      const sources = [];
+      const rawById = {};
+      let totalChars = 0, totalBytes = 0, totalLines = 0;
+      const parseStart = performance.now();
+
+      function ingest(text, path) {
+        totalChars += text.length;
+        totalBytes += new Blob([text]).size;
+        totalLines += text.split('\n').length;
+        const parsed = parseCSN(text);
+        const blocks = extractRawBlocks(text);
+        parsed.forEach(t => {
+          t._source = path;
+          if (t.meta && t.meta.id && blocks[t.meta.id]) {
+            rawById[t.meta.id] = blocks[t.meta.id];
+          }
+        });
+        allTournaments.push(...parsed);
+        sources.push(path);
+      }
+
+      const manifestPath = (config.archives && config.archives.manifest) || 'data/manifest.json';
+      try {
+        const manRes = await fetch(manifestPath);
+        if (manRes.ok) {
+          const list = await manRes.json();
+          if (Array.isArray(list) && list.length) {
+            for (const name of list) {
+              const path = name.startsWith('data/') ? name : 'data/' + name;
+              try {
+                const res = await fetch(path);
+                if (!res.ok) { console.warn('Archive not found:', path); continue; }
+                ingest(await res.text(), path);
+              } catch (e) {
+                console.warn('Failed to load', path, e);
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('No manifest or failed to load it:', e.message);
+      }
+
+      if (allTournaments.length === 0) {
+        const fallback = (config.archives && config.archives.fallback) || 'data.csn';
+        try {
+          const res = await fetch(fallback);
+          if (res.ok) ingest(await res.text(), fallback);
+        } catch (e) {
+          console.warn('Fallback data.csn also failed:', e.message);
+        }
+      }
+
+      const parseEnd = performance.now();
+      const ids = new Set();
+      const unique = allTournaments.filter(t => {
+        if (!t.meta || !t.meta.id) return false;
+        if (ids.has(t.meta.id)) return false;
+        ids.add(t.meta.id);
+        return true;
+      });
+
+      return {
+        tournaments: unique,
+        sources,
+        rawById,
+        metrics: {
+          characters: totalChars,
+          bytes: totalBytes,
+          lines: totalLines,
+          parseTimeMs: +(parseEnd - parseStart).toFixed(1),
+          loadSources: sources.length
+        }
+      };
+    }
+
+    function getAwardLabel(code) {
+      const labels = (STATE.config && STATE.config.awardLabels) || {};
+      return labels[code] || code;
+    }
+
+    async function boot() {
+      try {
+        const cfgRes = await fetch('config.json');
+        if (!cfgRes.ok) throw new Error('config.json not found');
+        const cfgText = await cfgRes.text();
+        STATE.config = JSON.parse(cfgText);
+
+        let miscText = '';
+        try {
+          const miscRes = await fetch('misc.json');
+          if (miscRes.ok) {
+            miscText = await miscRes.text();
+            STATE.misc = Object.assign({ news: [], seasonalAwards: [], records: [], seasonNotes: {} }, JSON.parse(miscText));
+          }
+        } catch (e) {
+          console.warn('misc.json not loaded:', e.message);
+        }
+
+        const { tournaments, sources, rawById, metrics: archMetrics } = await loadAllArchives(STATE.config);
+        if (!tournaments.length) {
+          throw new Error('No tournaments found. Add .csn files to data/ and list them in data/manifest.json');
+        }
+        STATE.tournaments = tournaments;
+        STATE.rawById = rawById || {};
+        STATE.archiveSources = sources;
+
+        STATE.metrics.characters = (archMetrics.characters || 0) + cfgText.length + miscText.length;
+        STATE.metrics.bytes = (archMetrics.bytes || 0) + new Blob([cfgText]).size + new Blob([miscText]).size;
+        STATE.metrics.lines = (archMetrics.lines || 0) + cfgText.split('\n').length + miscText.split('\n').length;
+        STATE.metrics.parseTimeMs = archMetrics.parseTimeMs || 0;
+        STATE.metrics.loadSources = archMetrics.loadSources || 0;
+        if (STATE.config.databaseVersion) STATE.metrics.databaseVersion = STATE.config.databaseVersion;
+        if (STATE.config.csnVersion) STATE.metrics.csnVersion = STATE.config.csnVersion;
+
+        const aggStart = performance.now();
+        const agg = buildAggregates(STATE.tournaments);
+        STATE.players = agg.players;
+        STATE.teams = agg.teams;
+        STATE.matches = agg.matches || [];
+        STATE.metrics.parseTimeMs = +(STATE.metrics.parseTimeMs + (performance.now() - aggStart)).toFixed(1);
+        STATE.ready = true;
+
+        if (STATE.config.theme) {
+          const t = STATE.config.theme;
+          const root = document.documentElement;
+          if (t.background) root.style.setProperty('--bg', t.background);
+          if (t.panel) root.style.setProperty('--panel', t.panel);
+          if (t.border) root.style.setProperty('--border', t.border);
+          if (t.text) root.style.setProperty('--text', t.text);
+          if (t.accent) root.style.setProperty('--accent', t.accent);
+          if (t.muted) root.style.setProperty('--muted', t.muted);
+        }
+        if (STATE.config.siteTitle) document.title = STATE.config.siteTitle + ' — Archive';
+        if (STATE.config.tagline) {
+          const el = document.getElementById('site-tagline');
+          if (el) el.textContent = STATE.config.tagline;
+        }
+
+        window.addEventListener('hashchange', route);
+        route();
+      } catch (err) {
+        document.getElementById('app').innerHTML =
+          `<div class="error"><strong>Failed to load archive</strong><br>${escapeHtml(err.message)}<br>
+      Place .csn files in the <code>data/</code> folder and list them in <code>data/manifest.json</code>.</div>`;
+      }
+    }
+
+    boot();
+  </script>
+</body>
+
+</html>
