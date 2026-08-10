@@ -1713,109 +1713,22 @@
 
 
     function renderPyramid() {
+      // Always show the official detailed pyramid (ASCII). Optional trophies from misc.
+      let html = getPyramidHtml();
       const pyr = (STATE.misc && STATE.misc.pyramid) || null;
-      if (!pyr) return '';
-      let html = `<div class="pyramid">
-    <div class="pyramid-title">${escapeHtml(pyr.title || 'CASPER Football Pyramid')}</div>
-    <div class="pyr-flow">
-      <div class="pyr-label">Start</div>
-      <div class="pyr-arrow">▼</div>
-      <div class="pyr-node primary">
-        <div class="name">Pioneer Cup</div>
-        <div class="detail">12–16 Clubs · Group Stage + Knockout</div>
-      </div>
-      <div class="pyr-arrow">▼</div>
-      <div class="pyr-split">
-        <div class="pyr-branch">
-          <div class="pyr-label">Top 8 Clubs</div>
-          <div class="pyr-arrow">▼</div>
-          <div class="pyr-node">
-            <div class="name">Grande Cup</div>
-            <div class="detail">Top 8 Knockout</div>
-          </div>
-          <div class="pyr-arrow">▼</div>
-          <div class="pyr-split" style="max-width:100%">
-            <div class="pyr-branch">
-              <div class="pyr-label">Top 4</div>
-              <div class="pyr-arrow">▼</div>
-              <div class="pyr-node">
-                <div class="name">Premier League</div>
-                <div class="detail">Double Round-Robin</div>
-              </div>
-            </div>
-            <div class="pyr-branch">
-              <div class="pyr-label">Bottom 4</div>
-              <div class="pyr-arrow">▼</div>
-              <div class="pyr-node">
-                <div class="name">Conference League</div>
-                <div class="detail">Single Round-Robin</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="pyr-branch">
-          <div class="pyr-label">Bottom 4–8 Clubs</div>
-          <div class="pyr-arrow">▼</div>
-          <div class="pyr-node">
-            <div class="name">Relegator Cup</div>
-            <div class="detail">Bottom Clubs Knockout</div>
-          </div>
-          <div class="pyr-arrow">▼</div>
-          <div class="pyr-node" style="min-width:auto">
-            <div class="name">Relegator Champion</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="pyr-section">
-      <h3>Elite Path</h3>
-      <div class="pyr-path">
-        <span class="pyr-chip">Pioneer Champion</span>
-        <span class="muted">+</span>
-        <span class="pyr-chip">Grande Champion</span>
-        <span class="muted">→</span>
-        <span class="pyr-chip">Cup Finalifier</span>
-      </div>
-      <div class="pyr-path">
-        <span class="pyr-chip">Premier Champion</span>
-        <span class="muted">+</span>
-        <span class="pyr-chip">Conference Champion</span>
-        <span class="muted">→</span>
-        <span class="pyr-chip">League Finalifier</span>
-      </div>
-      <div class="pyr-path">
-        <span class="pyr-chip">Cup Finalifier</span>
-        <span class="muted">+</span>
-        <span class="pyr-chip">League Finalifier</span>
-        <span class="muted">→</span>
-        <span class="pyr-chip final">Finale</span>
-      </div>
-      <p class="muted" style="margin-top:8px;font-size:12px">Ultimate Champion of the CASPER season.</p>
-    </div>
-
-    <div class="pyr-section">
-      <h3>Cascade Path</h3>
-      <div class="pyr-path">
-        <span class="pyr-chip">Conference Champion</span>
-        <span class="muted">+</span>
-        <span class="pyr-chip">Relegator Champion</span>
-        <span class="muted">→</span>
-        <span class="pyr-chip final">Cascade Cup</span>
-      </div>
-    </div>
-
-    <div class="pyr-section">
+      const trophies = (pyr && pyr.trophies) || [];
+      if (trophies.length) {
+        html += `<div class="pyr-section" style="margin-top:12px">
       <h3>Trophies</h3>
       <div class="pyr-trophies">`;
-      const trophies = pyr.trophies || [];
-      trophies.forEach(t => {
-        html += `<div class="pyr-trophy ${escapeHtml(t.level || '')}">
+        trophies.forEach(t => {
+          html += `<div class="pyr-trophy ${escapeHtml(t.level || '')}">
       <div class="t-name">${escapeHtml(t.name)}</div>
       <div class="t-note">${escapeHtml(t.note || '')}</div>
     </div>`;
-      });
-      html += `</div></div></div>`;
+        });
+        html += `</div></div>`;
+      }
       return html;
     }
 
@@ -1843,7 +1756,7 @@
   <p class="muted" style="margin-bottom:8px">${escapeHtml(STATE.config.tagline || '')}</p>
   <p class="muted" style="margin-bottom:8px;font-family:sans-serif;font-size:12px">
     <a href="#structure"><i class="fa-solid fa-diagram-project i"></i>Competition pyramid</a>
-    — Pioneer → Grande / Relegator → Premier · Conference · Chroma → Finale
+    — Pioneer → Grande / Relegator → Premier · Conference · Peripheral · SuperCups → Finale
   </p>`;
 
       html += `<div class="mega-strip">
@@ -2883,44 +2796,85 @@
       │  Direct Knockout  │             │  Direct Knockout   │
       └───────┬───────────┘             └─────────┬──────────┘
               │                                   │
-              │                                   │
-              ▼                                   ▼
-       Top 4 Finishers                    Relegator Champion
-       Bottom 4 Finishers
-      ┌───────────────┐               ┌─────────────────────────┐
-      │ PREMIER LEAGUE│               │      CHROMA CUP         │
-      │  Double RR    │◄──────────────┤ Pioneer Champion vs     │
-      │   (Top 4)     │               │ Relegator Champion      │
-      └──────┬────────┘               └─────────────────────────┘
-             │
-             │
-             ▼
-      Premier Champion
-      ┌──────────────────┐
-      │ CONFERENCE LEAGUE│
-      │    Single RR     │
-      │ (Grande 5th–8th) │
-      └──────────────────┘
-
+       ┌──────┴──────┐                            │
+       │             │                            │
+       ▼             ▼                            ▼
+   Top 4          5th–8th                 Relegator Champion
+ Finishers        Finishers                      │
+       │             │                           │
+       ▼             ▼                           │
+┌───────────────┐ ┌──────────────────┐           │
+│ PREMIER LEAGUE│ │ CONFERENCE LEAGUE│           │
+│  Double RR    │ │    Single RR     │           │
+│   (Top 4)     │ │ (Grande 5th–8th) │           │
+└──────┬────────┘ └────────┬─────────┘           │
+       │                   │                     │
+       │                   │                     │
+       ▼                   │                     │
+Premier Champion           │                     │
+       │                   │                     │
+       │                   │                     ▼
+       │                   │            ┌────────────────────┐
+       │                   │            │  PERIPHERAL CUP    │
+       │                   │            │    Single RR       │
+       │                   │            │ Relegator entrants │
+       │                   │            └─────────┬──────────┘
+       │                   │                      │
+       │                   │                      ▼
+       │                   │             Peripheral Champion
+       │                   │                      │
+       │                   │                      │
+       │                   │                      ▼
+       │                   │            ┌────────────────────┐
+       │                   │            │   MINOR SUPERCUP   │
+       │                   │            │ Peripheral Champ   │
+       │                   │            │  vs Relegator Champ│
+       │                   │            └─────────┬──────────┘
+       │                   │                      │
+       │                   │                      ▼
+       │                   │              Minor SuperCup
+       │                   │                 Champion
+       │                   │                      │
+       │                   │                      │
+       │                   ▼                      ▼
+       │            ┌────────────────────────────────────┐
+       │            │          SUB SUPERCUP              │
+       │            │ Minor SuperCup Champ vs            │
+       │            │ Conference League Champion         │
+       │            └─────────────────┬──────────────────┘
+       │                              │
+       │                              ▼
+       │                       Sub SuperCup Champion
+       │                              │
+       │                              │
+       ▼                              │
+┌─────────────────────────┐           │
+│       SUPER CUP         │           │
+│ Premier Champion vs     │           │
+│ Grande Champion         │           │
+└────────────┬────────────┘           │
+             │                        │
+             ▼                        │
+       Super Cup Champion             │
+                                      │
+                                      │
                     ─────────── FINALE ───────────
+                                      │
+          Pioneer Champion ───────────┐
+                                      ├── Winner A
+           Grande Champion ───────────┘
+                                     
+     Sub Super Cup Champion ──────────┐
+                                      ├── Winner B
+           Premier Champion ──────────┘
 
-          Pioneer Champion ───────────────┐
-                                          ├── Winner A
-           Grande Champion ───────────────┘
-
-          Relegator Champion ─────────────┐
-                                          ├── Winner B
-           Premier Champion ──────────────┘
-
-                    Winner A
-                        │
-                        ▼
-                 ┌───────────────┐
-                 │    FINALE     │
-                 │ Ultimate Match│
-                 └───────────────┘
-                        ▲
-                    Winner B
+                    FINALE QUALIFIER
+                           │
+                           ▼
+                 ┌─────────────────┐
+                 │     FINALE      │
+                 │  Ultimate Match │
+                 └─────────────────┘
 `;
       return `<div class="pyramid-wrap">
     <div class="pyramid-title">CASPER COMPETITION PYRAMID</div>
@@ -2933,8 +2887,11 @@
         <tr><td><b>Relegator Cup</b></td><td>Bottom 4–8 from Pioneer</td><td>Direct Knockout</td></tr>
         <tr><td><b>Premier League</b></td><td>Top 4 from Grande</td><td>Double Round Robin</td></tr>
         <tr><td><b>Conference League</b></td><td>Grande 5th–8th</td><td>Single Round Robin</td></tr>
-        <tr><td><b>Chroma Cup</b></td><td>Pioneer Champion vs Relegator Champion</td><td>Special fixture</td></tr>
-        <tr><td><b>Finale</b></td><td>Winners of semi-brackets (A vs B)</td><td>Ultimate Match</td></tr>
+        <tr><td><b>Peripheral Cup</b></td><td>Relegator entrants</td><td>Single Round Robin</td></tr>
+        <tr><td><b>Minor SuperCup</b></td><td>Peripheral Champion vs Relegator Champion</td><td>One-off</td></tr>
+        <tr><td><b>Sub SuperCup</b></td><td>Minor SuperCup Champ vs Conference Champion</td><td>One-off</td></tr>
+        <tr><td><b>Super Cup</b></td><td>Premier Champion vs Grande Champion</td><td>One-off</td></tr>
+        <tr><td><b>Finale</b></td><td>Winner A (Pioneer vs Grande) vs Winner B (Sub SuperCup vs Premier)</td><td>Ultimate Match</td></tr>
       </table>
     </div>
   </div>`;
@@ -2947,11 +2904,13 @@
   <div class="panel">
     <h2>Path notes</h2>
     <ul>
-      <li><b>Pioneer Cup</b> opens the season for the full field (12–16 clubs).</li>
-      <li>The <b>top 8</b> advance to the <b>Grande Cup</b>; the remainder enter the <b>Relegator Cup</b>.</li>
-      <li><b>Grande</b> top 4 feed the <b>Premier League</b> (double round robin); places 5–8 play the <b>Conference League</b> (single RR).</li>
-      <li><b>Chroma Cup</b> pairs the Pioneer champion with the Relegator champion.</li>
-      <li><b>Finale</b> is the ultimate match between Winner A (Pioneer vs Grande path) and Winner B (Relegator vs Premier path).</li>
+      <li><b>Pioneer Cup</b> opens the season for the full field (12–16 clubs, groups + knockout).</li>
+      <li>The <b>top 8</b> advance to the <b>Grande Cup</b> (direct knockout); the bottom 4–8 enter the <b>Relegator Cup</b> (direct knockout).</li>
+      <li><b>Grande</b> top 4 feed the <b>Premier League</b> (double round-robin); places 5–8 play the <b>Conference League</b> (single round-robin).</li>
+      <li>Relegator entrants also contest the <b>Peripheral Cup</b> (single RR). Its champion meets the Relegator champion in the <b>Minor SuperCup</b>.</li>
+      <li>Minor SuperCup champion then faces the Conference champion in the <b>Sub SuperCup</b>.</li>
+      <li><b>Super Cup</b> is played between the Premier champion and the Grande champion.</li>
+      <li><b>Finale</b> is the ultimate match: Winner A (Pioneer Champion vs Grande Champion) against Winner B (Sub SuperCup Champion vs Premier Champion).</li>
     </ul>
   </div>`;
     }
@@ -2982,10 +2941,10 @@
     <h2>Competition structure</h2>
     <p>A full CASPER season is built around a fixed pyramid of cups and leagues. The season always opens with the <b>Pioneer Cup</b> (12–16 clubs, group stage then knockout). From there the field splits:</p>
     <ul>
-      <li><b>Top 8</b> → <b>Grande Cup</b> (knockout). The top four of Grande enter the <b>Premier League</b> (double round-robin); places 5–8 play the <b>Conference League</b> (single round-robin).</li>
-      <li><b>Bottom clubs</b> → <b>Relegator Cup</b> (knockout). The Relegator champion earns a place in the later special fixtures.</li>
-      <li><b>Chroma Cup</b> — Pioneer champion vs Relegator champion.</li>
-      <li><b>Finale</b> — the ultimate match of the season, contested by the winners of the two main paths (Pioneer/Grande side vs Relegator/Premier side).</li>
+      <li><b>Top 8</b> → <b>Grande Cup</b> (direct knockout). Grande’s top four enter the <b>Premier League</b> (double round-robin); places 5–8 play the <b>Conference League</b> (single round-robin).</li>
+      <li><b>Bottom 4–8</b> → <b>Relegator Cup</b> (direct knockout). Relegator entrants also play the <b>Peripheral Cup</b> (single RR). Peripheral champion vs Relegator champion = <b>Minor SuperCup</b>; that winner then meets the Conference champion in the <b>Sub SuperCup</b>.</li>
+      <li><b>Super Cup</b> — Premier champion vs Grande champion.</li>
+      <li><b>Finale</b> — the ultimate match of the season: Winner A (Pioneer Champion vs Grande Champion) against Winner B (Sub SuperCup Champion vs Premier Champion).</li>
     </ul>
     <p>Exact formats, number of teams and qualification rules can vary slightly by season; the archive records what actually happened. A full diagram is on the <a href="#structure">Structure</a> page.</p>
   </div>
