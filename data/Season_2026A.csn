@@ -182,10 +182,11 @@ mar=Martians[Anirban]
 );
 
 m(
-kko-hor:3-3#QF;
+kko-hor:3-3(p1-0)#QF;
 rsa-mar:3-3(p2-3)#QF;
 bbu-mvl:7-1#QF;
 ssc-vos:4-1#QF;
+bbu-ssc:8-0#SF;
 );
 
 nt(
