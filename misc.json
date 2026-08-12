@@ -1,9 +1,24 @@
 {
   "news": [
     {
+      "date": "12082026",
+      "title": "Grande Cup final set for Pioneer Cup final rematch",
+      "body": "The inaugural Grande Cup final will see Black Bird United face Kolkata Kous, recreating the Pioneer Cup 2026A final between Anish and Bhavesh. Black Bird United previously defeated Kolkata Kous 2-0 on penalties after a 3-3 draw in the Pioneer Cup final."
+    },
+    {
+      "date": "12082026",
+      "title": "CASPER expands with Conference League and Peripheral Cup",
+      "body": "CASPER launched two new four-player single round-robin competitions, the Conference League and Peripheral Cup, expanding the federation's competitive calendar beyond its knockout competitions."
+    },
+    {
+      "date": "12082026",
+      "title": "Peripheral Cup enters ongoing stage",
+      "body": "The inaugural Peripheral Cup began with Romano United, Inter Grande CF, New Athletico Saltlake and Modo FC competing in a four-player single round-robin."
+    },
+    {
       "date": "11082026",
       "title": "Black Bird United demolish Super Strikers CF 8-0 in The Derby",
-      "body": "Black Bird United produced a historic performance in The Derby, defeating Srinjoy's Super Strikers CF 8-0. The eight-goal victory became the largest clean-sheet winning margin recorded in CASPER history, surpassing BBU's previous record of a 7-1 victory over Movile."
+      "body": "Black Bird United produced a historic performance in The Derby, defeating Srinjoy's Super Strikers CF 8-0. The eight-goal victory became the largest winning margin recorded in CASPER history, surpassing BBU's previous record of a 7-1 victory over Movile."
     },
     {
       "date": "10082026",
@@ -45,25 +60,37 @@
       "title": "CASPER era begins with inaugural Pioneer Cup",
       "body": "Competitive Athletics & Sports Promotion (CASPER) officially launched with the opening of the Pioneer Cup 2026A. Twelve clubs entered the federation's first competition, featuring a group stage followed by seeded knockout rounds."
     }
-],
+  ],
   "records": [
     {
       "label": "Most Goals in a Single Match",
       "value": "7",
       "holder": "Anish (Black Bird United)",
-      "context": "bbu 7\u20134 rsa \u00b7 Pioneer Cup 2026A"
+      "context": "BBU 7-4 RSA · Pioneer Cup 2026A"
     },
     {
       "label": "Highest Scoring Match",
       "value": "11 goals",
-      "holder": "bbu 7\u20134 rsa",
-      "context": "Pioneer Cup 2026A Group A"
+      "holder": "Black Bird United",
+      "context": "BBU 7-4 RSA · Pioneer Cup 2026A Group A"
+    },
+    {
+      "label": "Largest Winning Margin",
+      "value": "8 goals",
+      "holder": "Black Bird United",
+      "context": "BBU 8-0 Super Strikers CF · The Derby · Grande Cup 2026A"
+    },
+    {
+      "label": "Largest Clean-Sheet Winning Margin",
+      "value": "8 goals",
+      "holder": "Black Bird United",
+      "context": "BBU 8-0 Super Strikers CF · The Derby · Grande Cup 2026A"
     },
     {
       "label": "Longest Penalty Shootout Win",
-      "value": "2\u20130",
+      "value": "2-0",
       "holder": "Black Bird United",
-      "context": "Final vs Kolkata Kous \u00b7 Pioneer Cup 2026A"
+      "context": "Final vs Kolkata Kous · Pioneer Cup 2026A"
     }
   ],
   "seasonNotes": {
@@ -72,11 +99,12 @@
   "pyramid": {
     "title": "CASPER Football Pyramid",
     "start": "Pioneer Cup",
+
     "stages": [
       {
         "id": "pioneer",
         "name": "Pioneer Cup",
-        "detail": "12\u201316 Clubs \u00b7 Group Stage + Knockout",
+        "detail": "12–16 Clubs · Group Stage + Knockout",
         "tier": 1
       },
       {
@@ -91,7 +119,7 @@
           }
         },
         "bottom": {
-          "label": "Bottom 4\u20138 Clubs",
+          "label": "Bottom 4–8 Clubs",
           "competition": {
             "id": "relegator",
             "name": "Relegator Cup",
@@ -119,12 +147,64 @@
             "detail": "Single Round-Robin"
           }
         }
+      },
+      {
+        "id": "relegator_path",
+        "type": "path",
+        "from": "relegator",
+        "next": {
+          "competition": {
+            "id": "peripheral",
+            "name": "Peripheral Cup",
+            "detail": "Single Round-Robin"
+          }
+        }
+      },
+      {
+        "id": "super_cup",
+        "type": "supercup",
+        "inputs": [
+          "Premier Champion",
+          "Grande Champion"
+        ],
+        "competition": {
+          "id": "supercup",
+          "name": "Super Cup",
+          "detail": "Premier Champion vs Grande Champion"
+        }
+      },
+      {
+        "id": "minor_supercup",
+        "type": "supercup",
+        "inputs": [
+          "Peripheral Champion",
+          "Relegator Champion"
+        ],
+        "competition": {
+          "id": "minor_supercup",
+          "name": "Minor SuperCup",
+          "detail": "Peripheral Champion vs Relegator Champion"
+        }
+      },
+      {
+        "id": "sub_supercup",
+        "type": "supercup",
+        "inputs": [
+          "Minor SuperCup Champion",
+          "Conference Champion"
+        ],
+        "competition": {
+          "id": "sub_supercup",
+          "name": "Sub SuperCup",
+          "detail": "Minor SuperCup Champion vs Conference Champion"
+        }
       }
     ],
+
     "paths": {
       "elite": {
         "name": "Elite Path",
-        "description": "Leads to Finale",
+        "description": "Primary championship path leading to the Finale",
         "branches": [
           {
             "name": "Cup Finalifier",
@@ -140,27 +220,71 @@
               "Conference Champion"
             ]
           }
+        ]
+      },
+
+      "lower": {
+        "name": "Lower Path",
+        "description": "Relegation-side pathway culminating in the Sub SuperCup",
+        "branches": [
+          {
+            "name": "Peripheral Path",
+            "inputs": [
+              "Relegator Entrants"
+            ],
+            "output": "Peripheral Champion"
+          },
+          {
+            "name": "Minor SuperCup",
+            "inputs": [
+              "Peripheral Champion",
+              "Relegator Champion"
+            ],
+            "output": "Minor SuperCup Champion"
+          },
+          {
+            "name": "Sub SuperCup",
+            "inputs": [
+              "Minor SuperCup Champion",
+              "Conference Champion"
+            ],
+            "output": "Sub SuperCup Champion"
+          }
+        ]
+      },
+
+      "finale": {
+        "name": "Finale Qualification",
+        "description": "Two qualification branches determine the finalists",
+        "branches": [
+          {
+            "name": "Elite Finalist",
+            "inputs": [
+              "Pioneer Champion",
+              "Grande Champion"
+            ],
+            "output": "Elite Finalifier"
+          },
+          {
+            "name": "Lower Finalist",
+            "inputs": [
+              "Premier Champion",
+              "Sub SuperCup Champion"
+            ],
+            "output": "Lower Finalifier"
+          }
         ],
         "final": {
           "name": "Finale",
           "inputs": [
-            "Cup Finalifier",
-            "League Finalifier"
+            "Elite Finalifier",
+            "Lower Finalifier"
           ],
           "note": "Ultimate Champion of the CASPER season."
         }
-      },
-      "cascade": {
-        "name": "Cascade Path",
-        "final": {
-          "name": "Cascade Cup",
-          "inputs": [
-            "Conference Champion",
-            "Relegator Champion"
-          ]
-        }
       }
     },
+
     "trophies": [
       {
         "name": "Finale",
@@ -188,14 +312,29 @@
         "note": "Secondary league championship."
       },
       {
-        "name": "Cascade Cup",
+        "name": "Super Cup",
         "level": "silver",
-        "note": "Conference Champion vs Relegator Champion."
+        "note": "Premier Champion vs Grande Champion."
       },
       {
         "name": "Relegator Cup",
         "level": "bronze",
         "note": "Redemption championship."
+      },
+      {
+        "name": "Peripheral Cup",
+        "level": "bronze",
+        "note": "Single round-robin competition for Relegator Cup entrants."
+      },
+      {
+        "name": "Minor SuperCup",
+        "level": "bronze",
+        "note": "Peripheral Champion vs Relegator Champion."
+      },
+      {
+        "name": "Sub SuperCup",
+        "level": "silver",
+        "note": "Minor SuperCup Champion vs Conference Champion; winner earns the lower-path Finale position."
       }
     ]
   }
