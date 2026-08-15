@@ -168,6 +168,7 @@ fmt=ko;
 t=8;
 tgt=8;
 dos=07082026;
+doc=13082026;
 ven=School;
 sts=Completed;
 
@@ -220,8 +221,9 @@ org=SSN;
 fmt=rr;
 t=4;
 dos=12082026;
+doc=14082026;
 ven=School;
-sts=Ongoing;
+sts=Completed;
 
 n(
 rsa=Real Saltlake[Arjun],
@@ -236,6 +238,16 @@ mvl-vos:0-1#GS;
 mvl-hor:0-1#GS;
 rsa-mvl:1-0#GS;
 rsa-vos:1-0#GS;
+vos-hor:1-0#GS;
+);
+
+aw(
+ch=rsa;
+ru=vos;
+3p=hor;
+gb=vos;
+iw=rsa;
+frp=mvl;
 );
 ]
 
@@ -248,8 +260,9 @@ org=SSN;
 fmt=rr;
 t=4;
 dos=12082026;
+doc=14082026;
 ven=School;
-sts=Ongoing;
+sts=Completed;
 
 n(
 rut=Romano United[Anshuman],
@@ -263,6 +276,17 @@ rut-igr:1-1#GS;
 rut-nas:1-3#GS;
 rut-mfc:0-1#GS;
 igr-nas:2-2#GS;
+mfc-igr:1-3#GS;
+nas-mfc:0-0#GS;
+);
+
+aw(
+ch=igr;
+ru=nas;
+3p=mfc;
+gb=igr;
+iw=mfc;
+frp=rut;
 );
 ]
 
