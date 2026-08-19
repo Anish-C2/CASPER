@@ -78,6 +78,11 @@ gk=vos;
 frp=vos;
 3p=rsa;
 4p=mar;
+cm=bbu;
+ps=bbu;
+cp=kko;
+rb=bbu;
+gmb=bbu;
 );
 
 nt(
@@ -118,6 +123,7 @@ aw(
 ch=nas;
 ru=mfc;
 gb=nas;
+gmb=nas;
 );
 
 nt(
@@ -150,7 +156,9 @@ bbu-nas:7-3(y1-0,r0-1)#F
 
 aw(
 ch=bbu;
-ru=nas
+ru=nas;
+rb=bbu;
+gmb=bbu;
 );
 
 nt(
@@ -205,6 +213,11 @@ ug=ssc;
 3p=ssc;
 4p=mar;
 gk=ssc;
+cm=kko;
+rb=bbu;
+cp=ssc;
+ps=kko;
+gmb=bbu;
 );
 
 nt(
@@ -248,6 +261,8 @@ ru=vos;
 gb=vos;
 iw=rsa;
 frp=mvl;
+gmb=rsa;
+4p=mvl;
 );
 ]
 
@@ -286,6 +301,7 @@ ru=nas;
 3p=mfc;
 gb=igr;
 iw=mfc;
+gmb=igr;
 frp=rut;
 );
 ]
@@ -299,19 +315,170 @@ org=SSN;
 fmt=rr;
 t=4;
 dos=13082026;
+doc=14082026;
 ven=School;
-sts=Ongoing;
+sts=Completed;
 
 n(
 kko=Kolkata Kous[Bhavesh],
 bbu=Black Bird United[Anish],
 ssc=Super Strikers CF[Srinjoy],
-mar=Martians[Anirban]
+mar=Martians[Anirban],
 );
 
 m(
 bbu-ssc:5-2#GS;
 bbu-mar:2-1#GS;
 mar-ssc:2-2#GS;
+kko-ssc:1-0#GS;
+mar-kko:0-1#GS;
+kko-bbu:2-5#GS;
+);
+
+aw(
+ch=bbu;
+ru=kko;
+3p=mar;
+gb=bbu;
+iw=mar;
+bg=bbu;
+rb=bbu;
+gmb=bbu;
+)
+]
+
+[
+id=sc26a;
+e=SuperCup;
+s=2026A;
+ed=1;
+org=SSN;
+fmt=ko;
+t=2;
+dos=18082026;
+doc=18082026;
+ven=School;
+sts=Completed;
+
+n(
+bbu=Black Bird United[Anish],
+kko=Kolkata Kous[Bhavesh]
+);
+
+m(
+bbu-kko:1-3#F;
+);
+
+aw(
+ch=kko;
+ru=bbu;
+gmb=kko;
+);
+]
+
+[
+id=msc26a;
+e=Minor Supercup;
+s=2026A;
+ed=1;
+org=SSN;
+fmt=ko;
+t=2;
+tgt=1;
+dos=18082026;
+doc=18082026;
+ven=School;
+sts=Completed;
+
+n(
+nas=New Athletico Saltlake[Vyom],
+igr=Inter Grande CF[Rounak]
+);
+
+m(
+nas-igr:1-2#F;
+);
+
+aw(
+ch=igr;
+ru=nas;
+gmb=igr;
+);
+
+nt(
+A Super Cup between the champions of the Relegator Cup and Peripheral Cup
+);
+]
+
+[
+id=ssc26a;
+e=Sub Supercup;
+s=2026A;
+ed=1;
+org=SSN;
+fmt=ko;
+t=2;
+tgt=1;
+dos=18082026;
+doc=18082026;
+ven=School;
+sts=Completed;
+
+n(
+rsa=Real Saltlake[Arjun],
+igr=Inter Grande CF[Rounak]
+);
+
+m(
+rsa-igr:1-0#F;
+);
+
+aw(
+ch=rsa;
+ru=igr;
+gmb=rsa;
+);
+
+nt(
+A Super Cup between the champions of the Conference League and Minor Supercup
+);
+]
+
+[
+id=fn26a;
+e=Finale;
+s=2026A;
+ed=1;
+org=SSN;
+fmt=ko;
+t=4;
+tgt=1;
+dos=19082026;
+ven=School;
+sts=Ongoing;
+
+n(
+bbu=Black Bird United[Anish],
+ssc=Super Strikers CF[Srinjoy],
+kko=Kolkata Kous[Bhavesh],
+rsa=Real Saltlake[Arjun]
+);
+
+m(
+# Semifinals;
+bbu-ssc:3-3(p2-1)#SF;
+kko-rsa:#SF;
+# Final;
+# TBD
+);
+
+aw(
+ch=;
+ru=;
+gmb=;
+);
+
+nt(
+The concluding championship of the 2026A season.
 );
 ]
