@@ -454,8 +454,10 @@ fmt=ko;
 t=4;
 tgt=1;
 dos=19082026;
+doc=21082026;
 ven=School;
-sts=Ongoing;
+sts=Completed;
+tag=golden;
 
 n(
 bbu=Black Bird United[Anish],
@@ -467,18 +469,70 @@ rsa=Real Saltlake[Arjun]
 m(
 # Semifinals;
 bbu-ssc:3-3(p2-1)#SF;
-kko-rsa:#SF;
-# Final;
-# TBD
+kko-rsa:0-1#SF;
+# Finals;
+bbu-rsa:1-1(p2-0)#F;
 );
 
 aw(
-ch=;
-ru=;
-gmb=;
+ch=bbu;
+ru=rsa;
+gmb=bbu;
+3p=ssc;
+4p=kko;
+ps=bbu;
+gb=bbu;
+iw=rsa;
+cp=rsa;
+cm=bbu;
 );
 
 nt(
 The concluding championship of the 2026A season.
 );
+]
+
+[
+id=sa26a;
+e=Seasonal Awards;
+s=2026A;
+typ=seasonal;
+sts=Completed;
+
+aw(
+Tsar=Anish;
+Crown Of CASPER=Anish;
+Golden Strike=Anish;
+Netherite=Arjun;
+gg=Arjun;
+The Standard=Anish;
+The Margin=Anish;
+The Pursuer=Bhavesh;
+The Wall=Anshuman;
+Silver Strike=Bhavesh;
+The Edge=Bhavesh;
+The Lock=Divyanshu;
+The Runner=Aryan;
+Lowest Exposure=Anshuman;
+Season Points Leader=Anish;
+sg=Anish;
+);
+
+ranks(
+1=Anish:23,
+2=Arjun:10,
+3=Bhavesh:9,
+4=Anirban:5,
+5=Gourav:3,
+6=Rounak:2,
+7=Srinjoy:2,
+8=Vyom:1,
+9=Aryan:1,
+10=Rajdeep:1,
+11=Divyanshu:1
+)
+
+nt(
+End of Season 2026A awards.
+)
 ]
