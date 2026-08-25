@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CASPER — Competitive Athletics & Sports Promotion</title>
+  <title>CASPER Futsal — Competitive Athletics & Sports Promotion</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
@@ -356,6 +356,26 @@
       background: #fef0f0;
     }
 
+    .badge.golden,
+    .tag.golden,
+    .status.golden {
+      border-color: #c9a227;
+      color: #8a6d1a;
+      background: #fdf8e8;
+      font-weight: bold;
+    }
+
+    .golden-title {
+      color: #8a6d1a;
+      font-weight: bold;
+    }
+
+    h1 .badge.golden {
+      font-size: 0.55em;
+      vertical-align: middle;
+      margin-left: 6px;
+    }
+
     .stage-tag {
       border-color: #3366cc;
       color: #3366cc;
@@ -682,29 +702,248 @@
 
     .trophy-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
-      gap: 6px;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 8px;
     }
 
     .trophy {
       background: #fff;
       border: 1px solid #c8ccd1;
       border-radius: 2px;
-      padding: 10px 6px;
+      padding: 12px 8px;
       text-align: center;
+      transition: border-color 0.12s ease, background 0.12s ease;
+    }
+
+    .trophy:hover {
+      border-color: #a2a9b1;
+      background: #f8f9fa;
     }
 
     .trophy .n {
-      font-size: 18px;
+      font-size: 22px;
       font-weight: bold;
       color: #000;
       font-family: sans-serif;
+      line-height: 1.1;
     }
 
     .trophy .l {
       font-size: 11px;
       color: #54595d;
       font-family: sans-serif;
+      margin-top: 4px;
+    }
+
+    .trophy.trophy-gold {
+      border-color: #c9a227;
+      background: #fdf8e8;
+    }
+
+    .trophy.trophy-gold .n {
+      color: #8a6d1a;
+    }
+
+    .trophy.trophy-title {
+      border-left: 3px solid #202122;
+    }
+
+    .trophy .t-icon {
+      font-size: 16px;
+      color: #54595d;
+      margin-bottom: 4px;
+    }
+
+    .trophy.trophy-gold .t-icon {
+      color: #c9a227;
+    }
+
+    /* Trophy cabinet shelf */
+    .cabinet {
+      border: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      padding: 0;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+
+    .cabinet-head {
+      background: #eaecf0;
+      border-bottom: 1px solid #a2a9b1;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cabinet-head h2 {
+      margin: 0;
+      border: none;
+      font-size: 1.2em;
+      padding: 0;
+    }
+
+    .cabinet-totals {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-family: sans-serif;
+      font-size: 12px;
+    }
+
+    .cabinet-totals .ct {
+      background: #fff;
+      border: 1px solid #c8ccd1;
+      padding: 3px 8px;
+      border-radius: 2px;
+    }
+
+    .cabinet-totals .ct b {
+      color: #000;
+    }
+
+    .cabinet-totals .ct.gold {
+      background: #fdf8e8;
+      border-color: #c9a227;
+      color: #8a6d1a;
+    }
+
+    .cabinet-body {
+      padding: 12px 14px 14px;
+      background: #fff;
+    }
+
+    .cabinet-section {
+      margin-bottom: 16px;
+    }
+
+    .cabinet-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .cabinet-section-title {
+      font-family: sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #54595d;
+      border-bottom: 1px solid #c8ccd1;
+      padding-bottom: 4px;
+      margin-bottom: 10px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border: 1px solid #c8ccd1;
+      background: #f8f9fa;
+      margin-bottom: 6px;
+      font-family: sans-serif;
+      font-size: 13px;
+    }
+
+    .title-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .title-row.golden-title-row {
+      background: #fdf8e8;
+      border-color: #c9a227;
+    }
+
+    .title-row .tr-icon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      border: 1px solid #c8ccd1;
+      border-radius: 2px;
+      color: #54595d;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .title-row.golden-title-row .tr-icon {
+      border-color: #c9a227;
+      color: #8a6d1a;
+      background: #fdf8e8;
+    }
+
+    .title-row .tr-main {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .title-row .tr-name {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .title-row .tr-meta {
+      font-size: 12px;
+      color: #54595d;
+      margin-top: 1px;
+    }
+
+    .title-row .tr-badge {
+      flex-shrink: 0;
+    }
+
+    /* Career header polish */
+    .career-top {
+      background: linear-gradient(180deg, #f8f9fa 0%, #fff 100%);
+    }
+
+    .avatar {
+      background: linear-gradient(145deg, #eaecf0, #f8f9fa);
+      font-size: 32px;
+    }
+
+    .form-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .form-pill {
+      width: 22px;
+      height: 22px;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: bold;
+      font-family: sans-serif;
+      border: 1px solid #c8ccd1;
+      background: #f8f9fa;
+      color: #54595d;
+    }
+
+    .form-pill.w {
+      background: #eef9f5;
+      border-color: #14866d;
+      color: #14866d;
+    }
+
+    .form-pill.d {
+      background: #f8f9fa;
+      border-color: #a2a9b1;
+      color: #54595d;
+    }
+
+    .form-pill.l {
+      background: #fef0f0;
+      border-color: #b32424;
+      color: #b32424;
     }
 
     .club-line {
@@ -801,7 +1040,7 @@
     }
 
 
-    /* CASPER Football Pyramid diagram */
+    /* CASPER Futsal Pyramid diagram */
     .pyramid {
       font-family: sans-serif;
       font-size: 13px;
@@ -962,6 +1201,451 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* ---- UI upgrades & new components ---- */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 0 #c8ccd1;
+    }
+
+    .address-bar-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 4px 12px 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: sans-serif;
+    }
+
+    .address-bar {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: #fff;
+      border: 1px solid #a2a9b1;
+      border-radius: 4px;
+      padding: 0 4px 0 8px;
+      gap: 4px;
+      min-height: 30px;
+      transition: border-color 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .address-bar:focus-within {
+      border-color: #3366cc;
+      box-shadow: 0 0 0 1px #3366cc;
+    }
+
+    .address-bar .addr-icon {
+      color: #54595d;
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .address-bar input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: "Courier New", ui-monospace, monospace;
+      font-size: 13px;
+      color: #202122;
+      outline: none;
+      min-width: 0;
+      padding: 5px 4px;
+      width: 100%;
+    }
+
+    .address-bar input:focus {
+      color: #000;
+    }
+
+    .address-go {
+      background: #eaecf0;
+      border: 1px solid #a2a9b1;
+      border-radius: 3px;
+      padding: 4px 12px;
+      font-size: 12px;
+      font-family: sans-serif;
+      cursor: pointer;
+      color: #202122;
+      flex-shrink: 0;
+    }
+
+    .address-go:hover {
+      background: #d8dce0;
+    }
+
+    /* Award cards on player pages */
+    .award-card {
+      border: 1px solid #c8ccd1;
+      background: #fff;
+      border-radius: 2px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .award-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .award-card.golden-card {
+      border-left: 3px solid #c9a227;
+      background: #fdfcf7;
+    }
+
+    .award-card.seasonal-card {
+      border-left: 3px solid #c9a227;
+      background: #fdf8e8;
+    }
+
+    .award-card .ac-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 2px;
+      background: #eaecf0;
+      border: 1px solid #c8ccd1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #54595d;
+      flex-shrink: 0;
+    }
+
+    .award-card.golden-card .ac-icon,
+    .award-card.seasonal-card .ac-icon {
+      background: #fdf8e8;
+      border-color: #c9a227;
+      color: #8a6d1a;
+    }
+
+    .award-card .ac-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .award-card .ac-title {
+      font-weight: bold;
+      font-size: 14px;
+      color: #000;
+      margin-bottom: 2px;
+    }
+
+    .award-card .ac-meta {
+      font-size: 12px;
+      color: #54595d;
+      font-family: sans-serif;
+    }
+
+    .award-card .ac-desc {
+      font-size: 12px;
+      color: #54595d;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    .award-card .ac-count {
+      font-family: sans-serif;
+      font-size: 18px;
+      font-weight: bold;
+      color: #000;
+      flex-shrink: 0;
+      text-align: center;
+      min-width: 36px;
+    }
+
+    .award-card .ac-count span {
+      display: block;
+      font-size: 10px;
+      font-weight: normal;
+      color: #54595d;
+    }
+
+    /* Points column in PFAC ranks */
+    .vote-rank .rank-pts {
+      font-family: sans-serif;
+      font-size: 13px;
+      font-weight: bold;
+      color: #000;
+      min-width: 48px;
+      text-align: right;
+    }
+
+    .vote-rank .rank-pts span {
+      font-weight: normal;
+      color: #54595d;
+      font-size: 11px;
+    }
+
+    /* Softer page feel */
+    main {
+      padding-top: 14px;
+    }
+
+    .panel {
+      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03);
+    }
+
+    h1 {
+      letter-spacing: -0.01em;
+    }
+
+    .mega-strip .cell {
+      transition: background 0.12s ease;
+    }
+
+    .mega-strip .cell:hover {
+      background: #eaecf0;
+    }
+
+    nav {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    nav a {
+      transition: background 0.12s ease;
+    }
+
+    .panel {
+      transition: border-color 0.15s ease;
+    }
+
+    .panel:hover {
+      border-color: #a2a9b1;
+    }
+
+    /* Golden seasonal awards */
+    .award-line.seasonal .accent,
+    .seasonal-award .accent {
+      color: #8a6d1a;
+    }
+
+    .badge.seasonal-golden,
+    .status.seasonal-golden {
+      border-color: #c9a227;
+      color: #8a6d1a;
+      background: #fdf8e8;
+      font-weight: bold;
+    }
+
+    /* Award infobox (Wikipedia-style) */
+    .infobox {
+      float: right;
+      width: 280px;
+      max-width: 100%;
+      margin: 0 0 14px 16px;
+      border: 1px solid #a2a9b1;
+      background: #f8f9fa;
+      font-family: sans-serif;
+      font-size: 12px;
+      clear: right;
+    }
+
+    .infobox-title {
+      background: #eaecf0;
+      text-align: center;
+      font-weight: bold;
+      padding: 8px 6px;
+      font-size: 14px;
+      border-bottom: 1px solid #a2a9b1;
+      color: #000;
+    }
+
+    .infobox-image {
+      text-align: center;
+      padding: 12px;
+      font-size: 42px;
+      color: #54595d;
+      border-bottom: 1px solid #c8ccd1;
+    }
+
+    .infobox table {
+      width: 100%;
+      margin: 0;
+      border: none;
+      font-size: 12px;
+    }
+
+    .infobox th,
+    .infobox td {
+      border: none;
+      border-bottom: 1px solid #c8ccd1;
+      padding: 4px 8px;
+      vertical-align: top;
+    }
+
+    .infobox th {
+      background: transparent;
+      color: #54595d;
+      font-weight: normal;
+      width: 38%;
+      text-align: left;
+    }
+
+    .infobox tr:last-child th,
+    .infobox tr:last-child td {
+      border-bottom: none;
+    }
+
+    .infobox .accent {
+      font-weight: bold;
+      color: #000;
+    }
+
+    @media (max-width: 700px) {
+      .infobox {
+        float: none;
+        width: 100%;
+        margin: 0 0 14px 0;
+      }
+    }
+
+    /* Sponsors */
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .sponsor-card {
+      border: 1px solid #c8ccd1;
+      background: #fff;
+      padding: 14px 12px;
+      text-align: center;
+      border-radius: 2px;
+    }
+
+    .sponsor-card .s-name {
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .sponsor-card .s-tier {
+      font-size: 11px;
+      color: #54595d;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .sponsor-card .s-note {
+      font-size: 12px;
+      color: #54595d;
+    }
+
+    .sponsor-card.tier-gold {
+      border-left: 3px solid #c9a227;
+      background: #fdf8e8;
+    }
+
+    .sponsor-card.tier-silver {
+      border-left: 3px solid #a2a9b1;
+    }
+
+    .sponsor-card.tier-partner {
+      border-left: 3px solid #3366cc;
+    }
+
+    /* PFAC */
+    .pfac-header {
+      background: linear-gradient(135deg, #f8f9fa 0%, #eaecf0 100%);
+      border: 1px solid #a2a9b1;
+      padding: 16px;
+      margin-bottom: 14px;
+      text-align: center;
+    }
+
+    .pfac-header h2 {
+      border: none;
+      margin: 0 0 6px;
+      font-size: 1.5em;
+    }
+
+    .vote-rank {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0;
+      border-bottom: 1px solid #c8ccd1;
+    }
+
+    .vote-rank:last-child {
+      border-bottom: none;
+    }
+
+    .vote-rank .rank-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #eaecf0;
+      border: 1px solid #a2a9b1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-family: sans-serif;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .vote-rank .rank-num.gold {
+      background: #fdf8e8;
+      border-color: #c9a227;
+      color: #8a6d1a;
+    }
+
+    .vote-rank .rank-num.silver {
+      background: #f0f0f0;
+      border-color: #a2a9b1;
+    }
+
+    .vote-rank .rank-num.bronze {
+      background: #f5efe6;
+      border-color: #b08d57;
+      color: #6b5428;
+    }
+
+    /* Award history timeline */
+    .award-history-item {
+      display: grid;
+      grid-template-columns: 90px 1fr auto;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid #c8ccd1;
+      align-items: baseline;
+      font-family: sans-serif;
+      font-size: 13px;
+    }
+
+    .award-history-item:last-child {
+      border-bottom: none;
+    }
+
+    .award-history-item .season {
+      color: #54595d;
+      font-weight: bold;
+    }
+
+    /* Better table hover */
+    tr:hover td {
+      background: #eaecf0 !important;
+    }
+
+    /* Sticky section titles feel */
+    .section-title {
+      scroll-margin-top: 80px;
+    }
+
+    h1 {
+      scroll-margin-top: 80px;
+    }
   </style>
 
 </head>
@@ -971,20 +1655,32 @@
     <div class="header-bar">
       <div class="logo">
         <div class="logo-mark">CA</div>
-        CASPER
+        CASPER Futsal
         <span class="tag" id="site-tagline">Competitive Athletics &amp; Sports Promotion</span>
       </div>
+    </div>
+    <div class="address-bar-wrap">
+      <div class="address-bar" title="Fully editable CSP address — type a path and press Enter">
+        <i class="fa-solid fa-globe addr-icon" aria-hidden="true"></i>
+        <input type="text" id="address-input" spellcheck="false" autocomplete="off" placeholder="csp://casper.org/#home"
+          aria-label="CASPER address bar" value="csp://casper.org/#home" />
+      </div>
+      <button type="button" class="address-go" id="address-go" title="Go">Go</button>
     </div>
     <nav id="main-nav">
       <a href="#home" data-view="home"><i class="fa-solid fa-house"></i> Home</a>
       <a href="#archive" data-view="archive"><i class="fa-solid fa-box-archive"></i> Archive</a>
       <a href="#competitions" data-view="competitions"><i class="fa-solid fa-trophy"></i> Competitions</a>
-      <a href="#news" data-view="news"><i class="fa-solid fa-newspaper"></i> News</a>
       <a href="#players" data-view="players"><i class="fa-solid fa-users"></i> Players</a>
       <a href="#teams" data-view="teams"><i class="fa-solid fa-shield-halved"></i> Teams</a>
+      <a href="#bles" data-view="bles"><i class="fa-solid fa-layer-group"></i> -bles</a>
+      <a href="#halloffame" data-view="halloffame"><i class="fa-solid fa-star"></i> Hall of Fame</a>
       <a href="#awards" data-view="awards"><i class="fa-solid fa-trophy"></i> Awards</a>
+      <a href="#pfac" data-view="pfac"><i class="fa-solid fa-handshake"></i> PFAC</a>
+      <a href="#sponsors" data-view="sponsors"><i class="fa-solid fa-handshake-angle"></i> Sponsors</a>
       <a href="#records" data-view="records"><i class="fa-solid fa-medal"></i> Records</a>
       <a href="#statistics" data-view="statistics"><i class="fa-solid fa-chart-column"></i> Statistics</a>
+      <a href="#streaks" data-view="streaks"><i class="fa-solid fa-fire"></i> Streaks</a>
       <a href="#database" data-view="database"><i class="fa-solid fa-database"></i> Database</a>
       <a href="#search" data-view="search"><i class="fa-solid fa-magnifying-glass"></i> Search</a>
       <a href="#structure" data-view="structure"><i class="fa-solid fa-diagram-project"></i> Structure</a>
@@ -997,7 +1693,7 @@
   </main>
 
   <footer>
-    CASPER — Competitive Athletics &amp; Sports Promotion · CSN-powered · Local client-side · <a
+    CASPER Futsal — Competitive Athletics &amp; Sports Promotion · CSN-powered · Local client-side · <a
       href="#database">Database</a>
   </footer>
 
@@ -1012,7 +1708,9 @@
       players: {},
       teams: {},
       matches: [],
-      misc: { news: [], seasonalAwards: [], records: [], seasonNotes: {} },
+      misc: { records: [], seasonNotes: {}, pyramid: null },
+      seasonalAwards: [],
+      pfacRanks: {},
       rawById: {},
       ready: false,
       metrics: {
@@ -1088,7 +1786,8 @@
           st: {},         // group -> [{team, pts, gd}]
           aw: {},         // award -> value
           ac: [],         // achievements
-          nt: ''
+          nt: '',
+          ranks: null     // PFAC voting ranks [{rank, name}]
         };
         skipWS();
         if (peek() !== '[') return null;
@@ -1191,6 +1890,41 @@
                   t.aw[pair.slice(0, eq).trim()] = pair.slice(eq + 1).trim();
                 }
               });
+            } else if (key === 'ranks' || key === 'vote' || key === 'voting') {
+              // PFAC voting ranks with optional points:
+              // ranks(1=Anish:42,2=Bhavesh:38,3=Sam:31)
+              // ranks(1=Anish=42,2=Bhavesh=38)
+              // ranks(Anish:42,Bhavesh:38)
+              // ranks(Anish,Bhavesh,Sam)
+              t.ranks = [];
+              body.split(',').forEach((part, idx) => {
+                part = part.trim();
+                if (!part) return;
+                let rank = idx + 1;
+                let name = part;
+                let points = null;
+
+                // Form: N=Name:pts  or  N=Name=pts  or  N=Name
+                const m1 = part.match(/^(\d+)\s*=\s*(.+)$/);
+                if (m1) {
+                  rank = parseInt(m1[1], 10) || (idx + 1);
+                  name = m1[2].trim();
+                }
+
+                // Points: Name:42 or Name=42 (second = only if not already used as rank sep in a way that left digits)
+                const ptsColon = name.match(/^(.+?)\s*:\s*(\d+)\s*$/);
+                const ptsEq = name.match(/^(.+?)\s*=\s*(\d+)\s*$/);
+                if (ptsColon) {
+                  name = ptsColon[1].trim();
+                  points = parseInt(ptsColon[2], 10);
+                } else if (ptsEq) {
+                  name = ptsEq[1].trim();
+                  points = parseInt(ptsEq[2], 10);
+                }
+
+                if (name) t.ranks.push({ rank, name, points });
+              });
+              t.ranks.sort((a, b) => a.rank - b.rank);
             } else if (key === 'ac') {
               t.ac = body.split(';').map(s => s.trim()).filter(Boolean);
             } else if (key === 'nt') {
@@ -1294,7 +2028,7 @@
             matches: 0,
             wins: 0, draws: 0, losses: 0,
             yellow: 0, red: 0,
-            titles: 0, runnerUps: 0,
+            titles: 0, goldenTitles: 0, runnerUps: 0,
             awards: [],
             tournaments: [],
             cleanSheets: 0,
@@ -1323,7 +2057,7 @@
             matches: 0,
             wins: 0, draws: 0, losses: 0,
             yellow: 0, red: 0,
-            titles: 0, runnerUps: 0,
+            titles: 0, goldenTitles: 0, runnerUps: 0,
             tournaments: [],
             cleanSheets: 0,
             failedToScore: 0,
@@ -1347,6 +2081,9 @@
       }
 
       tournaments.forEach(t => {
+        // Seasonal award blocks live in CSN but are not real competitions
+        if (isSeasonalBlock(t)) return;
+
         Object.keys(t.n).forEach(abbr => {
           const info = t.n[abbr];
           const team = ensureTeam(abbr, info);
@@ -1476,11 +2213,19 @@
 
         if (t.aw.ch) {
           const abbr = t.aw.ch;
-          ensureTeam(abbr).titles++;
+          const teamObj = ensureTeam(abbr);
+          teamObj.titles++;
+          if (isGolden(t)) teamObj.goldenTitles = (teamObj.goldenTitles || 0) + 1;
           const info = t.n[abbr];
           if (info && info.player) {
-            ensurePlayer(info.player).titles++;
-            ensurePlayer(info.player).awards.push({ tourney: t.meta.id, award: 'Champion' });
+            const pObj = ensurePlayer(info.player);
+            pObj.titles++;
+            if (isGolden(t)) pObj.goldenTitles = (pObj.goldenTitles || 0) + 1;
+            pObj.awards.push({
+              tourney: t.meta.id,
+              award: 'Champion',
+              golden: isGolden(t)
+            });
           }
         }
         if (t.aw.ru) {
@@ -1497,7 +2242,11 @@
           const val = t.aw[k];
           let p = players[val.toLowerCase()];
           if (!p && t.n[val] && t.n[val].player) p = ensurePlayer(t.n[val].player);
-          if (p) p.awards.push({ tourney: t.meta.id, award: getAwardLabel(k) });
+          if (p) p.awards.push({
+            tourney: t.meta.id,
+            award: getAwardLabel(k),
+            golden: isGolden(t)
+          });
         });
 
         Object.keys(t.n).forEach(abbr => {
@@ -1560,6 +2309,74 @@
       if (s == null) return '';
       return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
+
+    function isSeasonalBlock(t) {
+      if (!t || !t.meta) return false;
+      const typ = (t.meta.typ || '').toLowerCase();
+      const cat = (t.meta.cat || '').toLowerCase();
+      const fmt = (t.meta.fmt || '').toLowerCase();
+      return typ === 'seasonal' || cat === 'seasonal' || fmt === 'seasonal';
+    }
+
+    function isGolden(t) {
+      if (!t || !t.meta) return false;
+      const tag = (t.meta.tag || '').toLowerCase();
+      if (!tag) return false;
+      return tag.split(',').map(s => s.trim()).includes('golden');
+    }
+
+    function goldenBadge(t) {
+      return isGolden(t) ? '<span class="badge golden" title="Golden competition — higher prestige">Golden</span>' : '';
+    }
+
+    function extractSeasonalAwards(tournaments) {
+      const list = [];
+      const ranksBySeason = {};
+      tournaments.forEach(t => {
+        if (!isSeasonalBlock(t)) return;
+        const season = t.meta.s || '';
+        if (t.ranks && t.ranks.length) {
+          ranksBySeason[season] = t.ranks.map(r => ({
+            rank: r.rank,
+            name: r.name,
+            points: r.points != null ? r.points : null,
+            id: t.meta.id,
+            note: t.nt || ''
+          }));
+        }
+        Object.keys(t.aw || {}).forEach(code => {
+          let val = t.aw[code];
+          let recipient = val;
+          let team = '';
+          // resolve team abbr → player
+          if (t.n && t.n[val]) {
+            team = t.n[val].name || val;
+            recipient = t.n[val].player || val;
+          } else if (STATE.teams && STATE.teams[val]) {
+            team = STATE.teams[val].name || val;
+            recipient = STATE.teams[val].player || val;
+          }
+          const isPfacGreat = /^(sg|pfacsg|seasonalgreat|pfac.?seasonal.?great)$/i.test(code) ||
+            /seasonal\s*great/i.test(getAwardLabel(code));
+          list.push({
+            season: season,
+            award: getAwardLabel(code),
+            code: code,
+            recipient: recipient,
+            team: team,
+            note: t.nt || '',
+            id: t.meta.id,
+            event: t.meta.e || 'Seasonal Awards',
+            golden: isPfacGreat || true, // seasonal awards are prestigious
+            isPfacGreat: isPfacGreat,
+            ranks: t.ranks || null
+          });
+        });
+      });
+      STATE.pfacRanks = ranksBySeason;
+      return list;
+    }
+
     function sortByDate(tours, newestFirst) {
       return tours.slice().sort((a, b) => {
         const da = a.meta.doc || a.meta.dos || '00000000';
@@ -1661,9 +2478,10 @@
         const tourney = STATE.tournaments.find(t => t.meta.id === a.tourney);
         const eventName = tourney ? (tourney.meta.e || a.tourney) : a.tourney;
         const key = eventName + '|' + a.award;
-        if (!map[key]) map[key] = { event: eventName, award: a.award, count: 0, ids: [] };
+        if (!map[key]) map[key] = { event: eventName, award: a.award, count: 0, ids: [], golden: !!a.golden };
         map[key].count++;
         map[key].ids.push(a.tourney);
+        if (a.golden) map[key].golden = true;
       });
       return Object.values(map).sort((a, b) => b.count - a.count || a.event.localeCompare(b.event));
     }
@@ -1711,6 +2529,436 @@
       });
     }
 
+    /* ---------- STREAKS ---------- */
+    function getChronoMatches() {
+      const chronoTours = STATE.tournaments.slice().sort((a, b) => {
+        const da = (a.meta.dos || a.meta.doc || '00000000');
+        const db = (b.meta.dos || b.meta.doc || '00000000');
+        const sa = da.slice(4) + da.slice(2, 4) + da.slice(0, 2);
+        const sb = db.slice(4) + db.slice(2, 4) + db.slice(0, 2);
+        return sa.localeCompare(sb);
+      });
+      const list = [];
+      chronoTours.forEach(t => {
+        t.m.forEach((m, mi) => {
+          const full = STATE.matches.find(x => x.tourneyId === t.meta.id && x.index === mi);
+          if (full) list.push(full);
+        });
+      });
+      return list;
+    }
+
+    function longestRun(seq, pred) {
+      let best = 0, cur = 0;
+      for (let i = 0; i < seq.length; i++) {
+        if (pred(seq[i])) {
+          cur++;
+          if (cur > best) best = cur;
+        } else {
+          cur = 0;
+        }
+      }
+      return best;
+    }
+
+    function computeEntityStreaks(isPlayer) {
+      const chrono = getChronoMatches();
+      const byKey = {};
+      chrono.forEach(m => {
+        const entries = [];
+        if (isPlayer) {
+          if (m.homePlayer) {
+            entries.push({
+              key: m.homePlayer,
+              result: m.homeWin ? 'W' : m.awayWin ? 'L' : 'D',
+              scored: m.sh,
+              conceded: m.sa
+            });
+          }
+          if (m.awayPlayer) {
+            entries.push({
+              key: m.awayPlayer,
+              result: m.awayWin ? 'W' : m.homeWin ? 'L' : 'D',
+              scored: m.sa,
+              conceded: m.sh
+            });
+          }
+        } else {
+          entries.push({
+            key: m.home,
+            result: m.homeWin ? 'W' : m.awayWin ? 'L' : 'D',
+            scored: m.sh,
+            conceded: m.sa
+          });
+          entries.push({
+            key: m.away,
+            result: m.awayWin ? 'W' : m.homeWin ? 'L' : 'D',
+            scored: m.sa,
+            conceded: m.sh
+          });
+        }
+        entries.forEach(e => {
+          if (!byKey[e.key]) byKey[e.key] = [];
+          byKey[e.key].push(e);
+        });
+      });
+
+      const current = [];
+      const historical = [];
+
+      Object.keys(byKey).forEach(key => {
+        const seq = byKey[key];
+        if (!seq.length) return;
+        const name = isPlayer ? key : ((STATE.teams[key] || {}).name || key);
+
+        // Current (open-ended) streaks from the end
+        let win = 0, unbeaten = 0, scoring = 0, cs = 0, losing = 0;
+        for (let i = seq.length - 1; i >= 0; i--) {
+          if (seq[i].result === 'W') win++; else break;
+        }
+        for (let i = seq.length - 1; i >= 0; i--) {
+          if (seq[i].result !== 'L') unbeaten++; else break;
+        }
+        for (let i = seq.length - 1; i >= 0; i--) {
+          if (seq[i].scored > 0) scoring++; else break;
+        }
+        for (let i = seq.length - 1; i >= 0; i--) {
+          if (seq[i].conceded === 0) cs++; else break;
+        }
+        for (let i = seq.length - 1; i >= 0; i--) {
+          if (seq[i].result === 'L') losing++; else break;
+        }
+        if (win || unbeaten > 1 || scoring || cs || losing) {
+          current.push({
+            key, name, win, unbeaten, scoring, cs, losing,
+            matches: seq.length
+          });
+        }
+
+        // Historical longest runs across the full sequence
+        const bestWin = longestRun(seq, e => e.result === 'W');
+        const bestUnb = longestRun(seq, e => e.result !== 'L');
+        const bestScore = longestRun(seq, e => e.scored > 0);
+        const bestCs = longestRun(seq, e => e.conceded === 0);
+        const bestLose = longestRun(seq, e => e.result === 'L');
+        historical.push({
+          key, name,
+          win: bestWin,
+          unbeaten: bestUnb,
+          scoring: bestScore,
+          cs: bestCs,
+          losing: bestLose,
+          matches: seq.length,
+          // keep current for comparison
+          currentWin: win,
+          currentUnbeaten: unbeaten,
+          currentScoring: scoring,
+          currentCs: cs,
+          currentLosing: losing
+        });
+      });
+
+      return { current, historical };
+    }
+
+    function getStreakHistory() {
+      // Cached on STATE after first compute
+      if (STATE._streakHistory) return STATE._streakHistory;
+      const players = computeEntityStreaks(true);
+      const teams = computeEntityStreaks(false);
+      STATE._streakHistory = {
+        playersCurrent: players.current,
+        playersHistorical: players.historical,
+        teamsCurrent: teams.current,
+        teamsHistorical: teams.historical
+      };
+      // Also stamp best streaks onto player objects for career pages
+      players.historical.forEach(h => {
+        const p = STATE.players[(h.key || '').toLowerCase()];
+        if (p) {
+          p.bestWinStreak = h.win;
+          p.bestUnbeatenStreak = h.unbeaten;
+          p.bestScoringStreak = h.scoring;
+          p.bestCsStreak = h.cs;
+          p.bestLosingStreak = h.losing;
+          p.currentWinStreak = h.currentWin;
+          p.currentUnbeatenStreak = h.currentUnbeaten;
+        }
+      });
+      return STATE._streakHistory;
+    }
+
+    function renderStreaks() {
+      const hist = getStreakHistory();
+      const playerStreaks = hist.playersCurrent;
+      const teamStreaks = hist.teamsCurrent;
+      const pHist = hist.playersHistorical;
+      const tHist = hist.teamsHistorical;
+
+      const sortWin = (a, b) => b.win - a.win || b.unbeaten - a.unbeaten || b.matches - a.matches;
+      const sortUnb = (a, b) => b.unbeaten - a.unbeaten || b.win - a.win;
+      const sortScore = (a, b) => b.scoring - a.scoring || b.win - a.win;
+      const sortCs = (a, b) => b.cs - a.cs || b.unbeaten - a.unbeaten;
+      const sortLose = (a, b) => b.losing - a.losing;
+
+      const pWin = playerStreaks.filter(s => s.win > 0).sort(sortWin);
+      const pUnb = playerStreaks.filter(s => s.unbeaten > 1).sort(sortUnb);
+      const pScore = playerStreaks.filter(s => s.scoring > 0).sort(sortScore);
+      const pCs = playerStreaks.filter(s => s.cs > 0).sort(sortCs);
+      const pLose = playerStreaks.filter(s => s.losing > 0).sort(sortLose);
+
+      const tWin = teamStreaks.filter(s => s.win > 0).sort(sortWin);
+      const tUnb = teamStreaks.filter(s => s.unbeaten > 1).sort(sortUnb);
+      const tScore = teamStreaks.filter(s => s.scoring > 0).sort(sortScore);
+      const tCs = teamStreaks.filter(s => s.cs > 0).sort(sortCs);
+      const tLose = teamStreaks.filter(s => s.losing > 0).sort(sortLose);
+
+      const phWin = pHist.filter(s => s.win > 0).sort(sortWin);
+      const phUnb = pHist.filter(s => s.unbeaten > 1).sort(sortUnb);
+      const phScore = pHist.filter(s => s.scoring > 0).sort(sortScore);
+      const phCs = pHist.filter(s => s.cs > 0).sort(sortCs);
+      const thWin = tHist.filter(s => s.win > 0).sort(sortWin);
+      const thUnb = tHist.filter(s => s.unbeaten > 1).sort(sortUnb);
+
+      function streakTable(rows, columns, linkFn) {
+        if (!rows.length) return `<p class="empty">None.</p>`;
+        let h = `<table><thead><tr>`;
+        columns.forEach(c => { h += `<th>${c.label}</th>`; });
+        h += `</tr></thead><tbody>`;
+        rows.slice(0, 15).forEach((r, i) => {
+          h += `<tr><td>${i + 1}</td>`;
+          columns.slice(1).forEach(c => {
+            if (c.key === 'name') {
+              h += `<td><a href="${linkFn(r)}">${escapeHtml(r.name)}</a></td>`;
+            } else {
+              const val = r[c.key];
+              h += `<td>${c.bold ? `<b>${val}</b>` : val}</td>`;
+            }
+          });
+          h += `</tr>`;
+        });
+        h += `</tbody></table>`;
+        return h;
+      }
+
+      let html = `<h1><i class="fa-solid fa-fire i"></i>Streaks</h1>
+  <p class="muted" style="margin-bottom:10px">
+    <b>Current</b> streaks are open-ended runs at the end of each player’s or team’s match sequence.
+    <b>All-time records</b> are the longest runs ever achieved in archive history (stored and recalculated from the full chronological record).
+  </p>
+
+  <div class="section-title"><i class="fa-solid fa-bolt i"></i> Current streaks — Players</div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-trophy i"></i> Winning</div>
+      ${streakTable(pWin, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Wins', key: 'win', bold: true },
+        { label: 'Unbeaten', key: 'unbeaten' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-shield i"></i> Unbeaten</div>
+      ${streakTable(pUnb, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Unbeaten', key: 'unbeaten', bold: true },
+        { label: 'Wins', key: 'win' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-bullseye i"></i> Scoring</div>
+      ${streakTable(pScore, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Scored', key: 'scoring', bold: true },
+        { label: 'Wins', key: 'win' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+  </div>
+
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-hand i"></i> Clean sheets</div>
+      ${streakTable(pCs, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'CS', key: 'cs', bold: true },
+        { label: 'Unbeaten', key: 'unbeaten' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-xmark i"></i> Losing</div>
+      ${streakTable(pLose, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Losses', key: 'losing', bold: true },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-info-circle i"></i> How streaks work</div>
+      <p class="muted" style="font-size:13px">
+        Matches are ordered by tournament start/end date, then by order inside each tournament.
+        A <b>winning streak</b> is consecutive wins. <b>Unbeaten</b> = wins or draws.
+        <b>Scoring</b> = scored at least once. <b>Clean sheet</b> = no goals conceded.
+        Historical records scan the entire career sequence; current streaks only count the open run at the end.
+      </p>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><i class="fa-solid fa-medal i"></i> All-time streak records — Players</div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title">Longest winning run</div>
+      ${streakTable(phWin, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Best', key: 'win', bold: true },
+        { label: 'Current', key: 'currentWin' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Longest unbeaten run</div>
+      ${streakTable(phUnb, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Best', key: 'unbeaten', bold: true },
+        { label: 'Current', key: 'currentUnbeaten' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Longest scoring run</div>
+      ${streakTable(phScore, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Best', key: 'scoring', bold: true },
+        { label: 'Current', key: 'currentScoring' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+  </div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title">Longest clean-sheet run</div>
+      ${streakTable(phCs, [
+        { label: '#' },
+        { label: 'Player', key: 'name' },
+        { label: 'Best', key: 'cs', bold: true },
+        { label: 'Current', key: 'currentCs' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#player/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Notes</div>
+      <p class="muted" style="font-size:13px">
+        All-time figures are stored on each player after the first Streaks visit (and whenever the archive is reloaded).
+        They appear on individual player pages under Personal Records.
+      </p>
+    </div>
+    <div class="panel"></div>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><i class="fa-solid fa-shield-halved i"></i> Current streaks — Teams</div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title">Team winning streaks</div>
+      ${streakTable(tWin, [
+        { label: '#' },
+        { label: 'Team', key: 'name' },
+        { label: 'Wins', key: 'win', bold: true },
+        { label: 'Unbeaten', key: 'unbeaten' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#team/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Team unbeaten streaks</div>
+      ${streakTable(tUnb, [
+        { label: '#' },
+        { label: 'Team', key: 'name' },
+        { label: 'Unbeaten', key: 'unbeaten', bold: true },
+        { label: 'Wins', key: 'win' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#team/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Team scoring streaks</div>
+      ${streakTable(tScore, [
+        { label: '#' },
+        { label: 'Team', key: 'name' },
+        { label: 'Scored', key: 'scoring', bold: true },
+        { label: 'Wins', key: 'win' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#team/${encodeURIComponent(r.key)}`)}
+    </div>
+  </div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title">Team clean-sheet streaks</div>
+      ${streakTable(tCs, [
+        { label: '#' },
+        { label: 'Team', key: 'name' },
+        { label: 'CS', key: 'cs', bold: true },
+        { label: 'Unbeaten', key: 'unbeaten' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#team/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Team losing streaks</div>
+      ${streakTable(tLose, [
+        { label: '#' },
+        { label: 'Team', key: 'name' },
+        { label: 'Losses', key: 'losing', bold: true },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#team/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Notes</div>
+      <p class="muted" style="font-size:13px">
+        Team streaks use the same chronological order. Because many players control a single team, player and team streaks often match closely.
+      </p>
+    </div>
+  </div>
+
+  <div class="section-title" style="margin-top:18px"><i class="fa-solid fa-medal i"></i> All-time streak records — Teams</div>
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title">Longest winning run</div>
+      ${streakTable(thWin, [
+        { label: '#' },
+        { label: 'Team', key: 'name' },
+        { label: 'Best', key: 'win', bold: true },
+        { label: 'Current', key: 'currentWin' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#team/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Longest unbeaten run</div>
+      ${streakTable(thUnb, [
+        { label: '#' },
+        { label: 'Team', key: 'name' },
+        { label: 'Best', key: 'unbeaten', bold: true },
+        { label: 'Current', key: 'currentUnbeaten' },
+        { label: 'Matches', key: 'matches' }
+      ], r => `#team/${encodeURIComponent(r.key)}`)}
+    </div>
+    <div class="panel">
+      <div class="section-title">Storage</div>
+      <p class="muted" style="font-size:13px">
+        Historical streak records are computed from the full match archive and cached in memory for the session.
+        Player best-streak fields are written onto each player object for career pages.
+      </p>
+    </div>
+  </div>`;
+      return html;
+    }
 
     function renderPyramid() {
       // Always show the official detailed pyramid (ASCII). Optional trophies from misc.
@@ -1743,7 +2991,7 @@
       const totalCardsY = players.reduce((s, p) => s + p.yellow, 0);
       const totalCardsR = players.reduce((s, p) => s + p.red, 0);
       const totalTitles = players.reduce((s, p) => s + p.titles, 0);
-      const totalAwards = players.reduce((s, p) => s + p.awards.length, 0) + (STATE.misc.seasonalAwards || []).length;
+      const totalAwards = players.reduce((s, p) => s + p.awards.length, 0) + (STATE.seasonalAwards || []).length;
       const topScorer = players.slice().sort((a, b) => b.goals - a.goals)[0];
       const mostTitles = players.slice().sort((a, b) => b.titles - a.titles)[0];
       const mostWins = players.slice().sort((a, b) => b.wins - a.wins)[0];
@@ -1752,7 +3000,7 @@
       const ongoing = tours.filter(t => getStatus(t).key === 'ongoing').length;
       const scheduled = tours.filter(t => getStatus(t).key === 'scheduled').length;
 
-      let html = `<h1><i class="fa-solid fa-gauge-high i"></i>CASPER Dashboard</h1>
+      let html = `<h1><i class="fa-solid fa-gauge-high i"></i>CASPER Futsal Dashboard</h1>
   <p class="muted" style="margin-bottom:8px">${escapeHtml(STATE.config.tagline || '')}</p>
   <p class="muted" style="margin-bottom:8px;font-family:sans-serif;font-size:12px">
     <a href="#structure"><i class="fa-solid fa-diagram-project i"></i>Competition pyramid</a>
@@ -1774,7 +3022,6 @@
     <div class="cell"><span class="n">${completed}</span><span class="l"><i class="fa-solid fa-circle-check"></i> Done</span></div>
     <div class="cell"><span class="n">${ongoing}</span><span class="l"><i class="fa-solid fa-spinner"></i> Live</span></div>
     <div class="cell"><span class="n">${scheduled}</span><span class="l"><i class="fa-solid fa-clock"></i> Upcoming</span></div>
-    <div class="cell"><span class="n">${(STATE.misc.news || []).length}</span><span class="l"><i class="fa-solid fa-newspaper"></i> News</span></div>
   </div>`;
 
       if (latest) {
@@ -1794,29 +3041,13 @@
 
       html += `<div class="split-3">
     <div class="panel">
-      <div class="section-title"><i class="fa-solid fa-newspaper i"></i> News</div>`;
-      const news = (STATE.misc.news || []).slice().sort((a, b) => {
-        const sa = (a.date || '').slice(4) + (a.date || '').slice(2, 4) + (a.date || '').slice(0, 2);
-        const sb = (b.date || '').slice(4) + (b.date || '').slice(2, 4) + (b.date || '').slice(0, 2);
-        return sb.localeCompare(sa);
-      });
-      if (!news.length) html += `<p class="empty">No news.</p>`;
-      news.slice(0, 8).forEach(n => {
-        html += `<div class="news-item">
-      <div class="date"><i class="fa-regular fa-calendar i"></i>${fmtDate(n.date)}</div>
-      <div class="title">${escapeHtml(n.title)}</div>
-      <div class="muted">${escapeHtml(n.body || '')}</div>
-    </div>`;
-      });
-      html += `<div style="margin-top:6px"><a href="#news">All news <i class="fa-solid fa-arrow-right"></i></a></div>
-    </div>
-    <div class="panel">
       <div class="section-title"><i class="fa-solid fa-list i"></i> Competitions</div>
       <ul class="plain">`;
       tours.slice(0, 12).forEach(t => {
+        const gBadge = goldenBadge(t);
         html += `<li>
       <a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a>
-      ${statusBadge(t)}
+      ${gBadge} ${statusBadge(t)}
       <span class="muted"> ${escapeHtml(t.meta.s || '')} · ${fmtDate(t.meta.doc)} · ${t.m.length}m</span>
     </li>`;
       });
@@ -1833,13 +3064,17 @@
         <tr><td><i class="fa-solid fa-futbol i"></i>Matches</td><td><b>${totalMatches}</b></td></tr>
         <tr><td><i class="fa-solid fa-award i"></i>Awards issued</td><td><b>${totalAwards}</b></td></tr>
       </table>
-      <div class="section-title" style="margin-top:10px"><i class="fa-solid fa-star i"></i> Seasonal</div>`;
-      const sa = STATE.misc.seasonalAwards || [];
-      if (!sa.length) html += `<p class="empty">None.</p>`;
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-star i"></i> Seasonal Awards <span class="badge seasonal-golden">Golden</span></div>
+      <p class="muted" style="font-size:12px;margin-bottom:6px">From CSN blocks with <code>typ=seasonal</code> · <a href="#pfac">PFAC</a></p>`;
+      const sa = STATE.seasonalAwards || [];
+      if (!sa.length) html += `<p class="empty">None recorded.</p>`;
       else {
         html += `<table>`;
-        sa.slice(0, 6).forEach(a => {
-          html += `<tr><td class="accent">${escapeHtml(a.award || '')}</td>
+        sa.slice(0, 8).forEach(a => {
+          const great = a.isPfacGreat ? ' <span class="badge seasonal-golden">Great</span>' : '';
+          html += `<tr class="seasonal-award"><td class="accent"><a href="#award/${encodeURIComponent(a.award || '')}">${escapeHtml(a.award || '')}</a>${great}</td>
         <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
         <td class="muted">${escapeHtml(a.season || '')}</td></tr>`;
         });
@@ -1871,14 +3106,14 @@
       tours.forEach(t => {
         html += `<div class="timeline-item">
       <a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a>
-      ${statusBadge(t)}
+      ${goldenBadge(t)} ${statusBadge(t)}
       <span class="muted"> ${fmtDate(t.meta.dos)}–${fmtDate(t.meta.doc)} · ${escapeHtml(t.meta.s || '')} · ${t.m.length} matches</span>
       ${t.aw.ch ? ` <span class="badge"><i class="fa-solid fa-crown"></i> ${escapeHtml((STATE.teams[t.aw.ch] || {}).name || t.aw.ch)}</span>` : ''}
     </div>`;
       });
       html += `</div></div>`;
 
-      // Football pyramid schematic
+      // Futsal pyramid schematic
       html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-diagram-project i"></i>Structure</div>${renderPyramid()}</div>`;
 
       // curated records strip
@@ -1909,7 +3144,7 @@
         const ch = t.aw.ch ? (STATE.teams[t.aw.ch] ? STATE.teams[t.aw.ch].name : t.aw.ch) : '—';
         html += `<tr>
       <td><a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.id)}</a></td>
-      <td>${escapeHtml(t.meta.e || '')}</td>
+      <td>${escapeHtml(t.meta.e || '')} ${goldenBadge(t)}</td>
       <td><a href="#season/${encodeURIComponent(t.meta.s || '')}">${escapeHtml(t.meta.s || '')}</a></td>
       <td>${escapeHtml(t.meta.fmt || '')}</td>
       <td>${escapeHtml(t.meta.t || Object.keys(t.n).length)}</td>
@@ -1931,8 +3166,8 @@
       if (!t) return `<div class="error">Tournament “${escapeHtml(id)}” not found.</div>`;
 
       let html = `<a class="back" href="#archive"><i class="fa-solid fa-arrow-left"></i> Archive</a>
-  <h1>${escapeHtml(t.meta.e || t.meta.id)} ${statusBadge(t)}</h1>
-  <p class="muted">${escapeHtml(t.meta.s || '')} · Edition ${escapeHtml(t.meta.ed || '1')} · ${escapeHtml(t.meta.fmt || '')} · ${fmtDate(t.meta.dos)} – ${fmtDate(t.meta.doc)}</p>`;
+  <h1>${escapeHtml(t.meta.e || t.meta.id)} ${goldenBadge(t)} ${statusBadge(t)}</h1>
+  <p class="muted">${escapeHtml(t.meta.s || '')} · Edition ${escapeHtml(t.meta.ed || '1')} · ${escapeHtml(t.meta.fmt || '')} · ${fmtDate(t.meta.dos)} – ${fmtDate(t.meta.doc)}${isGolden(t) ? ' · <span class="golden-title">Golden competition</span>' : ''}</p>`;
 
       // Metadata (driven by config.metadataFields)
       {
@@ -2165,7 +3400,7 @@
       });
 
       const grouped = groupPlayerAwards(p);
-      const seasonal = (STATE.misc.seasonalAwards || []).filter(a => (a.recipient || '').toLowerCase() === key);
+      const seasonal = (STATE.seasonalAwards || []).filter(a => (a.recipient || '').toLowerCase() === key);
 
       const trophyMap = {};
       grouped.forEach(g => { trophyMap[g.award] = (trophyMap[g.award] || 0) + g.count; });
@@ -2187,11 +3422,26 @@
         <div><span class="muted">Record</span><strong>${p.wins}W – ${p.draws}D – ${p.losses}L</strong></div>
         <div><span class="muted">ELO</span><strong>${p.elo} <span class="muted">(peak ${p.peakElo || p.elo})</span></strong></div>
       </div>
+      ${(() => {
+          const recent = STATE.matches.filter(m =>
+            (m.homePlayer && m.homePlayer.toLowerCase() === key) ||
+            (m.awayPlayer && m.awayPlayer.toLowerCase() === key)
+          ).slice(-8);
+          if (!recent.length) return '';
+          let pills = `<div class="form-pills" title="Recent form (oldest → newest)">`;
+          recent.forEach(m => {
+            const isHome = m.homePlayer && m.homePlayer.toLowerCase() === key;
+            const res = isHome ? (m.homeWin ? 'W' : m.awayWin ? 'L' : 'D') : (m.awayWin ? 'W' : m.homeWin ? 'L' : 'D');
+            pills += `<span class="form-pill ${res.toLowerCase()}">${res}</span>`;
+          });
+          pills += `</div>`;
+          return pills;
+        })()}
       <div class="big-stats">
         <div class="cell"><div class="n">${p.elo}</div><div class="l">ELO</div></div>
         <div class="cell"><div class="n">${p.goals}</div><div class="l">Goals</div></div>
         <div class="cell"><div class="n">${p.matches}</div><div class="l">Matches</div></div>
-        <div class="cell"><div class="n">${p.titles}</div><div class="l">Titles</div></div>
+        <div class="cell"><div class="n">${p.titles}</div><div class="l">Titles${p.goldenTitles ? ' <span class="badge golden" title="Golden cup titles">' + p.goldenTitles + ' golden</span>' : ''}</div></div>
         <div class="cell"><div class="n">${gbCount || (trophyMap['Golden Boot'] || 0)}</div><div class="l">Golden Boots</div></div>
         <div class="cell"><div class="n">${seasons.size || uniqueTours.length}</div><div class="l">Seasons Active</div></div>
       </div>
@@ -2213,17 +3463,28 @@
     <div class="q"><div class="n">${p.runnerUps}</div><div class="l">Runner-up</div></div>
   </div>
 
-  <div class="grid2">
-    <div class="panel">
-      <div class="section-title"><i class="fa-solid fa-timeline i"></i>Competition Career</div>`;
+  ${(() => {
+          const ctxMap = (STATE.config && STATE.config.playerContext) || (STATE.misc && STATE.misc.playerContext) || {};
+          const ctx = ctxMap[key] || ctxMap[p.name] || ctxMap[p.name.toLowerCase()];
+          if (!ctx) return '';
+          return `<div class="panel">
+      <div class="section-title"><i class="fa-solid fa-quote-left i"></i> Context</div>
+      <p style="font-size:13px;line-height:1.55">${escapeHtml(ctx)}</p>
+    </div>`;
+        })()}
+
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-timeline i"></i> Competition Career</div>`;
       uniqueTours.forEach(id => {
-        const row = byTour[id] || { event: id, season: '', goals: 0, matches: 0 };
+        const row = byTour[id] || { event: id, season: '', goals: 0, matches: 0, wins: 0, draws: 0, losses: 0 };
         const abbr = (row.event || id).replace(/[^A-Za-z0-9]/g, '').slice(0, 3).toUpperCase();
+        const wonTitle = row.ch && STATE.teams[row.ch] && STATE.teams[row.ch].player &&
+          STATE.teams[row.ch].player.toLowerCase() === key;
         html += `<div class="club-line">
       <div class="club-dot">${escapeHtml(abbr)}</div>
       <div style="flex:1">
-        <div><a href="#competition/${encodeURIComponent(id)}">${escapeHtml(row.event)}</a></div>
-        <div class="muted" style="font-size:12px">${escapeHtml(row.season || '')}</div>
+        <div><a href="#competition/${encodeURIComponent(id)}">${escapeHtml(row.event)}</a>${wonTitle ? ' <span class="badge golden">Champion</span>' : ''}</div>
+        <div class="muted" style="font-size:12px">${escapeHtml(row.season || '')} · ${row.wins || 0}W ${row.draws || 0}D ${row.losses || 0}L</div>
       </div>
       <div style="text-align:right">
         <div><strong>${row.matches}</strong> <span class="muted">M</span></div>
@@ -2237,91 +3498,200 @@
     <div style="text-align:right"><div>${p.matches} M</div><div>${p.goals} G</div></div>
   </div></div>
 
-  <div class="panel">
-    <div class="section-title"><i class="fa-solid fa-book-open i"></i>Career Overview</div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">
-      ${escapeHtml(p.name)} has ${p.goals} goals in ${p.matches} matches across ${uniqueTours.length} competition(s),
-      with ${p.titles} title(s) and ${p.awards.length + seasonal.length} award(s). Win rate ${playerWinRate(p)}.
-    </p>
-    <div class="section-title"><i class="fa-solid fa-trophy i"></i>Trophy Cabinet</div>
-    <div class="trophy-grid">`;
-      const trophyEntries = Object.keys(trophyMap).length
-        ? Object.entries(trophyMap)
-        : [['Titles', p.titles], ['Awards', p.awards.length]];
-      let anyTrophy = false;
-      trophyEntries.forEach(([label, n]) => {
-        if (!n) return;
-        anyTrophy = true;
-        html += `<div class="trophy"><div class="n">${n}</div><div class="l">${escapeHtml(label)}</div></div>`;
-      });
-      if (!anyTrophy) html += `<div class="muted">No trophies recorded yet.</div>`;
-      html += `</div>
-    <div class="section-title" style="margin-top:16px"><i class="fa-solid fa-chart-simple i"></i>Career Statistics</div>
-    <table>
-      <thead><tr><th>Level</th><th>Matches</th><th>Goals</th><th>W-D-L</th><th>G/M</th></tr></thead>
-      <tbody>
-        <tr><td>All competitions</td><td>${p.matches}</td><td>${p.goals}</td><td>${p.wins}-${p.draws}-${p.losses}</td><td>${gpm}</td></tr>
-      </tbody>
-    </table>
-  </div>
-  </div>
+  ${(() => {
+          getStreakHistory();
+          const champAwards = grouped.filter(g => /^(champion)$/i.test(g.award));
+          const ruAwards = grouped.filter(g => /runner.?up/i.test(g.award));
+          // Collapse individual awards by award name (not per competition)
+          const indivMap = {};
+          grouped.filter(g => !/^(champion)$/i.test(g.award) && !/runner.?up/i.test(g.award)).forEach(g => {
+            if (!indivMap[g.award]) {
+              indivMap[g.award] = { award: g.award, count: 0, ids: [], golden: !!g.golden, event: g.event };
+            }
+            indivMap[g.award].count += g.count;
+            indivMap[g.award].ids.push(...(g.ids || []));
+            if (g.golden) indivMap[g.award].golden = true;
+          });
+          const individualAwards = Object.values(indivMap).sort((a, b) => b.count - a.count || a.award.localeCompare(b.award));
+          const totalIndividual = individualAwards.reduce((s, g) => s + g.count, 0) + seasonal.length;
+          const totalTitles = p.titles || champAwards.reduce((s, g) => s + g.count, 0);
+          const goldenTitleCount = p.goldenTitles || 0;
+
+          let cab = `<div class="cabinet">
+    <div class="cabinet-head">
+      <h2><i class="fa-solid fa-trophy i"></i> Trophy Cabinet</h2>
+      <div class="cabinet-totals">
+        <span class="ct"><b>${totalTitles}</b> title${totalTitles === 1 ? '' : 's'}</span>
+        ${goldenTitleCount ? `<span class="ct gold"><b>${goldenTitleCount}</b> golden</span>` : ''}
+        <span class="ct"><b>${totalIndividual}</b> individual</span>
+        <span class="ct"><b>${p.runnerUps || 0}</b> RU</span>
+      </div>
+    </div>
+    <div class="cabinet-body">`;
+
+          const hasAnyTrophy = champAwards.length || p.titles || ruAwards.length || p.runnerUps || individualAwards.length || seasonal.length;
+          if (!hasAnyTrophy) {
+            cab += `<p class="empty">No trophies recorded yet.</p>`;
+          }
+
+          cab += `<div class="cabinet-section">
+      <div class="cabinet-section-title"><i class="fa-solid fa-crown"></i> Championships</div>`;
+          if (!champAwards.length && !p.titles) {
+            cab += `<p class="empty">No titles won yet.</p>`;
+          } else if (champAwards.length) {
+            champAwards.forEach(g => {
+              (g.ids || [null]).forEach((tid) => {
+                const tour = tid ? STATE.tournaments.find(x => x.meta.id === tid) : null;
+                const eventName = tour ? (tour.meta.e || g.event) : g.event;
+                const season = tour ? (tour.meta.s || '') : '';
+                const golden = g.golden || (tour && isGolden(tour));
+                cab += `<div class="title-row${golden ? ' golden-title-row' : ''}">
+            <div class="tr-icon"><i class="fa-solid fa-trophy"></i></div>
+            <div class="tr-main">
+              <div class="tr-name">${tid ? `<a href="#competition/${encodeURIComponent(tid)}">${escapeHtml(eventName)}</a>` : escapeHtml(eventName)}</div>
+              <div class="tr-meta">${escapeHtml(season)}${golden ? ' · Golden competition' : ''}</div>
+            </div>
+            <div class="tr-badge">${golden ? '<span class="badge golden">Golden</span>' : '<span class="badge">Champion</span>'}</div>
+          </div>`;
+              });
+            });
+          } else {
+            cab += `<div class="title-row">
+        <div class="tr-icon"><i class="fa-solid fa-trophy"></i></div>
+        <div class="tr-main">
+          <div class="tr-name">${p.titles} title${p.titles === 1 ? '' : 's'}</div>
+          <div class="tr-meta">See competition history below</div>
+        </div>
+      </div>`;
+          }
+          cab += `</div>`;
+
+          if (ruAwards.length || p.runnerUps) {
+            cab += `<div class="cabinet-section">
+      <div class="cabinet-section-title"><i class="fa-solid fa-medal"></i> Runner-up finishes</div>`;
+            if (ruAwards.length) {
+              ruAwards.forEach(g => {
+                (g.ids || [null]).forEach(tid => {
+                  const tour = tid ? STATE.tournaments.find(x => x.meta.id === tid) : null;
+                  const eventName = tour ? (tour.meta.e || g.event) : g.event;
+                  const season = tour ? (tour.meta.s || '') : '';
+                  cab += `<div class="title-row">
+              <div class="tr-icon"><i class="fa-solid fa-medal"></i></div>
+              <div class="tr-main">
+                <div class="tr-name">${tid ? `<a href="#competition/${encodeURIComponent(tid)}">${escapeHtml(eventName)}</a>` : escapeHtml(eventName)}</div>
+                <div class="tr-meta">${escapeHtml(season)}</div>
+              </div>
+              <div class="tr-badge"><span class="badge">Runner-up</span></div>
+            </div>`;
+                });
+              });
+            } else {
+              cab += `<p class="muted" style="font-size:13px">${p.runnerUps} runner-up finish${p.runnerUps === 1 ? '' : 'es'}.</p>`;
+            }
+            cab += `</div>`;
+          }
+
+          cab += `<div class="cabinet-section">
+      <div class="cabinet-section-title"><i class="fa-solid fa-award"></i> Individual awards</div>`;
+          if (!individualAwards.length && !seasonal.length) {
+            cab += `<p class="empty">No individual awards yet.</p>`;
+          } else {
+            individualAwards.forEach(g => {
+              const desc = getAwardDescriptionByLabel(g.award);
+              const cardClass = g.golden ? 'award-card golden-card' : 'award-card';
+              const idLinks = (g.ids || []).map(tid => {
+                const tour = STATE.tournaments.find(x => x.meta.id === tid);
+                const label = tour ? (tour.meta.e || tid) + (tour.meta.s ? ' (' + tour.meta.s + ')' : '') : tid;
+                return tid ? `<a href="#competition/${encodeURIComponent(tid)}">${escapeHtml(label)}</a>` : escapeHtml(label);
+              }).join(' · ');
+              cab += `<div class="${cardClass}">
+          <div class="ac-icon"><i class="fa-solid fa-award"></i></div>
+          <div class="ac-body">
+            <div class="ac-title"><a href="#award/${encodeURIComponent(g.award)}">${escapeHtml(g.award)}</a>
+              ${g.golden ? ' <span class="badge golden">Golden</span>' : ''}
+            </div>
+            <div class="ac-meta">${idLinks || escapeHtml(g.event)}${g.count > 1 ? ' · ×' + g.count : ''}</div>
+            ${desc ? `<div class="ac-desc">${escapeHtml(desc)}</div>` : ''}
+          </div>
+          <div class="ac-count">${g.count}<span>won</span></div>
+        </div>`;
+            });
+            seasonal.forEach(a => {
+              const desc = getAwardDescriptionByLabel(a.award) || getAwardDescription(a.code);
+              const greatLabel = a.isPfacGreat ? 'PFAC Great' : 'Seasonal · Golden';
+              cab += `<div class="award-card seasonal-card">
+          <div class="ac-icon"><i class="fa-solid fa-star"></i></div>
+          <div class="ac-body">
+            <div class="ac-title"><a href="#award/${encodeURIComponent(a.award)}">${escapeHtml(a.award)}</a>
+              <span class="badge seasonal-golden">${greatLabel}</span>
+            </div>
+            <div class="ac-meta">${escapeHtml(a.season || '')} · Seasonal · <a href="#pfac">PFAC</a></div>
+            ${desc ? `<div class="ac-desc">${escapeHtml(desc)}</div>` : ''}
+          </div>
+          <div class="ac-count">1<span>won</span></div>
+        </div>`;
+            });
+          }
+          cab += `</div>`;
+
+          cab += `<div style="margin-top:8px;font-size:12px;font-family:sans-serif">
+      <a href="#awards">All awards →</a> · <a href="#pfac">PFAC →</a> · <a href="#bles">-bles →</a>
+    </div>`;
+          cab += `</div></div>`;
+          return cab;
+        })()}
 
   <div class="grid3">
     <div class="panel">
-      <div class="section-title"><i class="fa-solid fa-award i"></i>Awards</div>`;
-      if (!grouped.length && !seasonal.length) {
-        html += `<p class="empty">No awards yet.</p>`;
-      } else {
-        grouped.forEach(g => {
-          const countStr = g.count > 1 ? ` <span class="count">×${g.count}</span>` : '';
-          html += `<div class="award-line">
-        <span class="accent">${escapeHtml(g.award)}</span>${countStr}
-        <span class="muted">${escapeHtml(g.event)}</span>
-      </div>`;
-        });
-        seasonal.forEach(a => {
-          html += `<div class="award-line">
-        <span class="accent">${escapeHtml(a.award)}</span>
-        <span class="muted">${escapeHtml(a.season || '')} · Seasonal</span>
-      </div>`;
-        });
-      }
-      html += `<div style="margin-top:10px"><a href="#awards">View all awards →</a></div>
+      <div class="section-title"><i class="fa-solid fa-book-open i"></i> Career Overview</div>
+      <p style="font-size:13px;line-height:1.55;margin-bottom:10px">
+        ${escapeHtml(p.name)} has <b>${p.goals}</b> goals in <b>${p.matches}</b> matches across
+        <b>${uniqueTours.length}</b> competition(s), with <b>${p.titles}</b> title(s) and
+        <b>${p.awards.length + seasonal.length}</b> award(s). Win rate <b>${playerWinRate(p)}</b>.
+      </p>
+      <table>
+        <thead><tr><th>Level</th><th>M</th><th>G</th><th>W-D-L</th><th>G/M</th></tr></thead>
+        <tbody>
+          <tr><td>All competitions</td><td>${p.matches}</td><td>${p.goals}</td><td>${p.wins}-${p.draws}-${p.losses}</td><td>${gpm}</td></tr>
+          <tr><td>Group stage</td><td>${p.groupMatches || 0}</td><td>—</td><td>${p.groupWins || 0}W</td><td>—</td></tr>
+          <tr><td>Knockout</td><td>${p.knockoutMatches || 0}</td><td>—</td><td>${p.knockoutWins || 0}W</td><td>—</td></tr>
+        </tbody>
+      </table>
     </div>
     <div class="panel">
-      <div class="section-title"><i class="fa-solid fa-star i"></i>Career Highlights</div>
+      <div class="section-title"><i class="fa-solid fa-star i"></i> Career Highlights</div>
       <ul class="hl-list">`;
-      if (p.titles) html += `<li>${p.titles} competition title${p.titles > 1 ? 's' : ''} won</li>`;
-      if (p.goals) html += `<li>${p.goals} career goals at ${gpm} per match</li>`;
-      if (gbCount) html += `<li>${gbCount} Golden Boot award${gbCount > 1 ? 's' : ''}</li>`;
-      if (p.runnerUps) html += `<li>${p.runnerUps} runner-up finish${p.runnerUps > 1 ? 'es' : ''}</li>`;
+      if (p.titles) html += `<li><b>${p.titles}</b> competition title${p.titles > 1 ? 's' : ''} won${p.goldenTitles ? ` (${p.goldenTitles} golden)` : ''}</li>`;
+      if (p.goals) html += `<li><b>${p.goals}</b> career goals at ${gpm} per match</li>`;
+      if (gbCount) html += `<li><b>${gbCount}</b> Golden Boot award${gbCount > 1 ? 's' : ''}</li>`;
+      if (p.runnerUps) html += `<li><b>${p.runnerUps}</b> runner-up finish${p.runnerUps > 1 ? 'es' : ''}</li>`;
       const best = uniqueTours.map(id => byTour[id]).sort((a, b) => b.goals - a.goals)[0];
-      if (best && best.goals) html += `<li>Best haul: ${best.goals} goals in ${escapeHtml(best.event)}</li>`;
+      if (best && best.goals) html += `<li>Best haul: <b>${best.goals}</b> goals in ${escapeHtml(best.event)}</li>`;
+      if (p.bestWinStreak) html += `<li>Best win streak: <b>${p.bestWinStreak}</b></li>`;
+      if (p.bestUnbeatenStreak) html += `<li>Best unbeaten streak: <b>${p.bestUnbeatenStreak}</b></li>`;
       seasonal.forEach(a => { html += `<li>${escapeHtml(a.award)} (${escapeHtml(a.season || '')})</li>`; });
       if (p.matches === 0) html += `<li>No matches recorded yet</li>`;
       html += `</ul>
       <div style="margin-top:10px"><a href="#records">View records →</a></div>
     </div>
     <div class="panel">
-      <div class="section-title"><i class="fa-solid fa-medal i"></i>Personal Records</div>
+      <div class="section-title"><i class="fa-solid fa-medal i"></i> Personal Records</div>
       <table>
         <tr><td>Career goals</td><td class="accent">${p.goals}</td></tr>
         <tr><td>Goals conceded</td><td class="accent">${p.conceded || 0}</td></tr>
-        <tr><td>Career matches</td><td class="accent">${p.matches}</td></tr>
         <tr><td>Win rate</td><td class="accent">${playerWinRate(p)}</td></tr>
         <tr><td>Clean sheets</td><td class="accent">${p.cleanSheets || 0}</td></tr>
-        <tr><td>Failed to score</td><td class="accent">${p.failedToScore || 0}</td></tr>
         <tr><td>Biggest win margin</td><td class="accent">${p.biggestWin || 0}</td></tr>
         <tr><td>Highest-scoring match</td><td class="accent">${p.highestScoring || 0}</td></tr>
         <tr><td>Penalties W-L</td><td class="accent">${p.penaltiesWon || 0}–${p.penaltiesLost || 0}</td></tr>
         <tr><td>ET record</td><td class="accent">${p.etWins || 0}/${p.etMatches || 0}</td></tr>
-        <tr><td>Group stage W/M</td><td class="accent">${p.groupWins || 0}/${p.groupMatches || 0}</td></tr>
-        <tr><td>Knockout W/M</td><td class="accent">${p.knockoutWins || 0}/${p.knockoutMatches || 0}</td></tr>
-        <tr><td>Titles</td><td class="accent">${p.titles}</td></tr>
-        <tr><td>Awards</td><td class="accent">${p.awards.length + seasonal.length}</td></tr>
+        <tr><td>Best win streak</td><td class="accent">${p.bestWinStreak != null ? p.bestWinStreak : '—'}${p.currentWinStreak ? ` <span class="muted">(now ${p.currentWinStreak})</span>` : ''}</td></tr>
+        <tr><td>Best unbeaten streak</td><td class="accent">${p.bestUnbeatenStreak != null ? p.bestUnbeatenStreak : '—'}${p.currentUnbeatenStreak ? ` <span class="muted">(now ${p.currentUnbeatenStreak})</span>` : ''}</td></tr>
+        <tr><td>Best scoring streak</td><td class="accent">${p.bestScoringStreak != null ? p.bestScoringStreak : '—'}</td></tr>
+        <tr><td>Best CS streak</td><td class="accent">${p.bestCsStreak != null ? p.bestCsStreak : '—'}</td></tr>
         <tr><td>Cards (Y/R)</td><td class="accent">${p.yellow} / ${p.red}</td></tr>
       </table>
-      <div style="margin-top:10px"><a href="#statistics">Full statistics →</a></div>
+      <div style="margin-top:10px"><a href="#statistics">Full statistics →</a> · <a href="#streaks">Streaks →</a></div>
     </div>
   </div>
 
@@ -2343,6 +3713,41 @@
       });
       html += `</tbody></table></div>`;
 
+      // Player Progression (goals & results by tournament, chronological)
+      {
+        const chronoTours = uniqueTours.slice().sort((a, b) => {
+          const ta = STATE.tournaments.find(x => x.meta.id === a);
+          const tb = STATE.tournaments.find(x => x.meta.id === b);
+          const da = (ta && (ta.meta.dos || ta.meta.doc)) || '00000000';
+          const db = (tb && (tb.meta.dos || tb.meta.doc)) || '00000000';
+          const sa = da.slice(4) + da.slice(2, 4) + da.slice(0, 2);
+          const sb = db.slice(4) + db.slice(2, 4) + db.slice(0, 2);
+          return sa.localeCompare(sb);
+        });
+        const maxG = Math.max(1, ...chronoTours.map(id => (byTour[id] || {}).goals || 0));
+        html += `<div class="panel">
+    <div class="section-title"><i class="fa-solid fa-chart-line i"></i> Player Progression</div>
+    <p class="muted" style="margin-bottom:8px;font-size:12px">Goals and results across competitions in chronological order. Bar width is relative to the player’s highest single-tournament goal tally.</p>
+    <div style="display:flex;flex-direction:column;gap:6px;font-family:sans-serif;font-size:12px">`;
+        chronoTours.forEach(id => {
+          const row = byTour[id] || { event: id, season: '', goals: 0, matches: 0, wins: 0, draws: 0, losses: 0 };
+          const pct = Math.round((row.goals / maxG) * 100);
+          const wonTitle = row.ch && STATE.teams[row.ch] && STATE.teams[row.ch].player &&
+            STATE.teams[row.ch].player.toLowerCase() === key;
+          html += `<div style="display:grid;grid-template-columns:140px 1fr 70px 60px;gap:8px;align-items:center">
+      <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${escapeHtml(row.event)}">
+        <a href="#competition/${encodeURIComponent(id)}">${escapeHtml((row.event || id).slice(0, 18))}</a>
+        <div class="muted" style="font-size:10px">${escapeHtml(row.season || '')}${wonTitle ? ' · 🏆' : ''}</div>
+      </div>
+      <div style="background:#eaecf0;height:14px;border-radius:2px;overflow:hidden">
+        <div style="width:${pct}%;height:100%;background:#3366cc;min-width:${row.goals ? '4px' : '0'}"></div>
+      </div>
+      <div style="text-align:right"><b>${row.goals}</b> G · ${row.matches} M</div>
+      <div style="text-align:right">${row.wins}W ${row.draws}D ${row.losses}L</div>
+    </div>`;
+        });
+        html += `</div></div>`;
+      }
 
       // Match history
       const myMatches = STATE.matches.filter(m =>
@@ -2399,69 +3804,577 @@
     }
 
     function renderTeam(abbr) {
-      const t = STATE.teams[decodeURIComponent(abbr)];
+      const key = decodeURIComponent(abbr);
+      const t = STATE.teams[key];
       if (!t) return `<div class="error">Team “${escapeHtml(abbr)}” not found.</div>`;
 
+      const winRate = t.matches ? ((t.wins / t.matches) * 100).toFixed(1) + '%' : '—';
+      const gpm = t.matches ? (t.goalsFor / t.matches).toFixed(2) : '—';
+      const gapm = t.matches ? (t.goalsAgainst / t.matches).toFixed(2) : '—';
+      const csPct = t.matches ? (((t.cleanSheets || 0) / t.matches) * 100).toFixed(0) + '%' : '—';
+      const uniqueTours = [...new Set(t.tournaments)];
+
+      // Collect titles / runner-ups with context
+      const titleList = [];
+      const ruList = [];
+      STATE.tournaments.forEach(tour => {
+        if (tour.aw.ch === t.abbr) {
+          titleList.push({
+            id: tour.meta.id,
+            event: tour.meta.e || tour.meta.id,
+            season: tour.meta.s || '',
+            golden: isGolden(tour)
+          });
+        }
+        if (tour.aw.ru === t.abbr) {
+          ruList.push({
+            id: tour.meta.id,
+            event: tour.meta.e || tour.meta.id,
+            season: tour.meta.s || '',
+            golden: isGolden(tour)
+          });
+        }
+      });
+      const goldenTitles = titleList.filter(x => x.golden).length;
+
+      // Team match history
+      const myMatches = STATE.matches.filter(m => m.home === t.abbr || m.away === t.abbr);
+
+      // Form pills (last 8)
+      const formRecent = myMatches.slice(-8);
+
       let html = `<a class="back" href="#teams"><i class="fa-solid fa-arrow-left"></i> Teams</a>
-  <h1>${escapeHtml(t.name)}</h1>
-  <p class="muted">Player: <a href="#player/${encodeURIComponent(t.player)}">${escapeHtml(t.player)}</a> · Abbr: ${escapeHtml(t.abbr)} · ELO <b>${t.elo}</b> (peak ${t.peakElo || t.elo})</p>
-  <div class="grid3" style="margin:14px 0">
-    <div class="stat-box"><span class="num">${t.elo}</span><span class="lbl">ELO</span></div>
-    <div class="stat-box"><span class="num">${t.titles}</span><span class="lbl">Titles</span></div>
-    <div class="stat-box"><span class="num">${t.goalsFor}</span><span class="lbl">Goals For</span></div>
-    <div class="stat-box"><span class="num">${t.wins}</span><span class="lbl">Wins</span></div>
+  <div class="career-top">
+    <div class="avatar" style="font-size:22px">${escapeHtml((t.abbr || '?').toUpperCase().slice(0, 3))}</div>
+    <div style="flex:1;min-width:0">
+      <h1 style="margin:0">${escapeHtml(t.name)}</h1>
+      <div class="muted" style="margin:4px 0 8px">Abbr <span class="accent">${escapeHtml(t.abbr)}</span>
+        · Player <a href="#player/${encodeURIComponent(t.player)}">${escapeHtml(t.player || '—')}</a>
+        · ELO <b>${t.elo}</b> <span class="muted">(peak ${t.peakElo || t.elo})</span>
+      </div>
+      <div class="career-meta">
+        <div><span class="muted">Record</span><strong>${t.wins}W – ${t.draws}D – ${t.losses}L</strong></div>
+        <div><span class="muted">Win rate</span><strong>${winRate}</strong></div>
+        <div><span class="muted">Tournaments</span><strong>${uniqueTours.length}</strong></div>
+        <div><span class="muted">Titles</span><strong>${t.titles}${goldenTitles ? ` (${goldenTitles} golden)` : ''}</strong></div>
+      </div>
+      ${formRecent.length ? (() => {
+          let pills = `<div class="form-pills" title="Recent form (oldest → newest)">`;
+          formRecent.forEach(m => {
+            const isHome = m.home === t.abbr;
+            const res = isHome ? (m.homeWin ? 'W' : m.awayWin ? 'L' : 'D') : (m.awayWin ? 'W' : m.homeWin ? 'L' : 'D');
+            pills += `<span class="form-pill ${res.toLowerCase()}">${res}</span>`;
+          });
+          return pills + `</div>`;
+        })() : ''}
+      <div class="big-stats">
+        <div class="cell"><div class="n">${t.elo}</div><div class="l">ELO</div></div>
+        <div class="cell"><div class="n">${t.titles}</div><div class="l">Titles</div></div>
+        <div class="cell"><div class="n">${t.runnerUps}</div><div class="l">Runner-up</div></div>
+        <div class="cell"><div class="n">${t.goalsFor}</div><div class="l">Goals For</div></div>
+        <div class="cell"><div class="n">${t.goalsAgainst}</div><div class="l">Goals Against</div></div>
+        <div class="cell"><div class="n">${teamGD(t)}</div><div class="l">GD</div></div>
+      </div>
+    </div>
   </div>
+
+  <div class="quick-row">
+    <div class="q"><div class="n">${t.matches}</div><div class="l">Matches</div></div>
+    <div class="q"><div class="n">${winRate}</div><div class="l">Win %</div></div>
+    <div class="q"><div class="n">${gpm}</div><div class="l">GF / Match</div></div>
+    <div class="q"><div class="n">${gapm}</div><div class="l">GA / Match</div></div>
+    <div class="q"><div class="n">${t.cleanSheets || 0}</div><div class="l">Clean Sheets</div></div>
+    <div class="q"><div class="n">${csPct}</div><div class="l">CS %</div></div>
+    <div class="q"><div class="n">${t.failedToScore || 0}</div><div class="l">Blank</div></div>
+    <div class="q"><div class="n">${t.yellow} / ${t.red}</div><div class="l">Y / R</div></div>
+    <div class="q"><div class="n">${t.penaltiesWon || 0}–${t.penaltiesLost || 0}</div><div class="l">Pens W-L</div></div>
+    <div class="q"><div class="n">${t.biggestWin || 0}</div><div class="l">Biggest Win</div></div>
+    <div class="q"><div class="n">${t.highestScoring || 0}</div><div class="l">Highest Scoring</div></div>
+    <div class="q"><div class="n">${t.knockoutWins || 0}/${t.knockoutMatches || 0}</div><div class="l">KO W/M</div></div>
+    <div class="q"><div class="n">${t.groupWins || 0}/${t.groupMatches || 0}</div><div class="l">GS W/M</div></div>
+    <div class="q"><div class="n">${t.etWins || 0}/${t.etMatches || 0}</div><div class="l">ET W/M</div></div>
+  </div>
+
+  <div class="cabinet">
+    <div class="cabinet-head">
+      <h2><i class="fa-solid fa-trophy i"></i> Trophy Cabinet</h2>
+      <div class="cabinet-totals">
+        <span class="ct"><b>${titleList.length}</b> title${titleList.length === 1 ? '' : 's'}</span>
+        ${goldenTitles ? `<span class="ct gold"><b>${goldenTitles}</b> golden</span>` : ''}
+        <span class="ct"><b>${ruList.length}</b> RU</span>
+      </div>
+    </div>
+    <div class="cabinet-body">
+      <div class="cabinet-section">
+        <div class="cabinet-section-title"><i class="fa-solid fa-crown"></i> Championships</div>
+        ${titleList.length ? titleList.map(x => `
+          <div class="title-row${x.golden ? ' golden-title-row' : ''}">
+            <div class="tr-icon"><i class="fa-solid fa-trophy"></i></div>
+            <div class="tr-main">
+              <div class="tr-name"><a href="#competition/${encodeURIComponent(x.id)}">${escapeHtml(x.event)}</a></div>
+              <div class="tr-meta">${escapeHtml(x.season)}${x.golden ? ' · Golden competition' : ''}</div>
+            </div>
+            <div class="tr-badge">${x.golden ? '<span class="badge golden">Golden</span>' : '<span class="badge">Champion</span>'}</div>
+          </div>`).join('') : '<p class="empty">No titles yet.</p>'}
+      </div>
+      ${ruList.length ? `
+      <div class="cabinet-section">
+        <div class="cabinet-section-title"><i class="fa-solid fa-medal"></i> Runner-up finishes</div>
+        ${ruList.map(x => `
+          <div class="title-row">
+            <div class="tr-icon"><i class="fa-solid fa-medal"></i></div>
+            <div class="tr-main">
+              <div class="tr-name"><a href="#competition/${encodeURIComponent(x.id)}">${escapeHtml(x.event)}</a></div>
+              <div class="tr-meta">${escapeHtml(x.season)}</div>
+            </div>
+            <div class="tr-badge"><span class="badge">Runner-up</span></div>
+          </div>`).join('')}
+      </div>` : ''}
+      <div style="margin-top:8px;font-size:12px;font-family:sans-serif">
+        ${t.player ? `<a href="#player/${encodeURIComponent(t.player)}">Player career →</a> · ` : ''}
+        <a href="#bles">-bles →</a>
+      </div>
+    </div>
+  </div>
+
   <div class="panel">
-    <table>
-      <tr><td>Current ELO</td><td>${t.elo}</td></tr>
-      <tr><td>Peak ELO</td><td>${t.peakElo || t.elo}</td></tr>
-      <tr><td>Matches</td><td>${t.matches}</td></tr>
-      <tr><td>Record</td><td>${t.wins}W – ${t.draws}D – ${t.losses}L</td></tr>
-      <tr><td>Goals For / Against</td><td>${t.goalsFor} / ${t.goalsAgainst}</td></tr>
-      <tr><td>Goal Difference</td><td>${teamGD(t)}</td></tr>
-      <tr><td>Yellow / Red</td><td>${t.yellow} / ${t.red}</td></tr>
-      <tr><td>Runner-up finishes</td><td>${t.runnerUps}</td></tr>
+    <div class="section-title"><i class="fa-solid fa-chart-simple i"></i> Detailed Statistics</div>
+    <table class="kv-table">
+      <tr><td>Current ELO</td><td class="accent">${t.elo}</td></tr>
+      <tr><td>Peak ELO</td><td class="accent">${t.peakElo || t.elo}</td></tr>
+      <tr><td>Matches played</td><td class="accent">${t.matches}</td></tr>
+      <tr><td>Record (W-D-L)</td><td class="accent">${t.wins}–${t.draws}–${t.losses}</td></tr>
+      <tr><td>Win rate</td><td class="accent">${winRate}</td></tr>
+      <tr><td>Goals for</td><td class="accent">${t.goalsFor}</td></tr>
+      <tr><td>Goals against</td><td class="accent">${t.goalsAgainst}</td></tr>
+      <tr><td>Goal difference</td><td class="accent">${teamGD(t)}</td></tr>
+      <tr><td>Goals / match</td><td class="accent">${gpm}</td></tr>
+      <tr><td>Conceded / match</td><td class="accent">${gapm}</td></tr>
+      <tr><td>Clean sheets</td><td class="accent">${t.cleanSheets || 0} (${csPct})</td></tr>
+      <tr><td>Failed to score</td><td class="accent">${t.failedToScore || 0}</td></tr>
+      <tr><td>Biggest win margin</td><td class="accent">${t.biggestWin || 0}</td></tr>
+      <tr><td>Highest-scoring match</td><td class="accent">${t.highestScoring || 0}</td></tr>
+      <tr><td>Penalties (W-L)</td><td class="accent">${t.penaltiesWon || 0}–${t.penaltiesLost || 0}</td></tr>
+      <tr><td>Extra-time record</td><td class="accent">${t.etWins || 0}/${t.etMatches || 0}</td></tr>
+      <tr><td>Group stage W/M</td><td class="accent">${t.groupWins || 0}/${t.groupMatches || 0}</td></tr>
+      <tr><td>Knockout W/M</td><td class="accent">${t.knockoutWins || 0}/${t.knockoutMatches || 0}</td></tr>
+      <tr><td>Yellow / Red cards</td><td class="accent">${t.yellow} / ${t.red}</td></tr>
+      <tr><td>Titles / Runner-ups</td><td class="accent">${t.titles} / ${t.runnerUps}</td></tr>
     </table>
   </div>
-  <div class="panel"><h2>Tournament History</h2><p>`;
-      [...new Set(t.tournaments)].forEach(id => {
-        html += `<span class="tag"><a href="#competition/${encodeURIComponent(id)}">${escapeHtml(id)}</a></span> `;
+
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-list i"></i> Tournament History</div>
+    <table><thead><tr><th>Competition</th><th>Season</th><th>Result</th></tr></thead><tbody>`;
+      uniqueTours.forEach(id => {
+        const tour = STATE.tournaments.find(x => x.meta.id === id);
+        const isCh = tour && tour.aw.ch === t.abbr;
+        const isRu = tour && tour.aw.ru === t.abbr;
+        const golden = tour && isGolden(tour);
+        let result = '—';
+        if (isCh) result = golden
+          ? '<span class="accent">Champion</span> <span class="badge golden">Golden</span>'
+          : '<span class="accent">Champion</span>';
+        else if (isRu) result = 'Runner-up';
+        html += `<tr>
+      <td><a href="#competition/${encodeURIComponent(id)}">${escapeHtml(tour ? (tour.meta.e || id) : id)}</a>${golden && isCh ? ' <span class="badge golden">Golden</span>' : ''}</td>
+      <td>${escapeHtml(tour && tour.meta.s || '')}</td>
+      <td>${result}</td>
+    </tr>`;
       });
-      html += `</p></div>`;
+      html += `</tbody></table></div>`;
+
+      if (myMatches.length) {
+        html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-futbol i"></i> Match history (${myMatches.length})</div>
+    <table><thead><tr><th>Competition</th><th>Stage</th><th>Match</th><th>Score</th><th>Result</th></tr></thead><tbody>`;
+        myMatches.forEach(m => {
+          const isHome = m.home === t.abbr;
+          const res = isHome ? (m.homeWin ? 'W' : m.awayWin ? 'L' : 'D') : (m.awayWin ? 'W' : m.homeWin ? 'L' : 'D');
+          html += `<tr>
+        <td><a href="#competition/${encodeURIComponent(m.tourneyId)}">${escapeHtml(m.event || '')}</a></td>
+        <td>${m.stage ? `<span class="stage-tag">${escapeHtml(m.stage)}</span>` : '—'}</td>
+        <td><a href="#match/${encodeURIComponent(m.id)}">${escapeHtml(m.homeName)} – ${escapeHtml(m.awayName)}</a></td>
+        <td class="match-score">${m.sh}–${m.sa}</td>
+        <td><b>${res}</b></td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
       return html;
     }
 
-    function renderAwards() {
-      // collect all awards
-      const rows = [];
+    /* ---------- -BLES (Doubles / Trebles / …) ---------- */
+    function computeBles() {
+      // Map season -> player/team -> list of titles won that season
+      const bySeasonPlayer = {}; // season -> { playerKey: { name, titles: [{event, id, abbr}] } }
+      const bySeasonTeam = {};
+
       STATE.tournaments.forEach(t => {
-        Object.keys(t.aw).forEach(k => {
-          let val = t.aw[k];
-          if (STATE.teams[val]) val = STATE.teams[val].name;
-          else if (STATE.players[val.toLowerCase()]) val = STATE.players[val.toLowerCase()].name;
-          rows.push({
-            tourney: t.meta.e || t.meta.id,
-            id: t.meta.id,
-            season: t.meta.s,
-            award: getAwardLabel(k),
-            recipient: val
+        const season = t.meta.s || 'Unknown';
+        const ch = t.aw.ch;
+        if (!ch) return;
+        const team = STATE.teams[ch];
+        const playerName = team && team.player ? team.player : '';
+        const event = t.meta.e || t.meta.id;
+        const entry = { event, id: t.meta.id, abbr: ch, teamName: team ? team.name : ch };
+
+        if (playerName) {
+          const pk = playerName.toLowerCase();
+          if (!bySeasonPlayer[season]) bySeasonPlayer[season] = {};
+          if (!bySeasonPlayer[season][pk]) {
+            bySeasonPlayer[season][pk] = { name: playerName, titles: [] };
+          }
+          bySeasonPlayer[season][pk].titles.push(entry);
+        }
+        if (!bySeasonTeam[season]) bySeasonTeam[season] = {};
+        if (!bySeasonTeam[season][ch]) {
+          bySeasonTeam[season][ch] = { abbr: ch, name: team ? team.name : ch, player: playerName, titles: [] };
+        }
+        bySeasonTeam[season][ch].titles.push(entry);
+      });
+
+      const BLE_LABELS = {
+        2: 'Double', 3: 'Treble', 4: 'Quadruple', 5: 'Quintuple',
+        6: 'Sextuple', 7: 'Septuple', 8: 'Octuple', 9: 'Nonuple', 10: 'Decuple'
+      };
+      function label(n) {
+        if (BLE_LABELS[n]) return BLE_LABELS[n];
+        if (n > 10) return n + '-ble';
+        return null;
+      }
+
+      const playerBles = [];
+      Object.keys(bySeasonPlayer).forEach(season => {
+        Object.values(bySeasonPlayer[season]).forEach(row => {
+          const n = row.titles.length;
+          if (n < 2) return;
+          playerBles.push({
+            season,
+            name: row.name,
+            count: n,
+            label: label(n) || (n + '-ble'),
+            titles: row.titles
           });
         });
       });
-      rows.sort((a, b) => (b.season || '').localeCompare(a.season || ''));
+      playerBles.sort((a, b) => b.count - a.count || (b.season || '').localeCompare(a.season || '') || a.name.localeCompare(b.name));
+
+      const teamBles = [];
+      Object.keys(bySeasonTeam).forEach(season => {
+        Object.values(bySeasonTeam[season]).forEach(row => {
+          const n = row.titles.length;
+          if (n < 2) return;
+          teamBles.push({
+            season,
+            name: row.name,
+            abbr: row.abbr,
+            player: row.player,
+            count: n,
+            label: label(n) || (n + '-ble'),
+            titles: row.titles
+          });
+        });
+      });
+      teamBles.sort((a, b) => b.count - a.count || (b.season || '').localeCompare(a.season || '') || a.name.localeCompare(b.name));
+
+      return { playerBles, teamBles, label };
+    }
+
+    function renderBles() {
+      const { playerBles, teamBles } = computeBles();
+      const groups = {};
+      playerBles.forEach(b => {
+        if (!groups[b.label]) groups[b.label] = [];
+        groups[b.label].push(b);
+      });
+      // Prefer showing highest first
+      const order = ['Decuple', 'Nonuple', 'Octuple', 'Septuple', 'Sextuple', 'Quintuple', 'Quadruple', 'Treble', 'Double'];
+      const labels = [...new Set([...order.filter(l => groups[l]), ...Object.keys(groups)])];
+
+      let html = `<h1><i class="fa-solid fa-layer-group i"></i> -bles</h1>
+  <p class="muted" style="margin-bottom:12px">
+    Multi-trophy seasons: a <b>Double</b> is two titles in the same season, a <b>Treble</b> is three, a <b>Quadruple</b> is four, and so on.
+    Counted from championships (<code>aw.ch</code>) only — runner-ups do not count.
+  </p>`;
+
+      // Summary strip
+      const counts = {};
+      playerBles.forEach(b => { counts[b.label] = (counts[b.label] || 0) + 1; });
+      html += `<div class="mega-strip">`;
+      labels.forEach(l => {
+        html += `<div class="cell"><span class="n">${counts[l] || 0}</span><span class="l">${escapeHtml(l)}s</span></div>`;
+      });
+      html += `<div class="cell"><span class="n">${playerBles.length}</span><span class="l">Total</span></div></div>`;
+
+      if (!playerBles.length) {
+        html += `<div class="panel"><p class="empty">No doubles or higher yet. A player needs to win at least two competitions in the same season label.</p></div>`;
+      }
+
+      labels.forEach(label => {
+        const list = groups[label] || [];
+        if (!list.length) return;
+        html += `<div class="panel">
+    <div class="section-title"><i class="fa-solid fa-trophy i"></i> ${escapeHtml(label)}s (${list.length})</div>
+    <table><thead><tr><th>Season</th><th>Player</th><th>Titles</th><th>Competitions</th></tr></thead><tbody>`;
+        list.forEach(b => {
+          const comps = b.titles.map(t =>
+            `<a href="#competition/${encodeURIComponent(t.id)}">${escapeHtml(t.event)}</a>`
+          ).join(' · ');
+          html += `<tr>
+      <td><a href="#season/${encodeURIComponent(b.season)}"><b>${escapeHtml(b.season)}</b></a></td>
+      <td><a href="#player/${encodeURIComponent(b.name)}">${escapeHtml(b.name)}</a></td>
+      <td><b>${b.count}</b></td>
+      <td>${comps}</td>
+    </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      });
+
+      // Team view (often mirrors players)
+      if (teamBles.length) {
+        html += `<div class="panel">
+    <div class="section-title"><i class="fa-solid fa-shield-halved i"></i> By team</div>
+    <table><thead><tr><th>Season</th><th>Team</th><th>Player</th><th>-ble</th><th>Competitions</th></tr></thead><tbody>`;
+        teamBles.forEach(b => {
+          const comps = b.titles.map(t =>
+            `<a href="#competition/${encodeURIComponent(t.id)}">${escapeHtml(t.event)}</a>`
+          ).join(' · ');
+          html += `<tr>
+      <td><a href="#season/${encodeURIComponent(b.season)}">${escapeHtml(b.season)}</a></td>
+      <td><a href="#team/${encodeURIComponent(b.abbr)}">${escapeHtml(b.name)}</a></td>
+      <td>${b.player ? `<a href="#player/${encodeURIComponent(b.player)}">${escapeHtml(b.player)}</a>` : '—'}</td>
+      <td><b>${escapeHtml(b.label)}</b></td>
+      <td>${comps}</td>
+    </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
+      html += `<div class="panel">
+    <div class="section-title">How -bles are counted</div>
+    <p class="muted" style="font-size:13px">
+      Only championship wins in tournaments that share the same <code>s</code> (season) label are grouped.
+      Pioneer + Grande + Premier in one season is a classic path to a Treble or higher under the CASPER pyramid.
+      Runner-up finishes, individual awards (Golden Boot, etc.) and seasonal awards are not included in the -ble count.
+    </p>
+  </div>`;
+      return html;
+    }
+
+    /* ---------- HALL OF FAME ---------- */
+    function autoTagsForPlayer(p) {
+      const tags = [];
+      if (p.titles >= 5) tags.push('Legend');
+      else if (p.titles >= 3) tags.push('Icon');
+      if (p.titles >= 2 && p.matches >= 15 && (p.wins / Math.max(1, p.matches)) >= 0.65) tags.push('Dominator');
+      if (p.tournaments && new Set(p.tournaments).size === 1 && p.goals >= 5) tags.push('One Season Wonder');
+      if (p.goals >= 40) tags.push('All-time Scorer');
+      if ((p.cleanSheets || 0) >= 10) tags.push('Wall');
+      if (p.awards && p.awards.length >= 5) tags.push('Decorated');
+      // founding heuristic: appears in earliest tournaments
+      const chrono = sortByDate(STATE.tournaments, false);
+      if (chrono.length) {
+        const earlyIds = new Set(chrono.slice(0, Math.max(1, Math.ceil(chrono.length * 0.25))).map(t => t.meta.id));
+        const playedEarly = (p.tournaments || []).some(id => earlyIds.has(id));
+        if (playedEarly && p.matches >= 5) tags.push('Founding Player');
+      }
+      return tags;
+    }
+
+    function renderHallOfFame() {
+      const master = (STATE.config && STATE.config.playersMaster) || (STATE.config && STATE.config.hallOfFame) || [];
+      // master can be array of {name, tags, note} or object keyed by name
+      let entries = [];
+      if (Array.isArray(master)) {
+        entries = master.map(e => ({
+          name: e.name || e.player || '',
+          tags: e.tags || [],
+          note: e.note || e.context || '',
+          forced: true
+        }));
+      } else if (master && typeof master === 'object') {
+        entries = Object.keys(master).map(k => {
+          const e = master[k] || {};
+          return {
+            name: e.name || k,
+            tags: e.tags || [],
+            note: e.note || e.context || '',
+            forced: true
+          };
+        });
+      }
+
+      // Merge auto-tagged notable players not already listed
+      const listed = new Set(entries.map(e => (e.name || '').toLowerCase()));
+      Object.values(STATE.players).forEach(p => {
+        if (listed.has(p.name.toLowerCase())) return;
+        const auto = autoTagsForPlayer(p);
+        if (auto.length) {
+          entries.push({ name: p.name, tags: auto, note: '', forced: false });
+        }
+      });
+
+      // Enrich with live stats
+      entries = entries.map(e => {
+        const p = STATE.players[(e.name || '').toLowerCase()];
+        return {
+          ...e,
+          player: p || null,
+          tags: [...new Set([...(e.tags || []), ...(p ? autoTagsForPlayer(p) : [])])]
+        };
+      }).filter(e => e.name);
+
+      // Sort: forced first, then by titles / goals
+      entries.sort((a, b) => {
+        if (a.forced !== b.forced) return a.forced ? -1 : 1;
+        const ta = a.player ? a.player.titles : 0;
+        const tb = b.player ? b.player.titles : 0;
+        if (tb !== ta) return tb - ta;
+        const ga = a.player ? a.player.goals : 0;
+        const gb = b.player ? b.player.goals : 0;
+        return gb - ga;
+      });
+
+      let html = `<h1><i class="fa-solid fa-star i"></i> Hall of Fame</h1>
+  <p class="muted" style="margin-bottom:12px">Players of lasting significance in the CASPER Futsal archive. Tags come from the master player list in <code>config.json</code> and automatic criteria (titles, dominance, founding era, etc.).</p>
+  <div class="panel">
+    <div class="section-title">Tag legend</div>
+    <p class="muted" style="font-size:13px">
+      <span class="badge">Legend</span> many titles ·
+      <span class="badge">Icon</span> multiple titles ·
+      <span class="badge">Dominator</span> high win rate + titles ·
+      <span class="badge">Founding Player</span> early era ·
+      <span class="badge">One Season Wonder</span> single tournament impact ·
+      <span class="badge">All-time Scorer</span> ·
+      <span class="badge">Wall</span> clean sheets ·
+      <span class="badge">Decorated</span> many awards
+    </p>
+  </div>
+  <div class="grid2">`;
+
+      if (!entries.length) {
+        html += `<p class="empty">No Hall of Fame entries yet. Add a <code>playersMaster</code> or <code>hallOfFame</code> array in config.json, or wait until players accumulate notable stats.</p>`;
+      }
+
+      entries.forEach(e => {
+        const p = e.player;
+        const tagsHtml = (e.tags || []).map(t => `<span class="badge">${escapeHtml(t)}</span>`).join(' ');
+        html += `<div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap">
+      <div>
+        <div style="font-size:16px;font-weight:bold"><a href="#player/${encodeURIComponent(e.name)}">${escapeHtml(e.name)}</a></div>
+        <div style="margin-top:4px">${tagsHtml || '<span class="muted">—</span>'}</div>
+      </div>
+      ${p ? `<div class="muted" style="font-size:12px;text-align:right">
+        ELO ${p.elo}<br>${p.titles} titles · ${p.goals} goals · ${p.matches} matches
+      </div>` : ''}
+    </div>
+    ${e.note ? `<p style="margin-top:8px;font-size:13px">${escapeHtml(e.note)}</p>` : ''}
+    ${p ? `<div class="inline-stats" style="margin-top:8px">
+      <span><b>${playerWinRate(p)}</b> win</span>
+      <span><b>${p.cleanSheets || 0}</b> CS</span>
+      <span><b>${p.awards.length}</b> awards</span>
+      <span><b>${p.runnerUps}</b> RU</span>
+    </div>` : ''}
+  </div>`;
+      });
+
+      html += `</div>
+  <div class="panel" style="margin-top:12px">
+    <div class="section-title">Master player list (config.json)</div>
+    <p class="muted" style="font-size:13px">Define curated entries and optional context:</p>
+    <pre class="csn-raw" style="max-height:none">"playersMaster": [
+  { "name": "Anish", "tags": ["Legend", "Dominator"], "note": "Founding force of the early seasons." },
+  { "name": "Bhavesh", "tags": ["Icon"], "note": "Multiple titles across the pyramid." }
+],
+"playerContext": {
+  "anish": "Optional longer biography shown on the player page."
+}</pre>
+  </div>`;
+      return html;
+    }
+
+    function collectAllAwards() {
+      // Unified list of every award instance with code + label
+      const rows = [];
+      STATE.tournaments.forEach(t => {
+        Object.keys(t.aw || {}).forEach(k => {
+          let val = t.aw[k];
+          let recipient = val;
+          if (STATE.teams[val]) recipient = STATE.teams[val].name + (STATE.teams[val].player ? ' (' + STATE.teams[val].player + ')' : '');
+          else if (STATE.players[val.toLowerCase()]) recipient = STATE.players[val.toLowerCase()].name;
+          rows.push({
+            tourney: t.meta.e || t.meta.id,
+            id: t.meta.id,
+            season: t.meta.s || '',
+            code: k,
+            award: getAwardLabel(k),
+            recipient: recipient,
+            rawRecipient: val,
+            golden: isGolden(t),
+            seasonal: false
+          });
+        });
+      });
+      (STATE.seasonalAwards || []).forEach(a => {
+        rows.push({
+          tourney: a.event || 'Seasonal Awards',
+          id: a.id || '',
+          season: a.season || '',
+          code: a.code,
+          award: a.award || getAwardLabel(a.code),
+          recipient: a.recipient,
+          rawRecipient: a.recipient,
+          golden: true,
+          seasonal: true,
+          isPfacGreat: !!a.isPfacGreat
+        });
+      });
+      return rows;
+    }
+
+    function renderAwards() {
+      const rows = collectAllAwards();
+      rows.sort((a, b) => (b.season || '').localeCompare(a.season || '') || a.award.localeCompare(b.award));
+
+      // Unique award types for index
+      const byType = {};
+      rows.forEach(r => {
+        const key = r.award;
+        if (!byType[key]) byType[key] = { label: key, code: r.code, count: 0, seasonal: r.seasonal, golden: r.golden || r.seasonal };
+        byType[key].count++;
+        if (r.seasonal) byType[key].seasonal = true;
+      });
+      const types = Object.values(byType).sort((a, b) => b.count - a.count || a.label.localeCompare(b.label));
 
       let html = `<h1><i class="fa-solid fa-trophy i"></i>Awards</h1>
-  <p class="muted">Tournament awards from CSN + seasonal awards from misc.json.</p>`;
+  <p class="muted" style="margin-bottom:10px">Tournament and seasonal awards from the CSN archive. Click any award name for a full history page with Wikipedia-style infobox.</p>
 
-      const sa = STATE.misc.seasonalAwards || [];
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-list i"></i> Award types</div>
+    <table><thead><tr><th>Award</th><th>Times awarded</th><th>Kind</th></tr></thead><tbody>`;
+      types.forEach(t => {
+        const slug = encodeURIComponent(t.label);
+        const kind = t.seasonal ? '<span class="badge seasonal-golden">Seasonal · Golden</span>' : (t.golden ? '<span class="badge golden">Golden</span>' : 'Tournament');
+        html += `<tr>
+      <td><a href="#award/${slug}"><b>${escapeHtml(t.label)}</b></a></td>
+      <td><b>${t.count}</b></td>
+      <td>${kind}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>`;
+
+      const sa = STATE.seasonalAwards || [];
       if (sa.length) {
-        html += `<div class="panel"><h2>Seasonal Awards</h2>
-    <p class="muted">Given mid or late season — not tied to a single tournament (e.g. Tsar Award).</p>
+        html += `<div class="panel"><h2><i class="fa-solid fa-star i"></i> Seasonal Awards <span class="badge seasonal-golden">Golden</span></h2>
+    <p class="muted">Loaded from CSN blocks with <code>typ=seasonal</code>. These carry higher prestige and are shown in gold.</p>
     <table><thead><tr><th>Season</th><th>Award</th><th>Recipient</th><th>Note</th></tr></thead><tbody>`;
         sa.forEach(a => {
-          html += `<tr>
+          const greatBadge = a.isPfacGreat ? ' <span class="badge seasonal-golden">PFAC Great</span>' : '';
+          html += `<tr class="seasonal-award">
         <td>${escapeHtml(a.season || '')}</td>
-        <td class="accent">${escapeHtml(a.award || a.code || '')}</td>
+        <td class="accent"><a href="#award/${encodeURIComponent(a.award || a.code)}">${escapeHtml(a.award || a.code || '')}</a>${greatBadge}</td>
         <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
         <td class="muted">${escapeHtml(a.note || '')}</td>
       </tr>`;
@@ -2469,18 +4382,265 @@
         html += `</tbody></table></div>`;
       }
 
-      html += `<div class="panel"><h2>Tournament Awards</h2>
+      html += `<div class="panel"><h2>All award instances</h2>
   <table>
-    <thead><tr><th>Competition</th><th>Season</th><th>Award</th><th>Recipient</th></tr></thead><tbody>`;
+    <thead><tr><th>Competition / Season</th><th>Season</th><th>Award</th><th>Recipient</th></tr></thead><tbody>`;
       rows.forEach(r => {
+        const awardLink = `<a href="#award/${encodeURIComponent(r.award)}">${escapeHtml(r.award)}</a>`;
+        const g = r.seasonal ? ' <span class="badge seasonal-golden">Seasonal</span>' : (r.golden ? ' <span class="badge golden">Golden</span>' : '');
         html += `<tr>
-      <td><a href="#competition/${encodeURIComponent(r.id)}">${escapeHtml(r.tourney)}</a></td>
+      <td>${r.seasonal ? '<span class="muted">Seasonal</span>' : `<a href="#competition/${encodeURIComponent(r.id)}">${escapeHtml(r.tourney)}</a>`}</td>
       <td>${escapeHtml(r.season || '')}</td>
-      <td>${escapeHtml(r.award)}</td>
-      <td>${escapeHtml(r.recipient)}</td>
+      <td>${awardLink}${g}</td>
+      <td>${r.rawRecipient && STATE.players[(r.rawRecipient + '').toLowerCase()]
+            ? `<a href="#player/${encodeURIComponent(r.rawRecipient)}">${escapeHtml(r.recipient)}</a>`
+            : escapeHtml(r.recipient)}</td>
     </tr>`;
       });
       html += `</tbody></table></div>`;
+      return html;
+    }
+
+    function renderAward(param) {
+      const name = decodeURIComponent(param || '').trim();
+      if (!name) return `<div class="error">No award specified.</div>`;
+      const rows = collectAllAwards().filter(r =>
+        (r.award || '').toLowerCase() === name.toLowerCase() ||
+        (r.code || '').toLowerCase() === name.toLowerCase()
+      );
+      let list = rows;
+      if (!list.length) {
+        // try partial match on award name
+        list = collectAllAwards().filter(r =>
+          (r.award || '').toLowerCase().includes(name.toLowerCase())
+        );
+        if (!list.length) {
+          return `<div class="error">Award “${escapeHtml(name)}” not found. <a href="#awards">All awards</a></div>`;
+        }
+      }
+      const label = list[0] ? list[0].award : name;
+      const codeHint = list[0] ? list[0].code : '';
+      const desc = getAwardDescriptionByLabel(label) || getAwardDescription(codeHint) || '';
+      const isSeasonal = list.some(r => r.seasonal);
+      const isPfac = list.some(r => r.isPfacGreat) || /seasonal\s*great|pfac/i.test(label);
+      const uniqueRecipients = [...new Set(list.map(r => r.recipient))];
+      const seasons = [...new Set(list.map(r => r.season).filter(Boolean))].sort().reverse();
+      const first = list.slice().sort((a, b) => (a.season || '').localeCompare(b.season || ''))[0];
+      const latest = list.slice().sort((a, b) => (b.season || '').localeCompare(a.season || ''))[0];
+
+      let html = `<a class="back" href="#awards"><i class="fa-solid fa-arrow-left"></i> Awards</a>
+  <h1>${escapeHtml(label)} ${isSeasonal || isPfac ? '<span class="badge seasonal-golden">Golden</span>' : ''}</h1>
+
+  <div class="infobox">
+    <div class="infobox-title">${escapeHtml(label)}</div>
+    <div class="infobox-image"><i class="fa-solid fa-trophy"></i></div>
+    <table>
+      <tr><th>Type</th><td class="accent">${isPfac ? 'PFAC Seasonal Great' : (isSeasonal ? 'Seasonal award' : 'Tournament award')}</td></tr>
+      <tr><th>Times awarded</th><td class="accent">${list.length}</td></tr>
+      <tr><th>Unique winners</th><td class="accent">${uniqueRecipients.length}</td></tr>
+      <tr><th>First awarded</th><td>${first ? escapeHtml(first.season || first.tourney) + ' · ' + escapeHtml(first.recipient) : '—'}</td></tr>
+      <tr><th>Latest</th><td>${latest ? escapeHtml(latest.season || latest.tourney) + ' · ' + escapeHtml(latest.recipient) : '—'}</td></tr>
+      <tr><th>Seasons</th><td>${seasons.length || '—'}</td></tr>
+      ${isPfac ? '<tr><th>Body</th><td>Players\' Futsal Association of CASPER (PFAC)</td></tr>' : ''}
+      ${codeHint ? `<tr><th>CSN code</th><td><code>${escapeHtml(codeHint)}</code></td></tr>` : ''}
+    </table>
+  </div>
+
+  <div class="panel" style="margin-bottom:12px">
+    <div class="section-title"><i class="fa-solid fa-book-open i"></i> Description</div>
+    <p style="font-size:13px;line-height:1.55">
+      ${desc
+          ? escapeHtml(desc)
+          : (isPfac
+            ? 'The <b>PFAC Seasonal Great</b> is the highest individual honour of the Players\' Futsal Association of CASPER. It is decided by player voting and recorded in seasonal CSN blocks.'
+            : isSeasonal
+              ? 'Seasonal awards are issued once per season from dedicated CSN blocks (<code>typ=seasonal</code>) and carry golden prestige.'
+              : 'Tournament awards are attached to individual competitions via the <code>aw(...)</code> block in CSN.')}
+    </p>
+    <p class="muted" style="font-size:12px;margin-top:6px">Descriptions can be customised in <code>config.json</code> under <code>awardDescriptions</code> or <code>awards</code>.</p>
+  </div>
+
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-clock-rotate-left i"></i> History</div>`;
+      if (!list.length) {
+        html += `<p class="empty">No recipients recorded yet for this award.</p>`;
+      } else {
+        const sorted = list.slice().sort((a, b) => (b.season || '').localeCompare(a.season || '') || (a.tourney || '').localeCompare(b.tourney || ''));
+        sorted.forEach(r => {
+          html += `<div class="award-history-item">
+        <div class="season">${escapeHtml(r.season || '—')}</div>
+        <div>
+          <a href="#player/${encodeURIComponent(r.rawRecipient || r.recipient)}"><b>${escapeHtml(r.recipient)}</b></a>
+          ${r.seasonal ? '' : ` · <a href="#competition/${encodeURIComponent(r.id)}">${escapeHtml(r.tourney)}</a>`}
+        </div>
+        <div>${r.seasonal ? '<span class="badge seasonal-golden">Seasonal</span>' : (r.golden ? '<span class="badge golden">Golden</span>' : '')}</div>
+      </div>`;
+        });
+      }
+      html += `</div>
+
+  <div class="panel">
+    <div class="section-title"><i class="fa-solid fa-users i"></i> Most wins</div>
+    <table><thead><tr><th>#</th><th>Player / Team</th><th>Times</th></tr></thead><tbody>`;
+      const countMap = {};
+      list.forEach(r => {
+        countMap[r.recipient] = (countMap[r.recipient] || 0) + 1;
+      });
+      Object.entries(countMap).sort((a, b) => b[1] - a[1]).forEach(([n, c], i) => {
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(n)}">${escapeHtml(n)}</a></td><td><b>${c}</b></td></tr>`;
+      });
+      if (!Object.keys(countMap).length) html += `<tr><td colspan="3" class="muted">—</td></tr>`;
+      html += `</tbody></table></div>`;
+
+      return html;
+    }
+
+    function renderPfac() {
+      const sa = (STATE.seasonalAwards || []).filter(a => a.isPfacGreat || /seasonal\s*great|pfac/i.test(a.award || '') || /^(sg|pfacsg)$/i.test(a.code || ''));
+      const allSeasonal = STATE.seasonalAwards || [];
+      const ranksBySeason = STATE.pfacRanks || {};
+      const seasonsWithRanks = Object.keys(ranksBySeason).sort().reverse();
+
+      let html = `<h1><i class="fa-solid fa-handshake i"></i> PFAC</h1>
+  <div class="pfac-header">
+    <h2>Players' Futsal Association of CASPER</h2>
+    <p class="muted" style="margin:0;font-size:13px">The official players' body of the CASPER pyramid. PFAC organises the Seasonal Great vote and represents player interests across competitions.</p>
+  </div>
+
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-star i"></i> About PFAC</div>
+      <p style="font-size:13px;line-height:1.55">
+        PFAC is the collective of active and former CASPER players. Its flagship honour is the
+        <b>PFAC Seasonal Great</b> — awarded once per season to the player judged most outstanding by peer vote.
+        Results are archived in CSN seasonal blocks (<code>typ=seasonal</code>) with the award code
+        <code>sg</code> / <code>pfacsg</code> and optional <code>ranks(...)</code> voting table.
+      </p>
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-trophy i"></i> Seasonal Great winners</div>`;
+      if (!sa.length) {
+        html += `<p class="empty">No PFAC Seasonal Great recipients recorded yet. Add a seasonal CSN block with <code>aw(sg=PlayerName)</code> and optional <code>ranks(1=...,2=...)</code>.</p>`;
+      } else {
+        html += `<table><thead><tr><th>Season</th><th>Winner</th></tr></thead><tbody>`;
+        sa.slice().sort((a, b) => (b.season || '').localeCompare(a.season || '')).forEach(a => {
+          html += `<tr>
+        <td><a href="#season/${encodeURIComponent(a.season || '')}">${escapeHtml(a.season || '')}</a></td>
+        <td><a href="#player/${encodeURIComponent(a.recipient)}"><b>${escapeHtml(a.recipient)}</b></a>
+          <span class="badge seasonal-golden">Great</span></td>
+      </tr>`;
+        });
+        html += `</tbody></table>`;
+      }
+      html += `</div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-info-circle i"></i> How voting works</div>
+      <p class="muted" style="font-size:13px">
+        At the end of each season, eligible players cast ranked votes.
+        The top of the ballot becomes the <b>PFAC Seasonal Great</b>.
+        Rankings and optional <b>points</b> are stored via
+        <code>ranks(1=Name:pts,2=Name:pts,...)</code> inside the seasonal CSN block.
+      </p>
+      <p style="margin-top:8px"><a href="#award/${encodeURIComponent('PFAC Seasonal Great')}">Open award page →</a></p>
+    </div>
+  </div>`;
+
+      // Voting ranks by season (with points)
+      if (seasonsWithRanks.length) {
+        html += `<div class="section-title" style="margin-top:16px"><i class="fa-solid fa-ranking-star i"></i> Voting ranks by season</div>`;
+        seasonsWithRanks.forEach(season => {
+          const ranks = ranksBySeason[season] || [];
+          const hasPts = ranks.some(r => r.points != null);
+          html += `<div class="panel">
+      <div class="section-title">${escapeHtml(season)} <span class="muted" style="font-weight:normal;font-size:12px">· ${ranks.length} ranked${hasPts ? ' · with points' : ''}</span></div>`;
+          ranks.forEach(r => {
+            const cls = r.rank === 1 ? 'gold' : r.rank === 2 ? 'silver' : r.rank === 3 ? 'bronze' : '';
+            html += `<div class="vote-rank">
+          <div class="rank-num ${cls}">${r.rank}</div>
+          <div style="flex:1">
+            <a href="#player/${encodeURIComponent(r.name)}"><b>${escapeHtml(r.name)}</b></a>
+            ${r.rank === 1 ? ' <span class="badge seasonal-golden">Seasonal Great</span>' : ''}
+          </div>
+          <div class="rank-pts">${r.points != null ? r.points + ' <span>pts</span>' : '<span class="muted">—</span>'}</div>
+        </div>`;
+          });
+          html += `</div>`;
+        });
+      } else {
+        html += `<div class="panel" style="margin-top:12px">
+    <div class="section-title">Voting ranks</div>
+    <p class="empty">No <code>ranks(...)</code> data found in seasonal CSN blocks yet.
+      Example: <code>ranks(1=Anish:42,2=Bhavesh:38,3=Sam:31)</code> inside a <code>typ=seasonal</code> block.</p>
+  </div>`;
+      }
+
+      // All seasonal awards (golden)
+      if (allSeasonal.length) {
+        html += `<div class="panel" style="margin-top:12px">
+    <div class="section-title"><i class="fa-solid fa-award i"></i> All seasonal awards <span class="badge seasonal-golden">Golden</span></div>
+    <table><thead><tr><th>Season</th><th>Award</th><th>Recipient</th></tr></thead><tbody>`;
+        allSeasonal.slice().sort((a, b) => (b.season || '').localeCompare(a.season || '')).forEach(a => {
+          html += `<tr>
+        <td>${escapeHtml(a.season || '')}</td>
+        <td class="accent"><a href="#award/${encodeURIComponent(a.award)}">${escapeHtml(a.award)}</a></td>
+        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
+      </tr>`;
+        });
+        html += `</tbody></table></div>`;
+      }
+
+      return html;
+    }
+
+    function renderSponsors() {
+      const sponsors = (STATE.config && STATE.config.sponsors) || [];
+      let html = `<h1><i class="fa-solid fa-handshake-angle i"></i> Sponsors</h1>
+  <p class="muted" style="margin-bottom:12px">Official partners of CASPER Futsal. Data is loaded from <code>config.json</code> (<code>sponsors</code> array).</p>`;
+
+      if (!sponsors.length) {
+        html += `<div class="panel">
+    <p class="empty">No sponsors listed yet. Add an array to <code>config.json</code>:</p>
+    <pre class="csn-raw" style="max-height:none">"sponsors": [
+  { "name": "Example Sports Co", "tier": "gold", "url": "https://example.com", "note": "Title partner of the Pioneer Cup" },
+  { "name": "Local Kit Supplier", "tier": "silver", "note": "Official kit partner" },
+  { "name": "Community Bank", "tier": "partner", "note": "Grassroots supporter" }
+]</pre>
+    <p class="muted" style="font-size:12px;margin-top:8px">Tiers: <code>gold</code>, <code>silver</code>, <code>partner</code> (or any string). Optional fields: <code>url</code>, <code>note</code>, <code>logo</code>.</p>
+  </div>`;
+        return html;
+      }
+
+      // Group by tier
+      const order = ['gold', 'silver', 'partner', 'other'];
+      const groups = {};
+      sponsors.forEach(s => {
+        const tier = ((s.tier || 'partner') + '').toLowerCase();
+        const key = order.includes(tier) ? tier : 'other';
+        if (!groups[key]) groups[key] = [];
+        groups[key].push(s);
+      });
+
+      order.forEach(tier => {
+        const list = groups[tier];
+        if (!list || !list.length) return;
+        const title = tier === 'gold' ? 'Gold partners' : tier === 'silver' ? 'Silver partners' : tier === 'partner' ? 'Partners' : 'Supporters';
+        html += `<div class="panel">
+    <div class="section-title">${escapeHtml(title)}</div>
+    <div class="sponsor-grid">`;
+        list.forEach(s => {
+          const name = s.name || 'Unnamed';
+          const note = s.note || '';
+          const url = s.url || '';
+          const tierClass = 'tier-' + (['gold', 'silver', 'partner'].includes(tier) ? tier : 'partner');
+          html += `<div class="sponsor-card ${tierClass}">
+        <div class="s-tier">${escapeHtml(tier)}</div>
+        <div class="s-name">${url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener">${escapeHtml(name)}</a>` : escapeHtml(name)}</div>
+        ${note ? `<div class="s-note">${escapeHtml(note)}</div>` : ''}
+      </div>`;
+        });
+        html += `</div></div>`;
+      });
+
       return html;
     }
 
@@ -2688,15 +4848,28 @@
           results.push({ type: 'Competition', label: (t.meta.e || t.meta.id) + ' (' + (t.meta.s || '') + ')', href: `#competition/${encodeURIComponent(t.meta.id)}` });
         }
       });
-      // awards
-      STATE.tournaments.forEach(t => {
-        Object.keys(t.aw).forEach(k => {
-          const val = t.aw[k];
-          if (val.toLowerCase().includes(q) || k.toLowerCase().includes(q)) {
-            results.push({ type: 'Award', label: k + ' → ' + val + ' (' + t.meta.id + ')', href: `#competition/${encodeURIComponent(t.meta.id)}` });
+      // awards (instances + type pages)
+      const seenAwardTypes = new Set();
+      collectAllAwards().forEach(r => {
+        if ((r.award || '').toLowerCase().includes(q) || (r.recipient || '').toLowerCase().includes(q) || (r.code || '').toLowerCase().includes(q)) {
+          results.push({
+            type: r.seasonal ? 'Seasonal award' : 'Award',
+            label: r.award + ' → ' + r.recipient + (r.season ? ' (' + r.season + ')' : ''),
+            href: `#award/${encodeURIComponent(r.award)}`
+          });
+          if (!seenAwardTypes.has(r.award)) {
+            seenAwardTypes.add(r.award);
+            results.push({ type: 'Award page', label: r.award + ' (history)', href: `#award/${encodeURIComponent(r.award)}` });
           }
-        });
+        }
       });
+      // PFAC / sponsors shortcuts
+      if ('pfac'.includes(q) || 'seasonal great'.includes(q) || 'players association'.includes(q)) {
+        results.push({ type: 'Page', label: 'PFAC — Players\' Futsal Association of CASPER', href: '#pfac' });
+      }
+      if ('sponsor'.includes(q) || 'partners'.includes(q)) {
+        results.push({ type: 'Page', label: 'Sponsors', href: '#sponsors' });
+      }
 
       if (!results.length) {
         box.innerHTML = '<p class="empty">No matches.</p>';
@@ -2711,182 +4884,59 @@
     }
 
 
-    function renderNews() {
-      const news = (STATE.misc.news || []).slice().sort((a, b) => {
-        const sa = (a.date || '').slice(4) + (a.date || '').slice(2, 4) + (a.date || '').slice(0, 2);
-        const sb = (b.date || '').slice(4) + (b.date || '').slice(2, 4) + (b.date || '').slice(0, 2);
-        return sb.localeCompare(sa);
-      });
-      const sa = STATE.misc.seasonalAwards || [];
-      let html = `<h1><i class="fa-solid fa-newspaper i"></i>News</h1>
-  <p class="muted" style="margin-bottom:12px">Bulletins and seasonal announcements. Managed via misc.json.</p>
-  <div class="grid2">
-    <div class="panel">
-      <div class="section-title">Latest News (${news.length})</div>`;
-      if (!news.length) html += `<p class="empty">No news items. Add entries in misc.json.</p>`;
-      news.forEach(n => {
-        html += `<div class="news-item">
-      <div class="date">${fmtDate(n.date)}</div>
-      <div class="title">${escapeHtml(n.title)}</div>
-      <div class="muted">${escapeHtml(n.body || '')}</div>
-    </div>`;
-      });
-      html += `</div>
-    <div>
-      <div class="panel">
-        <div class="section-title">Seasonal Awards</div>`;
-      if (!sa.length) html += `<p class="empty">None yet.</p>`;
-      else {
-        html += `<table><thead><tr><th>Season</th><th>Award</th><th>Recipient</th></tr></thead><tbody>`;
-        sa.forEach(a => {
-          html += `<tr>
-        <td>${escapeHtml(a.season || '')}</td>
-        <td class="accent">${escapeHtml(a.award || '')}</td>
-        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
-      </tr>`;
-        });
-        html += `</tbody></table>`;
-      }
-      html += `</div>
-      <div class="panel">
-        <div class="section-title">Archive Pulse</div>
-        <table>
-          <tr><td>Tournaments</td><td class="accent">${STATE.tournaments.length}</td></tr>
-          <tr><td>Players</td><td class="accent">${Object.keys(STATE.players).length}</td></tr>
-          <tr><td>Teams</td><td class="accent">${Object.keys(STATE.teams).length}</td></tr>
-          <tr><td>News items</td><td class="accent">${news.length}</td></tr>
-          <tr><td>Seasonal awards</td><td class="accent">${sa.length}</td></tr>
-        </table>
-      </div>
-      <div class="panel">
-        <div class="section-title">Recent Results</div>
-        <ul class="plain">`;
-      sortByDate(STATE.tournaments, true).slice(0, 6).forEach(t => {
-        html += `<li><a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a>
-      ${statusBadge(t)} <span class="muted">${fmtDate(t.meta.doc)}</span></li>`;
-      });
-      html += `</ul></div>
-    </div>
-  </div>`;
-      return html;
-    }
-
-
-
     function getPyramidHtml() {
       const diagram = `
-                    CASPER COMPETITION PYRAMID
-                          START OF SEASON
-                                │
-                                ▼
-                   ┌──────────────────────────┐
-                   │       PIONEER CUP        │
-                   │       12–16 Clubs        │
-                   │  Group Stage + Knockout  │
-                   └──────────┬───────────────┘
-                              │
-          ┌───────────────────┴───────────────────┐
-          │                                       │
-          ▼                                       ▼
-   Top 8 clubs qualify                   Bottom 4–8 clubs
-    for Grande Cup                       enter Relegator Cup
-      ┌───────────────────┐             ┌────────────────────┐
-      │    GRANDE CUP     │             │   RELEGATOR CUP    │
-      │    Top 8 Teams    │             │   Last 4–8 Teams   │
-      │  Direct Knockout  │             │  Direct Knockout   │
-      └───────┬───────────┘             └─────────┬──────────┘
-              │                                   │
-       ┌──────┴──────┐                            │
-       │             │                            │
-       ▼             ▼                            ▼
-   Top 4          5th–8th                 Relegator Champion
- Finishers        Finishers                      │
-       │             │                           │
-       ▼             ▼                           │
-┌───────────────┐ ┌──────────────────┐           │
-│ PREMIER LEAGUE│ │ CONFERENCE LEAGUE│           │
-│  Double RR    │ │    Single RR     │           │
-│   (Top 4)     │ │ (Grande 5th–8th) │           │
-└──────┬────────┘ └────────┬─────────┘           │
-       │                   │                     │
-       │                   │                     │
-       ▼                   │                     │
-Premier Champion           │                     │
-       │                   │                     │
-       │                   │                     ▼
-       │                   │            ┌────────────────────┐
-       │                   │            │  PERIPHERAL CUP    │
-       │                   │            │    Single RR       │
-       │                   │            │ Relegator entrants │
-       │                   │            └─────────┬──────────┘
-       │                   │                      │
-       │                   │                      ▼
-       │                   │             Peripheral Champion
-       │                   │                      │
-       │                   │                      │
-       │                   │                      ▼
-       │                   │            ┌────────────────────┐
-       │                   │            │   MINOR SUPERCUP   │
-       │                   │            │ Peripheral Champ   │
-       │                   │            │  vs Relegator Champ│
-       │                   │            └─────────┬──────────┘
-       │                   │                      │
-       │                   │                      ▼
-       │                   │              Minor SuperCup
-       │                   │                 Champion
-       │                   │                      │
-       │                   │                      │
-       │                   ▼                      ▼
-       │            ┌────────────────────────────────────┐
-       │            │          SUB SUPERCUP              │
-       │            │ Minor SuperCup Champ vs            │
-       │            │ Conference League Champion         │
-       │            └─────────────────┬──────────────────┘
-       │                              │
-       │                              ▼
-       │                       Sub SuperCup Champion
-       │                              │
-       │                              │
-       ▼                              │
-┌─────────────────────────┐           │
-│       SUPER CUP         │           │
-│ Premier Champion vs     │           │
-│ Grande Champion         │           │
-└────────────┬────────────┘           │
-             │                        │
-             ▼                        │
-       Super Cup Champion             │
-                                      │
-                                      │
-                    ─────────── FINALE ───────────
-                                      │
-          Pioneer Champion ───────────┐
-                                      ├── Winner A
-           Grande Champion ───────────┘
-                                     
-     Sub Super Cup Champion ──────────┐
-                                      ├── Winner B
-           Premier Champion ──────────┘
-
-                    FINALE QUALIFIER
+                    PIONEER CUP
+                 (12-16 clubs · Groups + KO)
                            │
-                           ▼
-                 ┌─────────────────┐
-                 │     FINALE      │
-                 │  Ultimate Match │
-                 └─────────────────┘
+              ┌────────────┴────────────┐
+              │                         │
+         TOP 8 CLUBS              BOTTOM 4-8 CLUBS
+              │                         │
+         GRANDE CUP                RELEGATOR CUP
+         (Knockout)                 (Knockout)
+              │                         │
+     ┌────────┴────────┐                │
+     │                 │                │
+  TOP 4             BOTTOM 4            │
+     │                 │                │
+PREMIER LEAGUE   CONFERENCE LEAGUE      │
+(Double RR)       (Single RR)           │
+     │                 │                │
+     │                 │          PERIPHERAL CUP
+     │                 │           (Single RR)
+     │                 │                │
+     │                 │         MINOR SUPERCUP
+     │                 │    (Peripheral vs Relegator)
+     │                 │                │
+     │                 └───────┬────────┘
+     │                         │
+     │                   SUB SUPERCUP
+     │              (Minor SC vs Conference)
+     │                         │
+     │                         │
+┌────┴────┐                    │
+│ SUPER CUP │                  │
+│ Premier vs│                  │
+│  Grande   │                  │
+└────┬────┘                    │
+     │                         │
+     └──────────┬──────────────┘
+                │
+             FINALE
+        (Ultimate Match)
 `;
       return `<div class="pyramid-wrap">
-    <div class="pyramid-title">CASPER COMPETITION PYRAMID</div>
+    <div class="pyramid-title">CASPER FUTSAL PYRAMID</div>
     <pre>${diagram.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>
     <div class="pyramid-legend">
       <table>
         <tr><th>Competition</th><th>Who plays</th><th>Format</th></tr>
-        <tr><td><b>Pioneer Cup</b></td><td>12–16 clubs (season openers)</td><td>Groups + Knockout</td></tr>
+        <tr><td><b>Pioneer Cup</b></td><td>12-16 clubs (season openers)</td><td>Groups + Knockout</td></tr>
         <tr><td><b>Grande Cup</b></td><td>Top 8 from Pioneer</td><td>Direct Knockout</td></tr>
-        <tr><td><b>Relegator Cup</b></td><td>Bottom 4–8 from Pioneer</td><td>Direct Knockout</td></tr>
+        <tr><td><b>Relegator Cup</b></td><td>Bottom 4-8 from Pioneer</td><td>Direct Knockout</td></tr>
         <tr><td><b>Premier League</b></td><td>Top 4 from Grande</td><td>Double Round Robin</td></tr>
-        <tr><td><b>Conference League</b></td><td>Grande 5th–8th</td><td>Single Round Robin</td></tr>
+        <tr><td><b>Conference League</b></td><td>Grande 5th-8th</td><td>Single Round Robin</td></tr>
         <tr><td><b>Peripheral Cup</b></td><td>Relegator entrants</td><td>Single Round Robin</td></tr>
         <tr><td><b>Minor SuperCup</b></td><td>Peripheral Champion vs Relegator Champion</td><td>One-off</td></tr>
         <tr><td><b>Sub SuperCup</b></td><td>Minor SuperCup Champ vs Conference Champion</td><td>One-off</td></tr>
@@ -2897,6 +4947,7 @@ Premier Champion           │                     │
   </div>`;
     }
 
+
     function renderStructure() {
       return `<h1><i class="fa-solid fa-diagram-project i"></i>Competition Structure</h1>
   <p class="muted" style="margin-bottom:10px">Season pathway from the opening Pioneer Cup through to the Finale.</p>
@@ -2904,9 +4955,9 @@ Premier Champion           │                     │
   <div class="panel">
     <h2>Path notes</h2>
     <ul>
-      <li><b>Pioneer Cup</b> opens the season for the full field (12–16 clubs, groups + knockout).</li>
-      <li>The <b>top 8</b> advance to the <b>Grande Cup</b> (direct knockout); the bottom 4–8 enter the <b>Relegator Cup</b> (direct knockout).</li>
-      <li><b>Grande</b> top 4 feed the <b>Premier League</b> (double round-robin); places 5–8 play the <b>Conference League</b> (single round-robin).</li>
+      <li><b>Pioneer Cup</b> opens the season for the full field (12-16 clubs, groups + knockout).</li>
+      <li>The <b>top 8</b> advance to the <b>Grande Cup</b> (direct knockout); the bottom 4-8 enter the <b>Relegator Cup</b> (direct knockout).</li>
+      <li><b>Grande</b> top 4 feed the <b>Premier League</b> (double round-robin); places 5-8 play the <b>Conference League</b> (single round-robin).</li>
       <li>Relegator entrants also contest the <b>Peripheral Cup</b> (single RR). Its champion meets the Relegator champion in the <b>Minor SuperCup</b>.</li>
       <li>Minor SuperCup champion then faces the Conference champion in the <b>Sub SuperCup</b>.</li>
       <li><b>Super Cup</b> is played between the Premier champion and the Grande champion.</li>
@@ -2917,13 +4968,13 @@ Premier Champion           │                     │
 
     function renderAbout() {
       const aboutText = (STATE.config && STATE.config.about) ? STATE.config.about : '';
-      return `<h1><i class="fa-solid fa-circle-info i"></i>About CASPER</h1>
+      return `<h1><i class="fa-solid fa-circle-info i"></i>About CASPER Futsal</h1>
 
   <div class="panel">
     <h2>What is CASPER?</h2>
-    <p>CASPER (Competitive Athletics &amp; Sports Promotion) is a local, offline archive and results viewer for a closed football competition system. It is not a live scores site and it does not connect to any external API. Everything you see is generated on your machine from plain-text archive files.</p>
+    <p>CASPER Futsal (Competitive Athletics &amp; Sports Promotion) is a local, offline archive and results viewer for a closed futsal competition system. It is not a live scores site and it does not connect to any external API. Everything you see is generated on your machine from plain-text archive files.</p>
     ${aboutText ? `<p>${escapeHtml(aboutText)}</p>` : ''}
-    <p>The site is intentionally dense. Tables, standings, match reports, career pages and records are all derived automatically from the same source data so nothing has to be typed twice.</p>
+    <p>The site is intentionally dense. Tables, standings, match reports, career pages, multi-trophy seasons (-bles), hall of fame and records are all derived automatically from the same source data so nothing has to be typed twice.</p>
   </div>
 
   <div class="panel">
@@ -2939,10 +4990,10 @@ Premier Champion           │                     │
 
   <div class="panel">
     <h2>Competition structure</h2>
-    <p>A full CASPER season is built around a fixed pyramid of cups and leagues. The season always opens with the <b>Pioneer Cup</b> (12–16 clubs, group stage then knockout). From there the field splits:</p>
+    <p>A full CASPER season is built around a fixed pyramid of cups and leagues. The season always opens with the <b>Pioneer Cup</b> (12-16 clubs, group stage then knockout). From there the field splits:</p>
     <ul>
-      <li><b>Top 8</b> → <b>Grande Cup</b> (direct knockout). Grande’s top four enter the <b>Premier League</b> (double round-robin); places 5–8 play the <b>Conference League</b> (single round-robin).</li>
-      <li><b>Bottom 4–8</b> → <b>Relegator Cup</b> (direct knockout). Relegator entrants also play the <b>Peripheral Cup</b> (single RR). Peripheral champion vs Relegator champion = <b>Minor SuperCup</b>; that winner then meets the Conference champion in the <b>Sub SuperCup</b>.</li>
+      <li><b>Top 8</b> → <b>Grande Cup</b> (direct knockout). Grande’s top four enter the <b>Premier League</b> (double round-robin); places 5-8 play the <b>Conference League</b> (single round-robin).</li>
+      <li><b>Bottom 4-8</b> → <b>Relegator Cup</b> (direct knockout). Relegator entrants also play the <b>Peripheral Cup</b> (single RR). Peripheral champion vs Relegator champion = <b>Minor SuperCup</b>; that winner then meets the Conference champion in the <b>Sub SuperCup</b>.</li>
       <li><b>Super Cup</b> — Premier champion vs Grande champion.</li>
       <li><b>Finale</b> — the ultimate match of the season: Winner A (Pioneer Champion vs Grande Champion) against Winner B (Sub SuperCup Champion vs Premier Champion).</li>
     </ul>
@@ -2980,14 +5031,14 @@ Premier Champion           │                     │
   <div class="panel">
     <h2>How the site is organised</h2>
     <table class="kv-table">
-      <tr><td><code>config.json</code></td><td>Site title, tagline, theme colours, award labels, archive paths</td></tr>
+      <tr><td><code>config.json</code></td><td>Site title, tagline, theme, award labels, archive paths, <code>playersMaster</code> / Hall of Fame, <code>playerContext</code></td></tr>
       <tr><td><code>data/manifest.json</code></td><td>Ordered list of <code>.csn</code> files to load</td></tr>
       <tr><td><code>data/*.csn</code></td><td>Tournament archives (one or many files)</td></tr>
-      <tr><td><code>misc.json</code></td><td>News, seasonal awards, curated records, season notes, pyramid trophies</td></tr>
+      <tr><td><code>misc.json</code></td><td>Curated records, season notes, pyramid trophies</td></tr>
       <tr><td><code>index.html</code></td><td>This viewer — HTML, CSS and vanilla JS only</td></tr>
       <tr><td><code>fill.html</code></td><td>Editor used to create and validate CSN + misc content</td></tr>
     </table>
-    <p>On load the viewer fetches the manifest, parses every listed CSN file, builds player/team aggregates and ELO ratings, then routes by the URL hash (<code>#player/Name</code>, <code>#competition/id</code>, <code>#database</code>, etc.). All of that happens client-side.</p>
+    <p>On load the viewer fetches the manifest, parses every listed CSN file, builds player/team aggregates and ELO ratings, then routes by the URL hash (<code>#player/Name</code>, <code>#competition/id</code>, <code>#bles</code>, <code>#halloffame</code>, <code>#database</code>, etc.). All of that happens client-side.</p>
   </div>
 
   <div class="panel">
@@ -2999,6 +5050,10 @@ Premier Champion           │                     │
       <li>ELO ratings (base 1500, K=32, chronological)</li>
       <li>Records (largest win, highest-scoring match, most titles, etc.)</li>
       <li>Season and competition-series summaries</li>
+      <li>Current form streaks</li>
+      <li>Doubles / Trebles / Quadruples and higher multi-trophy seasons</li>
+      <li>Hall of Fame auto-tags (Legend, Icon, Dominator, Founding Player, …)</li>
+      <li>Player progression bars across competitions</li>
     </ul>
     <p>If a number appears on a page, it came from the archive or was derived from it. Nothing is simulated for display.</p>
   </div>
@@ -3010,7 +5065,7 @@ Premier Champion           │                     │
 
   <div class="panel">
     <h2>Editing the archive</h2>
-    <p>Use <a href="fill.html">fill.html</a> to create new tournaments, edit existing CSN, validate syntax and maintain news / seasonal awards / records in <code>misc.json</code>. After saving files into <code>data/</code> and updating the manifest, reload this page.</p>
+    <p>Use <a href="fill.html">fill.html</a> to create new tournaments, edit existing CSN, validate syntax and maintain records in <code>misc.json</code>. Seasonal awards live in CSN as blocks with <code>typ=seasonal</code>. After saving files into <code>data/</code> and updating the manifest, reload this page.</p>
   </div>
 
   <div class="panel">
@@ -3025,13 +5080,13 @@ Premier Champion           │                     │
       const tours = STATE.tournaments;
       const matches = STATE.matches;
       const totalGoals = players.reduce((s, p) => s + p.goals, 0);
-      const totalAwards = players.reduce((s, p) => s + p.awards.length, 0) + (STATE.misc.seasonalAwards || []).length;
+      const totalAwards = players.reduce((s, p) => s + p.awards.length, 0) + (STATE.seasonalAwards || []).length;
       const curatedRecords = (STATE.misc.records || []).length;
       const totalRecords = curatedRecords + 14;
       const seasons = [...new Set(tours.map(t => t.meta.s).filter(Boolean))];
-      const newsCount = (STATE.misc.news || []).length;
+      const seasonalCount = (STATE.seasonalAwards || []).length;
       const objects = tours.length + matches.length + players.length + teams.length +
-        totalAwards + totalRecords + newsCount + seasons.length + Object.keys(STATE.rawById).length;
+        totalAwards + totalRecords + seasonalCount + seasons.length + Object.keys(STATE.rawById).length;
       const fmt = n => (n == null ? '—' : Number(n).toLocaleString('en-US'));
       const rows = [
         { k: 'Database Version', v: STATE.metrics.databaseVersion || '2026.08' },
@@ -3046,7 +5101,7 @@ Premier Champion           │                     │
         { k: 'Awards', v: fmt(totalAwards) },
         { k: 'Records', v: fmt(totalRecords) },
         { k: 'Seasons', v: fmt(seasons.length) },
-        { k: 'News items', v: fmt(newsCount) },
+        { k: 'Seasonal awards', v: fmt(seasonalCount) },
         { k: 'Characters', v: fmt(STATE.metrics.characters) },
         { k: 'Bytes', v: fmt(STATE.metrics.bytes) },
         { k: 'Lines', v: fmt(STATE.metrics.lines) },
@@ -3077,7 +5132,7 @@ Premier Champion           │                     │
         <tr><td>Awards</td><td class="accent">${fmt(totalAwards)}</td></tr>
         <tr><td>Records</td><td class="accent">${fmt(totalRecords)}</td></tr>
         <tr><td>Seasons</td><td class="accent">${fmt(seasons.length)}</td></tr>
-        <tr><td>News</td><td class="accent">${fmt(newsCount)}</td></tr>
+        <tr><td>Seasonal awards</td><td class="accent">${fmt((STATE.seasonalAwards || []).length)}</td></tr>
         <tr><td><b>Total objects</b></td><td class="accent"><b>${fmt(objects)}</b></td></tr>
       </table>
     </div>
@@ -3205,78 +5260,381 @@ Premier Champion           │                     │
 
     function renderSeason(param) {
       const season = decodeURIComponent(param);
-      const tours = STATE.tournaments.filter(t => t.meta.s === season);
+      const tours = sortByDate(STATE.tournaments.filter(t => t.meta.s === season), false);
       if (!tours.length) return `<div class="error">Season “${escapeHtml(season)}” not found.</div>`;
       const matchList = STATE.matches.filter(m => m.season === season);
       const goals = matchList.reduce((s, m) => s + m.sh + m.sa, 0);
+      const yellow = matchList.reduce((s, m) => s + (m.y ? m.y[0] + m.y[1] : 0), 0);
+      const red = matchList.reduce((s, m) => s + (m.r ? m.r[0] + m.r[1] : 0), 0);
+      const pens = matchList.filter(m => m.p).length;
+      const et = matchList.filter(m => m.et).length;
+      const csMatches = matchList.filter(m => m.sa === 0 || m.sh === 0).length;
+
+      // Rich player season stats
       const players = {};
+      function ensureP(name) {
+        if (!players[name]) {
+          players[name] = {
+            name, g: 0, ga: 0, m: 0, w: 0, d: 0, l: 0,
+            cs: 0, blank: 0, y: 0, r: 0, titles: 0, awards: []
+          };
+        }
+        return players[name];
+      }
       matchList.forEach(m => {
         if (m.homePlayer) {
-          if (!players[m.homePlayer]) players[m.homePlayer] = { name: m.homePlayer, g: 0, m: 0, w: 0, cs: 0 };
-          players[m.homePlayer].g += m.sh; players[m.homePlayer].m++;
-          if (m.homeWin) players[m.homePlayer].w++;
-          if (m.sa === 0) players[m.homePlayer].cs++;
+          const p = ensureP(m.homePlayer);
+          p.g += m.sh; p.ga += m.sa; p.m++;
+          if (m.homeWin) p.w++; else if (m.awayWin) p.l++; else p.d++;
+          if (m.sa === 0) p.cs++;
+          if (m.sh === 0) p.blank++;
+          if (m.y) p.y += m.y[0];
+          if (m.r) p.r += m.r[0];
         }
         if (m.awayPlayer) {
-          if (!players[m.awayPlayer]) players[m.awayPlayer] = { name: m.awayPlayer, g: 0, m: 0, w: 0, cs: 0 };
-          players[m.awayPlayer].g += m.sa; players[m.awayPlayer].m++;
-          if (m.awayWin) players[m.awayPlayer].w++;
-          if (m.sh === 0) players[m.awayPlayer].cs++;
+          const p = ensureP(m.awayPlayer);
+          p.g += m.sa; p.ga += m.sh; p.m++;
+          if (m.awayWin) p.w++; else if (m.homeWin) p.l++; else p.d++;
+          if (m.sh === 0) p.cs++;
+          if (m.sa === 0) p.blank++;
+          if (m.y) p.y += m.y[1];
+          if (m.r) p.r += m.r[1];
         }
       });
-      const plist = Object.values(players).sort((a, b) => b.g - a.g);
-      const note = (STATE.misc.seasonNotes && STATE.misc.seasonNotes[season]) || '';
-      const sa = (STATE.misc.seasonalAwards || []).filter(a => a.season === season);
+      // Titles & awards this season
+      tours.forEach(t => {
+        if (t.aw.ch) {
+          const team = STATE.teams[t.aw.ch];
+          if (team && team.player) {
+            ensureP(team.player).titles++;
+            ensureP(team.player).awards.push({ award: 'Champion', event: t.meta.e || t.meta.id, id: t.meta.id });
+          }
+        }
+        if (t.aw.ru) {
+          const team = STATE.teams[t.aw.ru];
+          if (team && team.player) {
+            ensureP(team.player).awards.push({ award: 'Runner-up', event: t.meta.e || t.meta.id, id: t.meta.id });
+          }
+        }
+        Object.keys(t.aw).forEach(k => {
+          if (k === 'ch' || k === 'ru') return;
+          const val = t.aw[k];
+          let pname = null;
+          if (STATE.players[val.toLowerCase()]) pname = STATE.players[val.toLowerCase()].name;
+          else if (STATE.teams[val] && STATE.teams[val].player) pname = STATE.teams[val].player;
+          else if (typeof val === 'string') pname = val;
+          if (pname) {
+            ensureP(pname).awards.push({ award: getAwardLabel(k), event: t.meta.e || t.meta.id, id: t.meta.id });
+          }
+        });
+      });
 
-      let html = `<a class="back" href="#archive"><i class="fa-solid fa-arrow-left"></i> Archive</a>
+      const plist = Object.values(players).sort((a, b) => b.g - a.g || b.w - a.w);
+      const byWins = Object.values(players).slice().sort((a, b) => b.w - a.w || b.g - a.g);
+      const byCS = Object.values(players).slice().sort((a, b) => b.cs - a.cs || b.w - a.w);
+      const byTitles = Object.values(players).filter(p => p.titles > 0).sort((a, b) => b.titles - a.titles || b.g - a.g);
+
+      const note = (STATE.misc.seasonNotes && STATE.misc.seasonNotes[season]) || '';
+      const sa = (STATE.seasonalAwards || []).filter(a => a.season === season);
+
+      // -bles in this season
+      const { playerBles } = computeBles();
+      const seasonBles = playerBles.filter(b => b.season === season);
+
+      // Champions strip
+      const champions = tours.filter(t => t.aw.ch).map(t => {
+        const team = STATE.teams[t.aw.ch];
+        return {
+          event: t.meta.e || t.meta.id,
+          id: t.meta.id,
+          team: team ? team.name : t.aw.ch,
+          player: team ? team.player : '',
+          abbr: t.aw.ch
+        };
+      });
+
+      // Biggest results this season
+      let largest = null, highest = null;
+      matchList.forEach(m => {
+        const margin = Math.abs(m.sh - m.sa);
+        const total = m.sh + m.sa;
+        if (!largest || margin > largest.margin) largest = { margin, m };
+        if (!highest || total > highest.total) highest = { total, m };
+      });
+
+      let html = `<a class="back" href="#competitions"><i class="fa-solid fa-arrow-left"></i> Competitions</a>
   <h1><i class="fa-solid fa-calendar i"></i>Season ${escapeHtml(season)}</h1>
-  ${note ? `<p class="muted">${escapeHtml(note)}</p>` : ''}
+  ${note ? `<p class="muted" style="margin-bottom:8px">${escapeHtml(note)}</p>` : ''}
+
   <div class="mega-strip">
     <div class="cell"><span class="n">${tours.length}</span><span class="l">Competitions</span></div>
     <div class="cell"><span class="n">${matchList.length}</span><span class="l">Matches</span></div>
     <div class="cell"><span class="n">${goals}</span><span class="l">Goals</span></div>
     <div class="cell"><span class="n">${matchList.length ? (goals / matchList.length).toFixed(2) : '—'}</span><span class="l">G/M</span></div>
     <div class="cell"><span class="n">${plist.length}</span><span class="l">Players</span></div>
+    <div class="cell"><span class="n">${champions.length}</span><span class="l">Titles</span></div>
+    <div class="cell"><span class="n">${seasonBles.length}</span><span class="l">-bles</span></div>
     <div class="cell"><span class="n">${sa.length}</span><span class="l">Season awards</span></div>
-    <div class="cell"><span class="n">${matchList.filter(m => m.sa === 0 || m.sh === 0).length}</span><span class="l">CS matches</span></div>
-    <div class="cell"><span class="n">${matchList.filter(m => m.p).length}</span><span class="l">Penalties</span></div>
-  </div>
-  <div class="grid2">
+    <div class="cell"><span class="n">${csMatches}</span><span class="l">CS matches</span></div>
+    <div class="cell"><span class="n">${pens}</span><span class="l">Penalties</span></div>
+    <div class="cell"><span class="n">${et}</span><span class="l">Extra time</span></div>
+    <div class="cell"><span class="n">${yellow}/${red}</span><span class="l">Y / R</span></div>
+  </div>`;
+
+      // Champions of the season
+      if (champions.length) {
+        html += `<div class="panel">
+    <div class="section-title"><i class="fa-solid fa-crown i"></i> Season champions</div>
+    <div class="split-4">`;
+        champions.forEach(c => {
+          html += `<div class="mini-stat">
+      <span class="n" style="font-size:14px">${escapeHtml(c.team)}</span>
+      <span class="l">${escapeHtml(c.event)}</span>
+      <div class="muted" style="font-size:11px;margin-top:2px">
+        ${c.player ? `<a href="#player/${encodeURIComponent(c.player)}">${escapeHtml(c.player)}</a>` : ''}
+        · <a href="#competition/${encodeURIComponent(c.id)}">Open</a>
+      </div>
+    </div>`;
+        });
+        html += `</div></div>`;
+      }
+
+      // PFAC & Seasonal awards (highlighted)
+      {
+        const ranks = (STATE.pfacRanks && STATE.pfacRanks[season]) || [];
+        const pfacGreats = sa.filter(a => a.isPfacGreat || /seasonal\s*great|pfac/i.test(a.award || '') || /^(sg|pfacsg)$/i.test(a.code || ''));
+        const otherSeasonal = sa.filter(a => !pfacGreats.includes(a));
+        if (sa.length || ranks.length) {
+          html += `<div class="cabinet" style="margin-bottom:12px">
+    <div class="cabinet-head">
+      <h2><i class="fa-solid fa-star i"></i> Seasonal &amp; PFAC Awards <span class="badge seasonal-golden">Golden</span></h2>
+      <div class="cabinet-totals">
+        <span class="ct gold"><b>${sa.length}</b> seasonal</span>
+        ${pfacGreats.length ? `<span class="ct gold"><b>${pfacGreats.length}</b> PFAC Great</span>` : ''}
+        ${ranks.length ? `<span class="ct"><b>${ranks.length}</b> ranked</span>` : ''}
+      </div>
+    </div>
+    <div class="cabinet-body">`;
+
+          if (pfacGreats.length) {
+            html += `<div class="cabinet-section">
+      <div class="cabinet-section-title"><i class="fa-solid fa-handshake"></i> PFAC Seasonal Great</div>`;
+            pfacGreats.forEach(a => {
+              const desc = getAwardDescriptionByLabel(a.award) || getAwardDescription(a.code) ||
+                'Highest individual honour of the Players\' Futsal Association of CASPER.';
+              html += `<div class="award-card seasonal-card">
+        <div class="ac-icon"><i class="fa-solid fa-star"></i></div>
+        <div class="ac-body">
+          <div class="ac-title"><a href="#award/${encodeURIComponent(a.award)}">${escapeHtml(a.award)}</a>
+            <span class="badge seasonal-golden">PFAC Great</span>
+          </div>
+          <div class="ac-meta">Winner · <a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a>
+            · <a href="#pfac">PFAC</a></div>
+          <div class="ac-desc">${escapeHtml(desc)}</div>
+        </div>
+        <div class="ac-count">★<span>great</span></div>
+      </div>`;
+            });
+            html += `</div>`;
+          }
+
+          if (ranks.length) {
+            html += `<div class="cabinet-section">
+      <div class="cabinet-section-title"><i class="fa-solid fa-ranking-star"></i> PFAC voting ranks</div>`;
+            ranks.forEach(r => {
+              const cls = r.rank === 1 ? 'gold' : r.rank === 2 ? 'silver' : r.rank === 3 ? 'bronze' : '';
+              html += `<div class="vote-rank">
+        <div class="rank-num ${cls}">${r.rank}</div>
+        <div style="flex:1">
+          <a href="#player/${encodeURIComponent(r.name)}"><b>${escapeHtml(r.name)}</b></a>
+          ${r.rank === 1 ? ' <span class="badge seasonal-golden">Seasonal Great</span>' : ''}
+        </div>
+        <div class="rank-pts">${r.points != null ? r.points + ' <span>pts</span>' : '<span class="muted">—</span>'}</div>
+      </div>`;
+            });
+            html += `<div style="margin-top:6px;font-size:12px"><a href="#pfac">Full PFAC page →</a></div></div>`;
+          }
+
+          if (otherSeasonal.length) {
+            html += `<div class="cabinet-section">
+      <div class="cabinet-section-title"><i class="fa-solid fa-award"></i> Other seasonal awards</div>`;
+            otherSeasonal.forEach(a => {
+              const desc = getAwardDescriptionByLabel(a.award) || getAwardDescription(a.code);
+              html += `<div class="award-card seasonal-card">
+        <div class="ac-icon"><i class="fa-solid fa-award"></i></div>
+        <div class="ac-body">
+          <div class="ac-title"><a href="#award/${encodeURIComponent(a.award)}">${escapeHtml(a.award)}</a>
+            <span class="badge seasonal-golden">Seasonal</span>
+          </div>
+          <div class="ac-meta"><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a>
+            ${a.note ? ' · ' + escapeHtml(a.note) : ''}</div>
+          ${desc ? `<div class="ac-desc">${escapeHtml(desc)}</div>` : ''}
+        </div>
+      </div>`;
+            });
+            html += `</div>`;
+          }
+
+          html += `</div></div>`;
+        }
+      }
+
+      // -bles this season
+      if (seasonBles.length) {
+        html += `<div class="panel">
+    <div class="section-title"><i class="fa-solid fa-layer-group i"></i> Multi-trophy (-bles)</div>
+    <table><thead><tr><th>Player</th><th>-ble</th><th>Titles</th><th>Competitions</th></tr></thead><tbody>`;
+        seasonBles.forEach(b => {
+          const comps = b.titles.map(t =>
+            `<a href="#competition/${encodeURIComponent(t.id)}">${escapeHtml(t.event)}</a>`
+          ).join(' · ');
+          html += `<tr>
+      <td><a href="#player/${encodeURIComponent(b.name)}">${escapeHtml(b.name)}</a></td>
+      <td><b>${escapeHtml(b.label)}</b></td>
+      <td>${b.count}</td>
+      <td>${comps}</td>
+    </tr>`;
+        });
+        html += `</tbody></table>
+    <div style="margin-top:6px"><a href="#bles">All -bles →</a></div>
+  </div>`;
+      }
+
+      html += `<div class="grid2">
     <div class="panel">
       <div class="section-title"><i class="fa-solid fa-trophy i"></i>Competitions</div>
-      <table><thead><tr><th>Event</th><th>Fmt</th><th>Teams</th><th>Matches</th><th>Champion</th><th>Status</th></tr></thead><tbody>`;
+      <table><thead><tr><th>Event</th><th>Fmt</th><th>Teams</th><th>M</th><th>Champion</th><th>Status</th></tr></thead><tbody>`;
       tours.forEach(t => {
         const ch = t.aw.ch ? ((STATE.teams[t.aw.ch] || {}).name || t.aw.ch) : '—';
+        const chPlayer = t.aw.ch && STATE.teams[t.aw.ch] ? STATE.teams[t.aw.ch].player : '';
         html += `<tr>
       <td><a href="#competition/${encodeURIComponent(t.meta.id)}">${escapeHtml(t.meta.e || t.meta.id)}</a></td>
       <td>${escapeHtml(t.meta.fmt || '')}</td>
       <td>${Object.keys(t.n).length}</td>
       <td>${t.m.length}</td>
-      <td>${escapeHtml(ch)}</td>
+      <td>${escapeHtml(ch)}${chPlayer ? ` <span class="muted">(${escapeHtml(chPlayer)})</span>` : ''}</td>
       <td>${statusBadge(t)}</td>
     </tr>`;
       });
       html += `</tbody></table></div>
     <div class="panel">
-      <div class="section-title"><i class="fa-solid fa-fire i"></i>Season scorers</div>
-      <table><thead><tr><th>#</th><th>Player</th><th>G</th><th>M</th><th>CS</th><th>W</th></tr></thead><tbody>`;
-      plist.slice(0, 15).forEach((p, i) => {
+      <div class="section-title"><i class="fa-solid fa-fire i"></i>Top scorers</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>G</th><th>M</th><th>G/M</th><th>W-D-L</th></tr></thead><tbody>`;
+      plist.slice(0, 12).forEach((p, i) => {
+        const gpm = p.m ? (p.g / p.m).toFixed(2) : '—';
         html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
-      <td><b>${p.g}</b></td><td>${p.m}</td><td>${p.cs}</td><td>${p.w}</td></tr>`;
+      <td><b>${p.g}</b></td><td>${p.m}</td><td>${gpm}</td><td>${p.w}-${p.d}-${p.l}</td></tr>`;
       });
       html += `</tbody></table></div>
+  </div>
+
+  <div class="split-3">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-handshake i"></i> Most wins</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>W</th><th>M</th><th>W%</th></tr></thead><tbody>`;
+      byWins.slice(0, 10).forEach((p, i) => {
+        const wr = p.m ? ((p.w / p.m) * 100).toFixed(0) + '%' : '—';
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.w}</b></td><td>${p.m}</td><td>${wr}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-hand i"></i> Clean sheets</div>
+      <table><thead><tr><th>#</th><th>Player</th><th>CS</th><th>M</th><th>CS%</th></tr></thead><tbody>`;
+      byCS.slice(0, 10).forEach((p, i) => {
+        const pct = p.m ? ((p.cs / p.m) * 100).toFixed(0) + '%' : '—';
+        html += `<tr><td>${i + 1}</td><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.cs}</b></td><td>${p.m}</td><td>${pct}</td></tr>`;
+      });
+      html += `</tbody></table></div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-crown i"></i> Title winners</div>`;
+      if (!byTitles.length) html += `<p class="empty">None yet.</p>`;
+      else {
+        html += `<table><thead><tr><th>Player</th><th>Titles</th><th>G</th></tr></thead><tbody>`;
+        byTitles.forEach(p => {
+          html += `<tr><td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+        <td><b>${p.titles}</b></td><td>${p.g}</td></tr>`;
+        });
+        html += `</tbody></table>`;
+      }
+      html += `</div>
   </div>`;
 
-      if (sa.length) {
-        html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-award i"></i>Seasonal awards</div>
-    <table><thead><tr><th>Award</th><th>Recipient</th><th>Note</th></tr></thead><tbody>`;
-        sa.forEach(a => {
-          html += `<tr><td class="accent">${escapeHtml(a.award || '')}</td>
-        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
-        <td class="muted">${escapeHtml(a.note || '')}</td></tr>`;
+      // Highlight results
+      html += `<div class="grid2">
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-medal i"></i> Season highlights</div>
+      <table class="kv-table">
+        <tr><td>Largest victory</td><td>${largest ? `${escapeHtml(largest.m.homeName)} ${largest.m.sh}–${largest.m.sa} ${escapeHtml(largest.m.awayName)} <span class="muted">(margin ${largest.margin})</span>` : '—'}</td></tr>
+        <tr><td>Highest scoring</td><td>${highest ? `${escapeHtml(highest.m.homeName)} ${highest.m.sh}–${highest.m.sa} ${escapeHtml(highest.m.awayName)} <span class="muted">(${highest.total} goals)</span>` : '—'}</td></tr>
+        <tr><td>Top scorer</td><td>${plist[0] ? `<a href="#player/${encodeURIComponent(plist[0].name)}">${escapeHtml(plist[0].name)}</a> <b>${plist[0].g}</b>` : '—'}</td></tr>
+        <tr><td>Most wins</td><td>${byWins[0] ? `<a href="#player/${encodeURIComponent(byWins[0].name)}">${escapeHtml(byWins[0].name)}</a> <b>${byWins[0].w}</b>` : '—'}</td></tr>
+        <tr><td>Most clean sheets</td><td>${byCS[0] ? `<a href="#player/${encodeURIComponent(byCS[0].name)}">${escapeHtml(byCS[0].name)}</a> <b>${byCS[0].cs}</b>` : '—'}</td></tr>
+        <tr><td>Penalties / ET</td><td>${pens} / ${et}</td></tr>
+        <tr><td>Cards (Y/R)</td><td>${yellow} / ${red}</td></tr>
+      </table>
+    </div>
+    <div class="panel">
+      <div class="section-title"><i class="fa-solid fa-award i"></i> Tournament awards this season</div>`;
+      const awardRows = [];
+      tours.forEach(t => {
+        Object.keys(t.aw).forEach(k => {
+          let val = t.aw[k];
+          let recipientName = val;
+          if (STATE.teams[val]) recipientName = STATE.teams[val].name + (STATE.teams[val].player ? ' (' + STATE.teams[val].player + ')' : '');
+          else if (STATE.players[val.toLowerCase()]) recipientName = STATE.players[val.toLowerCase()].name;
+          awardRows.push({
+            event: t.meta.e || t.meta.id,
+            id: t.meta.id,
+            award: getAwardLabel(k),
+            code: k,
+            recipient: recipientName,
+            golden: isGolden(t)
+          });
         });
-        html += `</tbody></table></div>`;
+      });
+      if (!awardRows.length && !sa.length) html += `<p class="empty">None recorded. Seasonal awards are shown in the PFAC panel above.</p>`;
+      else {
+        html += `<table><thead><tr><th>Competition</th><th>Award</th><th>Recipient</th></tr></thead><tbody>`;
+        awardRows.forEach(r => {
+          const g = r.golden ? ' <span class="badge golden">Golden</span>' : '';
+          html += `<tr>
+        <td><a href="#competition/${encodeURIComponent(r.id)}">${escapeHtml(r.event)}</a></td>
+        <td><a href="#award/${encodeURIComponent(r.award)}">${escapeHtml(r.award)}</a>${g}</td>
+        <td>${escapeHtml(r.recipient)}</td>
+      </tr>`;
+        });
+        sa.forEach(a => {
+          const great = a.isPfacGreat ? ' <span class="badge seasonal-golden">PFAC Great</span>' : ' <span class="badge seasonal-golden">Seasonal</span>';
+          html += `<tr class="seasonal-award">
+        <td class="muted">Seasonal</td>
+        <td class="accent"><a href="#award/${encodeURIComponent(a.award || '')}">${escapeHtml(a.award || '')}</a>${great}</td>
+        <td><a href="#player/${encodeURIComponent(a.recipient)}">${escapeHtml(a.recipient)}</a></td>
+      </tr>`;
+        });
+        html += `</tbody></table>
+      <p class="muted" style="font-size:12px;margin-top:6px">Seasonal awards also appear in the <a href="#pfac">PFAC</a> panel above.</p>`;
       }
+      html += `</div>
+  </div>`;
+
+      // Full player table for the season
+      html += `<div class="panel">
+    <div class="section-title"><i class="fa-solid fa-users i"></i> All players (${plist.length})</div>
+    <table><thead><tr>
+      <th>#</th><th>Player</th><th>G</th><th>GA</th><th>M</th><th>W-D-L</th><th>CS</th><th>Y/R</th><th>Titles</th>
+    </tr></thead><tbody>`;
+      plist.forEach((p, i) => {
+        html += `<tr>
+      <td>${i + 1}</td>
+      <td><a href="#player/${encodeURIComponent(p.name)}">${escapeHtml(p.name)}</a></td>
+      <td><b>${p.g}</b></td><td>${p.ga}</td><td>${p.m}</td>
+      <td>${p.w}-${p.d}-${p.l}</td><td>${p.cs}</td>
+      <td>${p.y}/${p.r}</td><td>${p.titles || '—'}</td>
+    </tr>`;
+      });
+      html += `</tbody></table></div>`;
 
       html += `<div class="panel"><div class="section-title"><i class="fa-solid fa-futbol i"></i>All matches (${matchList.length})</div>
   <table><thead><tr><th>Competition</th><th>Stage</th><th>Match</th><th>Score</th><th></th></tr></thead><tbody>`;
@@ -3387,8 +5745,9 @@ Premier Champion           │                     │
         const ch = latest && latest.aw.ch ? ((STATE.teams[latest.aw.ch] || {}).name || latest.aw.ch) : '—';
         const seasons = [...new Set(list.map(t => t.meta.s).filter(Boolean))].join(', ');
         const matches = list.reduce((s, t) => s + t.m.length, 0);
+        const anyGolden = list.some(isGolden);
         html += `<tr>
-      <td><a href="#series/${encodeURIComponent(name)}"><b>${escapeHtml(name)}</b></a></td>
+      <td><a href="#series/${encodeURIComponent(name)}"><b>${escapeHtml(name)}</b></a> ${anyGolden ? '<span class="badge golden">Golden</span>' : ''}</td>
       <td>${list.length}</td>
       <td>${escapeHtml(seasons)}</td>
       <td>${matches}</td>
@@ -3429,6 +5788,41 @@ Premier Champion           │                     │
     }
 
 
+    function updateAddressBar() {
+      const input = document.getElementById('address-input');
+      if (!input) return;
+      // Don't clobber while the user is actively editing
+      if (document.activeElement === input) return;
+      const h = location.hash || '#home';
+      input.value = 'csp://casper.org/' + h;
+    }
+
+    function navigateFromAddress() {
+      const input = document.getElementById('address-input');
+      if (!input) return;
+      let raw = (input.value || '').trim();
+      if (!raw) {
+        location.hash = '#home';
+        return;
+      }
+      // Fully editable: accept entire CSP URL or any partial path
+      // csp://casper.org/#player/Anish
+      // csp://casper.org/player/Anish
+      // #player/Anish
+      // player/Anish
+      raw = raw.replace(/^csp:\/\/casper\.org\/?/i, '');
+      raw = raw.replace(/^https?:\/\/[^/]+\/?/i, '');
+      if (!raw.startsWith('#')) raw = '#' + raw.replace(/^\//, '');
+      raw = raw.replace(/^#players\//i, '#player/');
+      raw = raw.replace(/^#teams\//i, '#team/');
+      raw = raw.replace(/^#competitions\//i, '#competition/');
+      if (location.hash !== raw) {
+        location.hash = raw;
+      } else {
+        route();
+      }
+    }
+
     function route() {
       if (!STATE.ready) return;
       const hash = (location.hash || '#home').slice(1);
@@ -3440,7 +5834,12 @@ Premier Champion           │                     │
           view === 'series' || view === 'season' ? 'competitions' :
             view === 'player' ? 'players' :
               view === 'team' ? 'teams' :
-                view
+                view === 'bles' ? 'bles' :
+                  view === 'halloffame' ? 'halloffame' :
+                    view === 'award' ? 'awards' :
+                      view === 'pfac' ? 'pfac' :
+                        view === 'sponsors' ? 'sponsors' :
+                          view
       );
 
       const app = document.getElementById('app');
@@ -3448,7 +5847,6 @@ Premier Champion           │                     │
       let html = '';
       switch (view) {
         case 'home': html = renderHome(); break;
-        case 'news': html = renderNews(); break;
         case 'structure': html = renderStructure(); break;
         case 'archive': html = renderArchive(); break;
         case 'competitions': html = renderCompetitions(); break;
@@ -3460,9 +5858,15 @@ Premier Champion           │                     │
         case 'player': html = renderPlayer(param); break;
         case 'teams': html = renderTeams(); break;
         case 'team': html = renderTeam(param); break;
+        case 'bles': html = renderBles(); break;
+        case 'halloffame': html = renderHallOfFame(); break;
         case 'awards': html = renderAwards(); break;
+        case 'award': html = renderAward(param); break;
+        case 'pfac': html = renderPfac(); break;
+        case 'sponsors': html = renderSponsors(); break;
         case 'records': html = renderRecords(); break;
         case 'statistics': html = renderStatistics(); break;
+        case 'streaks': html = renderStreaks(); break;
         case 'database': html = renderDatabase(); break;
         case 'search': html = renderSearch(); break;
         case 'about': html = renderAbout(); break;
@@ -3470,6 +5874,7 @@ Premier Champion           │                     │
       }
       app.innerHTML = html;
       STATE.metrics.renderTimeMs = +(performance.now() - renderStart).toFixed(1);
+      updateAddressBar();
 
       if (view === 'search') {
         const input = document.getElementById('search-input');
@@ -3570,9 +5975,64 @@ Premier Champion           │                     │
       };
     }
 
-    function getAwardLabel(code) {
+    function getAwardMeta(code) {
+      const builtins = {
+        ch: { label: 'Champion', description: 'Winner of the competition.' },
+        ru: { label: 'Runner-up', description: 'Second place in the competition.' },
+        gb: { label: 'Golden Boot', description: 'Awarded to the top goalscorer of the tournament.' },
+        pot: { label: 'Player of the Tournament', description: 'Outstanding player of the competition, selected for overall impact.' },
+        poty: { label: 'Player of the Year', description: 'Best player across the full season.' },
+        sg: { label: 'PFAC Seasonal Great', description: 'Highest individual honour of the Players\' Futsal Association of CASPER. Decided by peer vote at season end.' },
+        pfacsg: { label: 'PFAC Seasonal Great', description: 'Highest individual honour of the Players\' Futsal Association of CASPER. Decided by peer vote at season end.' },
+        seasonalgreat: { label: 'PFAC Seasonal Great', description: 'Highest individual honour of the Players\' Futsal Association of CASPER. Decided by peer vote at season end.' },
+        yot: { label: 'Young Player of the Tournament', description: 'Best young or debutant performer in the competition.' },
+        gk: { label: 'Best Goalkeeper', description: 'Recognises the outstanding goalkeeper of the tournament.' },
+        fair: { label: 'Fair Play', description: 'Awarded for sporting conduct and discipline.' },
+        mvp: { label: 'MVP', description: 'Most Valuable Player of the competition.' }
+      };
+      const c = (code || '').toLowerCase();
+      const fromAwards = (STATE.config && STATE.config.awards && (STATE.config.awards[code] || STATE.config.awards[c])) || null;
       const labels = (STATE.config && STATE.config.awardLabels) || {};
-      return labels[code] || code;
+      const descs = (STATE.config && STATE.config.awardDescriptions) || {};
+      let label = (fromAwards && fromAwards.label) || labels[code] || labels[c] || (builtins[c] && builtins[c].label) || code;
+      // awardLabels may be string or {label, description}
+      if (label && typeof label === 'object') {
+        return {
+          label: label.label || code,
+          description: label.description || (fromAwards && fromAwards.description) || descs[code] || descs[c] || (builtins[c] && builtins[c].description) || ''
+        };
+      }
+      const description = (fromAwards && fromAwards.description) || descs[code] || descs[c] || (typeof labels[code] === 'object' ? labels[code].description : '') || (builtins[c] && builtins[c].description) || '';
+      return { label, description };
+    }
+
+    function getAwardLabel(code) {
+      return getAwardMeta(code).label;
+    }
+
+    function getAwardDescription(code) {
+      return getAwardMeta(code).description || '';
+    }
+
+    function getAwardDescriptionByLabel(label) {
+      if (!label) return '';
+      const low = label.toLowerCase();
+      // Try reverse lookup via known codes
+      const tryCodes = ['ch', 'ru', 'gb', 'pot', 'poty', 'sg', 'pfacsg', 'seasonalgreat', 'yot', 'gk', 'fair', 'mvp'];
+      for (const c of tryCodes) {
+        const m = getAwardMeta(c);
+        if ((m.label || '').toLowerCase() === low) return m.description || '';
+      }
+      // config awards keyed by label-ish
+      const awards = (STATE.config && STATE.config.awards) || {};
+      for (const k of Object.keys(awards)) {
+        const a = awards[k];
+        if (a && typeof a === 'object' && (a.label || '').toLowerCase() === low) return a.description || '';
+      }
+      const descs = (STATE.config && STATE.config.awardDescriptions) || {};
+      if (descs[label]) return descs[label];
+      if (descs[low]) return descs[low];
+      return '';
     }
 
     async function boot() {
@@ -3587,7 +6047,7 @@ Premier Champion           │                     │
           const miscRes = await fetch('misc.json');
           if (miscRes.ok) {
             miscText = await miscRes.text();
-            STATE.misc = Object.assign({ news: [], seasonalAwards: [], records: [], seasonNotes: {} }, JSON.parse(miscText));
+            STATE.misc = Object.assign({ records: [], seasonNotes: {}, pyramid: null }, JSON.parse(miscText));
           }
         } catch (e) {
           console.warn('misc.json not loaded:', e.message);
@@ -3597,7 +6057,10 @@ Premier Champion           │                     │
         if (!tournaments.length) {
           throw new Error('No tournaments found. Add .csn files to data/ and list them in data/manifest.json');
         }
-        STATE.tournaments = tournaments;
+        // Split seasonal award blocks (typ/cat/fmt = seasonal) from real competitions
+        const seasonalBlocks = tournaments.filter(isSeasonalBlock);
+        const realTournaments = tournaments.filter(t => !isSeasonalBlock(t));
+        STATE.tournaments = realTournaments;
         STATE.rawById = rawById || {};
         STATE.archiveSources = sources;
 
@@ -3614,7 +6077,11 @@ Premier Champion           │                     │
         STATE.players = agg.players;
         STATE.teams = agg.teams;
         STATE.matches = agg.matches || [];
+        // Seasonal awards from CSN blocks (not misc.json)
+        STATE.seasonalAwards = extractSeasonalAwards(seasonalBlocks);
         STATE.metrics.parseTimeMs = +(STATE.metrics.parseTimeMs + (performance.now() - aggStart)).toFixed(1);
+        STATE._streakHistory = null;
+        try { getStreakHistory(); } catch (e) { console.warn('Streak history:', e); }
         STATE.ready = true;
 
         if (STATE.config.theme) {
@@ -3634,6 +6101,22 @@ Premier Champion           │                     │
         }
 
         window.addEventListener('hashchange', route);
+
+        // Address bar: type CSP paths like csp://casper.org/#player/Anish
+        const addrInput = document.getElementById('address-input');
+        const addrGo = document.getElementById('address-go');
+        if (addrInput) {
+          addrInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              navigateFromAddress();
+            }
+          });
+        }
+        if (addrGo) {
+          addrGo.addEventListener('click', () => navigateFromAddress());
+        }
+
         route();
       } catch (err) {
         document.getElementById('app').innerHTML =
