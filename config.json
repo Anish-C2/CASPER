@@ -1,9 +1,9 @@
 {
-  "siteTitle": "CASPER Football",
+  "siteTitle": "CASPER Futsal",
   "orgName": "CASPer",
   "tagline": "Competition Archive & Historical Record System",
   "defaultSeason": "2026A",
-  "about": "CASPER is a football competition archive, statistics database and historical record system. Its primary data source is CSN (Competition Serialization Notation). Everything is generated automatically from the archive. No duplicated information. Built for long-term archival quality.",
+  "about": "CASPER is a football, futsal and cricket competition archive, statistics database and historical record system. Its primary data source is CSN (Competition Serialization Notation). Everything is generated automatically from the archive. No duplicated information. Built for long-term archival quality",
   "logoText": "CA",
   "theme": {
     "background": "#111111",
@@ -35,7 +35,12 @@
     "3p": "Third Place",
     "frp": "Fair Play",
     "gk": "Giant Killer",
-    "4p": "Fourth Place"
+    "4p": "Fourth Place",
+    "cm": "Comeback Specialist",
+    "cp": "Clutch Player",
+    "rb": "Record Breaker",
+    "ps": "Penalty Specialist",
+    "gmb": "Golden Match Ball"
   },
   "metadataFields": [
     {
@@ -123,5 +128,41 @@
   "archives": {
     "manifest": "data/manifest.json",
     "fallback": "data.csn"
-  }
+  },
+  "playerContext": {
+    "anish": "The dominant figure of CASPER's inaugural era. Anish established himself as the leading scorer, most decorated player and most successful competitor of the 2026A season, combining prolific scoring with an exceptional win rate. He won the inaugural Pioneer Cup and Premier League with Black Bird United, while accumulating a record-breaking collection of individual awards. His rivalry with Bhavesh became the defining storyline of the inaugural season.",
+
+    "bhavesh": "Originally a late addition to CASPER and not initially regarded as a major contender, Bhavesh quickly emerged as Anish's principal rival. After finishing runner-up in the inaugural Pioneer Cup, he led Kolkata Kous to victory in Grande and later defeated Black Bird United to win the SuperCup. His back-and-forth rivalry with Anish became one of the defining narratives of the 2026A season.",
+
+    "arjun": "A defensively strong competitor and one of CASPER's most consistent players. Arjun led Real Saltlake to multiple titles and established himself as the archive's leading clean-sheet performer during the inaugural season.",
+
+    "anirban": "A high-scoring and unpredictable competitor whose attacking output made Martians a frequent threat despite inconsistent results. Known for producing dramatic matches and maintaining one of the highest goal totals in CASPER.",
+
+    "srinjoy": "The representative of Super Strikers CF and one of the inaugural competitors. Despite remaining without a title during 2026A, Srinjoy remained competitive across multiple major competitions and emerged as a recurring challenger.",
+
+    "vyom": "A founding CASPER competitor who led New Athletico Saltlake to victory in the inaugural Relegator Cup. His performances established NAS as a capable competitor across the season.",
+
+    "rounak": "Leader of Inter Grande CF and a multiple-time champion during the inaugural season. Rounak helped establish IGR as one of CASPER's strongest competitors outside the major championship hierarchy.",
+
+    "aryan": "The player behind Vostok CF, Aryan recorded a strong win rate and consistently competitive performances despite not securing a title during the inaugural season.",
+
+    "gourav": "The representative of Movile, whose side experienced a difficult inaugural campaign but remained involved across several competitions.",
+
+    "divyanshu": "Leader of Modo FC and an inaugural CASPER competitor. Despite limited title success, Divyanshu recorded several notable defensive performances and remained competitive in knockout and league play.",
+
+    "rajdeep": "The representative of Horsemen United and one of CASPER's founding competitors. Rajdeep's campaign included notable wins and consistent defensive contributions.",
+
+    "anshuman": "Leader of Romano United and one of the original CASPER participants. Romano United endured a difficult inaugural season but remains part of CASPER's founding generation.",
+
+    "karan": "A new-generation competitor entering after the inaugural season.",
+
+    "aarav": "A new competitor entering CASPER alongside the emerging generation following the inaugural season. Aarav represents part of the expanding field of challengers expected to reshape the competitive landscape."
+  },
+  "sponsors": [
+    {
+  "name": "Ballers",
+  "tier": "gold",
+  "note": "Official Ball Making Partner"
+}
+  ]
 }
