@@ -4,31 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CASPER Futsal</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="assets/casper.css" />
+  <link rel="stylesheet" href="assets/css/casper.css">
   <script>window.CASPER_PAGE = { mode: 'sport', sport: 'futsal' };</script>
 </head>
 <body>
   <header>
-    <div class="header-bar"><div class="logo"><div class="logo-mark">CA</div><span id="site-name">CASPER Futsal</span><span class="tag" id="site-tagline"></span></div></div>
+    <div class="topbar">
+      <div class="brand">
+        <span class="mark lg" id="org-mark"></span>
+        <div>
+          <h1>CASPER</h1>
+          <div class="sub" id="site-tagline">Competitive Athletics &amp; Sports Promotion</div>
+          <div class="sub"><b id="sport-sub">Futsal</b></div>
+        </div>
+      </div>
+      <div class="quote">“Records are made.<br>Trophies are won.<br>Legends are remembered.”<br>– CASPER</div>
+      <div class="clockbox">
+        <div class="k">CASPER TIME</div>
+        <div class="t" id="casper-time">--:--:--</div>
+        <div class="d" id="casper-date"></div>
+      </div>
+    </div>
     <div id="sport-switch-slot"></div>
-    <nav id="main-nav">
-      <a href="#home" data-view="home"><i class="fa-solid fa-house"></i> Home</a>
-      <a href="#news" data-view="news"><i class="fa-solid fa-newspaper"></i> News</a>
-      <a href="#archive" data-view="archive"><i class="fa-solid fa-box-archive"></i> Archive</a>
-      <a href="#competitions" data-view="competitions"><i class="fa-solid fa-trophy"></i> Competitions</a>
-      <a href="#players" data-view="players"><i class="fa-solid fa-users"></i> Players</a>
-      <a href="#teams" data-view="teams"><i class="fa-solid fa-shield-halved"></i> Teams</a>
-      <a href="#awards" data-view="awards"><i class="fa-solid fa-award"></i> Awards</a>
-      <a href="#ranking" data-view="ranking"><i class="fa-solid fa-ranking-star"></i> Ranking</a>
-      <a href="#records" data-view="records"><i class="fa-solid fa-medal"></i> Records</a>
-      <a href="#statistics" data-view="statistics"><i class="fa-solid fa-chart-column"></i> Statistics</a>
-      <a href="#about" data-view="about"><i class="fa-solid fa-circle-info"></i> About</a>
-    </nav>
+    <nav class="main"><ul>
+      <li><a href="#home" data-view="home">Home</a></li>
+      <li><a href="#news" data-view="news">News</a></li>
+      <li><a href="#archive" data-view="archive">Archive</a></li>
+      <li><a href="#competitions" data-view="competitions">Competitions</a></li>
+      <li><a href="#players" data-view="players">Players</a></li>
+      <li><a href="#teams" data-view="teams">Teams</a></li>
+      <li><a href="#awards" data-view="awards">Awards</a></li>
+      <li><a href="#ranking" data-view="ranking">Ranking</a></li>
+      <li><a href="#records" data-view="records">Records</a></li>
+      <li><a href="#statistics" data-view="statistics">Statistics</a></li>
+      <li><a href="#about" data-view="about">About</a></li>
+    </ul></nav>
+    <div class="ticker"><div class="lbl">LATEST NEWS</div><div class="items" id="ticker-items">Loading archive…</div></div>
   </header>
-  <main id="app"><div class="loading">Loading archive…</div></main>
-  <footer>CASPER · generated from CSN</footer>
-  <script src="assets/casper-core.js"></script>
-  <script src="assets/casper-ui.js"></script>
+  <main id="app"></main>
+  <footer><div>© 2026 CASPER</div><div>Built from CSN archives. Crests generated from club codes.</div></footer>
+  <script src="assets/js/casper-marks.js"></script>
+  <script src="assets/js/casper-core.js"></script>
+  <script src="assets/js/casper-ui.js"></script>
+  <script>document.getElementById('org-mark').innerHTML = crestSvg('CA','CASPER');</script>
 </body>
 </html>
