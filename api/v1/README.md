@@ -1,6 +1,6 @@
 # CASPER API v1
 
-Public, static JSON API for CASPER Futsal.
+Public, static JSON API for CASPER Futsal. The API is generated from CASPER CSN archives and includes both source-style records and compact precomputed analytics.
 
 ## Base URL
 
@@ -8,19 +8,16 @@ Public, static JSON API for CASPER Futsal.
 https://anish-c2.github.io/CASPER-Futsal/api/v1/
 ```
 
-All endpoints are static JSON files and can be requested with normal HTTP `GET` requests. No authentication or API key is required.
+All endpoints are static JSON resources and use normal HTTP `GET` requests. No API key is required.
 
 ## Quick start
 
-JavaScript:
-
 ```js
-const response = await fetch(
-  "https://anish-c2.github.io/CASPER-Futsal/api/v1/teams.json"
-);
+const data = await fetch(
+  "https://anish-c2.github.io/CASPER-Futsal/api/v1/analytics-teams.json"
+).then(r => r.json());
 
-const data = await response.json();
-console.log(data.teams);
+console.log(data.rankings);
 ```
 
 Python:
@@ -28,101 +25,120 @@ Python:
 ```python
 import requests
 
-url = "https://anish-c2.github.io/CASPER-Futsal/api/v1/teams.json"
-data = requests.get(url).json()
-print(data["teams"])
+data = requests.get(
+    "https://anish-c2.github.io/CASPER-Futsal/api/v1/analytics-teams.json"
+).json()
+print(data["rankings"])
 ```
 
 ## Endpoints
 
 | Endpoint | Description |
 |---|---|
-| [`index.json`](./index.json) | API metadata and endpoint directory |
-| [`seasons.json`](./seasons.json) | CASPER seasons |
-| [`competitions.json`](./competitions.json) | Competitions and editions |
-| [`teams.json`](./teams.json) | Teams and aggregate team statistics |
-| [`players.json`](./players.json) | Players associated with teams |
-| [`matches.json`](./matches.json) | Recorded matches and scores |
-| [`awards.json`](./awards.json) | Competition and seasonal awards |
-| [`stats.json`](./stats.json) | Global API statistics |
-| [`records.json`](./records.json) | Season records |
+| `index.json` | API metadata and endpoint directory |
+| `seasons.json` | CASPER seasons |
+| `competitions.json` | Competition records |
+| `teams.json` | Team records and aggregate statistics |
+| `players.json` | Player records |
+| `matches.json` | Historical match records |
+| `awards.json` | Competition awards |
+| `stats.json` | Global archive counts |
+| `analytics.json` | Compact analytics overview |
+| `analytics-teams.json` | Precomputed team rankings and metrics |
+| `analytics-competitions.json` | Precomputed competition metrics |
 
-## Response formats
+## Analytics API
 
-### `seasons.json`
+Analytics endpoints are intended for dashboards, leaderboards and applications that should **not need to download the complete match archive**.
+
+### `analytics.json`
+
+Returns archive-wide totals plus links to the specialized analytics resources.
 
 ```json
 {
-  "seasons": [
-    {
-      "id": "2026A",
-      "name": "2026A",
-      "status": "completed"
-    }
-  ]
+  "overview": {
+    "seasons": 1,
+    "competitions": 11,
+    "teams": 12,
+    "players": 12,
+    "matches": 56,
+    "goals": 217
+  },
+  "team_rankings": "./analytics-teams.json",
+  "competition_rankings": "./analytics-competitions.json"
 }
 ```
 
-### `competitions.json`
+### `analytics-teams.json`
 
-Each competition contains:
+Teams are ranked using the generated analytics score order: win rate first, then goal difference, then titles.
 
-| Field | Type | Description |
-|---|---|---|
-| `id` | string | Unique competition ID |
-| `name` | string | Competition name |
-| `season` | string | Season ID |
-| `edition` | number/null | Edition number |
-| `format` | string/null | Competition format, such as `rr`, `ko`, or `rsk` |
-| `teams` | number/null | Number of registered teams |
-| `status` | string | Competition status |
-| `champion` | string/null | Winning team ID when available |
+Each ranking contains:
 
-### `teams.json`
-
-The `teams` array contains one object per team.
-
-| Field | Type | Description |
-|---|---|---|
-| `id` | string | Stable team code used by match records |
-| `name` | string | Team/club name |
-| `player` | string/null | Player associated with the team |
-| `season` | string | Season in which the team record was created |
-| `matches` | number | Matches recorded by the generator |
-| `wins` | number | Wins |
-| `draws` | number | Draws |
-| `losses` | number | Losses |
-| `goals_for` | number | Goals scored |
-| `goals_against` | number | Goals conceded |
-| `title_count` | number | Titles detected from competition champion fields |
-| `titles` | string[] | Competition names won |
+| Field | Description |
+|---|---|
+| `team` | Team ID |
+| `name` | Team name |
+| `matches` | Matches counted |
+| `wins` | Wins |
+| `draws` | Draws |
+| `losses` | Losses |
+| `win_rate` | Wins divided by matches, from `0` to `1` |
+| `goals_for` | Goals scored |
+| `goals_against` | Goals conceded |
+| `goal_difference` | Goals for minus goals against |
+| `titles` | Number of detected competition titles |
 
 Example:
 
 ```json
 {
-  "teams": [
+  "rankings": [
     {
-      "id": "bbu",
+      "team": "bbu",
       "name": "Black Bird United",
-      "player": "Anish",
-      "season": "2026A",
-      "matches": 0,
-      "wins": 0,
-      "draws": 0,
-      "losses": 0,
-      "goals_for": 0,
-      "goals_against": 0,
-      "title_count": 0,
-      "titles": []
+      "matches": 20,
+      "wins": 15,
+      "draws": 2,
+      "losses": 3,
+      "win_rate": 0.75,
+      "goals_for": 64,
+      "goals_against": 31,
+      "goal_difference": 33,
+      "titles": 3
     }
   ]
 }
 ```
 
-### `players.json`
+### `analytics-competitions.json`
 
-Each player object contains:
+Each competition contains its season, format, champion, match count and total goals.
+
+```json
+{
+  "competitions": [
+    {
+      "id": "competition-id",
+      "name": "Competition Name",
+      "season": "2026A",
+      "format": "rr",
+      "champion": "bbu",
+      "matches": 12,
+      "goals": 61
+    }
+  ]
+}
+```
+
+## Core data endpoints
+
+### `teams.json`
+
+Team records include `id`, `name`, `player`, `season`, `matches`, `wins`, `draws`, `losses`, `goals_for`, `goals_against`, `goal_difference`, `win_rate`, `title_count`, and `titles`.
+
+### `players.json`
 
 ```json
 {
@@ -134,78 +150,59 @@ Each player object contains:
 }
 ```
 
-Player IDs are generated as lowercase, hyphen-separated names.
-
 ### `matches.json`
 
-```json
-{
-  "count": 1,
-  "matches": [
-    {
-      "id": "2026A-pc26a-001",
-      "competition": "pc26a",
-      "home_team": "bbu",
-      "away_team": "rsa",
-      "home_score": 7,
-      "away_score": 4,
-      "round": "GA",
-      "status": "completed"
-    }
-  ]
-}
-```
-
-Optional fields may be present for special results, including `shootout` and `yellow_card_score`.
-
-### `awards.json`
-
-Awards are grouped by competition ID:
+Match records contain the competition, teams, regulation score, round and completion status. Special results can additionally contain a `shootout` field.
 
 ```json
 {
-  "competition_awards": {
-    "sa26a": {
-      "Tsar": "Anish",
-      "The Wall": "Anshuman"
-    }
-  }
+  "id": "2026A-competition-001",
+  "competition": "competition",
+  "home_team": "bbu",
+  "away_team": "rsa",
+  "home_score": 7,
+  "away_score": 4,
+  "round": "GA",
+  "status": "completed"
 }
 ```
-
-### `stats.json`
-
-Contains aggregate counts:
-
-```json
-{
-  "matches": 0,
-  "competitions": 0,
-  "teams": 0,
-  "players": 0,
-  "goals": 0
-}
-```
-
-### `records.json`
-
-Contains notable records for a season, including the record label, value, holder, and context.
 
 ## IDs and relationships
 
-- `competition` in a match refers to a competition `id`.
-- `home_team` and `away_team` in a match refer to team `id` values.
-- `champion` refers to the winning team `id` when the source archive provides one.
-- `season` refers to the season ID in `seasons.json`.
+- Match `competition` values refer to competition IDs.
+- Match `home_team` and `away_team` values refer to team IDs.
+- Competition `champion` values refer to team IDs when available.
+- `season` values refer to IDs in `seasons.json`.
 
-## Data source
+## Static-query pattern
 
-The API is generated automatically from CSN archives in `data/*.csn`. The generator lives at `scripts/generate_api.py`.
+GitHub Pages cannot execute server-side query parameters. Instead, CASPER publishes purpose-built static resources for common queries and analytics.
 
-When source CSN data or the generator changes, the GitHub Actions workflow regenerates the JSON files under `api/v1`.
+For example:
+
+```text
+/analytics-teams.json
+/analytics-competitions.json
+```
+
+are cheaper for a client to consume than downloading and processing the complete historical match dataset.
+
+## Data pipeline
+
+```text
+CSN archives in data/*.csn
+          ↓
+ scripts/generate_api.py
+          ↓
+     api/v1/*.json
+          ↓
+       GitHub Pages
+```
+
+The generator automatically processes every `.csn` archive in `data/`. The GitHub Actions workflow regenerates the API whenever CSN data or the generator changes.
 
 ## Version
 
-Current API version: **1.0.0**
+**CASPER API v1.0.0**
 
-The API is currently read-only and static. Data changes are published by regenerating and committing the JSON files.
+The API is currently public, read-only and static. Analytics are precomputed during generation.
