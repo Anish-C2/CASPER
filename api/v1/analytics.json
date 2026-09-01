@@ -1,0 +1,11 @@
+{
+  "name": "CASPER Analytics API",
+  "version": "1.0.0",
+  "description": "Precomputed historical analytics derived from CASPER CSN archives.",
+  "endpoints": {
+    "overview": "./analytics.json",
+    "team_rankings": "./analytics-teams.json",
+    "competition_rankings": "./analytics-competitions.json"
+  },
+  "metrics": ["matches", "wins", "draws", "losses", "win_rate", "goals_for", "goals_against", "goal_difference", "titles"]
+}
