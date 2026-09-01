@@ -1,0 +1,10 @@
+{
+  "season":"2026A",
+  "records":[
+    {"label":"Most Goals in a Single Match","value":"7","holder":"Anish (Black Bird United)","context":"BBU 7-4 RSA · Pioneer Cup 2026A"},
+    {"label":"Highest Scoring Match","value":"11 goals","holder":"Black Bird United","context":"BBU 7-4 RSA · Pioneer Cup 2026A Group A"},
+    {"label":"Largest Winning Margin","value":"8 goals","holder":"Black Bird United","context":"BBU 8-0 Super Strikers CF · Grande 2026A"},
+    {"label":"Largest Clean-Sheet Winning Margin","value":"8 goals","holder":"Black Bird United","context":"BBU 8-0 Super Strikers CF · Grande 2026A"},
+    {"label":"Longest Penalty Shootout Win","value":"2-0","holder":"Black Bird United","context":"Final vs Kolkata Kous · Pioneer Cup 2026A"}
+  ]
+}
