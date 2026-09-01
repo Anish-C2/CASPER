@@ -1,0 +1,36 @@
+{
+  "orgName": "CASPER",
+  "tagline": "Competitive Athletics & Sports Promotion",
+  "sports": [
+    {
+      "id": "futsal",
+      "name": "Futsal",
+      "page": "futsal.html",
+      "manifest": "data/manifest.json",
+      "dataDir": "data",
+      "scoring": "goals",
+      "crown": "Pioneer Cup",
+      "winPts": 3
+    },
+    {
+      "id": "football",
+      "name": "Football",
+      "page": "football.html",
+      "manifest": "data/football/manifest.json",
+      "dataDir": "data/football",
+      "scoring": "goals",
+      "crown": "SuperCup",
+      "winPts": 3
+    },
+    {
+      "id": "cricket",
+      "name": "Cricket",
+      "page": "cricket.html",
+      "manifest": "data/cricket/manifest.json",
+      "dataDir": "data/cricket",
+      "scoring": "cricket",
+      "crown": "Titan Cup",
+      "winPts": 2
+    }
+  ]
+}
