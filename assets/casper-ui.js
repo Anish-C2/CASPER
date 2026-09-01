@@ -19,63 +19,115 @@ function headerPaint() {
 function setActive(view) {
   document.querySelectorAll('#main-nav a').forEach(a => a.classList.toggle('active', a.getAttribute('data-view') === view));
 }
-function tableWrap(head, rows) {
-  return '<table><thead><tr>' + head + '</tr></thead><tbody>' + (rows || '') + '</tbody></table>';
+function tableWrap(head, rows) { return '<table><thead><tr>' + head + '</tr></thead><tbody>' + (rows || '') + '</tbody></table>'; }
+function pct(x) { return ((x || 0) * 100).toFixed(1) + '%'; }
+function clubList(p, sp) {
+  if (p.clubNames && p.clubNames.size) return [...p.clubNames].join(', ');
+  if (!sp) return [...(p.teams || [])].join(', ');
+  return [...(p.teams || [])].map(a => teamName(sp, a)).join(', ');
+}
+function cabinetHtml(items) {
+  if (!items || !items.length) return '<p class="muted">No trophies in the loaded archive.</p>';
+  return '<div class="cabinet">' + items.map(t => {
+    const gold = t.code === 'ch' || /tsar|crown|champion/i.test(t.label || '');
+    return '<div class="trophy' + (gold ? ' gold' : '') + '"><div class="t">' + escapeHtml(t.label) + '</div><div class="s">' + escapeHtml((t.event || '') + ' ' + (t.season || '')) + '</div></div>';
+  }).join('') + '</div>';
+}
+function generateNews() {
+  const items = [];
+  STATE.sportsCfg.sports.forEach(cfg => {
+    const sp = STATE.sports[cfg.id]; if (!sp) return;
+    const ch = crownWinner(cfg);
+    if (ch) items.push({ k: 100, html: '<b>' + escapeHtml(cfg.name) + ' crown</b>' + escapeHtml(teamName(sp, ch)) + ' hold the ' + escapeHtml(cfg.crown) + '.' });
+    sp.tournaments.forEach(t => {
+      if (t.aw.ch) items.push({ k: 80, html: '<b>' + escapeHtml(t.meta.e || t.meta.id) + ' ' + escapeHtml(t.meta.s || '') + '</b>Champion: ' + escapeHtml(t.n[t.aw.ch] ? t.n[t.aw.ch].name : t.aw.ch) + (t.aw.ru && t.n[t.aw.ru] ? ' \u00b7 runner-up ' + escapeHtml(t.n[t.aw.ru].name) : '') + '.' });
+    });
+    sp.matches.slice(-8).reverse().forEach(m => {
+      const hn = m.names && m.names[m.home] ? m.names[m.home].name : m.home;
+      const an = m.names && m.names[m.away] ? m.names[m.away].name : m.away;
+      const res = resultOf(m);
+      const winner = res === 'H' ? hn : res === 'A' ? an : 'Draw';
+      const score = m.kind === 'cricket' ? (m.sh + '/' + m.hw + ' vs ' + m.sa + '/' + m.aw) : (m.sh + '\u2013' + m.sa);
+      const hats = [].concat(m.gh || [], m.ga || []).filter(x => x.n >= 3).map(x => x.name + ' hat-trick');
+      items.push({ k: 40, html: '<b>' + escapeHtml(m.event) + (m.stageLabel ? ' ' + m.stageLabel : '') + '</b>' + escapeHtml(hn) + ' ' + score + ' ' + escapeHtml(an) + '. ' + (res === 'D' ? 'Draw.' : escapeHtml(winner) + ' won.') + (hats.length ? ' ' + hats.join(', ') + '.' : '') });
+    });
+    const top = Object.values(sp.players).sort((a, b) => b.goals - a.goals)[0];
+    if (top && top.goals) items.push({ k: 60, html: '<b>' + escapeHtml(cfg.name) + ' scoring lead</b>' + escapeHtml(top.name) + ' leads with ' + top.goals + ' ' + unitOf(cfg).toLowerCase() + ' from ' + top.matches + ' matches (' + top.gpg.toFixed(2) + ' per match).' });
+  });
+  items.sort((a, b) => b.k - a.k);
+  return items.slice(0, 18);
+}
+function renderNews() {
+  const items = generateNews();
+  return '<h1>News</h1><p class="muted">Auto-written from the archive whenever CSN files change. No hand-written headlines.</p>' + items.map(i => '<div class="news">' + i.html + '</div>').join('');
 }
 function renderGlobalBlock() {
   const rows = globalRanks().map((r, i) => {
     const bits = STATE.sportsCfg.sports.map(s => '<td>' + (r.ranks[s.id] != null ? r.ranks[s.id] : '\u2014') + '</td>').join('');
-    return '<tr class="' + (i === 0 ? 'rank-gold' : '') + '"><td>' + (i + 1) + '</td><td>' + escapeHtml(r.name) + '</td>' + bits + '<td><b>' + r.avgRank.toFixed(2) + '</b></td><td>' + r.sportsPlayed + '</td><td>' + r.crowns + '</td></tr>';
+    return '<tr class="' + (i === 0 ? 'rank-gold' : '') + '"><td>' + (i + 1) + '</td><td><a href="#team/' + encodeURIComponent(r.abbr) + '">' + escapeHtml(r.name) + '</a></td>' + bits + '<td><b>' + r.avgRank.toFixed(2) + '</b></td><td>' + r.sportsPlayed + '</td><td>' + r.crowns + '</td></tr>';
   }).join('');
-  const heads = STATE.sportsCfg.sports.map(s => '<th>' + escapeHtml(s.name) + ' rank</th>').join('');
-  return '<div class="panel"><h2><i class="fa-solid fa-globe i"></i>Global club ranking</h2><p class="muted">Sport ranks come from each archive. Average rank is the mean of ranks in sports a club actually played.</p>' + tableWrap('<th>World #</th><th>Club</th>' + heads + '<th>Avg rank</th><th>Sports</th><th>Crowns</th>', rows) + '</div>';
+  const heads = STATE.sportsCfg.sports.map(s => '<th>' + escapeHtml(s.name) + '</th>').join('');
+  return '<div class="panel"><h2>Global club ranking</h2><p class="muted">Average rank = mean of a club\'s ranks in sports it actually played.</p>' + tableWrap('<th>#</th><th>Club</th>' + heads + '<th>Avg rank</th><th>Sports</th><th>Crowns</th>', rows) + '</div>';
 }
-function renderHubHome() {
-  const cards = STATE.sportsCfg.sports.map(cfg => {
-    const sp = STATE.sports[cfg.id];
-    const ch = crownWinner(cfg);
-    const n = ch && sp ? teamName(sp, ch) : '\u2014';
-    const m = sp ? sp.matches.length : 0;
-    return '<div class="panel"><h2>' + escapeHtml(cfg.name) + '</h2><p class="muted">' + escapeHtml(cfg.crown) + ' \u00b7 ' + m + ' matches</p><p>Champion: <b>' + escapeHtml(n) + '</b></p><p><a href="' + cfg.page + '">Open ' + escapeHtml(cfg.name) + '</a></p></div>';
-  }).join('');
-  const trebleBits = STATE.sportsCfg.sports.map(cfg => {
-    const ch = crownWinner(cfg);
-    const sp = STATE.sports[cfg.id];
-    const name = ch && sp ? teamName(sp, ch) : 'unawarded';
-    return '<tr><td>' + escapeHtml(cfg.name) + '</td><td>' + escapeHtml(cfg.crown) + '</td><td>' + escapeHtml(name) + '</td></tr>';
-  }).join('');
-  const holders = {};
-  STATE.sportsCfg.sports.forEach(cfg => { const ch = crownWinner(cfg); if (ch) holders[ch] = (holders[ch] || 0) + 1; });
-  const need = STATE.sportsCfg.sports.length;
-  const trebleClub = Object.keys(holders).find(k => holders[k] === need);
-  const trebleLine = trebleClub ? (teamName(Object.values(STATE.sports)[0], trebleClub) + ' hold the Great CASPER Treble.') : 'The Great CASPER Treble is vacant.';
-  return '<h1>CASPER</h1><p class="muted">' + escapeHtml(STATE.config.about || STATE.sportsCfg.tagline || '') + '</p><div class="treble-box"><h2>The Great CASPER Treble</h2><p>One club must win the crown event named in sports.json in every sport. Champions come from CSN aw(ch=\u2026).</p><table><tr><th>Sport</th><th>Crown event</th><th>Champion</th></tr>' + trebleBits + '</table><p><b>' + escapeHtml(trebleLine) + '</b></p></div><div class="grid">' + cards + '</div>' + renderGlobalBlock();
+function leaderBox(title, rows) {
+  return '<div class="panel"><h2>' + title + '</h2>' + rows + '</div>';
+}
+function renderLeaders(sp) {
+  const unit = unitOf(sp.cfg);
+  const scorers = Object.values(sp.players).sort((a, b) => b.goals - a.goals || b.assists - a.assists).slice(0, 8);
+  const wr = Object.values(sp.players).filter(p => p.matches >= 3).sort((a, b) => b.winRate - a.winRate).slice(0, 8);
+  const titled = Object.values(sp.teams).sort((a, b) => b.titles - a.titles || b.trophies.length - a.trophies.length).slice(0, 8);
+  const srows = tableWrap('<th>#</th><th>Player</th><th>' + unit + '</th><th>A</th><th>M</th><th>Per M</th>', scorers.map((p, i) => '<tr><td>' + (i + 1) + '</td><td><a href="#player/' + encodeURIComponent(p.name) + '">' + escapeHtml(p.name) + '</a></td><td><b>' + p.goals + '</b></td><td>' + p.assists + '</td><td>' + p.matches + '</td><td>' + p.gpg.toFixed(2) + '</td></tr>').join(''));
+  const wrows = tableWrap('<th>#</th><th>Player</th><th>Win%</th><th>W-D-L</th>', wr.map((p, i) => '<tr><td>' + (i + 1) + '</td><td><a href="#player/' + encodeURIComponent(p.name) + '">' + escapeHtml(p.name) + '</a></td><td><b>' + pct(p.winRate) + '</b></td><td>' + p.wins + '-' + p.draws + '-' + p.losses + '</td></tr>').join(''));
+  const trows = tableWrap('<th>#</th><th>Club</th><th>Titles</th><th>Trophies</th><th>Win%</th>', titled.map((t, i) => '<tr><td>' + (i + 1) + '</td><td><a href="#team/' + encodeURIComponent(t.abbr) + '">' + escapeHtml(t.name) + '</a></td><td><b>' + t.titles + '</b></td><td>' + t.trophies.length + '</td><td>' + pct(t.winRate) + '</td></tr>').join(''));
+  return '<div class="leaders">' + leaderBox(unit + ' leaders', srows) + leaderBox('Win rate (min 3 M)', wrows) + leaderBox('Trophy haul', trows) + '</div>';
 }
 function renderHome() {
-  if (PAGE.mode === 'hub') return renderHubHome();
+  if (PAGE.mode === 'hub') {
+    const cards = STATE.sportsCfg.sports.map(cfg => {
+      const sp = STATE.sports[cfg.id];
+      const ch = crownWinner(cfg);
+      const n = ch && sp ? teamName(sp, ch) : 'unawarded';
+      const m = sp ? sp.matches.length : 0;
+      const g = sp ? Object.values(sp.teams).reduce((s, t) => s + t.gf, 0) : 0;
+      return '<div class="panel"><h2>' + escapeHtml(cfg.name) + '</h2><p class="muted">Crown: ' + escapeHtml(cfg.crown) + '</p><p>Champion: <b>' + escapeHtml(n) + '</b></p><p>' + m + ' matches \u00b7 ' + g + ' ' + unitOf(cfg).toLowerCase() + '</p><p><a href="' + cfg.page + '">Open archive</a></p></div>';
+    }).join('');
+    const holders = {};
+    STATE.sportsCfg.sports.forEach(cfg => { const ch = crownWinner(cfg); if (ch) holders[ch] = (holders[ch] || 0) + 1; });
+    const need = STATE.sportsCfg.sports.length;
+    const trebleClub = Object.keys(holders).find(k => holders[k] === need);
+    const trebleBits = STATE.sportsCfg.sports.map(cfg => {
+      const ch = crownWinner(cfg); const sp = STATE.sports[cfg.id];
+      return '<tr><td>' + escapeHtml(cfg.name) + '</td><td>' + escapeHtml(cfg.crown) + '</td><td>' + escapeHtml(ch && sp ? teamName(sp, ch) : 'unawarded') + '</td></tr>';
+    }).join('');
+    return '<h1>CASPER</h1><p class="muted">' + escapeHtml(STATE.config.about || '') + '</p><div class="treble-box"><h2>The Great CASPER Treble</h2><p>Win Finale, SuperCup and Titan Cup in one season. Read from CSN awards.</p><table><tr><th>Sport</th><th>Crown</th><th>Holder</th></tr>' + trebleBits + '</table><p><b>' + (trebleClub ? escapeHtml(trebleClub) + ' complete the Treble.' : 'Vacant.') + '</b></p></div><div class="grid">' + cards + '</div><h2>Desk</h2>' + generateNews().slice(0, 8).map(i => '<div class="news">' + i.html + '</div>').join('') + renderGlobalBlock();
+  }
   const sp = currentSport();
   if (!sp) return '<p class="muted">No archive loaded.</p>';
+  const unit = unitOf(sp.cfg);
   const players = Object.values(sp.players);
+  const goals = players.reduce((s, p) => s + p.goals, 0);
   const crown = crownWinner(sp.cfg);
-  const rows = sp.ranked.map(t => '<tr class="' + (t.rank === 1 ? 'rank-gold' : '') + '"><td>' + t.rank + '</td><td><a href="#team/' + encodeURIComponent(t.abbr) + '">' + escapeHtml(t.name) + '</a></td><td>' + escapeHtml(t.player || '') + '</td><td>' + t.matches + '</td><td>' + t.wins + '</td><td>' + t.draws + '</td><td>' + t.losses + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + (t.gd > 0 ? '+' : '') + t.gd + '</td><td>' + t.titles + '</td><td><b>' + t.rank + '</b></td></tr>').join('');
-  return '<h1>' + escapeHtml(sp.cfg.name) + ' dashboard</h1><div class="grid-stats"><div class="cell"><div class="n">' + sp.tournaments.length + '</div><div class="l">Competitions</div></div><div class="cell"><div class="n">' + Object.keys(sp.teams).length + '</div><div class="l">Clubs</div></div><div class="cell"><div class="n">' + players.length + '</div><div class="l">Players</div></div><div class="cell"><div class="n">' + sp.matches.length + '</div><div class="l">Matches</div></div><div class="cell"><div class="n">' + escapeHtml(crown ? teamName(sp, crown) : '\u2014') + '</div><div class="l">' + escapeHtml(sp.cfg.crown) + '</div></div></div><div class="panel"><h2>' + escapeHtml(sp.cfg.name) + ' ranking</h2>' + tableWrap('<th>#</th><th>Club</th><th>Player</th><th>P</th><th>W</th><th>D</th><th>L</th><th>F</th><th>A</th><th>Diff</th><th>Titles</th><th>Rank</th>', rows) + '<p class="muted">Computed from CSN. Nothing in this table is typed into the HTML.</p></div>' + renderGlobalBlock();
+  const rows = sp.ranked.map(t => '<tr class="' + (t.rank === 1 ? 'rank-gold' : '') + '"><td>' + t.rank + '</td><td><a href="#team/' + encodeURIComponent(t.abbr) + '">' + escapeHtml(t.name) + '</a></td><td>' + escapeHtml(t.player || '') + '</td><td>' + t.matches + '</td><td>' + t.wins + '</td><td>' + t.draws + '</td><td>' + t.losses + '</td><td>' + pct(t.winRate) + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + (t.gd > 0 ? '+' : '') + t.gd + '</td><td>' + t.gpg.toFixed(2) + '</td><td>' + t.cleanSheets + '</td><td>' + t.titles + '</td><td>' + t.trophies.length + '</td></tr>').join('');
+  return '<h1>' + escapeHtml(sp.cfg.name) + '</h1><div class="grid-stats"><div class="cell"><div class="n">' + sp.tournaments.length + '</div><div class="l">Competitions</div></div><div class="cell"><div class="n">' + Object.keys(sp.teams).length + '</div><div class="l">Clubs</div></div><div class="cell"><div class="n">' + players.length + '</div><div class="l">Players</div></div><div class="cell"><div class="n">' + sp.matches.length + '</div><div class="l">Matches</div></div><div class="cell"><div class="n">' + goals + '</div><div class="l">' + unit + '</div></div><div class="cell"><div class="n">' + escapeHtml(crown ? teamName(sp, crown) : '\u2014') + '</div><div class="l">' + escapeHtml(sp.cfg.crown) + '</div></div></div>' + renderLeaders(sp) + '<div class="panel"><h2>' + escapeHtml(sp.cfg.name) + ' table</h2>' + tableWrap('<th>#</th><th>Club</th><th>Player</th><th>P</th><th>W</th><th>D</th><th>L</th><th>Win%</th><th>' + unit + '</th><th>Ag</th><th>Diff</th><th>Per M</th><th>CS</th><th>Titles</th><th>Trophies</th>', rows) + '</div><h2>Latest</h2>' + generateNews().filter(i => i.html.indexOf(sp.cfg.name) >= 0 || true).slice(0, 6).map(i => '<div class="news">' + i.html + '</div>').join('') + renderGlobalBlock();
 }
 function allTourneys() {
   if (PAGE.mode === 'hub') return STATE.sportsCfg.sports.flatMap(s => (STATE.sports[s.id] || { tournaments: [] }).tournaments.map(t => ({ t, sport: s })));
-  const sp = currentSport();
-  return sp ? sp.tournaments.map(t => ({ t, sport: sp.cfg })) : [];
+  const sp = currentSport(); return sp ? sp.tournaments.map(t => ({ t, sport: sp.cfg })) : [];
 }
 function renderArchive() {
   const list = allTourneys();
-  if (!list.length) return '<h1>Archive</h1><p class="muted">No CSN competitions loaded.</p>';
-  const rows = list.map(({ t, sport }) => '<tr><td>' + escapeHtml(sport.name) + '</td><td><a href="#competition/' + encodeURIComponent(t.meta.id) + '">' + escapeHtml(t.meta.e || t.meta.id) + '</a></td><td>' + escapeHtml(t.meta.s || '') + '</td><td>' + escapeHtml(t.meta.sts || '') + '</td><td>' + t.m.length + '</td><td>' + escapeHtml(t.aw.ch ? teamName(STATE.sports[sport.id], t.aw.ch) : '\u2014') + '</td></tr>').join('');
-  return '<h1>Archive</h1>' + tableWrap('<th>Sport</th><th>Competition</th><th>Season</th><th>Status</th><th>Matches</th><th>Champion</th>', rows);
+  if (!list.length) return '<h1>Archive</h1><p class="muted">No competitions loaded.</p>';
+  const rows = list.map(({ t, sport }) => {
+    const gf = t.m.reduce((s, m) => s + m.sh + m.sa, 0);
+    return '<tr><td>' + escapeHtml(sport.name) + '</td><td><a href="#competition/' + encodeURIComponent(t.meta.id) + '">' + escapeHtml(t.meta.e || t.meta.id) + '</a></td><td>' + escapeHtml(t.meta.s || '') + '</td><td>' + escapeHtml(t.meta.sts || '') + '</td><td>' + Object.keys(t.n).length + '</td><td>' + t.m.length + '</td><td>' + gf + '</td><td>' + Object.keys(t.aw).length + '</td><td>' + escapeHtml(t.aw.ch && STATE.sports[sport.id] ? teamName(STATE.sports[sport.id], t.aw.ch) : '\u2014') + '</td></tr>';
+  }).join('');
+  return '<h1>Archive</h1>' + tableWrap('<th>Sport</th><th>Competition</th><th>Season</th><th>Status</th><th>Clubs</th><th>Matches</th><th>Score events</th><th>Awards</th><th>Champion</th>', rows);
 }
 function calcTable(t, cfg) {
   const table = {};
   Object.keys(t.n).forEach(abbr => { table[abbr] = { abbr, name: t.n[abbr].name, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0, runs: 0, wkts: 0, ballsF: 0, ballsB: 0, nrr: 0 }; });
-  const quota = oversToBallsSafe(t.meta.ov || t.meta.overs || '1');
-  const allOut = parseInt(t.meta.wk || '1', 10);
+  const quota = oversToBallsSafe(t.meta.ov || '1'); const allOut = parseInt(t.meta.wk || '1', 10);
   t.m.forEach(m => {
     if (!table[m.home] || !table[m.away]) return;
     const a = table[m.home], b = table[m.away];
@@ -93,11 +145,9 @@ function calcTable(t, cfg) {
   });
   Object.values(table).forEach(r => {
     r.gd = r.gf - r.ga;
-    const rrF = r.ballsF ? r.runs / (r.ballsF / 6) : 0;
-    const rrAg = r.ballsB ? r.ga / (r.ballsB / 6) : 0;
-    r.nrr = rrF - rrAg;
+    r.nrr = (r.ballsF ? r.runs / (r.ballsF / 6) : 0) - (r.ballsB ? r.ga / (r.ballsB / 6) : 0);
   });
-  return Object.values(table).sort((x, y) => y.pts - x.pts || (y.nrr - x.nrr) || (y.gd - x.gd) || y.gf - x.gf);
+  return Object.values(table).sort((x, y) => y.pts - x.pts || y.nrr - x.nrr || y.gd - x.gd || y.gf - x.gf);
 }
 function renderCompetition(id) {
   let found = null, sport = null;
@@ -106,59 +156,59 @@ function renderCompetition(id) {
     if (t) { found = t; sport = STATE.sports[cfg.id]; }
   });
   if (!found) return '<p>Competition not found.</p>';
-  const cfg = sport.cfg;
+  const cfg = sport.cfg; const unit = unitOf(cfg);
   const stand = calcTable(found, cfg);
   const srows = stand.map((r, i) => {
     const extra = cfg.scoring === 'cricket' ? ('<td>' + r.runs + '</td><td>' + r.wkts + '</td><td>' + r.nrr.toFixed(3) + '</td>') : ('<td>' + r.gf + '</td><td>' + r.ga + '</td><td>' + (r.gd > 0 ? '+' : '') + r.gd + '</td>');
     return '<tr><td>' + (i + 1) + '</td><td><a href="#team/' + encodeURIComponent(r.abbr) + '">' + escapeHtml(r.name) + '</a></td><td>' + r.p + '</td><td>' + r.w + '</td><td>' + r.d + '</td><td>' + r.l + '</td>' + extra + '<td><b>' + r.pts + '</b></td></tr>';
   }).join('');
-  const shead = cfg.scoring === 'cricket' ? '<th>#</th><th>Team</th><th>P</th><th>W</th><th>T</th><th>L</th><th>Runs</th><th>Wkts</th><th>NRR</th><th>Pts</th>' : '<th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>Pts</th>';
+  const shead = cfg.scoring === 'cricket' ? '<th>#</th><th>Team</th><th>P</th><th>W</th><th>T</th><th>L</th><th>Runs</th><th>Wkts lost</th><th>NRR</th><th>Pts</th>' : '<th>#</th><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>' + unit + '</th><th>Ag</th><th>Diff</th><th>Pts</th>';
   const mrows = found.m.map(m => {
     const hn = found.n[m.home] ? found.n[m.home].name : m.home;
     const an = found.n[m.away] ? found.n[m.away].name : m.away;
-    let score = m.kind === 'cricket' ? (m.sh + '/' + m.hw + (m.ho ? ' (' + m.ho + ')' : '') + ' \u2013 ' + m.sa + '/' + m.aw + (m.ao ? ' (' + m.ao + ')' : '')) : (m.sh + '\u2013' + m.sa + (m.p ? ' (' + m.p[0] + '\u2013' + m.p[1] + ' pens)' : ''));
-    const gline = [].concat((m.gh || []).map(x => x.name + ' \u00d7' + x.n), (m.ga || []).map(x => x.name + ' \u00d7' + x.n));
+    const score = m.kind === 'cricket' ? (m.sh + '/' + m.hw + (m.ho ? ' (' + m.ho + ')' : '') + ' \u2013 ' + m.sa + '/' + m.aw + (m.ao ? ' (' + m.ao + ')' : '')) : (m.sh + '\u2013' + m.sa + (m.p ? ' (' + m.p[0] + '\u2013' + m.p[1] + ' pens)' : ''));
+    const gline = [].concat(m.gh || [], m.ga || []).map(x => x.name + ' \u00d7' + x.n);
     return '<tr><td>' + escapeHtml(m.stageLabel || m.stage || '') + '</td><td>' + escapeHtml(hn) + ' vs ' + escapeHtml(an) + '</td><td>' + escapeHtml(score) + '</td><td>' + escapeHtml(gline.join(', ') || '\u2014') + '</td></tr>';
   }).join('');
-  const awRows = Object.keys(found.aw).map(k => {
-    const label = (STATE.config.awardLabels && STATE.config.awardLabels[k]) || k;
-    const val = found.aw[k];
-    const name = found.n[val] ? found.n[val].name : val;
-    return '<tr><td>' + escapeHtml(label) + '</td><td>' + escapeHtml(name) + '</td></tr>';
-  }).join('');
+  const awItems = Object.keys(found.aw).map(k => ({ code: k, label: (STATE.config.awardLabels && STATE.config.awardLabels[k]) || k, event: found.meta.e, season: found.meta.s }));
   let squad = '';
   Object.keys(found.sq || {}).forEach(abbr => {
     const sq = found.sq[abbr];
     squad += '<p><b>' + escapeHtml(teamName(sport, abbr)) + '</b> start: ' + escapeHtml((sq.start || []).join(', ')) + ' \u00b7 bench: ' + escapeHtml((sq.bench || []).join(', ') || '\u2014') + '</p>';
   });
-  return '<h1>' + escapeHtml(found.meta.e || found.meta.id) + '</h1><p class="muted">' + escapeHtml(found.meta.s || '') + ' \u00b7 ' + escapeHtml(found.meta.sts || '') + ' \u00b7 ' + escapeHtml(cfg.name) + '</p>' + squad + '<div class="panel"><h2>Table</h2>' + tableWrap(shead, srows) + '</div><div class="panel"><h2>Matches</h2>' + tableWrap('<th>Stage</th><th>Match</th><th>Score</th><th>Named scorers</th>', mrows) + '</div><div class="panel"><h2>Awards</h2>' + (awRows ? tableWrap('<th>Award</th><th>Holder</th>', awRows) : '<p class="muted">No aw() block in this file.</p>') + '</div>';
+  return '<h1>' + escapeHtml(found.meta.e || found.meta.id) + '</h1><p class="muted">' + escapeHtml(found.meta.s || '') + ' \u00b7 ' + escapeHtml(found.meta.sts || '') + ' \u00b7 ' + found.m.length + ' matches \u00b7 ' + Object.keys(found.n).length + ' clubs</p>' + squad + '<div class="panel"><h2>Table</h2>' + tableWrap(shead, srows) + '</div><div class="panel"><h2>Matches</h2>' + tableWrap('<th>Stage</th><th>Match</th><th>Score</th><th>Named scorers</th>', mrows) + '</div><div class="panel"><h2>Trophy cabinet</h2>' + cabinetHtml(awItems.map(a => Object.assign(a, { event: found.n[found.aw[a.code]] ? found.n[found.aw[a.code]].name + ' \u00b7 ' + a.label : a.label }))) + '</div>';
 }
 function collectPlayers() {
-  if (PAGE.mode !== 'hub') return Object.values((currentSport() || { players: {} }).players);
+  if (PAGE.mode !== 'hub') return Object.values((currentSport() || { players: {} }).players).map(p => Object.assign({}, p, { _sp: currentSport() }));
   const map = {};
   STATE.sportsCfg.sports.forEach(cfg => {
     const sp = STATE.sports[cfg.id]; if (!sp) return;
     Object.values(sp.players).forEach(p => {
       const k = p.name.toLowerCase();
-      if (!map[k]) map[k] = { name: p.name, goals: 0, assists: 0, matches: 0, titles: 0, awards: [], teams: new Set() };
-      map[k].goals += p.goals; map[k].assists += p.assists; map[k].matches += p.matches; map[k].titles += p.titles;
-      map[k].awards = map[k].awards.concat(p.awards); p.teams.forEach(t => map[k].teams.add(t));
+      if (!map[k]) map[k] = { name: p.name, goals: 0, assists: 0, matches: 0, wins: 0, draws: 0, losses: 0, titles: 0, hatTricks: 0, conceded: 0, awards: [], trophies: [], teams: new Set(), clubNames: new Set(), _sp: null };
+      map[k].goals += p.goals; map[k].assists += p.assists; map[k].matches += p.matches; map[k].wins += p.wins; map[k].draws += p.draws; map[k].losses += p.losses; map[k].titles += p.titles; map[k].hatTricks += p.hatTricks; map[k].conceded += p.conceded;
+      map[k].awards = map[k].awards.concat(p.awards || []); map[k].trophies = map[k].trophies.concat(p.trophies || []);
+      (p.teams || []).forEach && p.teams.forEach(t => map[k].teams.add(t));
+      (p.clubNames || []).forEach && p.clubNames.forEach(t => map[k].clubNames.add(t));
     });
   });
+  Object.values(map).forEach(p => { p.winRate = p.matches ? p.wins / p.matches : 0; p.gpg = p.matches ? p.goals / p.matches : 0; p.gd = p.goals - p.conceded; });
   return Object.values(map);
 }
 function renderPlayers() {
-  const list = collectPlayers().sort((a, b) => b.goals - a.goals || b.assists - a.assists || a.name.localeCompare(b.name));
-  const rows = list.map((p, i) => '<tr><td>' + (i + 1) + '</td><td><a href="#player/' + encodeURIComponent(p.name) + '">' + escapeHtml(p.name) + '</a></td><td>' + escapeHtml([...(p.teams || [])].join(', ')) + '</td><td>' + p.goals + '</td><td>' + (p.assists || 0) + '</td><td>' + p.matches + '</td><td>' + p.titles + '</td><td>' + (p.awards || []).length + '</td></tr>').join('');
-  return '<h1>Players</h1><p class="muted">From CSN names, squads and named scorers/assists.</p>' + tableWrap('<th>#</th><th>Player</th><th>Clubs</th><th>Goals</th><th>Assists</th><th>M</th><th>Titles</th><th>Awards</th>', rows);
+  const sp = currentSport();
+  const unit = sp ? unitOf(sp.cfg) : 'G/R';
+  const list = collectPlayers().sort((a, b) => b.goals - a.goals || b.winRate - a.winRate || a.name.localeCompare(b.name));
+  const rows = list.map((p, i) => '<tr><td>' + (i + 1) + '</td><td><a href="#player/' + encodeURIComponent(p.name) + '">' + escapeHtml(p.name) + '</a></td><td>' + escapeHtml(clubList(p, p._sp || sp)) + '</td><td><b>' + p.goals + '</b></td><td>' + (p.assists || 0) + '</td><td>' + p.matches + '</td><td>' + p.wins + '-' + p.draws + '-' + p.losses + '</td><td>' + pct(p.winRate) + '</td><td>' + (p.gpg ? p.gpg.toFixed(2) : '0.00') + '</td><td>' + (p.gd > 0 ? '+' : '') + (p.gd || 0) + '</td><td>' + (p.hatTricks || 0) + '</td><td>' + p.titles + '</td><td>' + (p.awards || []).length + '</td></tr>').join('');
+  return '<h1>Players</h1><p class="muted">Futsal/cricket goals and runs are the club player\'s team output unless a match lists named scorers.</p>' + tableWrap('<th>#</th><th>Player</th><th>Clubs</th><th>' + unit + '</th><th>A</th><th>M</th><th>W-D-L</th><th>Win%</th><th>Per M</th><th>Diff</th><th>HT</th><th>Titles</th><th>Awards</th>', rows);
 }
 function renderPlayer(name) {
   const key = decodeURIComponent(name);
   const p = collectPlayers().find(x => x.name.toLowerCase() === key.toLowerCase());
   if (!p) return '<p>Player not found.</p>';
   const ctx = STATE.config.playerContext && STATE.config.playerContext[p.name.toLowerCase()];
-  const aw = (p.awards || []).map(a => '<tr><td>' + escapeHtml(a.label) + '</td><td>' + escapeHtml(a.event) + '</td><td>' + escapeHtml(a.season) + '</td></tr>').join('');
-  return '<h1>' + escapeHtml(p.name) + '</h1>' + (ctx ? '<p>' + escapeHtml(ctx) + '</p>' : '') + '<div class="grid-stats"><div class="cell"><div class="n">' + p.goals + '</div><div class="l">Goals</div></div><div class="cell"><div class="n">' + (p.assists || 0) + '</div><div class="l">Assists</div></div><div class="cell"><div class="n">' + p.matches + '</div><div class="l">Matches</div></div><div class="cell"><div class="n">' + p.titles + '</div><div class="l">Titles</div></div></div><div class="panel"><h2>Awards</h2>' + (aw ? tableWrap('<th>Award</th><th>Event</th><th>Season</th>', aw) : '<p class="muted">No award rows yet.</p>') + '</div>';
+  const unit = currentSport() ? unitOf(currentSport().cfg) : 'Goals / runs';
+  return '<h1>' + escapeHtml(p.name) + '</h1>' + (ctx ? '<p>' + escapeHtml(ctx) + '</p>' : '') + '<p class="muted">Clubs: ' + escapeHtml(clubList(p, currentSport())) + '</p><div class="grid-stats"><div class="cell"><div class="n">' + p.goals + '</div><div class="l">' + unit + '</div></div><div class="cell"><div class="n">' + (p.assists || 0) + '</div><div class="l">Assists</div></div><div class="cell"><div class="n">' + p.matches + '</div><div class="l">Matches</div></div><div class="cell"><div class="n">' + pct(p.winRate) + '</div><div class="l">Win%</div></div><div class="cell"><div class="n">' + p.wins + '-' + p.draws + '-' + p.losses + '</div><div class="l">W-D-L</div></div><div class="cell"><div class="n">' + (p.gpg ? p.gpg.toFixed(2) : '0.00') + '</div><div class="l">Per match</div></div><div class="cell"><div class="n">' + (p.gd > 0 ? '+' : '') + (p.gd || 0) + '</div><div class="l">Diff</div></div><div class="cell"><div class="n">' + (p.hatTricks || 0) + '</div><div class="l">Hat-tricks</div></div><div class="cell"><div class="n">' + p.titles + '</div><div class="l">Titles</div></div><div class="cell"><div class="n">' + (p.awards || []).length + '</div><div class="l">Awards</div></div></div><div class="panel"><h2>Trophy cabinet</h2>' + cabinetHtml(p.trophies && p.trophies.length ? p.trophies : p.awards) + '</div>';
 }
 function collectTeams() {
   if (PAGE.mode !== 'hub') return Object.values((currentSport() || { teams: {} }).teams);
@@ -166,28 +216,28 @@ function collectTeams() {
   STATE.sportsCfg.sports.forEach(cfg => {
     const sp = STATE.sports[cfg.id]; if (!sp) return;
     Object.values(sp.teams).forEach(t => {
-      if (!map[t.abbr]) map[t.abbr] = { abbr: t.abbr, name: t.name, player: t.player, matches: 0, wins: 0, titles: 0, gf: 0, ga: 0, rank: t.rank };
-      map[t.abbr].name = t.name; map[t.abbr].matches += t.matches; map[t.abbr].wins += t.wins; map[t.abbr].titles += t.titles; map[t.abbr].gf += t.gf; map[t.abbr].ga += t.ga;
+      if (!map[t.abbr]) map[t.abbr] = { abbr: t.abbr, name: t.name, player: t.player, matches: 0, wins: 0, draws: 0, losses: 0, titles: 0, gf: 0, ga: 0, trophies: [], rank: t.rank };
+      map[t.abbr].name = t.name; map[t.abbr].matches += t.matches; map[t.abbr].wins += t.wins; map[t.abbr].draws += t.draws; map[t.abbr].losses += t.losses; map[t.abbr].titles += t.titles; map[t.abbr].gf += t.gf; map[t.abbr].ga += t.ga; map[t.abbr].trophies = map[t.abbr].trophies.concat(t.trophies || []);
     });
   });
+  Object.values(map).forEach(t => { t.winRate = t.matches ? t.wins / t.matches : 0; t.gd = t.gf - t.ga; });
   return Object.values(map);
 }
 function renderTeams() {
   const list = collectTeams().sort((a, b) => (a.rank || 99) - (b.rank || 99) || b.titles - a.titles);
-  const rows = list.map(t => '<tr><td>' + (t.rank || '\u2014') + '</td><td><a href="#team/' + encodeURIComponent(t.abbr) + '">' + escapeHtml(t.name) + '</a></td><td>' + escapeHtml(t.player || '') + '</td><td>' + t.matches + '</td><td>' + t.wins + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + t.titles + '</td></tr>').join('');
-  return '<h1>Teams</h1>' + tableWrap('<th>Rank</th><th>Club</th><th>Main player</th><th>P</th><th>W</th><th>F</th><th>A</th><th>Titles</th>', rows);
+  const rows = list.map(t => '<tr><td>' + (t.rank || '\u2014') + '</td><td><a href="#team/' + encodeURIComponent(t.abbr) + '">' + escapeHtml(t.name) + '</a></td><td>' + escapeHtml(t.player || '') + '</td><td>' + t.matches + '</td><td>' + t.wins + '-' + (t.draws || 0) + '-' + (t.losses || 0) + '</td><td>' + pct(t.winRate || 0) + '</td><td>' + t.gf + '</td><td>' + t.ga + '</td><td>' + ((t.gf - t.ga) > 0 ? '+' : '') + (t.gf - t.ga) + '</td><td>' + t.titles + '</td><td>' + (t.trophies || []).length + '</td></tr>').join('');
+  return '<h1>Teams</h1>' + tableWrap('<th>Rank</th><th>Club</th><th>Main player</th><th>P</th><th>W-D-L</th><th>Win%</th><th>F</th><th>A</th><th>Diff</th><th>Titles</th><th>Trophies</th>', rows);
 }
 function renderTeam(abbr) {
   abbr = decodeURIComponent(abbr);
-  const chunks = [];
+  const chunks = []; let name = abbr; let allTrop = [];
   STATE.sportsCfg.sports.forEach(cfg => {
     const sp = STATE.sports[cfg.id]; if (!sp || !sp.teams[abbr]) return;
-    const t = sp.teams[abbr];
-    chunks.push('<div class="panel"><h2>' + escapeHtml(cfg.name) + '</h2><p>Rank <b>' + t.rank + '</b> \u00b7 P ' + t.matches + ' W ' + t.wins + ' D ' + t.draws + ' L ' + t.losses + ' \u00b7 F ' + t.gf + ' A ' + t.ga + ' \u00b7 titles ' + t.titles + '</p></div>');
+    const t = sp.teams[abbr]; name = t.name; allTrop = allTrop.concat(t.trophies || []);
+    chunks.push('<div class="panel"><h2>' + escapeHtml(cfg.name) + '</h2><div class="grid-stats"><div class="cell"><div class="n">' + t.rank + '</div><div class="l">Rank</div></div><div class="cell"><div class="n">' + t.matches + '</div><div class="l">P</div></div><div class="cell"><div class="n">' + t.wins + '-' + t.draws + '-' + t.losses + '</div><div class="l">W-D-L</div></div><div class="cell"><div class="n">' + pct(t.winRate) + '</div><div class="l">Win%</div></div><div class="cell"><div class="n">' + t.gf + '</div><div class="l">' + unitOf(cfg) + '</div></div><div class="cell"><div class="n">' + t.ga + '</div><div class="l">Against</div></div><div class="cell"><div class="n">' + (t.gd > 0 ? '+' : '') + t.gd + '</div><div class="l">Diff</div></div><div class="cell"><div class="n">' + t.gpg.toFixed(2) + '</div><div class="l">Per match</div></div><div class="cell"><div class="n">' + t.cleanSheets + '</div><div class="l">Clean sheets</div></div><div class="cell"><div class="n">' + t.titles + '</div><div class="l">Titles</div></div></div></div>');
   });
-  const name = ((Object.values(STATE.sports).map(s => s.teams[abbr]).find(Boolean)) || {}).name || abbr;
   if (!chunks.length) return '<p>Team not found.</p>';
-  return '<h1>' + escapeHtml(name) + '</h1>' + chunks.join('') + renderGlobalBlock();
+  return '<h1>' + escapeHtml(name) + '</h1>' + chunks.join('') + '<div class="panel"><h2>Trophy cabinet</h2>' + cabinetHtml(allTrop) + '</div>' + renderGlobalBlock();
 }
 function renderAwards() {
   const rows = [];
@@ -203,10 +253,10 @@ function renderAwards() {
       });
     });
   });
-  return '<h1>Awards</h1><p class="muted">Every row is an aw() entry. Labels come from config.json.</p>' + (rows.length ? tableWrap('<th>Sport</th><th>Competition</th><th>Season</th><th>Award</th><th>Holder</th>', rows.join('')) : '<p class="muted">No awards in loaded files.</p>');
+  return '<h1>Awards</h1><p class="muted">Every CSN aw() row, including seasonal named honours.</p>' + (rows.length ? tableWrap('<th>Sport</th><th>Competition</th><th>Season</th><th>Award</th><th>Holder</th>', rows.join('')) : '<p class="muted">No awards loaded.</p>');
 }
 function renderRanking() {
-  const sportBlock = (PAGE.mode === 'hub' || !currentSport()) ? '' : ('<div class="panel"><h2>' + escapeHtml(currentSport().cfg.name) + ' ranking</h2>' + tableWrap('<th>#</th><th>Club</th><th>Model pts</th><th>Titles</th><th>Win%</th>', currentSport().ranked.map(t => '<tr class="' + (t.rank === 1 ? 'rank-gold' : '') + '"><td>' + t.rank + '</td><td><a href="#team/' + encodeURIComponent(t.abbr) + '">' + escapeHtml(t.name) + '</a></td><td>' + t.sportPts.toFixed(1) + '</td><td>' + t.titles + '</td><td>' + (t.winRate * 100).toFixed(1) + '</td></tr>').join('')) + '</div>');
+  const sportBlock = (PAGE.mode === 'hub' || !currentSport()) ? '' : ('<div class="panel"><h2>' + escapeHtml(currentSport().cfg.name) + ' ranking</h2>' + tableWrap('<th>#</th><th>Club</th><th>Model</th><th>Titles</th><th>Win%</th><th>Diff</th>', currentSport().ranked.map(t => '<tr class="' + (t.rank === 1 ? 'rank-gold' : '') + '"><td>' + t.rank + '</td><td><a href="#team/' + encodeURIComponent(t.abbr) + '">' + escapeHtml(t.name) + '</a></td><td>' + t.sportPts.toFixed(1) + '</td><td>' + t.titles + '</td><td>' + pct(t.winRate) + '</td><td>' + (t.gd > 0 ? '+' : '') + t.gd + '</td></tr>').join('')) + '</div>');
   return '<h1>Ranking</h1>' + sportBlock + renderGlobalBlock();
 }
 function renderRecords() {
@@ -214,21 +264,28 @@ function renderRecords() {
   const dyn = [];
   STATE.sportsCfg.sports.forEach(cfg => {
     const sp = STATE.sports[cfg.id]; if (!sp) return;
-    let best = 0, pair = '';
-    sp.matches.forEach(m => { const tot = m.sh + m.sa; if (tot > best) { best = tot; pair = m.home + ' ' + m.sh + '\u2013' + m.sa + ' ' + m.away + ' \u00b7 ' + m.event; } });
+    let best = 0, pair = '', blow = 0, blowP = '';
+    sp.matches.forEach(m => {
+      const tot = m.sh + m.sa; if (tot > best) { best = tot; pair = (m.names && m.names[m.home] ? m.names[m.home].name : m.home) + ' ' + m.sh + '\u2013' + m.sa + ' ' + (m.names && m.names[m.away] ? m.names[m.away].name : m.away) + ' \u00b7 ' + m.event; }
+      const margin = Math.abs(m.sh - m.sa); if (margin > blow) { blow = margin; blowP = m.event + ' ' + m.sh + '\u2013' + m.sa; }
+    });
+    const topP = Object.values(sp.players).sort((a, b) => b.goals - a.goals)[0];
     if (best) dyn.push('<tr><td>Highest scoring ' + escapeHtml(cfg.name) + ' match</td><td>' + best + '</td><td>\u2014</td><td>' + escapeHtml(pair) + '</td></tr>');
+    if (blow) dyn.push('<tr><td>Biggest ' + escapeHtml(cfg.name) + ' winning margin</td><td>' + blow + '</td><td>\u2014</td><td>' + escapeHtml(blowP) + '</td></tr>');
+    if (topP) dyn.push('<tr><td>Most ' + unitOf(cfg).toLowerCase() + ' in ' + escapeHtml(cfg.name) + '</td><td>' + topP.goals + '</td><td>' + escapeHtml(topP.name) + '</td><td>' + topP.matches + ' matches</td></tr>');
   });
-  return '<h1>Records</h1><p class="muted">misc.json plus values computed from matches.</p>' + tableWrap('<th>Record</th><th>Value</th><th>Holder</th><th>Context</th>', recs + dyn.join(''));
+  return '<h1>Records</h1>' + tableWrap('<th>Record</th><th>Value</th><th>Holder</th><th>Context</th>', recs + dyn.join(''));
 }
 function renderStatistics() {
   const rows = STATE.sportsCfg.sports.map(cfg => {
     const sp = STATE.sports[cfg.id]; if (!sp) return '';
-    return '<tr><td>' + escapeHtml(cfg.name) + '</td><td>' + sp.tournaments.length + '</td><td>' + Object.keys(sp.teams).length + '</td><td>' + Object.keys(sp.players).length + '</td><td>' + sp.matches.length + '</td><td>' + Object.values(sp.teams).reduce((s, t) => s + t.gf, 0) + '</td></tr>';
+    const g = Object.values(sp.teams).reduce((s, t) => s + t.gf, 0);
+    return '<tr><td>' + escapeHtml(cfg.name) + '</td><td>' + sp.tournaments.length + '</td><td>' + Object.keys(sp.teams).length + '</td><td>' + Object.keys(sp.players).length + '</td><td>' + sp.matches.length + '</td><td>' + g + '</td><td>' + (sp.matches.length ? (g / sp.matches.length).toFixed(2) : '0') + '</td><td>' + unitOf(cfg) + '</td></tr>';
   }).join('');
-  return '<h1>Statistics</h1>' + tableWrap('<th>Sport</th><th>Competitions</th><th>Clubs</th><th>Players</th><th>Matches</th><th>Goals / runs</th>', rows) + renderGlobalBlock();
+  return '<h1>Statistics</h1>' + tableWrap('<th>Sport</th><th>Competitions</th><th>Clubs</th><th>Players</th><th>Matches</th><th>Output</th><th>Per match</th><th>Unit</th>', rows) + renderGlobalBlock();
 }
 function renderAbout() {
-  return '<h1>About</h1><p>' + escapeHtml(STATE.config.about || '') + '</p><p class="muted">Generated from sports.json, config.json and CSN manifests. Scores and rankings are not hard-coded in the HTML.</p>';
+  return '<h1>About</h1><p>' + escapeHtml(STATE.config.about || '') + '</p><p class="muted">Pages are generated from sports.json, config.json and CSN. Futsal crown event is Finale.</p>';
 }
 function route() {
   const hash = (location.hash || '#home').slice(1);
@@ -247,6 +304,7 @@ function route() {
   else if (view === 'ranking') html = renderRanking();
   else if (view === 'records') html = renderRecords();
   else if (view === 'statistics') html = renderStatistics();
+  else if (view === 'news') html = renderNews();
   else if (view === 'about') html = renderAbout();
   else html = renderHome();
   document.getElementById('app').innerHTML = html;
@@ -267,8 +325,6 @@ async function boot() {
     }
     STATE.sports[cfg.id] = buildSport(cfg, tours);
   }
-  headerPaint();
-  route();
-  window.addEventListener('hashchange', route);
+  headerPaint(); route(); window.addEventListener('hashchange', route);
 }
 boot();
