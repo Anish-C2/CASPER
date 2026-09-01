@@ -11,13 +11,15 @@
       "losses": 1,
       "goals_for": 63,
       "goals_against": 31,
-      "title_count": 4,
       "titles": [
         "Pioneer Cup",
         "Chroma Super Cup",
         "Premier League",
         "Finale"
-      ]
+      ],
+      "title_count": 4,
+      "goal_difference": 32,
+      "win_rate": 0.6667
     },
     {
       "id": "kko",
@@ -30,11 +32,13 @@
       "losses": 2,
       "goals_for": 29,
       "goals_against": 24,
-      "title_count": 2,
       "titles": [
         "Grande",
         "SuperCup"
-      ]
+      ],
+      "title_count": 2,
+      "goal_difference": 5,
+      "win_rate": 0.4615
     },
     {
       "id": "nas",
@@ -47,10 +51,12 @@
       "losses": 3,
       "goals_for": 15,
       "goals_against": 19,
-      "title_count": 1,
       "titles": [
         "Relegator Cup"
-      ]
+      ],
+      "title_count": 1,
+      "goal_difference": -4,
+      "win_rate": 0.2222
     },
     {
       "id": "rsa",
@@ -63,11 +69,13 @@
       "losses": 1,
       "goals_for": 18,
       "goals_against": 15,
-      "title_count": 2,
       "titles": [
         "Conference League",
         "Sub Supercup"
-      ]
+      ],
+      "title_count": 2,
+      "goal_difference": 3,
+      "win_rate": 0.5
     },
     {
       "id": "mfc",
@@ -80,8 +88,10 @@
       "losses": 3,
       "goals_for": 8,
       "goals_against": 11,
+      "titles": [],
       "title_count": 0,
-      "titles": []
+      "goal_difference": -3,
+      "win_rate": 0.1429
     },
     {
       "id": "ssc",
@@ -94,8 +104,10 @@
       "losses": 5,
       "goals_for": 19,
       "goals_against": 31,
+      "titles": [],
       "title_count": 0,
-      "titles": []
+      "goal_difference": -12,
+      "win_rate": 0.1
     },
     {
       "id": "rut",
@@ -108,8 +120,10 @@
       "losses": 4,
       "goals_for": 3,
       "goals_against": 8,
+      "titles": [],
       "title_count": 0,
-      "titles": []
+      "goal_difference": -5,
+      "win_rate": 0.0
     },
     {
       "id": "igr",
@@ -122,11 +136,13 @@
       "losses": 3,
       "goals_for": 14,
       "goals_against": 17,
-      "title_count": 2,
       "titles": [
         "Peripheral Cup",
         "Minor Supercup"
-      ]
+      ],
+      "title_count": 2,
+      "goal_difference": -3,
+      "win_rate": 0.25
     },
     {
       "id": "mvl",
@@ -139,8 +155,10 @@
       "losses": 5,
       "goals_for": 9,
       "goals_against": 19,
+      "titles": [],
       "title_count": 0,
-      "titles": []
+      "goal_difference": -10,
+      "win_rate": 0.1429
     },
     {
       "id": "vos",
@@ -153,8 +171,10 @@
       "losses": 2,
       "goals_for": 11,
       "goals_against": 10,
+      "titles": [],
       "title_count": 0,
-      "titles": []
+      "goal_difference": 1,
+      "win_rate": 0.5714
     },
     {
       "id": "hor",
@@ -167,8 +187,10 @@
       "losses": 3,
       "goals_for": 8,
       "goals_against": 10,
+      "titles": [],
       "title_count": 0,
-      "titles": []
+      "goal_difference": -2,
+      "win_rate": 0.2857
     },
     {
       "id": "mar",
@@ -181,8 +203,10 @@
       "losses": 5,
       "goals_for": 20,
       "goals_against": 22,
+      "titles": [],
       "title_count": 0,
-      "titles": []
+      "goal_difference": -2,
+      "win_rate": 0.1818
     }
   ]
 }

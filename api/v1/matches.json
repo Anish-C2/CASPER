@@ -2,18 +2,17 @@
   "count": 56,
   "matches": [
     {
-      "id": "2026A-pc26a-001",
+      "id": "2026A-pc26a-002",
       "competition": "pc26a",
       "home_team": "rsa",
       "away_team": "rut",
       "home_score": 2,
       "away_score": 1,
       "round": "GS",
-      "status": "completed",
-      "yellow_card_score": "1-0"
+      "status": "completed"
     },
     {
-      "id": "2026A-pc26a-002",
+      "id": "2026A-pc26a-003",
       "competition": "pc26a",
       "home_team": "bbu",
       "away_team": "rsa",
@@ -23,7 +22,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-003",
+      "id": "2026A-pc26a-004",
       "competition": "pc26a",
       "home_team": "rut",
       "away_team": "bbu",
@@ -33,7 +32,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-004",
+      "id": "2026A-pc26a-006",
       "competition": "pc26a",
       "home_team": "ssc",
       "away_team": "nas",
@@ -43,7 +42,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-005",
+      "id": "2026A-pc26a-007",
       "competition": "pc26a",
       "home_team": "vos",
       "away_team": "ssc",
@@ -53,7 +52,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-006",
+      "id": "2026A-pc26a-008",
       "competition": "pc26a",
       "home_team": "nas",
       "away_team": "vos",
@@ -63,7 +62,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-007",
+      "id": "2026A-pc26a-010",
       "competition": "pc26a",
       "home_team": "mfc",
       "away_team": "hor",
@@ -73,7 +72,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-008",
+      "id": "2026A-pc26a-011",
       "competition": "pc26a",
       "home_team": "kko",
       "away_team": "mfc",
@@ -83,7 +82,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-009",
+      "id": "2026A-pc26a-012",
       "competition": "pc26a",
       "home_team": "hor",
       "away_team": "kko",
@@ -93,7 +92,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-010",
+      "id": "2026A-pc26a-014",
       "competition": "pc26a",
       "home_team": "mar",
       "away_team": "igr",
@@ -103,18 +102,17 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-011",
+      "id": "2026A-pc26a-015",
       "competition": "pc26a",
       "home_team": "mvl",
       "away_team": "mar",
       "home_score": 0,
       "away_score": 0,
       "round": "GS",
-      "status": "completed",
-      "yellow_card_score": "1-1"
+      "status": "completed"
     },
     {
-      "id": "2026A-pc26a-012",
+      "id": "2026A-pc26a-016",
       "competition": "pc26a",
       "home_team": "igr",
       "away_team": "mvl",
@@ -124,7 +122,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-013",
+      "id": "2026A-pc26a-018",
       "competition": "pc26a",
       "home_team": "bbu",
       "away_team": "ssc",
@@ -134,18 +132,17 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-014",
+      "id": "2026A-pc26a-019",
       "competition": "pc26a",
       "home_team": "hor",
       "away_team": "mar",
       "home_score": 1,
       "away_score": 3,
       "round": "QF",
-      "status": "completed",
-      "yellow_card_score": "0-1"
+      "status": "completed"
     },
     {
-      "id": "2026A-pc26a-015",
+      "id": "2026A-pc26a-020",
       "competition": "pc26a",
       "home_team": "kko",
       "away_team": "mvl",
@@ -155,7 +152,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-016",
+      "id": "2026A-pc26a-021",
       "competition": "pc26a",
       "home_team": "rsa",
       "away_team": "vos",
@@ -166,7 +163,7 @@
       "shootout": "2-1"
     },
     {
-      "id": "2026A-pc26a-017",
+      "id": "2026A-pc26a-023",
       "competition": "pc26a",
       "home_team": "bbu",
       "away_team": "mar",
@@ -176,7 +173,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-018",
+      "id": "2026A-pc26a-024",
       "competition": "pc26a",
       "home_team": "kko",
       "away_team": "rsa",
@@ -187,7 +184,7 @@
       "shootout": "1-0"
     },
     {
-      "id": "2026A-pc26a-019",
+      "id": "2026A-pc26a-026",
       "competition": "pc26a",
       "home_team": "mar",
       "away_team": "rsa",
@@ -197,7 +194,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-pc26a-020",
+      "id": "2026A-pc26a-028",
       "competition": "pc26a",
       "home_team": "bbu",
       "away_team": "kko",
@@ -247,8 +244,7 @@
       "home_score": 7,
       "away_score": 3,
       "round": "F",
-      "status": "completed",
-      "yellow_card_score": "1-0"
+      "status": "completed"
     },
     {
       "id": "2026A-gr26a-001",
@@ -545,7 +541,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-fn26a-001",
+      "id": "2026A-fn26a-002",
       "competition": "fn26a",
       "home_team": "bbu",
       "away_team": "ssc",
@@ -556,7 +552,7 @@
       "shootout": "2-1"
     },
     {
-      "id": "2026A-fn26a-002",
+      "id": "2026A-fn26a-003",
       "competition": "fn26a",
       "home_team": "kko",
       "away_team": "rsa",
@@ -566,7 +562,7 @@
       "status": "completed"
     },
     {
-      "id": "2026A-fn26a-003",
+      "id": "2026A-fn26a-005",
       "competition": "fn26a",
       "home_team": "bbu",
       "away_team": "rsa",

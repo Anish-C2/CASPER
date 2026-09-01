@@ -8,7 +8,9 @@
     "teams": "./teams.json",
     "players": "./players.json",
     "matches": "./matches.json",
-    "awards": "./awards.json",
+    "analytics": "./analytics.json",
+    "analytics_teams": "./analytics-teams.json",
+    "analytics_competitions": "./analytics-competitions.json",
     "stats": "./stats.json"
   }
 }
