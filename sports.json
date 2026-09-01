@@ -11,6 +11,7 @@
       "scoring": "goals",
       "crown": "Finale",
       "winPts": 3,
+      "drawPts": 1,
       "unit": "Goals",
       "unitShort": "G"
     },
@@ -23,6 +24,7 @@
       "scoring": "goals",
       "crown": "SuperCup",
       "winPts": 3,
+      "drawPts": 1,
       "unit": "Goals",
       "unitShort": "G"
     },
@@ -35,6 +37,7 @@
       "scoring": "cricket",
       "crown": "Titan Cup",
       "winPts": 2,
+      "drawPts": 1,
       "unit": "Runs",
       "unitShort": "R"
     }
