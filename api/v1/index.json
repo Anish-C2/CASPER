@@ -1,0 +1,24 @@
+{
+  "name": "CASPER API",
+  "version": "1.0.0",
+  "description": "Public static API for the CASPER Competition Archive & Historical Record System.",
+  "source": "https://anish-c2.github.io/CASPER-Futsal/",
+  "data_source": "../data/Season_2026A.csn",
+  "sport": ["football", "futsal", "cricket"],
+  "season": "2026A",
+  "endpoints": {
+    "seasons": "./seasons.json",
+    "competitions": "./competitions.json",
+    "teams": "./teams.json",
+    "players": "./players.json",
+    "matches": "./matches.json",
+    "statistics": "./stats.json",
+    "records": "./records.json",
+    "awards": "./awards.json"
+  },
+  "notes": [
+    "This is a static, read-only API served by GitHub Pages.",
+    "The CASPER CSN archive is the canonical source of competition data.",
+    "Match scores are regulation scores; penalty shootouts are represented separately when available in the source archive."
+  ]
+}
