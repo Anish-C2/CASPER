@@ -1,16 +1,107 @@
 {
   "competition_awards": {
-    "pc26a": {},
-    "rc26a": {},
-    "csc26a": {},
-    "gr26a": {},
-    "cl26a": {},
-    "prc26a": {},
-    "pl26a": {},
-    "sc26a": {},
-    "msc26a": {},
-    "ssc26a": {},
-    "fn26a": {},
+    "pc26a": {
+      "ch": "bbu",
+      "ru": "kko",
+      "ug": "kko",
+      "gb": "bbu",
+      "iw": "kko",
+      "bg": "bbu",
+      "gk": "vos",
+      "frp": "vos",
+      "3p": "rsa",
+      "4p": "mar",
+      "cm": "bbu",
+      "ps": "bbu",
+      "cp": "kko",
+      "rb": "bbu",
+      "gmb": "bbu"
+    },
+    "rc26a": {
+      "ch": "nas",
+      "ru": "mfc",
+      "gb": "nas",
+      "gmb": "nas"
+    },
+    "csc26a": {
+      "ch": "bbu",
+      "ru": "nas",
+      "rb": "bbu",
+      "gmb": "bbu"
+    },
+    "gr26a": {
+      "ch": "kko",
+      "ru": "bbu",
+      "gb": "bbu",
+      "bg": "bbu",
+      "pot": "bbu",
+      "iw": "bbu",
+      "ug": "ssc",
+      "3p": "ssc",
+      "4p": "mar",
+      "gk": "ssc",
+      "cm": "kko",
+      "rb": "bbu",
+      "cp": "ssc",
+      "ps": "kko",
+      "gmb": "bbu"
+    },
+    "cl26a": {
+      "ch": "rsa",
+      "ru": "vos",
+      "3p": "hor",
+      "gb": "vos",
+      "iw": "rsa",
+      "frp": "mvl",
+      "gmb": "rsa",
+      "4p": "mvl"
+    },
+    "prc26a": {
+      "ch": "igr",
+      "ru": "nas",
+      "3p": "mfc",
+      "gb": "igr",
+      "iw": "mfc",
+      "gmb": "igr",
+      "frp": "rut"
+    },
+    "pl26a": {
+      "ch": "bbu",
+      "ru": "kko",
+      "3p": "mar",
+      "gb": "bbu",
+      "iw": "mar",
+      "bg": "bbu",
+      "rb": "bbu",
+      "gmb": "bbu"
+    },
+    "sc26a": {
+      "ch": "kko",
+      "ru": "bbu",
+      "gmb": "kko"
+    },
+    "msc26a": {
+      "ch": "igr",
+      "ru": "nas",
+      "gmb": "igr"
+    },
+    "ssc26a": {
+      "ch": "rsa",
+      "ru": "igr",
+      "gmb": "rsa"
+    },
+    "fn26a": {
+      "ch": "bbu",
+      "ru": "rsa",
+      "gmb": "bbu",
+      "3p": "ssc",
+      "4p": "kko",
+      "ps": "bbu",
+      "gb": "bbu",
+      "iw": "rsa",
+      "cp": "rsa",
+      "cm": "bbu"
+    },
     "sa26a": {
       "Tsar": "Anish",
       "Crown Of CASPER": "Anish",

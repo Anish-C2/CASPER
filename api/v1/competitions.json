@@ -8,7 +8,7 @@
       "format": "rsk",
       "teams": 12,
       "status": "Completed",
-      "champion": null
+      "champion": "bbu"
     },
     {
       "id": "rc26a",
@@ -18,7 +18,7 @@
       "format": "ko",
       "teams": 4,
       "status": "Completed",
-      "champion": null
+      "champion": "nas"
     },
     {
       "id": "csc26a",
@@ -28,7 +28,7 @@
       "format": "ko",
       "teams": 2,
       "status": "Completed",
-      "champion": null
+      "champion": "bbu"
     },
     {
       "id": "gr26a",
@@ -38,7 +38,7 @@
       "format": "ko",
       "teams": 8,
       "status": "Completed",
-      "champion": null
+      "champion": "kko"
     },
     {
       "id": "cl26a",
@@ -48,7 +48,7 @@
       "format": "rr",
       "teams": 4,
       "status": "Completed",
-      "champion": null
+      "champion": "rsa"
     },
     {
       "id": "prc26a",
@@ -58,7 +58,7 @@
       "format": "rr",
       "teams": 4,
       "status": "Completed",
-      "champion": null
+      "champion": "igr"
     },
     {
       "id": "pl26a",
@@ -68,7 +68,7 @@
       "format": "rr",
       "teams": 4,
       "status": "Completed",
-      "champion": null
+      "champion": "bbu"
     },
     {
       "id": "sc26a",
@@ -78,7 +78,7 @@
       "format": "ko",
       "teams": 2,
       "status": "Completed",
-      "champion": null
+      "champion": "kko"
     },
     {
       "id": "msc26a",
@@ -88,7 +88,7 @@
       "format": "ko",
       "teams": 2,
       "status": "Completed",
-      "champion": null
+      "champion": "igr"
     },
     {
       "id": "ssc26a",
@@ -98,7 +98,7 @@
       "format": "ko",
       "teams": 2,
       "status": "Completed",
-      "champion": null
+      "champion": "rsa"
     },
     {
       "id": "fn26a",
@@ -108,7 +108,7 @@
       "format": "ko",
       "teams": 4,
       "status": "Completed",
-      "champion": null
+      "champion": "bbu"
     },
     {
       "id": "sa26a",

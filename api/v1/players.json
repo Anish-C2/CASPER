@@ -1,3 +1,88 @@
 {
-  "players": []
+  "players": [
+    {
+      "id": "anish",
+      "name": "Anish",
+      "team": "bbu",
+      "club": "Black Bird United",
+      "season": "2026A"
+    },
+    {
+      "id": "bhavesh",
+      "name": "Bhavesh",
+      "team": "kko",
+      "club": "Kolkata Kous",
+      "season": "2026A"
+    },
+    {
+      "id": "vyom",
+      "name": "Vyom",
+      "team": "nas",
+      "club": "New Athletico Saltlake",
+      "season": "2026A"
+    },
+    {
+      "id": "arjun",
+      "name": "Arjun",
+      "team": "rsa",
+      "club": "Real Saltlake",
+      "season": "2026A"
+    },
+    {
+      "id": "divyanshu",
+      "name": "Divyanshu",
+      "team": "mfc",
+      "club": "Modo FC",
+      "season": "2026A"
+    },
+    {
+      "id": "srinjoy",
+      "name": "Srinjoy",
+      "team": "ssc",
+      "club": "Super Strikers CF",
+      "season": "2026A"
+    },
+    {
+      "id": "anshuman",
+      "name": "Anshuman",
+      "team": "rut",
+      "club": "Romano United",
+      "season": "2026A"
+    },
+    {
+      "id": "rounak",
+      "name": "Rounak",
+      "team": "igr",
+      "club": "Inter Grande CF",
+      "season": "2026A"
+    },
+    {
+      "id": "gourav",
+      "name": "Gourav",
+      "team": "mvl",
+      "club": "Movile",
+      "season": "2026A"
+    },
+    {
+      "id": "aryan",
+      "name": "Aryan",
+      "team": "vos",
+      "club": "Vostok CF",
+      "season": "2026A"
+    },
+    {
+      "id": "rajdeep",
+      "name": "Rajdeep",
+      "team": "hor",
+      "club": "Horsemen United",
+      "season": "2026A"
+    },
+    {
+      "id": "anirban",
+      "name": "Anirban",
+      "team": "mar",
+      "club": "Martians",
+      "season": "2026A"
+    }
+  ]
 }

@@ -1,3 +1,188 @@
 {
-  "teams": []
+  "teams": [
+    {
+      "id": "bbu",
+      "name": "Black Bird United",
+      "player": "Anish",
+      "season": "2026A",
+      "matches": 15,
+      "wins": 10,
+      "draws": 4,
+      "losses": 1,
+      "goals_for": 63,
+      "goals_against": 31,
+      "title_count": 4,
+      "titles": [
+        "Pioneer Cup",
+        "Chroma Super Cup",
+        "Premier League",
+        "Finale"
+      ]
+    },
+    {
+      "id": "kko",
+      "name": "Kolkata Kous",
+      "player": "Bhavesh",
+      "season": "2026A",
+      "matches": 13,
+      "wins": 6,
+      "draws": 5,
+      "losses": 2,
+      "goals_for": 29,
+      "goals_against": 24,
+      "title_count": 2,
+      "titles": [
+        "Grande",
+        "SuperCup"
+      ]
+    },
+    {
+      "id": "nas",
+      "name": "New Athletico Saltlake",
+      "player": "Vyom",
+      "season": "2026A",
+      "matches": 9,
+      "wins": 2,
+      "draws": 4,
+      "losses": 3,
+      "goals_for": 15,
+      "goals_against": 19,
+      "title_count": 1,
+      "titles": [
+        "Relegator Cup"
+      ]
+    },
+    {
+      "id": "rsa",
+      "name": "Real Saltlake",
+      "player": "Arjun",
+      "season": "2026A",
+      "matches": 12,
+      "wins": 6,
+      "draws": 5,
+      "losses": 1,
+      "goals_for": 18,
+      "goals_against": 15,
+      "title_count": 2,
+      "titles": [
+        "Conference League",
+        "Sub Supercup"
+      ]
+    },
+    {
+      "id": "mfc",
+      "name": "Modo FC",
+      "player": "Divyanshu",
+      "season": "2026A",
+      "matches": 7,
+      "wins": 1,
+      "draws": 3,
+      "losses": 3,
+      "goals_for": 8,
+      "goals_against": 11,
+      "title_count": 0,
+      "titles": []
+    },
+    {
+      "id": "ssc",
+      "name": "Super Strikers CF",
+      "player": "Srinjoy",
+      "season": "2026A",
+      "matches": 10,
+      "wins": 1,
+      "draws": 4,
+      "losses": 5,
+      "goals_for": 19,
+      "goals_against": 31,
+      "title_count": 0,
+      "titles": []
+    },
+    {
+      "id": "rut",
+      "name": "Romano United",
+      "player": "Anshuman",
+      "season": "2026A",
+      "matches": 6,
+      "wins": 0,
+      "draws": 2,
+      "losses": 4,
+      "goals_for": 3,
+      "goals_against": 8,
+      "title_count": 0,
+      "titles": []
+    },
+    {
+      "id": "igr",
+      "name": "Inter Grande CF",
+      "player": "Rounak",
+      "season": "2026A",
+      "matches": 8,
+      "wins": 2,
+      "draws": 3,
+      "losses": 3,
+      "goals_for": 14,
+      "goals_against": 17,
+      "title_count": 2,
+      "titles": [
+        "Peripheral Cup",
+        "Minor Supercup"
+      ]
+    },
+    {
+      "id": "mvl",
+      "name": "Movile",
+      "player": "Gourav",
+      "season": "2026A",
+      "matches": 7,
+      "wins": 1,
+      "draws": 1,
+      "losses": 5,
+      "goals_for": 9,
+      "goals_against": 19,
+      "title_count": 0,
+      "titles": []
+    },
+    {
+      "id": "vos",
+      "name": "Vostok CF",
+      "player": "Aryan",
+      "season": "2026A",
+      "matches": 7,
+      "wins": 4,
+      "draws": 1,
+      "losses": 2,
+      "goals_for": 11,
+      "goals_against": 10,
+      "title_count": 0,
+      "titles": []
+    },
+    {
+      "id": "hor",
+      "name": "Horsemen United",
+      "player": "Rajdeep",
+      "season": "2026A",
+      "matches": 7,
+      "wins": 2,
+      "draws": 2,
+      "losses": 3,
+      "goals_for": 8,
+      "goals_against": 10,
+      "title_count": 0,
+      "titles": []
+    },
+    {
+      "id": "mar",
+      "name": "Martians",
+      "player": "Anirban",
+      "season": "2026A",
+      "matches": 11,
+      "wins": 2,
+      "draws": 4,
+      "losses": 5,
+      "goals_for": 20,
+      "goals_against": 22,
+      "title_count": 0,
+      "titles": []
+    }
+  ]
 }
