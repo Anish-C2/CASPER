@@ -9,8 +9,10 @@
       "manifest": "data/manifest.json",
       "dataDir": "data",
       "scoring": "goals",
-      "crown": "Pioneer Cup",
-      "winPts": 3
+      "crown": "Finale",
+      "winPts": 3,
+      "unit": "Goals",
+      "unitShort": "G"
     },
     {
       "id": "football",
@@ -20,7 +22,9 @@
       "dataDir": "data/football",
       "scoring": "goals",
       "crown": "SuperCup",
-      "winPts": 3
+      "winPts": 3,
+      "unit": "Goals",
+      "unitShort": "G"
     },
     {
       "id": "cricket",
@@ -30,7 +34,9 @@
       "dataDir": "data/cricket",
       "scoring": "cricket",
       "crown": "Titan Cup",
-      "winPts": 2
+      "winPts": 2,
+      "unit": "Runs",
+      "unitShort": "R"
     }
   ]
 }
