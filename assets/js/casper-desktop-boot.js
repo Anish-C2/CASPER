@@ -1,7 +1,7 @@
 /* CASPER DESKTOP BOOT — never leave the hub stuck on the loading banner. */
 (function () {
   'use strict';
-  var VERSION = '20260901e';
+  var VERSION = '20260901h';
 
   function loadJson(path, fallback) {
     return fetch(path + (path.indexOf('?') >= 0 ? '&' : '?') + 'v=' + VERSION)
