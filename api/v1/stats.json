@@ -1,15 +1,7 @@
 {
-  "season":"2026A",
-  "matches":56,
-  "competitions":11,
-  "teams":12,
-  "players":12,
-  "goals":217,
-  "championship_leaders":[
-    {"team":"Black Bird United","team_id":"bbu","titles":4},
-    {"team":"Kolkata Kous","team_id":"kko","titles":2},
-    {"team":"Real Saltlake","team_id":"rsa","titles":2},
-    {"team":"Inter Grande CF","team_id":"igr","titles":2},
-    {"team":"New Athletico Saltlake","team_id":"nas","titles":1}
-  ]
+  "matches": 0,
+  "competitions": 12,
+  "teams": 0,
+  "players": 0,
+  "goals": 0
 }

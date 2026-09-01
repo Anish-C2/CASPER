@@ -1,19 +1,33 @@
 {
-  "season":"2026A",
-  "competition_awards":{
-    "pioneer":{"champion":"bbu","runner_up":"kko","golden_boot":"bbu","underdog":"vos","fair_play":"vos","third_place":"rsa","fourth_place":"mar"},
-    "relegator":{"champion":"nas","runner_up":"mfc","golden_boot":"nas"},
-    "chroma":{"champion":"bbu","runner_up":"nas"},
-    "grande":{"champion":"kko","runner_up":"bbu","golden_boot":"bbu","best_goal":"bbu","underdog":"ssc","third_place":"ssc","fourth_place":"mar"},
-    "conference":{"champion":"rsa","runner_up":"vos","third_place":"hor","fourth_place":"mvl"},
-    "peripheral":{"champion":"igr","runner_up":"nas","third_place":"mfc"},
-    "premier":{"champion":"bbu","runner_up":"kko","third_place":"mar","golden_boot":"bbu"},
-    "supercup":{"champion":"kko","runner_up":"bbu"},
-    "minor_supercup":{"champion":"igr","runner_up":"nas"},
-    "sub_supercup":{"champion":"rsa","runner_up":"igr"},
-    "finale":{"champion":"bbu","runner_up":"rsa","third_place":"ssc","fourth_place":"kko"}
-  },
-  "seasonal":{
-    "Tsar":"Anish","Crown Of CASPER":"Anish","Golden Strike":"Anish","Netherite":"Arjun","Golden Glove":"Arjun","The Standard":"Anish","The Margin":"Anish","The Pursuer":"Bhavesh","The Wall":"Anshuman","Silver Strike":"Bhavesh","The Edge":"Bhavesh","The Lock":"Divyanshu","The Runner":"Aryan","Lowest Exposure":"Anshuman","Season Points Leader":"Anish","Season Golden Match":"Anish"
+  "competition_awards": {
+    "pc26a": {},
+    "rc26a": {},
+    "csc26a": {},
+    "gr26a": {},
+    "cl26a": {},
+    "prc26a": {},
+    "pl26a": {},
+    "sc26a": {},
+    "msc26a": {},
+    "ssc26a": {},
+    "fn26a": {},
+    "sa26a": {
+      "Tsar": "Anish",
+      "Crown Of CASPER": "Anish",
+      "Golden Strike": "Anish",
+      "Netherite": "Arjun",
+      "gg": "Arjun",
+      "The Standard": "Anish",
+      "The Margin": "Anish",
+      "The Pursuer": "Bhavesh",
+      "The Wall": "Anshuman",
+      "Silver Strike": "Bhavesh",
+      "The Edge": "Bhavesh",
+      "The Lock": "Divyanshu",
+      "The Runner": "Aryan",
+      "Lowest Exposure": "Anshuman",
+      "Season Points Leader": "Anish",
+      "sg": "Anish"
+    }
   }
 }
