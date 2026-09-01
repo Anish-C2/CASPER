@@ -1,0 +1,28 @@
+[
+id=sc26a;
+e=SuperCup;
+s=2026A;
+ed=1;
+org=CASPER;
+fmt=8-match series (standard 5);
+t=2;
+ven=25x15m 4v4+2;
+lvl=Football Crown;
+sts=In progress — 7 of 8;
+prd=S1;
+
+n(
+bbu=Black Bird United[Anish],
+rsa=Real Saltlake[Arjun]
+);
+
+m(
+bbu-rsa:3-6#1;
+bbu-rsa:4-2#2;
+bbu-rsa:5-2#3;
+bbu-rsa:1-4#4;
+bbu-rsa:6-1#5;
+bbu-rsa:2-0#6;
+bbu-rsa:0-1#7
+);
+]
