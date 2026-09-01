@@ -36,7 +36,7 @@ function parseCSN(text) {
     if (!s) return out;
     s.split('+').forEach(part => {
       part = part.trim(); if (!part) return;
-      const m = part.match(/^(.+?)\*(\d+)$/);
+      const m = part.match(/^(.+)\*(\d+)$/);
       if (m) out.push({ name: m[1].trim(), n: parseInt(m[2], 10) });
       else out.push({ name: part, n: 1 });
     });
@@ -70,6 +70,8 @@ function parseCSN(text) {
         e = e.trim();
         if (e === 'et') extras.et = true;
         else if (/^p\d+-\d+$/.test(e)) { const pm = e.match(/p(\d+)-(\d+)/); extras.p = [+pm[1], +pm[2]]; }
+        else if (/^y\d+-\d+$/.test(e)) { const ym = e.match(/y(\d+)-(\d+)/); extras.y = [+ym[1], +ym[2]]; }
+        else if (/^r\d+-\d+$/.test(e)) { const rm = e.match(/r(\d+)-(\d+)/); extras.r = [+rm[1], +rm[2]]; }
         else if (e.startsWith('gh=')) extras.gh = parseGoalList(e.slice(3));
         else if (e.startsWith('ga=')) extras.ga = parseGoalList(e.slice(3));
         else if (e.startsWith('ah=')) extras.ah = parseGoalList(e.slice(3));
