@@ -1,0 +1,15 @@
+{
+  "competitions": [
+    {"id":"pioneer","name":"Pioneer Cup","season":"2026A","format":"rsk","teams":12,"status":"completed","champion":"bbu"},
+    {"id":"relegator","name":"Relegator Cup","season":"2026A","format":"ko","teams":4,"status":"completed","champion":"nas"},
+    {"id":"chroma","name":"Chroma Super Cup","season":"2026A","format":"ko","teams":2,"status":"completed","champion":"bbu"},
+    {"id":"grande","name":"Grande","season":"2026A","format":"ko","teams":8,"status":"completed","champion":"kko"},
+    {"id":"conference","name":"Conference League","season":"2026A","format":"rr","teams":4,"status":"completed","champion":"rsa"},
+    {"id":"peripheral","name":"Peripheral Cup","season":"2026A","format":"rr","teams":4,"status":"completed","champion":"igr"},
+    {"id":"premier","name":"Premier League","season":"2026A","format":"rr","teams":4,"status":"completed","champion":"bbu"},
+    {"id":"supercup","name":"SuperCup","season":"2026A","format":"ko","teams":2,"status":"completed","champion":"kko"},
+    {"id":"minor_supercup","name":"Minor Supercup","season":"2026A","format":"ko","teams":2,"status":"completed","champion":"igr"},
+    {"id":"sub_supercup","name":"Sub Supercup","season":"2026A","format":"ko","teams":2,"status":"completed","champion":"rsa"},
+    {"id":"finale","name":"Finale","season":"2026A","format":"ko","teams":4,"status":"completed","champion":"bbu"}
+  ]
+}
