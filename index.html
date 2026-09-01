@@ -3,144 +3,210 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CASPER — Competitive Athletics &amp; Sports Promotion</title>
+  <title>CASPER — Clubs, Players & Statistics</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    :root {
-      --bg: #ffffff;
-      --panel: #f8f9fa;
-      --border: #a2a9b1;
-      --text: #202122;
-      --muted: #54595d;
-      --link: #0645ad;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: "Linux Libertine", Georgia, "Times New Roman", Times, serif;
-      background: #fff;
-      color: var(--text);
-      line-height: 1.6;
-      font-size: 15px;
-    }
-    a { color: var(--link); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    header { border-bottom: 1px solid #c8ccd1; }
-    .header-bar {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 10px 12px 6px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .logo-mark {
-      width: 36px; height: 36px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 12px; font-weight: bold;
-      font-family: sans-serif;
-      background: #f8f9fa;
-    }
-    .logo-name { font-size: 22px; }
-    .tag { color: var(--muted); font-size: 12px; font-family: sans-serif; border-left: 1px solid #c8ccd1; padding-left: 10px; }
-    .sport-switch {
-      max-width: 1100px; margin: 0 auto; padding: 0 12px 8px;
-      display: flex; gap: 6px; flex-wrap: wrap;
-      font-family: sans-serif; font-size: 12px;
-    }
-    .sport-switch a {
-      border: 1px solid #c8ccd1; background: #f8f9fa; color: #202122 !important;
-      padding: 3px 10px; border-radius: 999px; text-decoration: none !important;
-    }
-    .sport-switch a.on { background: #202122; color: #fff !important; border-color: #202122; font-weight: bold; }
-    main { max-width: 1100px; margin: 0 auto; padding: 22px 12px 48px; }
-    h1 { font-size: 28px; font-weight: normal; border-bottom: 1px solid #a2a9b1; margin-bottom: 12px; }
-    h2 { font-size: 20px; font-weight: normal; border-bottom: 1px solid #eaecf0; margin: 22px 0 10px; }
-    .lede { font-size: 16px; max-width: 46em; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 14px; margin-top: 16px; }
-    .card {
-      border: 1px solid var(--border);
-      background: var(--panel);
-      padding: 16px;
-      min-height: 180px;
-    }
-    .card h3 { font-family: sans-serif; font-size: 16px; margin-bottom: 6px; }
-    .card p { font-family: sans-serif; font-size: 13px; color: var(--muted); }
-    .card .meta { margin-top: 10px; font-family: sans-serif; font-size: 12px; color: #202122; }
-    .card a.btn {
-      display: inline-block; margin-top: 12px;
-      font-family: sans-serif; font-size: 13px;
-      border: 1px solid #a2a9b1; background: #fff;
-      padding: 4px 10px; color: #202122; text-decoration: none;
-    }
-    .card a.btn:hover { background: #eaecf0; }
-    .facts { width: 100%; border-collapse: collapse; font-family: sans-serif; font-size: 13px; margin-top: 8px; }
-    .facts th, .facts td { border: 1px solid #a2a9b1; padding: 6px 8px; text-align: left; }
-    .facts th { background: #eaecf0; width: 38%; }
-    footer {
-      border-top: 1px solid #c8ccd1;
-      padding: 12px;
-      text-align: center;
-      font-family: sans-serif;
-      font-size: 12px;
-      color: var(--muted);
-    }
+    :root { --border:#a2a9b1; --text:#202122; --muted:#54595d; --link:#0645ad; --panel:#f8f9fa; --gold:#c9a227; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font-family:"Linux Libertine", Georgia, "Times New Roman", Times, serif; background:#fff; color:var(--text); line-height:1.55; font-size:14px; }
+    a { color:var(--link); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    header { border-bottom:1px solid #c8ccd1; }
+    .header-bar { max-width:1140px; margin:0 auto; padding:10px 12px 6px; display:flex; align-items:center; gap:10px; }
+    .logo-mark { width:36px; height:36px; border:1px solid var(--border); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:bold; font-family:sans-serif; background:#f8f9fa; }
+    .logo-name { font-size:22px; }
+    .tag { color:var(--muted); font-size:12px; font-family:sans-serif; border-left:1px solid #c8ccd1; padding-left:10px; }
+    .sport-switch, .jump { max-width:1140px; margin:0 auto; padding:0 12px 8px; display:flex; gap:6px; flex-wrap:wrap; font-family:sans-serif; font-size:12px; }
+    .sport-switch a, .jump a { border:1px solid #c8ccd1; background:#f8f9fa; color:#202122 !important; padding:3px 10px; border-radius:999px; text-decoration:none !important; }
+    .sport-switch a.on { background:#202122; color:#fff !important; border-color:#202122; font-weight:bold; }
+    main { max-width:1140px; margin:0 auto; padding:18px 12px 56px; }
+    h1 { font-size:28px; font-weight:normal; border-bottom:1px solid #a2a9b1; margin-bottom:10px; }
+    h2 { font-size:20px; font-weight:normal; border-bottom:1px solid #eaecf0; margin:26px 0 10px; scroll-margin-top:12px; }
+    h3 { font-size:16px; font-family:sans-serif; margin:16px 0 8px; }
+    .lede { font-size:16px; max-width:50em; }
+    .muted { color:var(--muted); font-family:sans-serif; font-size:12px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:12px; }
+    .card, .panel { border:1px solid var(--border); background:var(--panel); padding:12px 14px; }
+    .card h3 { margin-top:0; }
+    table { width:100%; border-collapse:collapse; font-family:sans-serif; font-size:12px; margin:8px 0 12px; }
+    th, td { border:1px solid #a2a9b1; padding:5px 7px; text-align:left; vertical-align:top; }
+    th { background:#eaecf0; }
+    td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+    tr.hl td { background:#fff8dc; }
+    .treble { border:2px solid var(--gold); background:#fff8e5; padding:14px 16px; margin:12px 0 18px; }
+    .treble h2 { border:0; margin:0 0 8px; color:#6b5428; }
+    .pills { display:flex; gap:8px; flex-wrap:wrap; margin:8px 0; }
+    .pill { font-family:sans-serif; font-size:12px; border:1px solid #a2a9b1; background:#fff; padding:4px 8px; }
+    .pill.yes { background:#e8f5e9; border-color:#4A7C4E; }
+    .pill.wait { background:#fff3cd; border-color:#c9a227; }
+    .balls { font-family:ui-monospace,Menlo,Consolas,monospace; }
+    .w { color:#8B3A3A; font-weight:bold; }
+    .six { color:#1b5e20; font-weight:bold; }
+    footer { border-top:1px solid #c8ccd1; padding:12px; text-align:center; font-family:sans-serif; font-size:12px; color:#54595d; }
+    .btn { display:inline-block; margin-top:8px; font-family:sans-serif; font-size:12px; border:1px solid #a2a9b1; background:#fff; padding:3px 8px; color:#202122; }
   </style>
 </head>
 <body>
-  <header>
-    <div class="header-bar">
-      <div class="logo-mark">CA</div>
-      <div class="logo-name">CASPER</div>
-      <span class="tag">Competitive Athletics &amp; Sports Promotion</span>
-    </div>
-    <div class="sport-switch">
-      <a href="index.html" class="on">CASPER</a>
-      <a href="futsal.html">Futsal</a>
-      <a href="football.html">Football</a>
-      <a href="cricket.html">Cricket</a>
-    </div>
-  </header>
-  <main>
-    <h1>CASPER</h1>
-    <p class="lede">
-      CASPER is the competition archive, statistics database and historical record system for
-      school sports at one organisation. Results are stored in CSN (Competition Serialization Notation)
-      and rendered in the browser. No live APIs. No duplicated tables.
-    </p>
+<header>
+  <div class="header-bar">
+    <div class="logo-mark">CA</div>
+    <div class="logo-name">CASPER</div>
+    <span class="tag">Competitive Athletics & Sports Promotion</span>
+  </div>
+  <div class="sport-switch">
+    <a href="index.html" class="on">CASPER</a>
+    <a href="futsal.html">Futsal</a>
+    <a href="football.html">Football</a>
+    <a href="cricket.html">Cricket</a>
+  </div>
+  <div class="jump">
+    <a href="#treble">Treble</a><a href="#clubs">Clubs</a><a href="#players">Players</a><a href="#leaders">Leaders</a><a href="#football">Football SuperCup</a><a href="#cricket">Titan Cup</a>
+  </div>
+</header>
+<main>
+<h1>CASPER S2026A</h1>
+<p class="lede">Season One is still live. Black Bird United already hold the biggest titles in futsal and cricket. One football SuperCup match remains.</p>
+<div class="grid" style="margin-top:14px">
+  <div class="card"><h3>Futsal crown</h3><p>Pioneer Cup — completed</p><div><b>Black Bird United</b> beat Kolkata Kous on penalties.</div><a class="btn" href="futsal.html">Futsal archive</a></div>
+  <div class="card"><h3>Football crown</h3><p>SuperCup — 7 of 8 (usually 5; S2026A extended)</p><div><b>BBU 4–3 RSA</b> · goals 21–16 · match 8 not played</div><a class="btn" href="football.html">Football archive</a></div>
+  <div class="card"><h3>Cricket crown</h3><p>Titan Cup — completed · 6-ball innings</p><div><b>Black Bird United</b> beat NAS by 2 runs.</div><a class="btn" href="cricket.html">Cricket archive</a></div>
+</div>
+<div class="treble" id="treble">
+  <h2>The Great CASPER Treble</h2>
+  <p>Special club award. Given only if one club wins the biggest competition in every CASPER sport in the same season.</p>
+  <table>
+    <tr><th>Leg</th><th>Biggest competition</th><th>S2026A champion</th></tr>
+    <tr><td>Futsal</td><td>Pioneer Cup</td><td>Black Bird United</td></tr>
+    <tr><td>Football</td><td>SuperCup (series)</td><td>Unawarded — match 8 remaining</td></tr>
+    <tr><td>Cricket</td><td>Titan Cup</td><td>Black Bird United</td></tr>
+  </table>
+  <p><b>Status:</b> Treble vacant. BBU has 2 of 3. Winning SuperCup match 8 would make BBU the first Great CASPER Treble club.</p>
+  <div class="pills">
+    <span class="pill yes">BBU Pioneer Cup</span>
+    <span class="pill yes">BBU Titan Cup</span>
+    <span class="pill wait">BBU SuperCup 4–3, 1 left</span>
+    <span class="pill">Treble vacant</span>
+  </div>
+</div>
 
-    <h2>Sports</h2>
-    <div class="grid">
-      <article class="card">
-        <h3><i class="fa-solid fa-futbol"></i> Futsal</h3>
-        <p>Indoor archive. The original CASPER competition set lives here: Pioneer Cup, Grande, Premier and the rest of the 2026A pyramid.</p>
-        <div class="meta">Scoring: goals · GD · clean sheets</div>
-        <a class="btn" href="futsal.html">Open futsal archive</a>
-      </article>
-      <article class="card">
-        <h3><i class="fa-solid fa-futbol"></i> Football</h3>
-        <p>Small-sided outdoor football. Matches are 4v4 with 2 substitutes on a 25 × 15 m pitch.</p>
-        <div class="meta">Format: 4v4 + 2 subs · Pitch: 25×15 m</div>
-        <a class="btn" href="football.html">Open football archive</a>
-      </article>
-      <article class="card">
-        <h3><i class="fa-solid fa-baseball-bat-ball"></i> Cricket</h3>
-        <p>Limited-overs archive with proper cricket scoring: runs, wickets, balls, overs and net run rate.</p>
-        <div class="meta">Scoring: R / W · overs.balls · NRR</div>
-        <a class="btn" href="cricket.html">Open cricket archive</a>
-      </article>
-    </div>
+<h2 id="clubs">Clubs</h2>
+<table>
+<tr><th>Abbr</th><th>Club</th><th>Main player</th><th>Futsal S2026A</th><th>Football S2026A</th><th>Cricket S2026A</th></tr>
+<tr class="hl"><td>BBU</td><td>Black Bird United</td><td>Anish (c)</td><td>Pioneer + Premier champions</td><td>SuperCup 4–3 up, 21–16</td><td>Titan Cup champions</td></tr>
+<tr><td>RSA</td><td>Real Saltlake</td><td>Arjun (c)</td><td>Pioneer third</td><td>SuperCup 3–4 down, 16–21</td><td>—</td></tr>
+<tr><td>KKO</td><td>Kolkata Kous</td><td>Bhavesh</td><td>Pioneer RU · Grande champions</td><td>—</td><td>—</td></tr>
+<tr><td>NAS</td><td>New Athletico Saltlake</td><td>Vyom</td><td>Relegator champions</td><td>—</td><td>Titan Cup runners-up</td></tr>
+<tr><td>MAR</td><td>Martians</td><td>Anirban</td><td>Pioneer fourth</td><td>Anirban at BBU (vc)</td><td>Titan SF</td></tr>
+<tr><td>SSC</td><td>Super Strikers CF</td><td>Srinjoy</td><td>Knockout field</td><td>Srinjoy at BBU</td><td>Titan SF</td></tr>
+<tr><td>IGR</td><td>Inter Grande CF</td><td>Rounak</td><td>Pyramid titles</td><td>Rounak BBU sub</td><td>—</td></tr>
+<tr><td>MFC</td><td>Modo FC</td><td>Divyanshu</td><td>Inaugural field</td><td>RSA bench GK</td><td>—</td></tr>
+<tr><td>RUT</td><td>Romano United</td><td>Anshuman</td><td>Inaugural field</td><td>Featured for RSA</td><td>—</td></tr>
+<tr><td>MVL</td><td>Movile</td><td>Gourav</td><td>Inaugural field</td><td>Gourav BBU sub</td><td>—</td></tr>
+<tr><td>VOS</td><td>Vostok CF</td><td>Aryan</td><td>Giant-killer / fair play</td><td>—</td><td>—</td></tr>
+<tr><td>HOR</td><td>Horsemen United</td><td>Rajdeep</td><td>Inaugural field</td><td>RSA starter</td><td>—</td></tr>
+</table>
 
-    <h2>Organisation</h2>
-    <table class="facts">
-      <tr><th>Name</th><td>CASPER — Competitive Athletics &amp; Sports Promotion</td></tr>
-      <tr><th>Sports</th><td>Futsal, Football (4v4), Cricket</td></tr>
-      <tr><th>Data format</th><td>CSN (Competition Serialization Notation)</td></tr>
-      <tr><th>Inaugural season</th><td>2026A (futsal first)</td></tr>
-      <tr><th>Source of truth</th><td>Plain-text archive files in this repository</td></tr>
-    </table>
-  </main>
-  <footer>CASPER · Futsal · Football · Cricket · CSN-powered archive</footer>
+<h2 id="players">Players</h2>
+<h3>Football SuperCup squads (4v4 + 2, 25×15 m)</h3>
+<table>
+<tr><th>Club</th><th>Starters</th><th>Substitutes</th></tr>
+<tr><td>Black Bird United</td><td>Anish (c), Srinjoy, Aditya (GK), Anirban (vc)</td><td>Gourav, Rounak</td></tr>
+<tr><td>Real Saltlake</td><td>Arjun (c), Aarav (vc), Pronob (GK), Rajdeep</td><td>Divyanshu (GK), Promit</td></tr>
+</table>
+<p class="muted">Anshuman (Romano United) also appeared on the RSA scoresheet in match 1.</p>
+<table>
+<tr><th>Player</th><th>Primary club</th><th>Also appeared</th><th>S2026A notes</th></tr>
+<tr class="hl"><td>Anish</td><td>BBU (c)</td><td>—</td><td>Pioneer + Titan champion. SuperCup 13 G, 6 A. Three hat-tricks.</td></tr>
+<tr><td>Arjun</td><td>RSA (c)</td><td>—</td><td>SuperCup 9 G, 8 A.</td></tr>
+<tr><td>Anirban</td><td>Martians</td><td>BBU (vc)</td><td>Titan SF. SuperCup hat-trick M5. 4 G, 2 A.</td></tr>
+<tr><td>Srinjoy</td><td>SSC</td><td>BBU</td><td>Titan SF. SuperCup 3 G, 4 A.</td></tr>
+<tr><td>Vyom</td><td>NAS</td><td>—</td><td>Titan Cup finalist.</td></tr>
+<tr><td>Bhavesh</td><td>KKO</td><td>—</td><td>Futsal Pioneer RU, Grande champion.</td></tr>
+<tr><td>Aditya</td><td>BBU (GK)</td><td>—</td><td>Football starting GK. Clean sheet M6.</td></tr>
+<tr><td>Aarav</td><td>RSA (vc)</td><td>—</td><td>SuperCup 3 G, 3 A.</td></tr>
+<tr><td>Pronob</td><td>RSA (GK)</td><td>—</td><td>Football starting GK.</td></tr>
+<tr><td>Rajdeep</td><td>HOR</td><td>RSA starter</td><td>No SuperCup goal yet.</td></tr>
+<tr><td>Gourav</td><td>MVL</td><td>BBU sub</td><td>SuperCup 1 G, 1 A.</td></tr>
+<tr><td>Rounak</td><td>IGR</td><td>BBU sub</td><td>Named substitute.</td></tr>
+<tr><td>Divyanshu</td><td>MFC</td><td>RSA bench GK</td><td>Second GK.</td></tr>
+<tr><td>Promit</td><td>RSA</td><td>—</td><td>Bench. 2 goals in M1.</td></tr>
+<tr><td>Anshuman</td><td>RUT</td><td>RSA M1</td><td>2 G, 2 A early in the series.</td></tr>
+<tr><td>Aryan</td><td>VOS</td><td>—</td><td>Futsal giant-killer / fair play.</td></tr>
+<tr><td>Karan</td><td>—</td><td>—</td><td>Incoming generation. No S2026A appearance yet.</td></tr>
+</table>
+
+<h2 id="leaders">S2026A leaders</h2>
+<table>
+<tr><th>#</th><th>Player</th><th class="num">G</th><th class="num">A</th><th class="num">G+A</th><th class="num">G/M</th></tr>
+<tr class="hl"><td>1</td><td>Anish</td><td class="num">13</td><td class="num">6</td><td class="num">19</td><td class="num">1.86</td></tr>
+<tr><td>2</td><td>Arjun</td><td class="num">9</td><td class="num">8</td><td class="num">17</td><td class="num">1.29</td></tr>
+<tr><td>3</td><td>Srinjoy</td><td class="num">3</td><td class="num">4</td><td class="num">7</td><td class="num">0.43</td></tr>
+<tr><td>4</td><td>Anirban</td><td class="num">4</td><td class="num">2</td><td class="num">6</td><td class="num">0.57</td></tr>
+<tr><td>5</td><td>Aarav</td><td class="num">3</td><td class="num">3</td><td class="num">6</td><td class="num">0.43</td></tr>
+<tr><td>6</td><td>Anshuman</td><td class="num">2</td><td class="num">2</td><td class="num">4</td><td class="num">—</td></tr>
+<tr><td>7</td><td>Promit</td><td class="num">2</td><td class="num">0</td><td class="num">2</td><td class="num">—</td></tr>
+<tr><td>8</td><td>Gourav</td><td class="num">1</td><td class="num">1</td><td class="num">2</td><td class="num">0.14</td></tr>
+</table>
+<table>
+<tr><th>Record</th><th>Value</th><th>Holder</th></tr>
+<tr><td>Great CASPER Treble</td><td>vacant</td><td>—</td></tr>
+<tr><td>Biggest titles this season</td><td>2</td><td>BBU (Pioneer + Titan)</td></tr>
+<tr><td>SuperCup goals</td><td>13</td><td>Anish</td></tr>
+<tr><td>SuperCup assists</td><td>8</td><td>Arjun</td></tr>
+<tr><td>SuperCup G+A</td><td>19</td><td>Anish</td></tr>
+<tr><td>Hat-tricks in series</td><td>3</td><td>Anish (M1, M3, M5)</td></tr>
+<tr><td>Two hat-tricks, one match</td><td>Anish + Anirban</td><td>M5, BBU 6–1</td></tr>
+<tr><td>Biggest SuperCup win</td><td>6–1</td><td>BBU M5</td></tr>
+<tr><td>Clean sheet</td><td>2–0</td><td>BBU M6</td></tr>
+<tr><td>Highest Titan innings</td><td>26/0 off 6</td><td>BBU vs Martians</td></tr>
+<tr><td>Titan final</td><td>18–16</td><td>BBU beat NAS by 2</td></tr>
+<tr><td>SuperCup goals / 7 matches</td><td>37 (5.29 per game)</td><td>BBU 21, RSA 16</td></tr>
+<tr><td>Anish share of BBU goals</td><td>61.9% (13/21)</td><td>BBU</td></tr>
+<tr><td>Arjun share of RSA goals</td><td>56.3% (9/16)</td><td>RSA</td></tr>
+</table>
+
+<h2 id="football">Football — SuperCup S2026A</h2>
+<p>Only football competition. Standard length is <b>5</b> matches. S2026A extended to <b>8</b>. 4v4 + 2 subs, 25×15 m. Series: <b>BBU 4–3 RSA</b>, goals <b>21–16</b>. Match 8 is the last football match of CASPER S1.</p>
+<table>
+<tr><th>M</th><th>Score</th><th>Win</th><th>BBU scorers</th><th>RSA scorers</th><th>BBU assists</th><th>RSA assists</th></tr>
+<tr><td>1</td><td>3–6</td><td>RSA</td><td>Anish ×3</td><td>Arjun ×2, Promit ×2, Anshuman ×2</td><td>Anish ×1, Srinjoy ×1</td><td>Arjun ×3, Anshuman ×1</td></tr>
+<tr><td>2</td><td>4–2</td><td>BBU</td><td>Anish ×2, Srinjoy ×2</td><td>Arjun ×2</td><td>Anish ×1, Srinjoy ×1, Gourav ×1</td><td>Arjun ×1, Anshuman ×1</td></tr>
+<tr><td>3</td><td>5–2</td><td>BBU</td><td>Anish ×3, Srinjoy ×1, Gourav ×1</td><td>Arjun ×2</td><td>Anish ×1, Srinjoy ×1</td><td>Arjun ×1, Aarav ×1</td></tr>
+<tr><td>4</td><td>1–4</td><td>RSA</td><td>Anish ×1</td><td>Arjun ×2, Aarav ×2</td><td>—</td><td>Arjun ×2, Aarav ×1</td></tr>
+<tr><td>5</td><td>6–1</td><td>BBU</td><td>Anish ×3, Anirban ×3</td><td>Aarav ×1</td><td>Anish ×2, Srinjoy ×1, Anirban ×1</td><td>Arjun ×1</td></tr>
+<tr><td>6</td><td>2–0</td><td>BBU</td><td>Anish ×1, Anirban ×1</td><td>—</td><td>Anish ×1, Anirban ×1</td><td>—</td></tr>
+<tr><td>7</td><td>0–1</td><td>RSA</td><td>—</td><td>Arjun ×1</td><td>—</td><td>Aarav ×1</td></tr>
+<tr class="hl"><td>Σ</td><td>21–16</td><td>BBU 4–3</td><td>Anish 13, Anirban 4, Srinjoy 3, Gourav 1</td><td>Arjun 9, Aarav 3, Promit 2, Anshuman 2</td><td>Anish 6, Srinjoy 4, Anirban 2, Gourav 1</td><td>Arjun 8, Aarav 3, Anshuman 2</td></tr>
+<tr><td>8</td><td colspan="6">Not played — last match of CASPER S1</td></tr>
+</table>
+<table>
+<tr><th>After</th><th class="num">BBU W–L</th><th class="num">GF–GA</th><th class="num">GD</th><th class="num">Anish G</th><th class="num">Arjun G</th></tr>
+<tr><td>M1</td><td class="num">0–1</td><td class="num">3–6</td><td class="num">−3</td><td class="num">3</td><td class="num">2</td></tr>
+<tr><td>M2</td><td class="num">1–1</td><td class="num">7–8</td><td class="num">−1</td><td class="num">5</td><td class="num">4</td></tr>
+<tr><td>M3</td><td class="num">2–1</td><td class="num">12–10</td><td class="num">+2</td><td class="num">8</td><td class="num">6</td></tr>
+<tr><td>M4</td><td class="num">2–2</td><td class="num">13–14</td><td class="num">−1</td><td class="num">9</td><td class="num">8</td></tr>
+<tr><td>M5</td><td class="num">3–2</td><td class="num">19–15</td><td class="num">+4</td><td class="num">12</td><td class="num">8</td></tr>
+<tr><td>M6</td><td class="num">4–2</td><td class="num">21–15</td><td class="num">+6</td><td class="num">13</td><td class="num">8</td></tr>
+<tr class="hl"><td>M7</td><td class="num">4–3</td><td class="num">21–16</td><td class="num">+5</td><td class="num">13</td><td class="num">9</td></tr>
+</table>
+
+<h2 id="cricket">Cricket — Titan Cup S2026A</h2>
+<p>Biggest cricket competition. Format: <b>6-ball</b> innings. <span class="w">W</span> ends the innings. BBU are champions.</p>
+<h3>SF1 — BBU vs Martians</h3>
+<p>BBU: <span class="balls"><span class="six">6</span>, <span class="six">6</span>, 2, 4, 2, <span class="six">6</span></span> = <b>26/0</b> off 6. Martians: <span class="balls"><span class="w">W</span></span> = <b>0/1</b> off 1. <b>BBU won</b> by 26 runs.</p>
+<h3>SF2 — Super Strikers vs New Athletico Saltlake</h3>
+<p>NAS: <span class="balls"><span class="six">6</span>, 0, 2, 4, 0, <span class="w">W</span></span> = <b>12/1</b>. SSC: <span class="balls"><span class="six">6</span>, 4, <span class="w">W</span></span> = <b>10/1</b> off 3. <b>NAS won</b> by 2 runs.</p>
+<h3>Final — NAS vs BBU</h3>
+<p>BBU batted first: <span class="balls">2, 2, 4, 0, <span class="six">6</span>, 4</span> = <b>18/0</b>. NAS: <span class="balls">4, 4, 2, 2, 0, 4</span> = <b>16/0</b>. <b>BBU won the Titan Cup</b> by 2 runs.</p>
+<table>
+<tr><th>#</th><th>Club</th><th class="num">P</th><th class="num">W</th><th class="num">L</th><th class="num">Runs</th><th class="num">Wkts lost</th><th class="num">Balls</th><th class="num">NRR</th><th class="num">Pts</th></tr>
+<tr class="hl"><td>1</td><td>Black Bird United</td><td class="num">2</td><td class="num">2</td><td class="num">0</td><td class="num">44</td><td class="num">0</td><td class="num">12</td><td class="num">+14.000</td><td class="num">4</td></tr>
+<tr><td>2</td><td>New Athletico Saltlake</td><td class="num">2</td><td class="num">1</td><td class="num">1</td><td class="num">28</td><td class="num">1</td><td class="num">12</td><td class="num">0.000</td><td class="num">2</td></tr>
+<tr><td>3</td><td>Super Strikers CF</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">10</td><td class="num">1</td><td class="num">3</td><td class="num">−2.000</td><td class="num">0</td></tr>
+<tr><td>4</td><td>Martians</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">0</td><td class="num">1</td><td class="num">1</td><td class="num">−26.000</td><td class="num">0</td></tr>
+</table>
+<p class="muted">NRR uses a 1-over quota. All out before the quota still counts as 1.0 over faced. BBU SR in the cup: 366.7 (44 off 12).</p>
+</main>
+<footer><a href="index.html">CASPER</a> · Clubs · Players · Statistics · The Great CASPER Treble</footer>
 </body>
 </html>
