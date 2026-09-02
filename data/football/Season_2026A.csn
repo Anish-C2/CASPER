@@ -28,6 +28,6 @@ bbu-rsa:5-2(gh=Anish*3+Srinjoy*1+Gourav*1,ga=Arjun*2,ah=Anish*1+Srinjoy*1,aa=Arj
 bbu-rsa:1-4(gh=Anish*1,ga=Arjun*2+Aarav*2,aa=Arjun*2+Aarav*1)#4;
 bbu-rsa:6-1(gh=Anish*3+Anirban*3,ga=Aarav*1,ah=Anish*2+Srinjoy*1+Anirban*1,aa=Arjun*1)#5;
 bbu-rsa:2-0(gh=Anish*1+Anirban*1,ah=Anish*1+Anirban*1)#6;
-bbu-rsa:0-1(ga=Arjun*1,aa=Aarav*1)#7
+bbu-rsa:0-1(gh=Anish*1)#7
 );
 ]
