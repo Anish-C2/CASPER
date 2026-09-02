@@ -8,17 +8,14 @@
       "name": "Sector 1",
       "type": "School",
       "status": "Active",
-      "description": "CASPER's school-based operating sector.",
+      "description": "CASPER operating sector based at the school location.",
       "sports": ["futsal", "football", "cricket"],
       "leagues": [],
       "seasons": [],
       "playerIds": [],
       "clubCodes": [],
       "competitionIds": [],
-      "archive": {
-        "dataRoot": "data/sectors/sector-1",
-        "manifest": "data/sectors/sector-1/manifest.json"
-      }
+      "archive": { "dataRoot": "data/sectors/sector-1", "manifest": "data/sectors/sector-1/manifest.json" }
     },
     {
       "id": "sector-2",
@@ -26,17 +23,14 @@
       "name": "Sector 2",
       "type": "Apartment",
       "status": "Active",
-      "description": "CASPER's apartment-based operating sector.",
+      "description": "CASPER operating sector based at the apartment location.",
       "sports": ["futsal", "football", "cricket"],
       "leagues": [],
       "seasons": [],
       "playerIds": [],
       "clubCodes": [],
       "competitionIds": [],
-      "archive": {
-        "dataRoot": "data/sectors/sector-2",
-        "manifest": "data/sectors/sector-2/manifest.json"
-      }
+      "archive": { "dataRoot": "data/sectors/sector-2", "manifest": "data/sectors/sector-2/manifest.json" }
     }
   ]
 }
