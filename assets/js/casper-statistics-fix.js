@@ -10,7 +10,6 @@
   function row(a, b) { return '<div class="desktop-row"><span>' + a + '</span><b>' + b + '</b></div>'; }
   function card(t, b) { return '<div class="desktop-card"><h3>' + t + '</h3>' + (b || '<div class="desktop-muted">No rows.</div>') + '</div>'; }
   function pLink(n) { return '<a class="desktop-link" href="#player/' + encodeURIComponent(n) + '">' + esc(n) + '</a>'; }
-  function teamName(sp, code) { return sp && sp.teams && sp.teams[code] ? sp.teams[code].name : code; }
   function matches() {
     var out = [];
     (STATE.sportsCfg.sports || []).forEach(function (cfg) {
@@ -59,8 +58,8 @@
       if (cfg.scoring !== 'cricket') return;
       var sp = STATE.sports[cfg.id]; if (!sp) return;
       Object.values(sp.teams || {}).forEach(function (t) {
-        var w = Number(t.wins || 0), d = Number(t.draws || 0), l = Number(t.losses || 0), n = w + d + l;
-        cricket.push({ name: t.name, w: w, d: d, l: l, gf: Number(t.gf || 0), ga: Number(t.ga || 0), n: n });
+        var w = Number(t.wins || 0), d = Number(t.draws || 0), l = Number(t.losses || 0);
+        cricket.push({ name: t.name, w: w, d: d, l: l, gf: Number(t.gf || 0), ga: Number(t.ga || 0) });
       });
     });
     cricket.sort(function (a, b) { return b.w - a.w || (b.gf - b.ga) - (a.gf - a.ga) || b.gf - a.gf; });
@@ -69,7 +68,7 @@
       ['gh', 'ga'].forEach(function (field) { (x.m[field] || []).forEach(function (g) { named.push({ name: g.name, goals: Number(g.n || 0) }); }); });
     });
     var namedMap = {};
-    named.forEach(function (g) { var k = g.name.toLowerCase(); if (!namedMap[k]) namedMap[k] = { name: g.name, goals: 0 }; namedMap[k].goals += g.goals; });
+    named.forEach(function (g) { var k = String(g.name || '').toLowerCase(); if (!k) return; if (!namedMap[k]) namedMap[k] = { name: g.name, goals: 0 }; namedMap[k].goals += g.goals; });
     var logged = Object.values(namedMap).sort(function (a, b) { return b.goals - a.goals; }).slice(0, 10);
     return '<div class="desktop-page">' +
       '<div class="desktop-hero"><div class="desktop-kicker">ARCHIVE</div><h2>STATISTICS</h2><p>Cross-sport totals generated directly from the loaded CSN archive.</p></div>' +
@@ -95,8 +94,13 @@
       '</div></div>';
   }
   function install() {
+    if (window.__CASPER_STATS_PATCHED) return;
     var oldRoute = window.route;
-    if (typeof oldRoute !== 'function') return;
+    if (typeof oldRoute !== 'function') {
+      setTimeout(install, 50);
+      return;
+    }
+    window.__CASPER_STATS_PATCHED = true;
     window.route = function () {
       var h = (location.hash || '#home').slice(1), v = h.split('/')[0] || 'home';
       if (v === 'statistics') {
@@ -110,5 +114,5 @@
     };
     if ((location.hash || '#home').slice(1).split('/')[0] === 'statistics') window.route();
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', install); else install();
+  install();
 })();
