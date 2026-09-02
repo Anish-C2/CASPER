@@ -1,0 +1,30 @@
+{
+  "name": "CASPER Data API",
+  "version": "1.0",
+  "description": "Static, public data interface for CASPER. Raw CSN remains the canonical source; parsed and filtered responses are exposed through the API client.",
+  "base": "/api/v1",
+  "sports": ["futsal", "football", "cricket"],
+  "resources": {
+    "manifest": "/api/v1/index.json",
+    "sports": "/sports.json",
+    "config": "/config.json",
+    "raw_csn": "/data/{sport-path}/{season}.csn",
+    "api_client": "/api/v1/casper-api.js"
+  },
+  "operations": [
+    "rawCSN",
+    "parsed",
+    "competitions",
+    "matches",
+    "players",
+    "teams",
+    "awards",
+    "rankings",
+    "filterCSN"
+  ],
+  "filters": ["sport", "season", "competition", "competitionId", "player", "team", "stage"],
+  "notes": [
+    "CASPER is hosted as a static site, so arbitrary HTTP query execution is intentionally handled by the API client rather than a server runtime.",
+    "All derived data is generated from CSN and should be treated as a view of the archive, not a replacement for the source CSN."
+  ]
+}
