@@ -1,8 +1,22 @@
 {
   "sector": "sector-1",
-  "version": "1.0",
-  "seasons": [],
-  "leagues": [],
-  "competitions": [],
+  "version": "1.1",
+  "seasons": ["2026A"],
+  "leagues": [
+    {"id":"pc26a","name":"Pioneer Cup","sport":"futsal","season":"2026A"},
+    {"id":"rc26a","name":"Relegator Cup","sport":"futsal","season":"2026A"},
+    {"id":"csc26a","name":"Chroma Super Cup","sport":"futsal","season":"2026A"},
+    {"id":"gr26a","name":"Grande","sport":"futsal","season":"2026A"},
+    {"id":"cl26a","name":"Conference League","sport":"futsal","season":"2026A"},
+    {"id":"prc26a","name":"Peripheral Cup","sport":"futsal","season":"2026A"},
+    {"id":"pl26a","name":"Premier League","sport":"futsal","season":"2026A"},
+    {"id":"sc26a","name":"SuperCup","sport":"futsal","season":"2026A"},
+    {"id":"msc26a","name":"Minor Supercup","sport":"futsal","season":"2026A"},
+    {"id":"ssc26a","name":"Sub Supercup","sport":"futsal","season":"2026A"},
+    {"id":"fn26a","name":"Finale","sport":"futsal","season":"2026A"},
+    {"id":"sc26a-football","name":"SuperCup","sport":"football","sourceId":"sc26a","season":"2026A"},
+    {"id":"tc26a","name":"Titan Cup","sport":"cricket","season":"2026A"}
+  ],
+  "competitions": ["pc26a","rc26a","csc26a","gr26a","cl26a","prc26a","pl26a","sc26a","msc26a","ssc26a","fn26a","sc26a-football","tc26a"],
   "files": []
 }
