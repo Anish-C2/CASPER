@@ -6,6 +6,10 @@
     return String(name || '').replace(/\(.*?\)/g, '').trim().toLowerCase();
   }
 
+  function displayName(name) {
+    return String(name || '').replace(/\(.*?\)/g, '').trim();
+  }
+
   function sportPlayers(id) {
     var s = STATE.sports && STATE.sports[id];
     return (s && s.players) || {};
@@ -32,8 +36,27 @@
     return out;
   }
 
+  function rowsForSport(id, field) {
+    return Object.keys(sportPlayers(id)).map(function (key) {
+      var p = sportPlayers(id)[key];
+      return { name: displayName(p.name), value: Number(p[field] || 0) };
+    }).filter(function (x) { return x.value > 0; }).sort(function (a, b) {
+      return b.value - a.value || a.name.localeCompare(b.name);
+    });
+  }
+
   function row(label, value) {
     return '<div class="desktop-row"><span>' + label + '</span><b>' + value + '</b></div>';
+  }
+
+  function link(name) {
+    return '<a class="desktop-link" href="#player/' + encodeURIComponent(name) + '">' + name + '</a>';
+  }
+
+  function board(id, field) {
+    return rowsForSport(id, field).map(function (x, i) {
+      return row((i + 1) + '. ' + link(x.name), x.value);
+    }).join('') || '<div class="desktop-muted">No rows.</div>';
   }
 
   function playerNameFromCard(card) {
@@ -81,21 +104,43 @@
     });
   }
 
+  function patchStatisticsPage() {
+    var cards = document.querySelectorAll('.desktop-card');
+    var named = Array.prototype.find.call(cards, function (card) {
+      var h = card.querySelector('h3');
+      return h && h.textContent.trim() === 'NAMED SCORERS';
+    });
+    if (!named || named.dataset.sportStatsPatched === '1') return;
+
+    named.dataset.sportStatsPatched = '1';
+    var wrapper = document.createElement('div');
+    wrapper.className = 'desktop-grid2';
+    wrapper.innerHTML =
+      '<div class="desktop-card"><h3>FUTSAL GOALS</h3>' + board('futsal', 'goals') + '</div>' +
+      '<div class="desktop-card"><h3>FOOTBALL GOALS</h3>' + board('football', 'goals') + '</div>' +
+      '<div class="desktop-card"><h3>FUTSAL ASSISTS</h3>' + board('futsal', 'assists') + '</div>' +
+      '<div class="desktop-card"><h3>FOOTBALL ASSISTS</h3>' + board('football', 'assists') + '</div>';
+    named.replaceWith(wrapper);
+  }
+
   function patch() {
     if (typeof STATE === 'undefined' || !STATE.ready) return;
     var hash = (location.hash || '#home').slice(1);
     if (hash === 'players') patchPlayersPage();
     else if (hash.indexOf('player/') === 0) patchPlayerPage();
+    else if (hash === 'statistics') patchStatisticsPage();
   }
 
   function install() {
     var previous = window.CASPER_DESKTOP_RENDER;
-    if (typeof previous !== 'function') return false;
-    window.CASPER_DESKTOP_RENDER = function () {
+    if (typeof previous !== 'function' || previous.__sportStatsWrapped) return false;
+    var wrapped = function () {
       var result = previous.apply(this, arguments);
       setTimeout(patch, 0);
       return result;
     };
+    wrapped.__sportStatsWrapped = true;
+    window.CASPER_DESKTOP_RENDER = wrapped;
     return true;
   }
 
