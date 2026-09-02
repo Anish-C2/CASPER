@@ -1,6 +1,6 @@
 {
   "_comment": "clubs is a list of club codes. sectors is a list of CASPER sector IDs. One player may own two or more clubs and may participate in more than one sector. Stats still come from CSN.",
-  "anish": { "name": "Anish", "clubs": ["bbu"], "sectors": [], "country": "India", "position": "Forward / Pivot", "foot": "Right", "status": "Active", "sports": ["futsal", "football", "cricket"], "id": "CAS-PL-0007" },
+  "anish": { "name": "Anish", "clubs": ["bbu"], "sectors": ["sector-1", "sector-2"], "country": "India", "position": "Forward / Pivot", "foot": "Right", "status": "Active", "sports": ["futsal", "football", "cricket"], "id": "CAS-PL-0007" },
   "bhavesh": { "name": "Bhavesh", "clubs": ["kko"], "sectors": [], "country": "India", "position": "Forward", "status": "Active", "sports": ["futsal"], "id": "CAS-PL-0002" },
   "arjun": { "name": "Arjun", "clubs": ["rsa"], "sectors": [], "country": "India", "position": "Defender", "status": "Active", "sports": ["futsal", "football"], "id": "CAS-PL-0003" },
   "anirban": { "name": "Anirban", "clubs": ["mar"], "sectors": [], "country": "India", "position": "Forward", "status": "Active", "sports": ["futsal", "football", "cricket"], "id": "CAS-PL-0004" },
