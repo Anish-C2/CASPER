@@ -1,6 +1,6 @@
 {
   "_comment": "A Sector is a physical/local area where CASPER operates. It is not necessarily a country, city or administrative region. Each Sector owns its own competitive ecosystem.",
-  "version": "1.0",
+  "version": "1.1",
   "sectors": [
     {
       "id": "sector-1",
@@ -10,11 +10,25 @@
       "status": "Active",
       "description": "CASPER operating sector based at the school location.",
       "sports": ["futsal", "football", "cricket"],
-      "leagues": [],
-      "seasons": [],
+      "leagues": [
+        {"id":"pc26a","name":"Pioneer Cup","sport":"futsal","season":"2026A"},
+        {"id":"rc26a","name":"Relegator Cup","sport":"futsal","season":"2026A"},
+        {"id":"csc26a","name":"Chroma Super Cup","sport":"futsal","season":"2026A"},
+        {"id":"gr26a","name":"Grande","sport":"futsal","season":"2026A"},
+        {"id":"cl26a","name":"Conference League","sport":"futsal","season":"2026A"},
+        {"id":"prc26a","name":"Peripheral Cup","sport":"futsal","season":"2026A"},
+        {"id":"pl26a","name":"Premier League","sport":"futsal","season":"2026A"},
+        {"id":"sc26a","name":"SuperCup","sport":"futsal","season":"2026A"},
+        {"id":"msc26a","name":"Minor Supercup","sport":"futsal","season":"2026A"},
+        {"id":"ssc26a","name":"Sub Supercup","sport":"futsal","season":"2026A"},
+        {"id":"fn26a","name":"Finale","sport":"futsal","season":"2026A"},
+        {"id":"sc26a-football","name":"SuperCup","sport":"football","sourceId":"sc26a","season":"2026A"},
+        {"id":"tc26a","name":"Titan Cup","sport":"cricket","season":"2026A"}
+      ],
+      "seasons": ["2026A"],
       "playerIds": [],
       "clubCodes": [],
-      "competitionIds": [],
+      "competitionIds": ["pc26a","rc26a","csc26a","gr26a","cl26a","prc26a","pl26a","sc26a","msc26a","ssc26a","fn26a","sc26a-football","tc26a"],
       "archive": { "dataRoot": "data/sectors/sector-1", "manifest": "data/sectors/sector-1/manifest.json" }
     },
     {
@@ -24,7 +38,7 @@
       "type": "Apartment",
       "status": "Active",
       "description": "CASPER operating sector based at the apartment location.",
-      "sports": ["futsal", "football", "cricket"],
+      "sports": [],
       "leagues": [],
       "seasons": [],
       "playerIds": [],
