@@ -1,4 +1,4 @@
-/* CASPER STATISTICS PATCH — intercept the desktop route before boot can call the broken statisticsPage(). */
+/* CASPER STATISTICS PATCH — intercept both route and desktop boot before the broken statisticsPage() can run. */
 (function () {
   'use strict';
 
@@ -119,36 +119,56 @@
       '</div></div>';
   }
 
+  function renderStatistics() {
+    var app = document.getElementById('app');
+    if (!app) return;
+    app.innerHTML = statisticsPageFixed();
+    if (typeof window.setActive === 'function') window.setActive('statistics');
+    document.querySelectorAll('nav.main a').forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('data-view') === 'statistics');
+    });
+  }
+
+  function isStatisticsHash() {
+    var h = (location.hash || '#home').slice(1);
+    return (h.split('/')[0] || 'home') === 'statistics';
+  }
+
   function install() {
     if (window.__CASPER_STATS_PATCHED) return;
-    var current = window.route;
+    var currentRoute = window.route;
+    var currentRender = window.CASPER_DESKTOP_RENDER;
 
     function wrappedRoute() {
-      var h = (location.hash || '#home').slice(1), v = h.split('/')[0] || 'home';
-      if (v === 'statistics') {
-        var app = document.getElementById('app');
-        if (app) app.innerHTML = statisticsPageFixed();
-        if (typeof window.setActive === 'function') window.setActive('statistics');
-        document.querySelectorAll('nav.main a').forEach(function (a) {
-          a.classList.toggle('active', a.getAttribute('data-view') === 'statistics');
-        });
+      if (isStatisticsHash()) {
+        renderStatistics();
         return;
       }
-      if (typeof current === 'function') return current.apply(this, arguments);
+      if (typeof currentRoute === 'function') return currentRoute.apply(this, arguments);
+    }
+
+    function wrappedRender() {
+      if (isStatisticsHash()) {
+        renderStatistics();
+        return;
+      }
+      if (typeof currentRender === 'function') return currentRender.apply(this, arguments);
     }
 
     try {
       Object.defineProperty(window, 'route', {
         configurable: true,
         get: function () { return wrappedRoute; },
-        set: function (fn) { current = fn; }
+        set: function (fn) { currentRoute = fn; }
+      });
+      Object.defineProperty(window, 'CASPER_DESKTOP_RENDER', {
+        configurable: true,
+        get: function () { return wrappedRender; },
+        set: function (fn) { currentRender = fn; }
       });
       window.__CASPER_STATS_PATCHED = true;
     } catch (e) {
-      if (typeof current === 'function') {
-        window.route = wrappedRoute;
-        window.__CASPER_STATS_PATCHED = true;
-      }
+      window.__CASPER_STATS_PATCH_ERROR = String(e && e.message ? e.message : e);
     }
   }
 
