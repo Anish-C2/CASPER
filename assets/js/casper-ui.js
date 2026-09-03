@@ -1,7 +1,9 @@
+function siteRoot(){ return (PAGE && PAGE.root) || ''; }
 function sportSwitch(){
   const cur = PAGE.mode === 'hub' ? 'hub' : PAGE.sport;
-  return '<div class="pills"><a href="index.html"' + (cur === 'hub' ? ' class="on"' : '') + '>CASPER</a>' +
-    STATE.sportsCfg.sports.map(s => '<a href="' + s.page + '"' + (cur === s.id ? ' class="on"' : '') + '>' + escapeHtml(s.name) + '</a>').join('') + '</div>';
+  const r = siteRoot();
+  return '<div class="pills"><a href="' + r + 'index.html"' + (cur === 'hub' ? ' class="on"' : '') + '>CASPER</a>' +
+    STATE.sportsCfg.sports.map(s => '<a href="' + r + s.page + '"' + (cur === s.id ? ' class="on"' : '') + '>' + escapeHtml(s.name) + '</a>').join('') + '</div>';
 }
 function currentSport(){ return PAGE.mode === 'hub' ? null : (STATE.sports[PAGE.sport] || null); }
 function pct(x){ return ((x || 0) * 100).toFixed(1) + '%'; }
