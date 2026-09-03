@@ -4,7 +4,7 @@ CASPER now exposes a static data API layer for consumers such as CASPER-Exp, das
 
 ## Canonical source
 
-CSN remains the source of truth. Raw files are available under `data/`, `data/football/` and `data/cricket/`.
+CSN remains the source of truth. Raw files are available under `data/futsal/`, `data/football/` and `data/cricket/`.
 
 ## API client
 
