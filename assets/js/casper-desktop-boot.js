@@ -3,8 +3,12 @@
   'use strict';
   var VERSION = '20260901h';
 
+  function root() {
+    return (window.CASPER_PAGE && window.CASPER_PAGE.root) || '';
+  }
+
   function loadJson(path, fallback) {
-    return fetch(path + (path.indexOf('?') >= 0 ? '&' : '?') + 'v=' + VERSION)
+    return fetch(root() + path + (path.indexOf('?') >= 0 ? '&' : '?') + 'v=' + VERSION)
       .then(function (r) { return r.ok ? r.json() : fallback; })
       .catch(function () { return fallback; });
   }
@@ -22,7 +26,7 @@
     if (!app) return;
     app.innerHTML = '<div class="desktop-page"><div class="desktop-hero"><div class="desktop-kicker">CASPER</div><h2>ARCHIVE DID NOT FINISH LOADING</h2><p>' +
       String(msg || 'Unknown renderer error') +
-      '</p><div class="desktop-actions"><a href="index.html">RELOAD HOME</a></div></div></div>';
+      '</p><div class="desktop-actions"><a href="' + root() + 'index.html">RELOAD HOME</a></div></div></div>';
   }
 
   function renderNow() {
@@ -59,7 +63,7 @@
       var chain = Promise.resolve();
       list.forEach(function (cfg) {
         chain = chain.then(function () {
-          return fetch((cfg.manifest || '') + '?v=' + VERSION)
+          return fetch(root() + (cfg.manifest || '') + '?v=' + VERSION)
             .then(function (r) { return r.ok ? r.json() : []; })
             .catch(function () { return []; })
             .then(function (files) {
@@ -68,7 +72,7 @@
               var filesChain = Promise.resolve();
               files.forEach(function (f) {
                 filesChain = filesChain.then(function () {
-                  return fetch((cfg.dataDir || 'data') + '/' + f + '?v=' + VERSION)
+                  return fetch(root() + (cfg.dataDir || 'data') + '/' + f + '?v=' + VERSION)
                     .then(function (r) { return r.ok ? r.text() : ''; })
                     .then(function (text) {
                       if (text && typeof parseCSN === 'function') {
