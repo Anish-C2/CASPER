@@ -1,6 +1,6 @@
 /* CASPER Data API v1.1 — static public data API. */
 (function(root){'use strict';
-const BASE=new URL('../../',document.currentScript?document.currentScript.src:location.href),SPORT_PATH={futsal:'data',football:'data/football',cricket:'data/cricket'},cache=new Map();
+const BASE=new URL('../../',document.currentScript?document.currentScript.src:location.href),SPORT_PATH={futsal:'data/futsal',football:'data/football',cricket:'data/cricket'},cache=new Map();
 function norm(v){return String(v==null?'':v).trim().toLowerCase()}
 function source(sport,season){const s=norm(sport||'futsal');if(!SPORT_PATH[s])throw new Error('Unknown sport: '+sport);return new URL(SPORT_PATH[s]+'/Season_'+encodeURIComponent(season||'2026A')+'.csn',BASE).href}
 async function text(sport,season){const u=source(sport,season);if(!cache.has(u))cache.set(u,fetch(u).then(r=>{if(!r.ok)throw new Error('CSN fetch failed: '+r.status);return r.text()}));return cache.get(u)}

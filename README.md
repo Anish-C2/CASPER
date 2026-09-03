@@ -20,8 +20,9 @@ CASPER/
 ├── player-registry.json    Players and club ownership
 ├── sectors.json            Operating-area registry
 ├── assets/
+│   ├── casper-core.js      CSN parser and rankings
 │   ├── css/                Active stylesheets
-│   └── js/                 Active site scripts
+│   └── js/                 Active page scripts
 ├── data/
 │   ├── futsal/             CSN seasons + manifest
 │   ├── football/
@@ -36,10 +37,8 @@ Pages and catalog JSON stay at the repo root so GitHub Pages and the public API 
 ## What lives where
 
 - `assets/css/` — portal and desktop theme
-- `assets/js/casper-core.js` — CSN parser and rankings
-- `assets/js/casper-ui.js` — shared UI helpers
-- `assets/js/casper-desktop-site.js` + `casper-desktop-boot.js` — desktop archive
-- `assets/js/casper-sectors.js` — sector directory
+- `assets/casper-core.js` — CSN parser and rankings
+- `assets/js/` — desktop UI, boot, sector pages, sport-specific fixes
 - `data/<sport>/` — one folder per sport; each has `manifest.json` and `Season_*.csn`
 - `api/v1/` — static API client over the same CSN files
 
