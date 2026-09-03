@@ -5,7 +5,7 @@
     {
       "id": "futsal",
       "name": "Futsal",
-      "page": "futsal.html",
+      "page": "sports/futsal.html",
       "manifest": "data/futsal/manifest.json",
       "dataDir": "data/futsal",
       "scoring": "goals",
@@ -18,7 +18,7 @@
     {
       "id": "football",
       "name": "Football",
-      "page": "football.html",
+      "page": "sports/football.html",
       "manifest": "data/football/manifest.json",
       "dataDir": "data/football",
       "scoring": "goals",
@@ -31,7 +31,7 @@
     {
       "id": "cricket",
       "name": "Cricket",
-      "page": "cricket.html",
+      "page": "sports/cricket.html",
       "manifest": "data/cricket/manifest.json",
       "dataDir": "data/cricket",
       "scoring": "cricket",
