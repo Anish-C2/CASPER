@@ -1,4 +1,4 @@
-/* CASPER STATISTICS PATCH — intercept both route and desktop boot before the broken statisticsPage() can run. */
+/* CASPER STATISTICS PATCH — safe route interception only. */
 (function () {
   'use strict';
 
@@ -137,8 +137,6 @@
   function install() {
     if (window.__CASPER_STATS_PATCHED) return;
     var currentRoute = window.route;
-    var currentRender = window.CASPER_DESKTOP_RENDER;
-
     function wrappedRoute() {
       if (isStatisticsHash()) {
         renderStatistics();
@@ -146,25 +144,11 @@
       }
       if (typeof currentRoute === 'function') return currentRoute.apply(this, arguments);
     }
-
-    function wrappedRender() {
-      if (isStatisticsHash()) {
-        renderStatistics();
-        return;
-      }
-      if (typeof currentRender === 'function') return currentRender.apply(this, arguments);
-    }
-
     try {
       Object.defineProperty(window, 'route', {
         configurable: true,
         get: function () { return wrappedRoute; },
         set: function (fn) { currentRoute = fn; }
-      });
-      Object.defineProperty(window, 'CASPER_DESKTOP_RENDER', {
-        configurable: true,
-        get: function () { return wrappedRender; },
-        set: function (fn) { currentRender = fn; }
       });
       window.__CASPER_STATS_PATCHED = true;
     } catch (e) {
