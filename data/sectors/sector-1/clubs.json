@@ -1,0 +1,32 @@
+{
+  "sector": "sector-1",
+  "version": "1.0",
+  "clubs": {
+    "bbu": "Black Bird United",
+    "sey": "Seyfert CF",
+    "ssc": "Super Strikers CF",
+    "wfc": "Wallington FC",
+    "yfc": "Yoboys FC",
+    "cgc": "Cybergoat FC",
+    "mar": "Masters FC",
+    "goat": "GOAT FC",
+    "akk": "Akkarian",
+    "bib": "Bibilorian",
+    "mfc": "Modo FC",
+    "godo": "Godo FC",
+    "nas": "New Athletico Saltlake",
+    "slr": "Saltlake Rangers",
+    "kko": "Kolkata Kous",
+    "bb": "Bold Bangers",
+    "rsa": "Real Saltlake CF",
+    "fcs": "FC Saltlake",
+    "rut": "Romano United",
+    "tro": "Troopers",
+    "vos": "Vostok FC",
+    "del": "FC Deltos",
+    "hor": "Horsemen United",
+    "nmc": "New Marinas CF",
+    "mvl": "Moville",
+    "bri": "Brighton CF"
+  }
+}
