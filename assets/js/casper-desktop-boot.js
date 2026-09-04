@@ -1,7 +1,7 @@
 /* CASPER DESKTOP BOOT — never leave the hub stuck on the loading banner. */
 (function () {
   'use strict';
-  var VERSION = '20260904b';
+  var VERSION = '20260904c';
 
   function root() {
     return (window.CASPER_PAGE && window.CASPER_PAGE.root) || '';
@@ -46,10 +46,27 @@
     var clubs = (data && data.clubs) || {};
     Object.keys(STATE.sports || {}).forEach(function (sportId) {
       var sport = STATE.sports[sportId];
-      if (!sport || !sport.teams) return;
-      Object.keys(sport.teams).forEach(function (code) {
-        var key = String(code || '').toLowerCase();
-        if (clubs[key]) sport.teams[code].name = clubs[key];
+      if (!sport) return;
+
+      if (sport.teams) {
+        Object.keys(sport.teams).forEach(function (code) {
+          var key = String(code || '').toLowerCase();
+          if (clubs[key] && sport.teams[code]) sport.teams[code].name = clubs[key];
+        });
+      }
+
+      (sport.tournaments || []).forEach(function (t) {
+        Object.keys(t.n || {}).forEach(function (code) {
+          var key = String(code || '').toLowerCase();
+          if (clubs[key]) t.n[code].name = clubs[key];
+        });
+      });
+
+      (sport.matches || []).forEach(function (m) {
+        Object.keys(m.names || {}).forEach(function (code) {
+          var key = String(code || '').toLowerCase();
+          if (clubs[key] && m.names[code]) m.names[code].name = clubs[key];
+        });
       });
     });
   }
