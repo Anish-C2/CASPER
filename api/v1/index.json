@@ -1,7 +1,7 @@
 {
   "name": "CASPER Data API",
   "version": "1.1",
-  "description": "Static public data interface for CASPER, including its geographic/local operating sectors.",
+  "description": "Static public data interface for CASPER, including its geographic/local operating sectors and club registry metadata.",
   "base": "/api/v1",
   "sports": ["futsal", "football", "cricket"],
   "resources": {
@@ -10,14 +10,16 @@
     "config": "/config.json",
     "sectors": "/sectors.json",
     "player_registry": "/player-registry.json",
+    "sector_1_clubs": "/data/sectors/sector-1/clubs.json",
     "raw_csn": "/data/{sport-path}/{season}.csn",
     "api_client": "/api/v1/casper-api.js"
   },
-  "operations": ["rawCSN", "parsed", "sectors", "competitions", "matches", "players", "teams", "awards", "rankings", "filterCSN"],
+  "operations": ["rawCSN", "parsed", "sectors", "competitions", "matches", "players", "awards", "rankings", "filterCSN"],
   "filters": ["sport", "season", "sector", "competition", "competitionId", "player", "team", "stage"],
   "sector_model": "A sector is a physical/local CASPER operating area. It is not inherently a country or administrative region. Each sector can maintain its own players, clubs, leagues, competitions and seasons.",
   "notes": [
     "CASPER is hosted as a static site, so arbitrary HTTP query execution is handled by the API client rather than a server runtime.",
-    "CSN remains the canonical source for match and competition statistics; sectors.json is the authoritative registry for operating areas and their ownership boundaries."
+    "CSN remains the canonical source for match and competition statistics; sectors.json is the authoritative registry for operating areas and their ownership boundaries.",
+    "Club codes in player-registry.json resolve to human-readable names through the sector club registry."
   ]
 }
