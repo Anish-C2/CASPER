@@ -1,7 +1,7 @@
 /* CASPER DESKTOP BOOT — never leave the hub stuck on the loading banner. */
 (function () {
   'use strict';
-  var VERSION = '20260901h';
+  var VERSION = '20260904a';
 
   function root() {
     return (window.CASPER_PAGE && window.CASPER_PAGE.root) || '';
@@ -53,12 +53,14 @@
       loadJson('config.json', {}),
       loadJson('sports.json', { sports: [] }),
       loadJson('misc.json', {}),
-      loadJson('player-registry.json', {})
+      loadJson('player-registry.json', {}),
+      loadJson('data/sectors/sector-1/clubs.json', { sector: 'sector-1', clubs: {} })
     ]).then(function (pack) {
       readyState.config = pack[0] || {};
       readyState.sportsCfg = pack[1] || { sports: [] };
       readyState.misc = pack[2] || {};
       readyState.registry = Object.assign({}, pack[3] || {}, readyState.config.playerRegistry || {});
+      readyState.clubRegistry = (pack[4] && pack[4].clubs) || {};
       var list = (readyState.sportsCfg.sports || []).slice();
       var chain = Promise.resolve();
       list.forEach(function (cfg) {
