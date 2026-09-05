@@ -1,7 +1,7 @@
 /* CASPER DESKTOP BOOT — never leave the hub stuck on the loading banner. */
 (function () {
   'use strict';
-  var VERSION = '20260905a';
+  var VERSION = '20260905c';
 
   function root() {
     return (window.CASPER_PAGE && window.CASPER_PAGE.root) || '';
@@ -63,12 +63,42 @@
     return owners;
   }
 
+  function findTeamKey(teams, code) {
+    if (!teams) return null;
+    if (teams[code]) return code;
+    var low = String(code || '').toLowerCase();
+    var keys = Object.keys(teams);
+    for (var i = 0; i < keys.length; i++) {
+      if (String(keys[i]).toLowerCase() === low) return keys[i];
+    }
+    return null;
+  }
+
+  function emptyRegisteredTeam(code, name, owner) {
+    return {
+      abbr: code,
+      name: name || code,
+      player: owner || '',
+      matches: 0, wins: 0, draws: 0, losses: 0, gf: 0, ga: 0, pts: 0,
+      titles: 0, runnerUps: 0, thirds: 0, cleanSheets: 0, biggestWin: 0,
+      trophies: [], form: [],
+      runsFor: 0, runsAg: 0, wktsLost: 0, wktsTook: 0, ballsFaced: 0, ballsBowled: 0, sportPts: 0,
+      registered: true
+    };
+  }
+
   function applyClubRegistry(data) {
     var clubs = clubMap(data);
     var owners = ownerMap(typeof STATE !== 'undefined' ? STATE.registry : {});
+    Object.keys(owners).forEach(function (code) {
+      if (!clubs[code]) clubs[code] = String(code).toUpperCase();
+    });
+    if (typeof STATE !== 'undefined') STATE.clubRegistry = clubs;
+
     Object.keys(STATE.sports || {}).forEach(function (sportId) {
       var sport = STATE.sports[sportId];
       if (!sport) return;
+      if (!sport.teams) sport.teams = {};
 
       function stamp(entry, code) {
         if (!entry) return;
@@ -78,11 +108,18 @@
         if (owners[key]) entry.player = owners[key];
       }
 
-      if (sport.teams) {
-        Object.keys(sport.teams).forEach(function (code) {
-          stamp(sport.teams[code], code);
-        });
-      }
+      Object.keys(clubs).forEach(function (code) {
+        var existing = findTeamKey(sport.teams, code);
+        if (existing) {
+          stamp(sport.teams[existing], existing);
+          return;
+        }
+        sport.teams[code] = emptyRegisteredTeam(code, clubs[code], owners[String(code).toLowerCase()]);
+      });
+
+      Object.keys(sport.teams).forEach(function (code) {
+        stamp(sport.teams[code], code);
+      });
 
       (sport.tournaments || []).forEach(function (t) {
         Object.keys(t.n || {}).forEach(function (code) {
@@ -152,6 +189,7 @@
       });
       return chain;
     }).then(function () {
+      applyClubRegistry({ clubs: readyState.clubRegistry });
       readyState.ready = true;
       var tick = document.getElementById('ticker-items');
       if (tick && typeof generateNews === 'function') {
