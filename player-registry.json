@@ -13,6 +13,5 @@
   "aryan": { "name": "Aryan", "clubs": ["vos", "del"], "sectors": ["sector-1"], "nationality": "India", "position": null, "preferredFoot": null, "birthYear": null, "status": "Active", "sports": ["futsal"], "id": "CAS-PL-0009" },
   "rajdeep": { "name": "Rajdeep", "clubs": ["hor", "nmc"], "sectors": ["sector-1"], "nationality": "India", "position": "Defender", "preferredFoot": null, "birthYear": null, "status": "Active", "sports": ["futsal", "football"], "id": "CAS-PL-0012" },
   "gourav": { "name": "Gourav", "clubs": ["mvl", "bri"], "sectors": ["sector-1"], "nationality": "India", "position": null, "preferredFoot": null, "birthYear": null, "status": "Active", "sports": ["futsal", "football"], "id": "CAS-PL-0010" },
-  "rounak": { "name": "Rounak", "clubs": ["igr", "acf"], "sectors": ["sector-1"], "nationality": "India", "position": null, "preferredFoot": null, "birthYear": null, "status": "Active", "sports": ["futsal"], "id": "CAS-PL-0008" },
-  "karan": { "name": "Karan", "clubs": [], "sectors": [], "nationality": "India", "position": null, "preferredFoot": null, "birthYear": null, "status": "Active", "sports": [], "id": "CAS-PL-0015" }
+  "rounak": { "name": "Rounak", "clubs": ["igr", "acf"], "sectors": ["sector-1"], "nationality": "India", "position": null, "preferredFoot": null, "birthYear": null, "status": "Active", "sports": ["futsal"], "id": "CAS-PL-0008" }
 }
