@@ -1,7 +1,7 @@
 /* CASPER DESKTOP BOOT — never leave the hub stuck on the loading banner. */
 (function () {
   'use strict';
-  var VERSION = '20260904c';
+  var VERSION = '20260905a';
 
   function root() {
     return (window.CASPER_PAGE && window.CASPER_PAGE.root) || '';
@@ -42,30 +42,57 @@
     return false;
   }
 
+  function clubMap(data) {
+    if (!data) return {};
+    if (data.clubs && typeof data.clubs === 'object' && !Array.isArray(data.clubs)) return data.clubs;
+    return data;
+  }
+
+  function ownerMap(registry) {
+    var owners = {};
+    Object.keys(registry || {}).forEach(function (k) {
+      if (String(k).charAt(0) === '_') return;
+      var info = registry[k] || {};
+      var name = info.name || k;
+      (info.clubs || []).forEach(function (code, idx) {
+        var key = String(code || '').toLowerCase();
+        if (!key) return;
+        if (!owners[key] || idx === 0) owners[key] = name;
+      });
+    });
+    return owners;
+  }
+
   function applyClubRegistry(data) {
-    var clubs = (data && data.clubs) || {};
+    var clubs = clubMap(data);
+    var owners = ownerMap(typeof STATE !== 'undefined' ? STATE.registry : {});
     Object.keys(STATE.sports || {}).forEach(function (sportId) {
       var sport = STATE.sports[sportId];
       if (!sport) return;
 
+      function stamp(entry, code) {
+        if (!entry) return;
+        var key = String(code || '').toLowerCase();
+        if (clubs[key]) entry.name = clubs[key];
+        else if (clubs[code]) entry.name = clubs[code];
+        if (owners[key]) entry.player = owners[key];
+      }
+
       if (sport.teams) {
         Object.keys(sport.teams).forEach(function (code) {
-          var key = String(code || '').toLowerCase();
-          if (clubs[key] && sport.teams[code]) sport.teams[code].name = clubs[key];
+          stamp(sport.teams[code], code);
         });
       }
 
       (sport.tournaments || []).forEach(function (t) {
         Object.keys(t.n || {}).forEach(function (code) {
-          var key = String(code || '').toLowerCase();
-          if (clubs[key]) t.n[code].name = clubs[key];
+          stamp(t.n[code], code);
         });
       });
 
       (sport.matches || []).forEach(function (m) {
         Object.keys(m.names || {}).forEach(function (code) {
-          var key = String(code || '').toLowerCase();
-          if (clubs[key] && m.names[code]) m.names[code].name = clubs[key];
+          stamp(m.names[code], code);
         });
       });
     });
@@ -118,7 +145,7 @@
                 readyState.sports[cfg.id] = typeof buildSport === 'function'
                   ? buildSport(cfg, tours)
                   : { cfg: cfg, tournaments: tours, matches: [], players: {}, teams: {}, ranked: [] };
-                applyClubRegistry(readyState.clubRegistry);
+                applyClubRegistry({ clubs: readyState.clubRegistry });
               });
             });
         });
