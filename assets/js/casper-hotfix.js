@@ -1,4 +1,4 @@
-/* CASPER HOTFIX — statistics render + sector-local archive + 2-sector cap.
+/* CASPER HOTFIX — statistics render + sector-local archive.
    Sector scope is also exposed synchronously so desktop boot can apply it before first render. */
 (function () {
   'use strict';
@@ -15,7 +15,7 @@
   }
   function esc(v) {
     return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+      return { '&': '&', '<': '<', '>': '>', '"': '"', "'": '&#39;' }[c];
     });
   }
   function row(a, b) { return '<div class="desktop-row"><span>' + a + '</span><b>' + b + '</b></div>'; }
@@ -34,7 +34,7 @@
     Object.keys(STATE.registry || {}).forEach(function (k) {
       if (String(k).charAt(0) === '_') return;
       var r = STATE.registry[k] || {};
-      var secs = (r.sectors || []).slice(0, 2);
+      var secs = r.sectors || [];
       if (secs.indexOf(s.id) >= 0) {
         if (r.id) allowed['ID:' + String(r.id).toUpperCase()] = 1;
         allowed['NAME:' + String(r.name || k).toLowerCase()] = 1;
@@ -73,8 +73,6 @@
     STATE.__sectorPruned = true;
   }
 
-  // casper-desktop-boot.js calls this immediately after STATE becomes ready,
-  // eliminating the old 50ms race where the global renderer won the first paint.
   window.CASPER_SCOPE_SECTOR = pruneToSector;
 
   function collectPlayers() {
@@ -89,7 +87,7 @@
       if (String(k).charAt(0) === '_') return;
       var r = STATE.registry[k] || {};
       if (sectorRec()) {
-        var secs = (r.sectors || []).slice(0, 2);
+        var secs = r.sectors || [];
         if (secs.indexOf(sectorRec().id) < 0 && (sectorRec().playerIds || []).indexOf(r.id) < 0) return;
       }
       get(r.name || k);
@@ -119,7 +117,7 @@
     var scorer = ps.filter(function (p) { return p.goals > 0; }).sort(function (a, b) { return b.goals - a.goals || b.assists - a.assists; }).slice(0, 12);
     var runner = ps.filter(function (p) { return p.matches >= 3; }).sort(function (a, b) { var ar = a.matches ? a.wins / a.matches : 0, br = b.matches ? b.wins / b.matches : 0; return br - ar || b.wins - a.wins; }).slice(0, 12);
     var scope = sectorRec() ? sectorRec().name + ' only' : 'Global CASPER';
-    return '<div class="desktop-page"><div class="desktop-hero"><div class="desktop-kicker">ARCHIVE</div><h2>STATISTICS</h2><p>Generated from loaded season files. Scope: ' + esc(scope) + '. Players may register in two sectors maximum.</p></div><div class="desktop-stats"><div class="desktop-stat"><b>' + ps.length + '</b><span>Players</span></div><div class="desktop-stat"><b>' + ms + '</b><span>Matches</span></div><div class="desktop-stat"><b>' + goals + '</b><span>Goals</span></div><div class="desktop-stat"><b>' + runs + '</b><span>Runs</span></div><div class="desktop-stat"><b>' + pens + '</b><span>Pens</span></div></div><div class="desktop-grid2">' + card('TOP SCORERS', scorer.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G · ' + p.assists + ' A'); }).join('')) + card('WIN RATE · 3+ MATCHES', runner.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% · ' + p.wins + '-' + p.draws + '-' + p.losses); }).join('')) + '</div></div>';
+    return '<div class="desktop-page"><div class="desktop-hero"><div class="desktop-kicker">ARCHIVE</div><h2>STATISTICS</h2><p>Generated from loaded season files. Scope: ' + esc(scope) + '.</p></div><div class="desktop-stats"><div class="desktop-stat"><b>' + ps.length + '</b><span>Players</span></div><div class="desktop-stat"><b>' + ms + '</b><span>Matches</span></div><div class="desktop-stat"><b>' + goals + '</b><span>Goals</span></div><div class="desktop-stat"><b>' + runs + '</b><span>Runs</span></div><div class="desktop-stat"><b>' + pens + '</b><span>Pens</span></div></div><div class="desktop-grid2">' + card('TOP SCORERS', scorer.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G · ' + p.assists + ' A'); }).join('')) + card('WIN RATE · 3+ MATCHES', runner.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% · ' + p.wins + '-' + p.draws + '-' + p.losses); }).join('')) + '</div></div>';
   }
 
   function isStats() { var h = (location.hash || '#home').slice(1); return (h.split('/')[0] || 'home') === 'statistics'; }
