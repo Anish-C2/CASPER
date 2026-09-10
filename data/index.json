@@ -1,0 +1,17 @@
+{
+  "name": "CASPER archive catalog",
+  "version": "2.0",
+  "model": {
+    "sports": "sports.json lists every sport. Each sport has data/{sport}/manifest.json pointing at any number of Season_*.csn files.",
+    "sectors": "sectors.json lists every operating sector. Each sector has data/sectors/{id}/manifest.json and optional clubs.json plus sport-scoped CSN files.",
+    "seasons": "seasons.json is an optional index. New seasons are also discovered from filenames and CSN meta.s. There is no season or sector cap."
+  },
+  "paths": {
+    "sports": "/sports.json",
+    "sectors": "/sectors.json",
+    "seasons": "/seasons.json",
+    "sport_archive": "/data/{sport}/Season_{season}.csn",
+    "sector_root": "/data/sectors/{sector-id}/",
+    "sector_archive": "/data/sectors/{sector-id}/{sport}/Season_{season}.csn"
+  }
+}

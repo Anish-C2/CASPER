@@ -1,0 +1,16 @@
+{
+  "_comment": "Optional season catalog. The engine also discovers seasons from sport and sector manifests and from CSN meta.s fields, so this file never has to list every season.",
+  "version": "2.0",
+  "seasons": [
+    {
+      "id": "2026A",
+      "name": "2026A",
+      "label": "Inaugural cycle",
+      "status": "completed",
+      "started": "2026-01",
+      "completed": "2026-09",
+      "sports": ["futsal", "football", "cricket"],
+      "notes": "Founding CASPER season across Sector 1 and Sector 2."
+    }
+  ]
+}
