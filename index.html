@@ -4,74 +4,75 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CASPER — Competitive Athletics & Sports Promotion</title>
-<link rel="stylesheet" href="assets/css/casper.css?v=20260908icons2">
-<link rel="stylesheet" href="assets/css/casper-archive-theme.css?v=20260910engine">
-<link rel="stylesheet" href="assets/css/casper-desktop.css?v=20260908icons">
-<link rel="stylesheet" href="assets/css/casper-sidebar.css?v=20260908icons">
-<link rel="stylesheet" href="assets/css/casper-plus.css?v=20260908icons">
-<link rel="stylesheet" href="assets/css/casper-featured.css?v=20260908icons">
+<link rel="stylesheet" href="assets/css/casper.css?v=20260910ed">
+<link rel="stylesheet" href="assets/css/casper-archive-theme.css?v=20260910ed">
+<link rel="stylesheet" href="assets/css/casper-editorial.css?v=20260910ed">
 <script>window.CASPER_PAGE={mode:"hub",sport:null,root:""};</script>
 </head>
-<body class="ca-app">
-<header class="ca-top">
-  <a class="ca-brand" href="index.html">
-    <div class="ca-crest">CA</div>
-    <div class="ca-wordmark"><b>CASPER</b><span>Competitive Athletics & Sports Promotion</span></div>
+<body class="ed-home">
+<header class="ed-top">
+  <a class="ed-brand" href="index.html">
+    <b>CASPER</b>
+    <span>COMPETITIVE ATHLETICS &amp; SPORTS PROMOTION</span>
   </a>
-  <nav class="ca-topnav">
-    <a href="index.html" data-nav="home" class="on"><span class="material-symbols-outlined ca-topico" aria-hidden="true">home</span>Home</a>
-    <a href="index.html#competitions" data-nav="competitions"><span class="material-symbols-outlined ca-topico" aria-hidden="true">emoji_events</span>Competitions</a>
-    <a href="index.html#players" data-nav="players"><span class="material-symbols-outlined ca-topico" aria-hidden="true">groups</span>Players</a>
-    <a href="index.html#teams" data-nav="clubs"><span class="material-symbols-outlined ca-topico" aria-hidden="true">shield</span>Clubs</a>
-    <a href="sectors/index.html" data-nav="sectors"><span class="material-symbols-outlined ca-topico" aria-hidden="true">grid_view</span>Sectors</a>
-    <a href="index.html#archive" data-nav="archive"><span class="material-symbols-outlined ca-topico" aria-hidden="true">inventory_2</span>Archive</a>
-    <a href="governance/index.html" data-nav="governance"><span class="material-symbols-outlined ca-topico" aria-hidden="true">account_balance</span>Governance</a>
+  <nav class="ed-nav">
+    <a href="index.html" data-nav="home" class="on">Home</a>
+    <div class="ed-drop">
+      <button type="button">Sports</button>
+      <div class="ed-menu" id="ed-sports-menu">
+        <a href="sports/futsal.html">Futsal</a>
+        <a href="sports/football.html">Football</a>
+        <a href="sports/cricket.html">Cricket</a>
+      </div>
+    </div>
+    <a href="sectors/index.html" data-nav="sectors">Sectors</a>
+    <a href="index.html#competitions" data-nav="competitions">Competitions</a>
+    <a href="index.html#archive" data-nav="archive">Archive</a>
+    <a href="governance/index.html" data-nav="governance">Governance</a>
+    <a href="join/index.html" data-nav="join">Join</a>
   </nav>
-  <div class="ca-tools">
-    <form class="ca-search" id="ca-search-form" action="#">
-      <input name="q" placeholder="Search players, clubs, competitions…" autocomplete="off">
-      <button type="submit" class="ca-iconbtn" aria-label="Search" style="width:26px;height:26px;border:0;background:transparent"><span class="material-symbols-outlined" aria-hidden="true">search</span></button>
+  <div class="ed-tools">
+    <form class="ed-search" id="ca-search-form" action="#">
+      <input name="q" placeholder="Search players, clubs, competitions..." autocomplete="off">
+      <button type="submit" aria-label="Search">⌔</button>
     </form>
-    <button type="button" class="ca-iconbtn" id="ca-theme-toggle" title="Theme"><span class="material-symbols-outlined" aria-hidden="true" data-theme-icon>dark_mode</span></button>
+    <div class="ed-motto">PLAY.
+COMPETE.
+UNITE.</div>
   </div>
 </header>
-<div class="ca-shell">
-  <aside class="ca-side">
-    <div class="ca-side-id">
-      <div class="k">CASPER</div>
-      <div class="s" id="ca-side-tagline">A global sports archive.</div>
-    </div>
-    <nav class="main ca-nav">
-      <ul>
-        <li><a href="index.html" data-nav="home" class="on"><span class="material-symbols-outlined ca-ico" aria-hidden="true">home</span>Home</a></li>
-      </ul>
-      <ul id="ca-sport-nav">
-        <li><a href="sports/futsal.html" data-nav="futsal"><span class="material-symbols-outlined ca-ico" aria-hidden="true">sports_soccer</span>Futsal</a></li>
-        <li><a href="sports/football.html" data-nav="football"><span class="material-symbols-outlined ca-ico" aria-hidden="true">stadium</span>Football</a></li>
-        <li><a href="sports/cricket.html" data-nav="cricket"><span class="material-symbols-outlined ca-ico" aria-hidden="true">sports_cricket</span>Cricket</a></li>
-      </ul>
-      <div class="ca-hr"></div>
-      <ul>
-        <li><a href="index.html#archive" data-nav="archive"><span class="material-symbols-outlined ca-ico" aria-hidden="true">inventory_2</span>Archive</a></li>
-        <li><a href="sectors/index.html" data-nav="sectors"><span class="material-symbols-outlined ca-ico" aria-hidden="true">grid_view</span>Sectors</a></li>
-        <li><a href="governance/index.html" data-nav="governance"><span class="material-symbols-outlined ca-ico" aria-hidden="true">account_balance</span>Governance</a></li>
-        <li><a href="join/index.html" data-nav="join"><span class="material-symbols-outlined ca-ico" aria-hidden="true">person_add</span>Join</a></li>
-        <li><a href="api/index.html" data-nav="api"><span class="material-symbols-outlined ca-ico" aria-hidden="true">api</span>API</a></li>
-      </ul>
-    </nav>
-    <blockquote class="ca-quote">“Records are made. Trophies are won. Legends are remembered.”<cite>— CASPER</cite></blockquote>
-  </aside>
-  <div class="ca-work">
-    <main id="app"><div class="desktop-page"><section class="ca-hero desktop-hero"><div class="desktop-kicker">CASPER</div><h2>LOADING CASPER ARCHIVE…</h2><p>Initializing the federation desk from CSN season files.</p></section></div></main>
-    <footer class="ca-foot site"><div>© 2026 CASPER<br>All rights reserved.</div><div>Federation desk</div></footer>
+
+<main id="app">
+  <div class="ed-wrap">
+    <section class="ed-copy">
+      <div class="ed-kicker">CASPER</div>
+      <h1>LOADING ARCHIVE…</h1>
+      <p>Initializing the federation desk from CSN season files.</p>
+    </section>
   </div>
-</div>
-<script src="assets/js/casper-shell.js?v=20260908icons"></script>
+</main>
+
+<footer class="ed-foot">
+  <a class="ed-brand" href="index.html"><b>CASPER</b><span>COMPETITIVE ATHLETICS &amp; SPORTS PROMOTION</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="sports/futsal.html">Sports</a>
+    <a href="sectors/index.html">Sectors</a>
+    <a href="index.html#competitions">Competitions</a>
+    <a href="index.html#archive">Archive</a>
+    <a href="governance/index.html">Governance</a>
+    <a href="join/index.html">Join</a>
+    <a href="api/index.html">API</a>
+  </nav>
+  <div>A GLOBAL ARCHIVE. A LASTING LEGACY.</div>
+</footer>
+
+<script src="assets/js/casper-shell.js?v=20260910ed"></script>
 <script src="assets/casper-core.js?v=20260910engine"></script>
 <script src="assets/js/casper-engine.js?v=20260910engine"></script>
 <script src="assets/js/casper-ui.js?v=20260908icons"></script>
 <script src="assets/js/casper-desktop-site.js?v=20260908icons"></script>
-<script src="assets/js/casper-home.js?v=20260910home"></script>
+<script src="assets/js/casper-home.js?v=20260910ed"></script>
 <script src="assets/js/casper-sport-stats.js?v=20260908icons"></script>
 <script src="assets/js/casper-statistics-fix.js?v=20260908icons"></script>
 <script src="assets/js/casper-player-fix.js?v=20260908icons"></script>
