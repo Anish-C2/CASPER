@@ -1,4 +1,5 @@
-/* CASPER HOME — federation desk matching the full portal layout. */
+/* CASPER HOME — federation desk. Sports, sectors, seasons and featured copy
+   come from STATE catalogs (sports.json / sectors.json / seasons + CSN files). */
 (function () {
   'use strict';
 
@@ -16,16 +17,30 @@
   function isSeasonal(t) {
     return t && t.meta && (t.meta.e === 'Seasonal Awards' || t.meta.typ === 'seasonal');
   }
-  function blurb(id) {
-    return ({ futsal: 'Fast. Technical. Global.', football: 'Clubs. Nations. Passion.', cricket: 'Tradition. Strategy. Prestige.' })[id] || '';
-  }
   function gico(name) {
     return '<span class="material-symbols-outlined" aria-hidden="true">' + name + '</span>';
   }
-  function icon(id) {
-    if (id === 'football') return gico('stadium');
-    if (id === 'cricket') return gico('sports_cricket');
-    return gico('sports_soccer');
+  function iconName(cfg) {
+    if (cfg && cfg.icon) return cfg.icon;
+    var id = cfg && cfg.id;
+    if (id === 'football') return 'stadium';
+    if (id === 'cricket') return 'sports_cricket';
+    if (id === 'futsal') return 'sports_soccer';
+    return 'sports';
+  }
+  function icon(cfgOrId) {
+    var cfg = typeof cfgOrId === 'string'
+      ? sportsCfg().filter(function (c) { return c.id === cfgOrId; })[0] || { id: cfgOrId }
+      : (cfgOrId || {});
+    return gico(iconName(cfg));
+  }
+  function blurb(cfg) {
+    if (cfg && cfg.blurb) return cfg.blurb;
+    if (cfg && cfg.crown) return 'Crown: ' + cfg.crown;
+    return cfg && cfg.name ? cfg.name : '';
+  }
+  function pageOf(cfg) {
+    return (cfg && cfg.page) || ('sports/' + cfg.id + '.html');
   }
   function scoreOf(m) {
     if (!m) return '—';
@@ -48,13 +63,28 @@
     if (!val) return '';
     return (t.n && t.n[val] && t.n[val].name) || val;
   }
-  function newsKind(text) {
+  function latestSeason() {
+    var list = (typeof STATE !== 'undefined' && STATE.seasons) || [];
+    if (list.length) return list[list.length - 1];
+    var idx = (STATE && STATE.seasonsIndex) || {};
+    var keys = Object.keys(idx);
+    return keys.length ? keys[keys.length - 1] : '';
+  }
+  function seasonOfItem(text, fallback) {
+    var m = String(text || '').match(/\b(20\d{2}[A-Za-z]?)\b/);
+    return (m && m[1]) || fallback || latestSeason() || '';
+  }
+  function newsKind(text, cfg) {
+    if (cfg && cfg.id) return cfg.id;
     var t = String(text || '').toUpperCase();
-    if (/CRICKET|TITAN|RUNS|WICKET/.test(t)) return 'cricket';
-    if (/FOOTBALL|4V4/.test(t) && !/FUTSAL|FINALE|PIONEER/.test(t)) return 'football';
+    var sports = sportsCfg();
+    for (var i = 0; i < sports.length; i++) {
+      var name = String(sports[i].name || sports[i].id || '').toUpperCase();
+      if (name && t.indexOf(name) >= 0) return sports[i].id;
+    }
     if (/AWARD|SEASONAL|POINTS/.test(t)) return 'awards';
     if (/REGIST|GENERAL|SECTOR/.test(t)) return 'general';
-    return 'futsal';
+    return (sports[0] && sports[0].id) || 'archive';
   }
   function newsTitle(text) {
     var s = String(text || '').replace(/^SEASONAL\s*·\s*/i, '').replace(/^HAT-TRICK\s*·\s*/i, '').replace(/^THRASHING\s*·\s*/i, '');
@@ -73,13 +103,30 @@
       var s = sportOf(c.id);
       if (typeof crownWinner === 'function') {
         var ch = crownWinner(c);
-        if (ch) items.push(clubName(s, ch).toUpperCase() + ' HOLD THE ' + String(c.crown).toUpperCase());
+        if (ch) items.push(clubName(s, ch).toUpperCase() + ' HOLD THE ' + String(c.crown || c.name).toUpperCase());
       }
       (s.tournaments || []).forEach(function (t) {
         if (t.aw && t.aw.ch) items.push((t.meta.e || t.meta.id).toUpperCase() + ' CHAMPIONS: ' + String(holder(t, 'ch')).toUpperCase());
       });
     });
     return items;
+  }
+  function firstChampion() {
+    var found = null;
+    sportsCfg().some(function (c) {
+      return (sportOf(c.id).tournaments || []).some(function (t) {
+        if (!t.aw || !t.aw.ch || isSeasonal(t)) return false;
+        found = {
+          sport: c,
+          tournament: t,
+          event: t.meta && (t.meta.e || t.meta.id),
+          holder: holder(t, 'ch'),
+          season: (t.meta && t.meta.s) || latestSeason()
+        };
+        return true;
+      });
+    });
+    return found;
   }
   function facts() {
     var f = { players: 0, clubs: 0, matches: 0, comps: 0 };
@@ -138,40 +185,67 @@
     var h = (location.hash || '#home').slice(1).split('/')[0];
     return !h || h === 'home';
   }
+  function sportNamesLine() {
+    var names = sportsCfg().map(function (c) { return c.name; }).filter(Boolean);
+    if (!names.length) return 'Every sport on file. United under one archive.';
+    if (names.length === 1) return names[0] + '. United under one global system.';
+    return names.join('. ') + '. United under one global system.';
+  }
+  function heroHeadline() {
+    var n = sportsCfg().length;
+    if (n <= 0) return 'The archive.<br>Infinite legacy.';
+    if (n === 1) return esc(sportsCfg()[0].name) + '.<br>Infinite legacy.';
+    return n + ' sports.<br>Infinite legacy.';
+  }
+  function paintSportNav() {
+    var host = document.getElementById('ca-sport-nav');
+    if (!host) return;
+    var root = (window.CASPER_PAGE && window.CASPER_PAGE.root) || '';
+    var list = sportsCfg();
+    if (!list.length) return;
+    host.innerHTML = list.map(function (c) {
+      return '<li><a href="' + esc(root + pageOf(c)) + '" data-nav="' + esc(c.id) + '">' +
+        '<span class="material-symbols-outlined ca-ico" aria-hidden="true">' + esc(iconName(c)) + '</span>' +
+        esc(c.name) + '</a></li>';
+    }).join('');
+    var tag = document.getElementById('ca-side-tagline');
+    if (tag) tag.textContent = list.length ? (list.length + ' sport' + (list.length === 1 ? '' : 's') + '. Infinite legacy.') : 'A global sports archive.';
+  }
   function html() {
     var f = facts();
     var sectors = ((STATE.sectorRegistry && STATE.sectorRegistry.sectors) || []);
     var sectorsN = sectors.length;
-    var seasonsN = 0;
-    sectors.forEach(function (s) { seasonsN += (s.seasons || []).length; });
-    if (!seasonsN) seasonsN = 1;
+    var seasonsN = ((STATE.seasons && STATE.seasons.length) || Object.keys(STATE.seasonsIndex || {}).length || 0);
     var recordsN = ((STATE.misc && STATE.misc.records) || []).length;
+    var seasonLabel = latestSeason();
     var news = newsItems();
     var ticker = news.slice(0, 8);
-    if (!ticker.length) ticker = ['CASPER archive online', 'Three sports. Infinite legacy.'];
-    var featRaw = news[0] || 'CASPER archive is live.';
+    if (!ticker.length) ticker = ['CASPER archive online', sportNamesLine()];
+    var champ = firstChampion();
+    var featRaw = news[0] || (champ ? (champ.holder + ' hold ' + champ.event) : 'CASPER archive is live.');
     var featTitle = newsTitle(featRaw);
-    var featBody = /HOLD THE FINALE|FINALE CHAMPION/i.test(featRaw)
-      ? 'Black Bird United are crowned champions of the Pioneer Cup / Finale from the loaded 2026A file.'
+    var featBadge = (champ && champ.event) || (sportsCfg()[0] && sportsCfg()[0].crown) || 'Archive';
+    var featBody = champ
+      ? (champ.holder ? champ.holder + ' hold the ' + champ.event + '.' : champ.event + ' is on file.') + (champ.season ? ' Season ' + champ.season + '.' : '')
       : 'Drawn from CSN season files — champions, awards and match lines published as they land.';
     var sportCards = sportsCfg().map(function (c) {
-      return '<a class="ca-sport ' + esc(c.id) + '" href="sports/' + esc(c.id) + '.html"><span class="ico">' + icon(c.id) + '</span><span><b>' + esc(c.name) + '</b><span>' + esc(blurb(c.id)) + '</span></span><span class="go">' + gico('chevron_right') + '</span></a>';
+      return '<a class="ca-sport ' + esc(c.id) + '" href="' + esc(pageOf(c)) + '"><span class="ico">' + icon(c) + '</span><span><b>' + esc(c.name) + '</b><span>' + esc(blurb(c)) + '</span></span><span class="go">' + gico('chevron_right') + '</span></a>';
     }).join('');
     var newsRows = news.slice(0, 5).map(function (item) {
       var kind = newsKind(item);
-      return '<article class="ca-news"><div class="ca-thumb ca-thumb-' + kind + '"></div><div><b>' + esc(newsTitle(item)) + '</b><div><span class="ca-badge bg-' + kind + '">' + esc(kind) + '</span></div></div><div class="ca-date">2026A</div></article>';
+      return '<article class="ca-news"><div class="ca-thumb ca-thumb-' + kind + '"></div><div><b>' + esc(newsTitle(item)) + '</b><div><span class="ca-badge bg-' + kind + '">' + esc(kind) + '</span></div></div><div class="ca-date">' + esc(seasonOfItem(item, seasonLabel)) + '</div></article>';
     }).join('') || '<div class="desktop-muted">News will appear when CSN awards and results load.</div>';
     var upcoming = inProgress().map(function (x) {
-      return '<div class="ca-match"><span>' + icon(x.cfg.id) + '</span><div><b>' + esc(x.t.meta.e || x.t.meta.id) + '</b><div class="desktop-muted">' + esc(x.cfg.name) + ' · ' + esc(x.t.meta.sts || 'In progress') + '</div></div></div>';
+      return '<div class="ca-match"><span>' + icon(x.cfg) + '</span><div><b>' + esc(x.t.meta.e || x.t.meta.id) + '</b><div class="desktop-muted">' + esc(x.cfg.name) + ' · ' + esc(x.t.meta.sts || 'In progress') + '</div></div></div>';
     }).join('');
     if (!upcoming) {
       upcoming = comps().slice(0, 4).map(function (x) {
-        return '<div class="ca-match"><span>' + icon(x.cfg.id) + '</span><div><b>' + esc(x.t.meta.e || x.t.meta.id) + '</b><div class="desktop-muted">' + esc(x.cfg.name) + ' · ' + esc(holder(x.t, 'ch') || x.t.meta.sts || 'Archive') + '</div></div></div>';
+        return '<div class="ca-match"><span>' + icon(x.cfg) + '</span><div><b>' + esc(x.t.meta.e || x.t.meta.id) + '</b><div class="desktop-muted">' + esc(x.cfg.name) + ' · ' + esc(holder(x.t, 'ch') || x.t.meta.sts || 'Archive') + '</div></div></div>';
       }).join('');
     }
     var results = allMatches().slice().reverse().slice(0, 4).map(function (x) {
       var nm = namesOf(x.m);
-      return '<div class="ca-result"><span class="ico">' + icon(x.cfg.id) + '</span><div><b>' + esc(x.m.event || x.cfg.name) + '</b><div class="desktop-muted">' + esc(nm.hn) + ' ' + esc(scoreOf(x.m)) + ' ' + esc(nm.an) + '</div></div></div>';
+      return '<div class="ca-result"><span class="ico">' + icon(x.cfg) + '</span><div><b>' + esc(x.m.event || x.cfg.name) + '</b><div class="desktop-muted">' + esc(nm.hn) + ' ' + esc(scoreOf(x.m)) + ' ' + esc(nm.an) + '</div></div></div>';
     }).join('') || '<div class="desktop-muted">No results loaded.</div>';
     function rankPanel(id, hidden) {
       var rows = rankRows(id).map(function (r, i) {
@@ -179,15 +253,20 @@
         var pts = r.sportPts != null ? Math.round(r.sportPts) : ((r.titles || 0) * 100 + (r.goals || r.runs || 0));
         return '<div class="ca-rank"><b>' + (i + 1) + '</b><span class="ca-avatar mini">' + esc(initial(name)) + '</span><span>' + esc(name) + '</span><em>' + Number(pts).toLocaleString() + '</em></div>';
       }).join('') || '<div class="desktop-muted">No ranking yet.</div>';
-      return '<div data-rank-panel="' + id + '"' + (hidden ? ' hidden' : '') + '>' + rows + '</div>';
+      return '<div data-rank-panel="' + esc(id) + '"' + (hidden ? ' hidden' : '') + '>' + rows + '</div>';
     }
+    var rankTabs = sportsCfg().map(function (c, i) {
+      return '<button type="button"' + (i === 0 ? ' class="on"' : '') + ' data-rank-tab="' + esc(c.id) + '">' + esc(c.name) + '</button>';
+    }).join('');
+    var rankPanels = sportsCfg().map(function (c, i) { return rankPanel(c.id, i !== 0); }).join('');
+    var sportsN = sportsCfg().length;
     return '<div class="desktop-page ca-home">' +
       '<div class="ca-stage">' +
         '<div class="ca-maincol">' +
           '<section class="ca-hero hero-home desktop-hero">' +
             '<div class="desktop-kicker">Competitive Athletics & Sports Promotion</div>' +
-            '<h2>Three sports.<br>Infinite legacy.</h2>' +
-            '<p>Futsal. Football. Cricket. United under one global system.</p>' +
+            '<h2>' + heroHeadline() + '</h2>' +
+            '<p>' + esc(sportNamesLine()) + '</p>' +
             '<div class="ca-hero-actions desktop-actions">' +
               '<a class="btn-gold" href="#competitions">Explore Competitions</a>' +
               '<a class="btn-ghost" href="#archive">View Archive</a>' +
@@ -201,13 +280,13 @@
             '<div class="ca-stat">' + gico('shield') + '<div><b>' + f.clubs + '</b><span>Registered Clubs</span></div></div>' +
             '<div class="ca-stat">' + gico('groups') + '<div><b>' + f.players + '</b><span>Registered Players</span></div></div>' +
             '<div class="ca-stat">' + gico('grid_view') + '<div><b>' + sectorsN + '</b><span>Active Sectors</span></div></div>' +
-            '<div class="ca-stat">' + gico('calendar_month') + '<div><b>' + seasonsN + '</b><span>Seasons Completed</span></div></div>' +
+            '<div class="ca-stat">' + gico('calendar_month') + '<div><b>' + seasonsN + '</b><span>Seasons on file</span></div></div>' +
             '<div class="ca-stat">' + gico('workspace_premium') + '<div><b>' + recordsN + '</b><span>Major Records</span></div></div>' +
           '</div>' +
           '<div class="ca-lower">' +
             '<article class="ca-card ca-feature-card">' +
               '<div class="ca-hd"><span class="ca-hd-title">' + gico('star') + ' Featured</span> <a class="view-all" href="#news">View All →</a></div>' +
-              '<div class="ca-feature"><div class="cap"><span class="ca-badge bg-awards">Pioneer Cup</span><h4>' + esc(featTitle) + '</h4><p>' + esc(featBody) + '</p><a href="#news">Read More →</a></div></div>' +
+              '<div class="ca-feature"><div class="cap"><span class="ca-badge bg-awards">' + esc(featBadge) + '</span><h4>' + esc(featTitle) + '</h4><p>' + esc(featBody) + '</p><a href="#news">Read More →</a></div></div>' +
             '</article>' +
             '<article class="ca-card"><div class="ca-hd"><span class="ca-hd-title">' + gico('newspaper') + ' Latest News</span> <a class="view-all" href="#news">View All →</a></div>' + newsRows + '</article>' +
             '<article class="ca-card"><div class="ca-hd"><span class="ca-hd-title">' + gico('event') + ' Upcoming Matches</span> <a class="view-all" href="#live-scores">View All →</a></div>' + upcoming + '</article>' +
@@ -218,24 +297,21 @@
           '<div class="ca-card"><div class="ca-hd"><span class="ca-hd-title">' + gico('scoreboard') + ' Recent Results</span> <a class="view-all" href="#results">View All →</a></div>' + results + '</div>' +
           '<div class="ca-card">' +
             '<div class="ca-hd"><span class="ca-hd-title">' + gico('leaderboard') + ' Global Rankings</span> <a class="view-all" href="#ranking">View All →</a></div>' +
-            '<div class="ca-tabs">' +
-              '<button type="button" class="on" data-rank-tab="futsal">Futsal</button>' +
-              '<button type="button" data-rank-tab="football">Football</button>' +
-              '<button type="button" data-rank-tab="cricket">Cricket</button>' +
-            '</div>' +
-            rankPanel('futsal', false) + rankPanel('football', true) + rankPanel('cricket', true) +
+            '<div class="ca-tabs">' + rankTabs + '</div>' +
+            rankPanels +
           '</div>' +
         '</aside>' +
       '</div>' +
       '<section class="ca-banner">' +
         '<h2>A global stage.<br>A brighter tomorrow.</h2>' +
-        '<div class="nums"><div><b>3</b><span>Sports</span></div><div><b>' + sectorsN + '</b><span>Sectors</span></div><div><b>1</b><span>Community</span></div></div>' +
+        '<div class="nums"><div><b>' + sportsN + '</b><span>Sports</span></div><div><b>' + sectorsN + '</b><span>Sectors</span></div><div><b>' + seasonsN + '</b><span>Seasons</span></div></div>' +
         '<a class="btn-gold" href="join/index.html">Join CASPER →</a>' +
       '</section>' +
     '</div>';
   }
   function paint() {
     if (typeof STATE === 'undefined' || !STATE.ready) return false;
+    paintSportNav();
     if ((window.CASPER_PAGE && window.CASPER_PAGE.mode) && window.CASPER_PAGE.mode !== 'hub') return false;
     if (!isHome()) return false;
     var app = document.getElementById('app');
