@@ -1,0 +1,14 @@
+/* Archive parchment theme — colors only. */
+:root{
+  --paper:#efe8d8; --card:#f7f1e6; --ink:#1c1812; --ink-2:#2c261c; --muted:#8a7f70;
+  --line:#d8cdb8; --line-2:#cfc3ad; --navy:#1a1712; --navy-deep:#12100c;
+  --gold:#b8954a; --gold-2:#c9a85c; --gold-deep:#8f7030;
+  --shadow:0 8px 24px rgba(28,24,18,.07);
+}
+html.dark{
+  --paper:#161310; --card:#1e1a16; --ink:#f3ead6; --ink-2:#e6dcc8; --muted:#9a9080;
+  --line:#3a342c; --line-2:#4a4338; --shadow:0 8px 24px rgba(0,0,0,.34);
+}
+html.dark body{background:var(--paper)}
+.ca-top{background:rgba(239,232,216,.94)}
+html.dark .ca-top{background:rgba(22,19,16,.94)}
