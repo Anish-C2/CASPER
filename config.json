@@ -6,12 +6,12 @@
   "about": "CASPER is a football, futsal and cricket competition archive, statistics database and historical record system. Its primary data source is CSN (Competition Serialization Notation). Everything is generated automatically from the archive. No duplicated information. Built for long-term archival quality",
   "logoText": "CA",
   "theme": {
-    "background": "#111111",
-    "panel": "#1A1A1A",
-    "border": "#444444",
-    "text": "#F2F2F2",
-    "accent": "#C89B3C",
-    "muted": "#888888",
+    "background": "#EFE8D8",
+    "panel": "#F7F1E6",
+    "border": "#D8CDB8",
+    "text": "#1C1812",
+    "accent": "#B8954A",
+    "muted": "#8A7F70",
     "success": "#4A7C4E",
     "danger": "#8B3A3A"
   },
