@@ -138,8 +138,8 @@
         '<div class="desktop-stat"><b>' + pens + '</b><span>Pens</span></div>' +
       '</div>' +
       '<div class="desktop-grid2">' +
-        card('TOP SCORERS', scorer.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G \u00b7 ' + p.assists + ' A'); }).join('')) +
-        card('WIN RATE \u00b7 3+ MATCHES', runner.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% \u00b7 ' + p.wins + '-' + p.draws + '-' + p.losses); }).join('')) +
+        card('TOP SCORERS', scorer.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G · ' + p.assists + ' A'); }).join('')) +
+        card('WIN RATE · 3+ MATCHES', runner.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% · ' + p.wins + '-' + p.draws + '-' + p.losses); }).join('')) +
       '</div></div>';
   }
 
@@ -186,6 +186,9 @@
     var prev = window.CASPER_DESKTOP_RENDER;
     if (typeof prev !== 'function' || prev.__hotfixRender) return typeof prev === 'function';
     var next = function () {
+      // Sector pages must be pruned BEFORE the desktop renderer builds its cards.
+      // Previously this happened only after the first global render, leaving global data at the top.
+      pruneToSector();
       var out = prev.apply(this, arguments);
       attachRoute();
       if (isStats()) paintStats();
