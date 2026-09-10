@@ -82,13 +82,14 @@
 <script src="../assets/casper-core.js?v=20260908fit"></script>
 <script src="../assets/js/casper-ui.js?v=20260908fit"></script>
 <script src="../assets/js/casper-desktop-site.js?v=20260908fit"></script>
+<!-- Load the sector scoping hotfix BEFORE desktop boot so global data is removed before the first render. -->
+<script src="../assets/js/casper-hotfix.js?v=20260910sector"></script>
 <script src="../assets/js/casper-sport-stats.js?v=20260908fit"></script>
 <script src="../assets/js/casper-statistics-fix.js?v=20260908fit"></script>
 <script src="../assets/js/casper-player-fix.js?v=20260908fit"></script>
 <script src="../assets/js/casper-tables.js?v=20260908fit"></script>
 <script src="../assets/js/casper-desktop-boot.js?v=20260908fit"></script>
 <script src="../assets/js/casper-rich.js?v=20260908fit"></script>
-<script src="../assets/js/casper-hotfix.js?v=20260908fit"></script>
 <script>
 (function(){
   if (window.__CASPER_HASH_BOUND__) return;
