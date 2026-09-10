@@ -1,6 +1,7 @@
 {
   "_comment": "A Sector is a physical/local area where CASPER operates. It is not necessarily a country, city or administrative region. Each Sector owns its own competitive ecosystem.",
-  "version": "1.1",
+  "version": "2.0",
+  "unlimited": true,
   "sectors": [
     {
       "id": "sector-1",
@@ -8,6 +9,9 @@
       "name": "Sector 1",
       "type": "School",
       "status": "Active",
+      "established": "2026",
+      "timezone": "Asia/Kolkata",
+      "tags": ["founding", "school"],
       "description": "CASPER operating sector based at the school location.",
       "sports": ["futsal", "football", "cricket"],
       "leagues": [
@@ -37,6 +41,9 @@
       "name": "Sector 2",
       "type": "Apartment",
       "status": "Active",
+      "established": "2026",
+      "timezone": "Asia/Kolkata",
+      "tags": ["apartment"],
       "description": "CASPER operating sector based at the apartment location.",
       "sports": ["futsal"],
       "leagues": [

@@ -1,8 +1,15 @@
 {
   "sector": "sector-2",
-  "version": "1.0",
-  "seasons": ["Season_2026A.csn"],
-  "leagues": ["SuperLeague"],
-  "competitions": [],
-  "files": ["futsal/Season_2026A.csn"]
+  "version": "2.0",
+  "seasons": ["2026A"],
+  "leagues": [
+    {"id":"sl26a","name":"SuperLeague","sport":"futsal","season":"2026A"}
+  ],
+  "competitions": ["sl26a"],
+  "files": [
+    "futsal/Season_2026A.csn"
+  ],
+  "sources": {
+    "futsal": "data/sectors/sector-2/futsal/Season_2026A.csn"
+  }
 }

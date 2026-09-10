@@ -1,6 +1,6 @@
 {
   "sector": "sector-1",
-  "version": "1.1",
+  "version": "2.0",
   "seasons": ["2026A"],
   "leagues": [
     {"id":"pc26a","name":"Pioneer Cup","sport":"futsal","season":"2026A"},
