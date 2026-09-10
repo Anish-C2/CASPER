@@ -1,5 +1,5 @@
 /* CASPER HOTFIX — statistics render + sector-local archive + 2-sector cap.
-   Wrap route once. Never use a getter/setter pair that can call itself. */
+   Sector scope is also exposed synchronously so desktop boot can apply it before first render. */
 (function () {
   'use strict';
 
@@ -66,14 +66,16 @@
       sport.players = players;
       var teams = {};
       Object.keys(sport.teams || {}).forEach(function (k) {
-        if (clubs[String(k).toLowerCase()] || clubs[String((sport.teams[k] && sport.teams[k].abbr) || '').toLowerCase()]) {
-          teams[k] = sport.teams[k];
-        }
+        if (clubs[String(k).toLowerCase()] || clubs[String((sport.teams[k] && sport.teams[k].abbr) || '').toLowerCase()]) teams[k] = sport.teams[k];
       });
       sport.teams = teams;
     });
     STATE.__sectorPruned = true;
   }
+
+  // casper-desktop-boot.js calls this immediately after STATE becomes ready,
+  // eliminating the old 50ms race where the global renderer won the first paint.
+  window.CASPER_SCOPE_SECTOR = pruneToSector;
 
   function collectPlayers() {
     var map = {};
@@ -100,123 +102,57 @@
         if (!x) return;
         if (cfg.scoring === 'cricket') x.runs += Number(p.runs != null ? p.runs : (p.goals || 0));
         else { x.goals += Number(p.goals || 0); x.assists += Number(p.assists || 0); x.hats += Number(p.hatTricks || 0); }
-        x.matches += Number(p.matches || 0);
-        x.wins += Number(p.wins || 0);
-        x.draws += Number(p.draws || 0);
-        x.losses += Number(p.losses || 0);
+        x.matches += Number(p.matches || 0); x.wins += Number(p.wins || 0); x.draws += Number(p.draws || 0); x.losses += Number(p.losses || 0);
       });
     });
     return Object.values(map);
   }
 
   function statisticsHTML() {
-    var ps = collectPlayers();
-    var ms = 0, goals = 0, runs = 0, pens = 0;
+    var ps = collectPlayers(), ms = 0, goals = 0, runs = 0, pens = 0;
     ((STATE.sportsCfg && STATE.sportsCfg.sports) || []).forEach(function (cfg) {
-      var sp = STATE.sports[cfg.id];
-      if (!sp) return;
+      var sp = STATE.sports[cfg.id]; if (!sp) return;
       (sp.matches || []).forEach(function (m) {
-        ms += 1;
-        if (m.kind === 'cricket') runs += Number(m.sh || 0) + Number(m.sa || 0);
-        else goals += Number(m.sh || 0) + Number(m.sa || 0);
-        if (m.p) pens += 1;
+        ms++; if (m.kind === 'cricket') runs += Number(m.sh || 0) + Number(m.sa || 0); else goals += Number(m.sh || 0) + Number(m.sa || 0); if (m.p) pens++;
       });
     });
     var scorer = ps.filter(function (p) { return p.goals > 0; }).sort(function (a, b) { return b.goals - a.goals || b.assists - a.assists; }).slice(0, 12);
-    var runner = ps.filter(function (p) { return p.matches >= 3; }).sort(function (a, b) {
-      var ar = a.matches ? a.wins / a.matches : 0, br = b.matches ? b.wins / b.matches : 0;
-      return br - ar || b.wins - a.wins;
-    }).slice(0, 12);
+    var runner = ps.filter(function (p) { return p.matches >= 3; }).sort(function (a, b) { var ar = a.matches ? a.wins / a.matches : 0, br = b.matches ? b.wins / b.matches : 0; return br - ar || b.wins - a.wins; }).slice(0, 12);
     var scope = sectorRec() ? sectorRec().name + ' only' : 'Global CASPER';
-    return '<div class="desktop-page">' +
-      '<div class="desktop-hero"><div class="desktop-kicker">ARCHIVE</div><h2>STATISTICS</h2><p>Generated from loaded season files. Scope: ' + esc(scope) + '. Players may register in two sectors maximum.</p></div>' +
-      '<div class="desktop-stats">' +
-        '<div class="desktop-stat"><b>' + ps.length + '</b><span>Players</span></div>' +
-        '<div class="desktop-stat"><b>' + ms + '</b><span>Matches</span></div>' +
-        '<div class="desktop-stat"><b>' + goals + '</b><span>Goals</span></div>' +
-        '<div class="desktop-stat"><b>' + runs + '</b><span>Runs</span></div>' +
-        '<div class="desktop-stat"><b>' + pens + '</b><span>Pens</span></div>' +
-      '</div>' +
-      '<div class="desktop-grid2">' +
-        card('TOP SCORERS', scorer.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G · ' + p.assists + ' A'); }).join('')) +
-        card('WIN RATE · 3+ MATCHES', runner.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% · ' + p.wins + '-' + p.draws + '-' + p.losses); }).join('')) +
-      '</div></div>';
+    return '<div class="desktop-page"><div class="desktop-hero"><div class="desktop-kicker">ARCHIVE</div><h2>STATISTICS</h2><p>Generated from loaded season files. Scope: ' + esc(scope) + '. Players may register in two sectors maximum.</p></div><div class="desktop-stats"><div class="desktop-stat"><b>' + ps.length + '</b><span>Players</span></div><div class="desktop-stat"><b>' + ms + '</b><span>Matches</span></div><div class="desktop-stat"><b>' + goals + '</b><span>Goals</span></div><div class="desktop-stat"><b>' + runs + '</b><span>Runs</span></div><div class="desktop-stat"><b>' + pens + '</b><span>Pens</span></div></div><div class="desktop-grid2">' + card('TOP SCORERS', scorer.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G · ' + p.assists + ' A'); }).join('')) + card('WIN RATE · 3+ MATCHES', runner.map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% · ' + p.wins + '-' + p.draws + '-' + p.losses); }).join('')) + '</div></div>';
   }
 
-  function isStats() {
-    var h = (location.hash || '#home').slice(1);
-    return (h.split('/')[0] || 'home') === 'statistics';
-  }
-
+  function isStats() { var h = (location.hash || '#home').slice(1); return (h.split('/')[0] || 'home') === 'statistics'; }
   function paintStats() {
-    var app = document.getElementById('app');
-    if (!app) return;
+    var app = document.getElementById('app'); if (!app) return;
     app.innerHTML = statisticsHTML();
-    document.querySelectorAll('nav.main a').forEach(function (a) {
-      var on = a.getAttribute('data-view') === 'statistics';
-      a.classList.toggle('active', on);
-      a.classList.toggle('on', on);
-    });
+    document.querySelectorAll('nav.main a').forEach(function (a) { var on = a.getAttribute('data-view') === 'statistics'; a.classList.toggle('active', on); a.classList.toggle('on', on); });
   }
-
   function attachRoute() {
-    if (typeof window.route !== 'function') return false;
-    if (window.route.__hotfixBound) return true;
-    if (!window.__CASPER_ROUTE_INNER || !window.__CASPER_ROUTE_INNER.__hotfixBound) {
-      if (!window.route.__hotfixBound) window.__CASPER_ROUTE_INNER = window.route;
-    }
-    var inner = window.__CASPER_ROUTE_INNER;
-    if (typeof inner !== 'function') return false;
+    if (typeof window.route !== 'function' || window.route.__hotfixBound) return typeof window.route === 'function';
+    var inner = window.__CASPER_ROUTE_INNER || window.route;
+    window.__CASPER_ROUTE_INNER = inner;
     function wrapped() {
       pruneToSector();
       if (isStats()) { paintStats(); return; }
-      try { return inner.apply(this, arguments); }
-      catch (err) {
-        if (isStats()) { paintStats(); return; }
+      try { return inner.apply(this, arguments); } catch (err) {
         var app = document.getElementById('app');
         if (app) app.innerHTML = '<div class="desktop-page"><div class="desktop-hero"><div class="desktop-kicker">ARCHIVE</div><h2>VIEW RECOVERED</h2><p>The previous page stayed on screen because this view crashed. It is safe to keep browsing.</p></div>' + card('DETAIL', row('Error', esc(err && err.message ? err.message : err))) + '</div>';
       }
     }
-    wrapped.__hotfixBound = true;
-    window.route = wrapped;
-    return true;
+    wrapped.__hotfixBound = true; window.route = wrapped; return true;
   }
-
   function wrapRender() {
     var prev = window.CASPER_DESKTOP_RENDER;
     if (typeof prev !== 'function' || prev.__hotfixRender) return typeof prev === 'function';
-    var next = function () {
-      // Sector pages must be pruned BEFORE the desktop renderer builds its cards.
-      // Previously this happened only after the first global render, leaving global data at the top.
-      pruneToSector();
-      var out = prev.apply(this, arguments);
-      attachRoute();
-      if (isStats()) paintStats();
-      return out;
-    };
-    next.__hotfixRender = true;
-    window.CASPER_DESKTOP_RENDER = next;
-    return true;
+    var next = function () { pruneToSector(); var out = prev.apply(this, arguments); attachRoute(); if (isStats()) paintStats(); return out; };
+    next.__hotfixRender = true; window.CASPER_DESKTOP_RENDER = next; return true;
   }
-
   function bootHook() {
     if (typeof STATE === 'undefined' || !STATE.ready) return false;
-    pruneToSector();
-    wrapRender();
-    attachRoute();
-    if (isStats()) paintStats();
-    return true;
+    pruneToSector(); wrapRender(); attachRoute(); if (isStats()) paintStats(); return true;
   }
-
   var n = 0;
-  var timer = setInterval(function () {
-    n += 1;
-    wrapRender();
-    attachRoute();
-    if (bootHook() || n > 120) clearInterval(timer);
-  }, 50);
-  window.addEventListener('hashchange', function () {
-    attachRoute();
-    if (isStats()) paintStats();
-  });
+  var timer = setInterval(function () { n++; wrapRender(); attachRoute(); if (bootHook() || n > 120) clearInterval(timer); }, 50);
+  window.addEventListener('hashchange', function () { attachRoute(); if (isStats()) setTimeout(paintStats, 0); });
 })();
