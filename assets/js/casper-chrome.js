@@ -33,20 +33,10 @@
     }
     host.hidden = false;
     var views = [
-      ['home', 'Desk'],
-      ['news', 'News'],
-      ['competitions', 'Competitions'],
-      ['live-scores', 'Live'],
-      ['results', 'Results'],
-      ['players', 'Players'],
-      ['teams', 'Clubs'],
-      ['awards', 'Awards'],
-      ['ranking', 'Ranking'],
-      ['tables', 'Tables'],
-      ['records', 'Records'],
-      ['statistics', 'Statistics'],
-      ['archive', 'Archive'],
-      ['about', 'About']
+      ['home', 'Desk'], ['news', 'News'], ['competitions', 'Competitions'], ['live-scores', 'Live'],
+      ['results', 'Results'], ['players', 'Players'], ['teams', 'Clubs'], ['awards', 'Awards'],
+      ['ranking', 'Ranking'], ['tables', 'Tables'], ['records', 'Records'], ['statistics', 'Statistics'],
+      ['archive', 'Archive'], ['about', 'About']
     ];
     var hash = (location.hash || '#home').slice(1).split('/')[0] || 'home';
     host.innerHTML = views.map(function (v) {
@@ -97,7 +87,18 @@
     });
   }
 
+  function ensurePagesCSS() {
+    if (document.querySelector('link[data-casper-pages]')) return;
+    var r = (window.CASPER_PAGE && window.CASPER_PAGE.root) || '';
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.setAttribute('data-casper-pages', '1');
+    link.href = r + 'assets/css/casper-pages.css?v=20260912ed';
+    document.head.appendChild(link);
+  }
+
   function boot() {
+    ensurePagesCSS();
     paintSportsMenu();
     paintDesk();
     highlight();
