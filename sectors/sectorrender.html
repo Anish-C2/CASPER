@@ -4,23 +4,32 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>CASPER — Sector</title>
-<link rel="stylesheet" href="../assets/css/casper.css?v=20260910sector3">
-<link rel="stylesheet" href="../assets/css/casper-desktop.css?v=20260910sector3">
-<link rel="stylesheet" href="../assets/css/casper-plus.css?v=20260910sector3">
-<style>
-:root{--sector-gap:18px}.sector-wrap{max-width:1180px;margin:0 auto;padding:28px 22px 56px;font-family:"Sora","Segoe UI",sans-serif}.sector-wrap *{font-family:inherit}.sector-wrap code,.sector-wrap pre,.sector-mono{font-family:Consolas,"JetBrains Mono",monospace}.sector-top{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:22px}.sector-kicker{font-size:12px;letter-spacing:.14em;opacity:.65;font-weight:700}.sector-title{font-size:42px;line-height:1;margin:7px 0}.sector-desc{max-width:720px;opacity:.72;margin:0}.sector-back{display:inline-flex;padding:9px 13px;border:1px solid rgba(127,127,127,.25);border-radius:10px;text-decoration:none}.sector-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0}.sector-stat,.sector-card{border:1px solid rgba(127,127,127,.2);border-radius:14px;padding:16px;background:rgba(127,127,127,.035)}.sector-stat b{display:block;font-size:25px}.sector-stat span{font-size:11px;letter-spacing:.1em;opacity:.6}.sector-grid{display:grid;grid-template-columns:1.35fr .85fr;gap:var(--sector-gap)}.sector-card{margin-bottom:var(--sector-gap)}.sector-card h3{margin:0 0 13px;font-size:14px;letter-spacing:.08em;text-transform:uppercase}.sector-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;padding:10px 0;border-bottom:1px solid rgba(127,127,127,.13);align-items:center}.sector-row:last-child{border-bottom:0}.sector-muted{opacity:.58;font-size:13px}.sector-pill{font-size:11px;padding:4px 7px;border-radius:999px;background:rgba(127,127,127,.1)}.sector-score{font-weight:800;white-space:nowrap}.sector-clubs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.sector-club{padding:11px 12px;border:1px solid rgba(127,127,127,.15);border-radius:10px}.sector-club b{display:block}.sector-club span{font-size:11px;opacity:.6}.sector-league{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid rgba(127,127,127,.13)}.sector-league:last-child{border-bottom:0}.sector-table{width:100%;border-collapse:collapse}.sector-table th,.sector-table td{text-align:left;padding:9px 6px;border-bottom:1px solid rgba(127,127,127,.13);font-size:13px}.sector-table th{font-size:10px;letter-spacing:.08em;opacity:.6}.sector-table td:not(:first-child),.sector-table th:not(:first-child){text-align:right}.sector-empty{padding:8px 0}.sector-footer{opacity:.55;font-size:12px;margin-top:8px}@media(max-width:800px){.sector-stats{grid-template-columns:repeat(2,1fr)}.sector-grid{grid-template-columns:1fr}.sector-top{align-items:flex-start;flex-direction:column}.sector-title{font-size:34px}}@media(max-width:480px){.sector-stats{grid-template-columns:1fr 1fr}.sector-clubs{grid-template-columns:1fr}.sector-wrap{padding:20px 14px 42px}}
-</style>
-<script>
-(function(){var id=new URLSearchParams(location.search).get('id')||'sector-1';window.CASPER_PAGE={mode:'sector-render',sector:id,root:'../'};})();
-</script>
+<link rel="stylesheet" href="../assets/css/casper.css?v=20260912ed">
+<link rel="stylesheet" href="../assets/css/casper-archive-theme.css?v=20260912ed">
+<link rel="stylesheet" href="../assets/css/casper-editorial.css?v=20260912ed">
+<script>(function(){var id=new URLSearchParams(location.search).get('id')||'sector-1';window.CASPER_PAGE={mode:'sector-render',sector:id,sport:null,root:'../'};})();</script>
 </head>
-<body class="ca-app">
-<header class="ca-top">
-  <a class="ca-brand" href="../index.html"><div class="ca-crest">CA</div><div class="ca-wordmark"><b>CASPER</b><span>Competitive Athletics &amp; Sports Promotion</span></div></a>
-  <nav class="ca-topnav"><a href="../index.html">Home</a><a href="index.html" class="on">Sectors</a><a href="../governance/index.html">Governance</a></nav>
+<body class="ed-home ed-page">
+<header class="ed-top">
+  <a class="ed-brand" href="../index.html"><b>CASPER</b><span>COMPETITIVE ATHLETICS &amp; SPORTS PROMOTION</span></a>
+  <nav class="ed-nav">
+    <a href="../index.html" data-nav="home">Home</a>
+    <div class="ed-drop"><button type="button">Sports</button><div class="ed-menu" id="ed-sports-menu"><a href="../sports/futsal.html">Futsal</a><a href="../sports/football.html">Football</a><a href="../sports/cricket.html">Cricket</a></div></div>
+    <a href="index.html" data-nav="sectors" class="on">Sectors</a>
+    <a href="../index.html#competitions" data-nav="competitions">Competitions</a>
+    <a href="../index.html#archive" data-nav="archive">Archive</a>
+    <a href="../governance/index.html" data-nav="governance">Governance</a>
+    <a href="../join/index.html" data-nav="join">Join</a>
+  </nav>
+  <div class="ed-tools"><form class="ed-search" id="ca-search-form" action="#"><input name="q" placeholder="Search players, clubs, competitions..." autocomplete="off"><button type="submit" aria-label="Search">⌔</button></form><div class="ed-motto">PLAY.
+COMPETE.
+UNITE.</div></div>
 </header>
-<main id="sector-app"><div class="sector-wrap"><div class="sector-card"><div class="sector-muted">Loading sector archive…</div></div></div></main>
-<script src="../assets/casper-core.js?v=20260910sector3"></script>
-<script src="sector-render.js?v=20260910sector3"></script>
-</body>
-</html>
+<main id="app"><div class="ed-wrap"><section class="ed-copy"><div class="ed-kicker">SECTOR</div><h1>LOADING ARCHIVE…</h1><p>Resolving this sector from sectors.json and its CSN files.</p></section></div></main>
+<footer class="ed-foot"><a class="ed-brand" href="../index.html"><b>CASPER</b><span>COMPETITIVE ATHLETICS &amp; SPORTS PROMOTION</span></a><nav><a href="../index.html">Home</a><a href="../sports/futsal.html">Sports</a><a href="index.html">Sectors</a><a href="../index.html#competitions">Competitions</a><a href="../index.html#archive">Archive</a><a href="../governance/index.html">Governance</a><a href="../join/index.html">Join</a><a href="../api/index.html">API</a></nav><div>A GLOBAL ARCHIVE. A LASTING LEGACY.</div></footer>
+<script src="../assets/js/casper-shell.js?v=20260912ed"></script>
+<script src="../assets/js/casper-chrome.js?v=20260912ed"></script>
+<script src="../assets/casper-core.js?v=20260912ed"></script>
+<script src="../assets/js/casper-engine.js?v=20260912ed"></script>
+<script src="sector-render.js?v=20260912ed"></script>
+</body></html>
