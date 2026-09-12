@@ -1,7 +1,7 @@
 /* CASPER DESKTOP BOOT — catalog-driven engine, unlimited sectors/seasons. */
 (function () {
   'use strict';
-  var VERSION = '20260910engine';
+  var VERSION = '20260912ed';
   function root() { return (window.CASPER_PAGE && window.CASPER_PAGE.root) || ''; }
   function tickClock() {
     var t = document.getElementById('casper-time'), d = document.getElementById('casper-date'), now = new Date();

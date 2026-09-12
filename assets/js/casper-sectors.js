@@ -1,7 +1,7 @@
 /* CASPER Sector Registry UI. A sector is a physical/local CASPER operating area. */
 (function(root){'use strict';
 function esc(v){return String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\"/g,'&quot;')}
-function siteRoot(){return (window.CASPER_PAGE && window.CASPER_PAGE.root) || '../';}
+function siteRoot(){return (window.CASPER_PAGE && window.CASPER_PAGE.root != null) ? window.CASPER_PAGE.root : '../';}
 function loadJson(path, fallback){
   return fetch(siteRoot()+path).then(function(r){return r.ok?r.json():fallback}).catch(function(){return fallback});
 }
