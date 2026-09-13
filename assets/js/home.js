@@ -1,4 +1,4 @@
-/* CASPER home — Wikipedia-style main page from live archive data. */
+/* CASPER home — compact archive front page from live CSN data. */
 (function () {
   'use strict';
   function esc(v) {
@@ -70,17 +70,13 @@
     var matches = recentMatches();
     var league = leagueRows();
     var news = newsItems().slice(0, 8);
-    var box = '<table class="infobox"><caption>CASPER</caption><tr><th colspan="2">Archive</th></tr>' +
+    var box = '<table class="infobox"><caption>CASPER</caption>' +
       '<tr><th>Sports</th><td>' + sportsCfg().length + '</td></tr>' +
       '<tr><th>Sectors</th><td>' + sectorsN + '</td></tr>' +
       '<tr><th>Competitions</th><td>' + f.comps + '</td></tr>' +
       '<tr><th>Players</th><td>' + f.players + '</td></tr>' +
       '<tr><th>Clubs</th><td>' + f.clubs + '</td></tr>' +
       '<tr><th>Matches</th><td>' + f.matches + '</td></tr></table>';
-    var toc = '<div id="toc" class="toc"><div id="toctitle"><h2>Contents</h2></div><ul>' +
-      '<li><a href="#Overview">1 Overview</a></li><li><a href="#Sports">2 Sports</a></li>' +
-      '<li><a href="#Recent_results">3 Recent results</a></li><li><a href="#Table">4 Table</a></li>' +
-      '<li><a href="#Bulletin">5 Bulletin</a></li></ul></div>';
     var sportsList = '<ul>' + sportsCfg().map(function (c) {
       var s = sportOf(c.id);
       return '<li><a href="' + esc(pageOf(c)) + '">' + esc(c.name) + '</a> \u2014 ' +
@@ -101,18 +97,16 @@
       ? '<ul>' + news.map(function (n) { return '<li>' + esc(typeof n === 'string' ? n : (n.text || '')) + '</li>'; }).join('') + '</ul>'
       : '<p>The archive is online.</p>';
     return box +
-      '<p><b>CASPER</b> (Competitive Athletics &amp; Sports Promotion) is a multi-sport archive covering ' +
+      '<p><b>CASPER</b> (Competitive Athletics &amp; Sports Promotion) covers ' +
       esc(names.join(', ') || 'the sports on file') +
-      '. It records clubs, players, competitions and match results from CSN season files.</p>' + toc +
-      '<h2 id="Overview">Overview</h2>' +
-      '<p>CASPER is organised by <a href="sectors/index.html">sectors</a>. Each sector is a local operating area with its own clubs and competitions, still bound by the same <a href="governance/index.html">governance</a> rules. Players may belong to at most two sectors.</p>' +
-      '<p>See also: <a href="#competitions">competition list</a>, <a href="join/index.html">how to join</a>, and the <a href="api/index.html">data API</a>.</p>' +
-      '<h2 id="Sports">Sports</h2>' + sportsList +
-      '<h2 id="Recent_results">Recent results</h2>' +
+      '. Clubs, players, competitions and results come from CSN season files.</p>' +
+      '<p><a href="sectors/index.html">Sectors</a> \u00b7 <a href="governance/index.html">Governance</a> \u00b7 <a href="join/index.html">Join</a> \u00b7 <a href="api/index.html">API</a> \u00b7 <a href="#competitions">Competitions</a></p>' +
+      '<h2>Sports</h2>' + sportsList +
+      '<h2>Recent results</h2>' +
       '<table class="wikitable"><thead><tr><th>Sport</th><th>Competition</th><th>Fixture</th><th>Score</th></tr></thead><tbody>' + matchRows + '</tbody></table>' +
-      '<h2 id="Table">Table</h2><p>' + esc(league._title || 'Standings') + '</p>' +
+      '<h2>' + esc(league._title || 'Table') + '</h2>' +
       '<table class="wikitable"><thead><tr><th>#</th><th>Club</th><th>P</th><th>W</th><th>D</th><th>L</th><th>Pts</th></tr></thead><tbody>' + tableRows + '</tbody></table>' +
-      '<h2 id="Bulletin">Bulletin</h2>' + newsList;
+      '<h2>Bulletin</h2>' + newsList;
   }
   function paint() {
     if (typeof STATE === 'undefined' || !STATE.ready) return false;

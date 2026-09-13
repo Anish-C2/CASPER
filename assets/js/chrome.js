@@ -1,4 +1,4 @@
-/* CASPER wiki chrome — one header, sidebar and search for every page. */
+/* CASPER chrome — compact left nav + search on every page. */
 (function () {
   'use strict';
   function page() { return window.CASPER_PAGE || { mode: 'hub', sport: null, root: '' }; }
@@ -90,36 +90,34 @@
   function mount() {
     if (document.getElementById('mw-panel')) { paintSports(); highlight(); bindSearch(); return; }
     var existing = document.getElementById('app');
-    document.body.classList.add('mediawiki', 'vector');
     var panel = document.createElement('div');
     panel.id = 'mw-panel';
     panel.innerHTML =
-      '<div id="p-logo"><a href="' + href('index.html') + '" title="CASPER main page">' +
-        '<span class="wiki-mark">C</span><b>CASPER</b></a></div>' +
-      '<div class="portal"><h3>Navigation</h3><ul>' +
-        '<li><a data-nav="home" href="' + href('index.html') + '">Main page</a></li>' +
+      '<div id="p-logo"><a href="' + href('index.html') + '" title="CASPER">CASPER</a></div>' +
+      '<div class="portal"><h3>Pages</h3><ul>' +
+        '<li><a data-nav="home" href="' + href('index.html') + '">Main</a></li>' +
         '<li><a data-nav="sports" href="' + href('sports/futsal.html') + '">Sports</a></li>' +
         '<li><a data-nav="sectors" href="' + href('sectors/index.html') + '">Sectors</a></li>' +
         '<li><a data-nav="governance" href="' + href('governance/index.html') + '">Governance</a></li>' +
-        '<li><a data-nav="join" href="' + href('join/index.html') + '">How to join</a></li>' +
-        '<li><a data-nav="api" href="' + href('api/index.html') + '">Data API</a></li>' +
+        '<li><a data-nav="join" href="' + href('join/index.html') + '">Join</a></li>' +
+        '<li><a data-nav="api" href="' + href('api/index.html') + '">API</a></li>' +
       '</ul></div>' +
       '<div class="portal"><h3>Sports</h3><ul id="p-sports"></ul></div>' +
       '<div class="portal"><h3>Archive</h3><ul>' +
         '<li><a href="' + href('index.html') + '#competitions">Competitions</a></li>' +
-        '<li><a href="' + href('index.html') + '#archive">All seasons</a></li>' +
+        '<li><a href="' + href('index.html') + '#archive">Seasons</a></li>' +
         '<li><a href="' + href('index.html') + '#statistics">Statistics</a></li>' +
       '</ul></div>';
     var head = document.createElement('div');
     head.id = 'mw-head';
     head.innerHTML =
       '<div id="p-personal"><ul>' +
-        '<li><a href="' + href('join/index.html') + '">Join CASPER</a></li>' +
+        '<li><a href="' + href('join/index.html') + '">Join</a></li>' +
         '<li><a href="https://github.com/Anish-C2/CASPER">Source</a></li>' +
       '</ul></div>' +
       '<div id="p-search"><form id="searchform" action="#">' +
-        '<input type="search" name="search" placeholder="Search" title="Search CASPER">' +
-        '<button type="submit">Search</button></form></div>';
+        '<input type="search" name="search" placeholder="Search">' +
+        '<button type="submit">Go</button></form></div>';
     var content = document.getElementById('content');
     if (!content) {
       content = document.createElement('div');
@@ -129,10 +127,6 @@
       heading.textContent = titleFor();
       var bodyContent = document.createElement('div');
       bodyContent.id = 'bodyContent';
-      var siteSub = document.createElement('div');
-      siteSub.id = 'siteSub';
-      siteSub.textContent = 'From CASPER, the competitive athletics archive';
-      bodyContent.appendChild(siteSub);
       if (existing) bodyContent.appendChild(existing);
       var tabs = document.createElement('div');
       tabs.id = 'p-namespaces';
@@ -144,8 +138,8 @@
     }
     var foot = document.createElement('div');
     foot.id = 'footer';
-    foot.innerHTML = '<ul id="footer-info"><li>CASPER is a static archive. Tables are built from CSN season files.</li></ul>' +
-      '<ul id="footer-places"><li><a href="' + href('index.html') + '">Main page</a></li>' +
+    foot.innerHTML = '<ul><li>Static archive. Tables built from CSN files.</li></ul>' +
+      '<ul><li><a href="' + href('index.html') + '">Main</a></li>' +
       '<li><a href="' + href('governance/index.html') + '">Governance</a></li>' +
       '<li><a href="' + href('api/index.html') + '">API</a></li></ul>';
     document.body.insertBefore(head, document.body.firstChild);
