@@ -1,0 +1,144 @@
+/* CASPER — classic Wikipedia (Vector 2010) skin. */
+html, body { margin: 0; padding: 0; }
+html { background: #f6f6f6; }
+body.mediawiki {
+  background: #f6f6f6;
+  color: #222;
+  font: 13px/1.5 sans-serif;
+  min-height: 100vh;
+}
+a { color: #0645ad; text-decoration: none; }
+a:visited { color: #0b0080; }
+a:hover { text-decoration: underline; }
+#mw-panel { position: absolute; top: 0; left: 0; width: 11em; padding: 160px 0 2em 0; }
+#p-logo { position: absolute; top: 0; left: 0; width: 11em; height: 160px; text-align: center; }
+#p-logo a { display: block; color: #222; text-decoration: none; padding-top: 18px; }
+#p-logo .wiki-mark {
+  display: block; width: 72px; height: 72px; margin: 0 auto 8px;
+  border: 1px solid #a7d7f9; border-radius: 50%; background: #fff;
+  font: bold 32px/72px Georgia, "Times New Roman", serif; color: #36c;
+}
+#p-logo b { display: block; font: normal 20px/1.1 Georgia, "Times New Roman", serif; }
+#mw-panel .portal { margin: 0 0.6em 1em 0.7em; }
+#mw-panel .portal h3 {
+  font: bold 11px sans-serif; color: #4d4d4d; border-bottom: 1px solid #d8d8d8;
+  margin: 0 0 4px; padding: 0 0 2px;
+}
+#mw-panel .portal ul { list-style: none; margin: 0; padding: 0.3em 0 0 0.4em; font-size: 12px; }
+#mw-panel .portal li { margin: 0; padding: 0.15em 0; }
+#mw-panel .portal a.on { font-weight: bold; }
+#mw-head { position: absolute; top: 0; right: 0; left: 11em; height: 5em; }
+#p-personal { position: absolute; top: 0.33em; right: 0.75em; }
+#p-personal ul { list-style: none; margin: 0; padding: 0; font-size: 12px; }
+#p-personal li { display: inline; margin-left: 0.75em; }
+#p-search { position: absolute; top: 2.6em; right: 0.75em; }
+#p-search input[type="search"] {
+  width: 14em; border: 1px solid #a2a9b1; padding: 2px 4px; font: 13px sans-serif; background: #fff;
+}
+#p-search button {
+  font: 13px sans-serif; padding: 1px 8px; border: 1px solid #a2a9b1; background: #f8f9fa; cursor: pointer;
+}
+#content {
+  margin: 2.5em 0 0 11em; padding: 1.25em 1.5em 1.5em; background: #fff;
+  border: 1px solid #a7d7f9; border-right: 0; min-height: 80vh; position: relative; z-index: 1;
+}
+#firstHeading {
+  font: normal 1.8em Georgia, "Times New Roman", Times, serif;
+  border-bottom: 1px solid #a2a9b1; margin: 0 0 0.25em; padding: 0 0 0.15em; color: #000;
+}
+#siteSub { font-size: 12px; color: #54595d; margin: 0 0 1em; }
+#p-namespaces { margin: 0 0 0.4em; }
+#p-namespaces ul { list-style: none; margin: 0; padding: 0; border-bottom: 1px solid #a7d7f9; }
+#p-namespaces li { display: inline-block; margin: 0 2px 0 0; }
+#p-namespaces a {
+  display: inline-block; padding: 3px 8px 2px; background: #f3f3f3;
+  border: 1px solid #a7d7f9; border-bottom: 0; font-size: 12px; color: #0645ad;
+}
+#p-namespaces li.selected a {
+  background: #fff; font-weight: bold; color: #222; padding-bottom: 3px; margin-bottom: -1px;
+}
+#bodyContent h2 {
+  font: normal 1.5em Georgia, "Times New Roman", Times, serif;
+  border-bottom: 1px solid #a2a9b1; margin: 1.2em 0 0.4em; padding-bottom: 0.15em;
+}
+#bodyContent h3 { font: bold 1.2em Georgia, "Times New Roman", Times, serif; margin: 1em 0 0.3em; }
+#bodyContent p { margin: 0.4em 0 0.6em; }
+#bodyContent ul, #bodyContent ol { margin: 0.3em 0 0.6em 1.6em; padding: 0; }
+.mw-muted { color: #54595d; font-size: 12px; }
+.toc {
+  display: table; background: #f8f9fa; border: 1px solid #a2a9b1;
+  padding: 7px; margin: 0.6em 0 1em; font-size: 13px;
+}
+#toctitle { text-align: center; }
+#toctitle h2 { display: inline; border: 0; font: bold 13px sans-serif; }
+.toc ul { list-style: none; margin: 0.3em 0 0; padding: 0; }
+table.wikitable, table.infobox, table.casper-table, table.sector-table, table.ed-table {
+  border-collapse: collapse; margin: 0.6em 0 1em; background: #fff;
+}
+table.wikitable, table.casper-table, table.sector-table, table.ed-table { border: 1px solid #a2a9b1; }
+table.wikitable th, table.wikitable td,
+table.casper-table th, table.casper-table td,
+table.sector-table th, table.sector-table td,
+table.ed-table th, table.ed-table td {
+  border: 1px solid #a2a9b1; padding: 4px 8px; vertical-align: top;
+}
+table.wikitable th, table.casper-table th, table.sector-table th, table.ed-table th {
+  background: #eaecf0; text-align: center; font-weight: bold;
+}
+table.infobox {
+  float: right; clear: right; width: 22em; margin: 0 0 1em 1.4em;
+  background: #f8f9fa; border: 1px solid #a2a9b1; font-size: 88%;
+}
+table.infobox caption { font: bold 1.15em Georgia, "Times New Roman", serif; padding: 6px 4px 4px; }
+table.infobox th, table.infobox td { border-top: 1px solid #a2a9b1; padding: 4px 6px; vertical-align: top; }
+table.infobox th[colspan] { background: #cedff2; text-align: center; font-weight: bold; }
+table.infobox th { text-align: left; width: 40%; font-weight: normal; }
+#footer {
+  margin-left: 11em; padding: 1.2em 1.5em 2em; border-top: 1px solid #a7d7f9;
+  font-size: 12px; color: #333; background: #f6f6f6;
+}
+#footer ul { list-style: none; margin: 0 0 0.6em; padding: 0; }
+#footer li { display: inline; margin-right: 1.2em; }
+.ed-top, .ed-foot, .ed-desk, .ed-tools, .ed-motto { display: none !important; }
+.ed-wrap, .desktop-page, .sector-wrap { max-width: none; margin: 0; padding: 0; background: transparent; }
+.ed-hero, .ed-shots, .ed-aside, .ed-watermark, .ed-quote, .ed-points, .ed-actions,
+.ed-facts, .ed-progress, .ed-bar, .ed-feat img, .ed-tabs { display: none !important; }
+.ed-kicker, .desktop-kicker { font: bold 12px sans-serif; color: #54595d; }
+.desktop-hero h2, .sector-title {
+  font: normal 1.6em Georgia, "Times New Roman", serif;
+  border-bottom: 1px solid #a2a9b1; margin: 0 0 0.4em;
+}
+.desktop-actions a, .btn-gold, .btn-ghost, .join-links a, .sector-open, .sector-back {
+  display: inline; background: none !important; border: 0 !important;
+  color: #0645ad !important; padding: 0 !important; font: inherit !important;
+  text-transform: none !important;
+}
+.desktop-card, .ca-card, .sector-card, .ed-card, .join-cta, .desktop-doc {
+  background: #fff; border: 0; box-shadow: none; padding: 0 0 0.8em; margin: 0 0 0.8em;
+}
+.desktop-card h3, .ca-card h3, .sector-card h3, .desktop-section-title {
+  font: normal 1.35em Georgia, "Times New Roman", serif;
+  border-bottom: 1px solid #a2a9b1; margin: 1em 0 0.4em; text-transform: none; color: #000;
+}
+.desktop-row { display: table; width: 100%; border-bottom: 1px solid #eaecf0; padding: 3px 0; }
+.desktop-row span, .desktop-row b { display: table-cell; }
+.desktop-row span { color: #54595d; width: 46%; }
+.desktop-row b { font-weight: normal; }
+.desktop-muted { color: #54595d; font-size: 12px; }
+.desktop-stats, .sector-stats {
+  display: table; border: 1px solid #a2a9b1; background: #f8f9fa; margin: 0.4em 0 1em;
+}
+.desktop-stat, .sector-stat {
+  display: table-cell; padding: 6px 12px; border-right: 1px solid #a2a9b1; text-align: center;
+}
+.desktop-grid2, .desktop-grid3, .desktop-grid4 { display: block; }
+.sector-rule, .join-warn { background: #f8f9fa; border: 1px solid #a2a9b1; padding: 6px 8px; margin: 0.6em 0; }
+code, pre { font: 12px/1.4 "Courier New", Courier, monospace; background: #f8f9fa; border: 1px solid #eaecf0; padding: 1px 4px; }
+pre { display: block; padding: 8px; overflow: auto; }
+@media (max-width: 720px) {
+  #mw-panel, #p-logo { position: static; width: auto; height: auto; padding: 8px 12px; }
+  #mw-head { position: static; height: auto; padding: 8px 12px; left: 0; }
+  #p-personal, #p-search { position: static; display: block; margin: 6px 0; }
+  #content, #footer { margin-left: 0; }
+  table.infobox { float: none; width: auto; }
+}
