@@ -11,7 +11,7 @@ CSN remains the source of truth. Raw files are available under `data/futsal/`, `
 Load the core parser first, then the API client:
 
 ```html
-<script src="assets/casper-core.js"></script>
+<script src="assets/js/core.js"></script>
 <script src="api/v1/casper-api.js"></script>
 ```
 
