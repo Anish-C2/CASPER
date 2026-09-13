@@ -1,3 +1,0 @@
-/* Sidebar layout is defined in casper.css. This file remains for legacy <link> tags. */
-nav.main:before{display:none !important}
-nav.main ul{flex-direction:column;border:0;background:transparent}
