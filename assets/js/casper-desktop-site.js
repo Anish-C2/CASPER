@@ -34,8 +34,7 @@
     return b;
   }
   function scorerText(list) { return (list || []).map(function (x) { return x.name + (x.n > 1 ? ' \u00d7' + x.n : ''); }).join(', '); }
-  function isSeasonal(t) { return t && t.meta && (t.meta.e === 'Seasonal Awards' || t.meta.typ === 'seasonal');
-  }
+  function isSeasonal(t) { return t && t.meta && (t.meta.e === 'Seasonal Awards' || t.meta.typ === 'seasonal'); }
   function hero(k, t, p, a) {
     return '<div class="desktop-hero"><div class="desktop-kicker">' + esc(k) + '</div><h2>' + esc(t) + '</h2><p>' + p + '</p>' +
       (a ? '<div class="desktop-actions">' + a + '</div>' : '') + '</div>';
@@ -185,19 +184,19 @@
       }
       (s.tournaments || []).forEach(function (t) {
         if (isSeasonal(t)) {
-          Object.keys(t.aw || {}).forEach(function (k) { items.push('SEASONAL \u00b7 ' + k.toUpperCase() + ': ' + String(t.aw[k]).toUpperCase()); });
+          Object.keys(t.aw || {}).forEach(function (k) { items.push('SEASONAL · ' + k.toUpperCase() + ': ' + String(t.aw[k]).toUpperCase()); });
           return;
         }
         if (t.aw && t.aw.ch) items.push((t.meta.e || t.meta.id).toUpperCase() + ' CHAMPIONS: ' + String(holderName(t, 'ch')).toUpperCase());
-        else if (/progress/i.test((t.meta && t.meta.sts) || '')) items.push((t.meta.e || '').toUpperCase() + ' IN PROGRESS \u00b7 ' + String(t.meta.sts).toUpperCase());
+        else if (/progress/i.test((t.meta && t.meta.sts) || '')) items.push((t.meta.e || '').toUpperCase() + ' IN PROGRESS · ' + String(t.meta.sts).toUpperCase());
         if (t.nt) items.push((t.meta.e || t.meta.id).toUpperCase() + ': ' + String(t.nt).replace(/\s+/g, ' ').trim());
       });
       (s.matches || []).forEach(function (m) {
         var nm = namesOf(m);
         if (m.kind !== 'cricket' && Math.abs((m.sh || 0) - (m.sa || 0)) >= 5)
-          items.push('THRASHING \u00b7 ' + (m.event || c.name).toUpperCase() + ': ' + nm.hn.toUpperCase() + ' ' + scoreOf(m) + ' ' + nm.an.toUpperCase());
+          items.push('THRASHING · ' + (m.event || c.name).toUpperCase() + ': ' + nm.hn.toUpperCase() + ' ' + scoreOf(m) + ' ' + nm.an.toUpperCase());
         [].concat(m.gh || [], m.ga || []).forEach(function (g) {
-          if (g.n >= 3) items.push('HAT-TRICK \u00b7 ' + String(g.name).toUpperCase() + ' \u00d7' + g.n + ' IN ' + String(m.event || '').toUpperCase());
+          if (g.n >= 3) items.push('HAT-TRICK · ' + String(g.name).toUpperCase() + ' ×' + g.n + ' IN ' + String(m.event || '').toUpperCase());
         });
       });
     });
@@ -213,90 +212,18 @@
       if (r === 'H') wins[m.home] = (wins[m.home] || 0) + 1;
       else if (r === 'A') wins[m.away] = (wins[m.away] || 0) + 1;
     });
-    return Object.keys(item.t.n || {}).map(function (a) { return tLink(a, item.t.n[a].name) + ' ' + (wins[a] || 0); }).join('  \u00b7  ') + ' \u00b7 ' + (item.t.m || []).length + ' played';
-  }
-  function groupTable(t) {
-    var clubs = {};
-    Object.keys(t.n || {}).forEach(function (a) { clubs[a] = { abbr: a, name: t.n[a].name, p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0 }; });
-    (t.m || []).filter(function (m) { return !m.stage || m.stage === 'GS'; }).forEach(function (m) {
-      if (!clubs[m.home] || !clubs[m.away]) return;
-      var h = clubs[m.home], a = clubs[m.away];
-      h.p++; a.p++; h.gf += m.sh; h.ga += m.sa; a.gf += m.sa; a.ga += m.sh;
-      var r = resOf(m);
-      if (r === 'H') { h.w++; a.l++; h.pts += 3; } else if (r === 'A') { a.w++; h.l++; a.pts += 3; } else { h.d++; a.d++; h.pts++; a.pts++; }
-    });
-    return Object.values(clubs).sort(function (a, b) { return b.pts - a.pts || (b.gf - b.ga) - (a.gf - a.ga); });
-  }
-  function home() {
-    var f = facts();
-    var sportCards = sports().map(function (c) {
-      var p = leaders(c)[0], field = c.scoring === 'cricket' ? 'runs' : 'goals';
-      var crown = (typeof crownWinner === 'function' && crownWinner(c)) ? clubName(sp(c.id), crownWinner(c)) : '\u2014';
-      return card(esc(c.name), '<div class="desktop-big">' + sp(c.id).matches.length + '</div><div class="desktop-muted">matches \u00b7 ' + esc(c.crown) + '</div>' +
-        row('Champion', esc(crown)) + row('Leader', p ? pLink(p.name) : '\u2014') + row(field === 'runs' ? 'Runs' : 'Goals', p ? (p[field] || 0) : 0));
-    }).join('');
-    var live = inProgress().map(function (x) {
-      return card(esc(x.cfg.name) + ' \u00b7 LIVE', row(cLink(x.t.meta.id, x.t.meta.e), esc(x.t.meta.sts || '')) + row('Series', seriesSummary(x)));
-    }).join('');
-    var seasonal = tourneys().filter(function (x) { return isSeasonal(x.t); })[0];
-    var season = '';
-    if (seasonal) {
-      season = '<div class="desktop-section"><div class="desktop-section-title">SEASON 2026A</div><div class="desktop-grid2">' +
-        card('AWARDS', Object.keys(seasonal.t.aw || {}).map(function (k) { return row(esc(k), pLink(seasonal.t.aw[k])); }).join('')) +
-        card('POINTS', (seasonal.t.ranks || []).map(function (r) { return row(r.rank + '. ' + pLink(r.name), (r.points != null ? r.points + ' pts' : '')); }).join('')) +
-        '</div></div>';
-    }
-    return '<div class="desktop-page">' +
-      hero('COMPETITIVE ATHLETICS & SPORTS PROMOTION', 'CASPER ARCHIVE',
-        'Tables, news, records and honours generated from CSN season files.',
-        '<a href="#archive">ARCHIVE</a><a href="#news">NEWS</a><a href="#statistics">STATS</a><a href="#live-scores">LIVE</a><a href="#results">RESULTS</a>') +
-      '<div class="desktop-stats"><div class="desktop-stat"><b>' + f.players + '</b><span>Players</span></div><div class="desktop-stat"><b>' + f.clubs + '</b><span>Clubs</span></div><div class="desktop-stat"><b>' + f.matches + '</b><span>Matches</span></div><div class="desktop-stat"><b>' + f.comps + '</b><span>Competitions</span></div><div class="desktop-stat"><b>' + f.goals + '</b><span>Goals</span></div><div class="desktop-stat"><b>' + f.hats + '</b><span>Hats</span></div></div>' +
-      (live ? '<div class="desktop-section"><div class="desktop-section-title">IN PROGRESS</div><div class="desktop-grid2">' + live + '</div></div>' : '') +
-      '<div class="desktop-section"><div class="desktop-section-title">SPORT DESKS</div><div class="desktop-grid3">' + sportCards + '</div></div>' +
-      season +
-      '<div class="desktop-section"><div class="desktop-section-title">BULLETIN</div>' + card('AUTO NEWS', buildNews().slice(0, 14).map(function (n) { return row(esc(n), ''); }).join('')) + '</div></div>';
-  }
-  function archivePage() {
-    return '<div class="desktop-page">' + hero('ARCHIVE', 'COMPETITION ARCHIVE', 'Loaded CSN competitions.') +
-      card('ALL', comps().map(function (x) {
-        return row(esc(x.cfg.name) + ' \u00b7 ' + cLink(x.t.meta.id, x.t.meta.e) + '<div class="desktop-muted">' + esc((x.t.meta.sts || '') + ' \u00b7 ' + (x.t.m || []).length + ' matches') + '</div>', esc(champOf(x) || 'Open'));
-      }).join('')) + '</div>';
+    return Object.keys(wins).sort(function (a, b) { return wins[b] - wins[a]; }).map(function (k) { return row(esc(clubName(item.sport, k)), wins[k] + ' win' + (wins[k] === 1 ? '' : 's')); }).join('') || '<div class="desktop-muted">No decided games.</div>';
   }
   function competitionPage(id) {
-    id = decodeURIComponent(id || '');
-    var hit = tourneys().find(function (x) { return x.t.meta && x.t.meta.id === id; });
+    var hit = tourneys().find(function (x) { return String(x.t.meta.id) === String(id); });
     if (!hit) return simple('COMPETITION', 'Not found.');
-    var t = hit.t;
-    var meta = ((STATE.config && STATE.config.metadataFields) || []).map(function (f) {
-      var val = t.meta[f.key]; if (!val) return '';
-      if (f.key === 'dos' || f.key === 'doc') val = prettyDate(val);
-      return row(esc(f.label), esc(val));
-    }).join('');
-    var matches = (t.m || []).map(function (m, i) {
-      var extra = [];
-      if (scorerText(m.gh)) extra.push('GH ' + scorerText(m.gh));
-      if (scorerText(m.ga)) extra.push('GA ' + scorerText(m.ga));
-      if (scorerText(m.ah)) extra.push('AH ' + scorerText(m.ah));
-      if (scorerText(m.aa)) extra.push('AA ' + scorerText(m.aa));
-      var hn = t.n[m.home] ? t.n[m.home].name : m.home, an = t.n[m.away] ? t.n[m.away].name : m.away;
-      return row(esc((m.stageLabel || m.stage || ('G' + (i + 1))) + ' \u00b7 ' + hn + ' vs ' + an) + (extra.length ? '<div class="desktop-muted">' + esc(extra.join(' \u00b7 ')) + '</div>' : ''), esc(scoreOf(m)));
-    }).join('');
-    var awards = Object.keys(t.aw || {}).map(function (code) { return row(esc(awardLabel(code)), esc(holderName(t, code))); }).join('');
-    var table = groupTable(t).filter(function (r) { return r.p > 0; }).map(function (r, i) {
-      return row((i + 1) + '. ' + tLink(r.abbr, r.name), r.pts + ' pts \u00b7 ' + r.w + '-' + r.d + '-' + r.l);
-    }).join('');
-    var squads = Object.keys(t.sq || {}).map(function (a) {
-      var sq = t.sq[a];
-      return row(tLink(a, t.n[a] ? t.n[a].name : a), esc((sq.start || []).join(', ') + (sq.bench && sq.bench.length ? ' | ' + sq.bench.join(', ') : '')));
-    }).join('');
-    var board = {};
-    (t.m || []).forEach(function (m) {
-      function add(list, f) { (list || []).forEach(function (g) { var k = cleanName(g.name); if (!k) return; if (!board[k]) board[k] = { g: 0, a: 0 }; board[k][f] += g.n || 0; }); }
-      add(m.gh, 'g'); add(m.ga, 'g'); add(m.ah, 'a'); add(m.aa, 'a');
-    });
-    var boardRows = Object.keys(board).sort(function (a, b) { return board[b].g - board[a].g; }).map(function (n, i) {
-      return row((i + 1) + '. ' + pLink(n), board[n].g + ' G \u00b7 ' + board[n].a + ' A');
-    }).join('');
+    var t = hit.t, s = hit.sport;
+    var meta = row('Sport', esc(hit.cfg.name)) + row('Status', esc(t.meta.sts || '')) + row('Date', prettyDate(t.meta.d || '')) + row('Champion', esc(champOf(hit) || '—'));
+    var matches = (t.m || []).map(function (m) { var nm = namesOf(m); return row(esc(nm.hn + ' vs ' + nm.an), esc(scoreOf(m))); }).join('');
+    var squads = Object.keys(t.n || {}).map(function (k) { return row(esc(k), esc(t.n[k].name || k)); }).join('');
+    var table = (t.tbl || []).map(function (r) { return row(esc(r.team || r.t || ''), esc([r.p, r.w, r.d, r.l, r.pts].join(' · '))); }).join('');
+    var boardRows = [];
+    [].concat(t.gh || [], t.ga || []).forEach(function (g) { boardRows.push(row(pLink(g.name), (g.n || 0) + ' G')); });
     return '<div class="desktop-page">' + hero(hit.cfg.name.toUpperCase(), String(t.meta.e || id).toUpperCase(), esc(t.nt || (t.meta.sts || ''))) +
       (/progress/i.test(t.meta.sts || '') ? card('SERIES', seriesSummary(hit)) : '') +
       '<div class="desktop-grid2">' + card('FILE CARD', meta) + card('AWARDS', awards + (t.ranks || []).map(function (r) { return row(r.rank + '. ' + pLink(r.name), r.points != null ? r.points + ' pts' : ''); }).join('')) + '</div>' +
@@ -307,7 +234,7 @@
     return '<div class="desktop-page">' + hero('PLAYER CENTRE', 'PLAYER ARCHIVE', 'CSN totals plus registry players.') +
       '<div class="desktop-grid4">' + players().sort(function (a, b) { return b.goals - a.goals || b.titles - a.titles; }).map(function (p) {
         var info = regOf(p.name) || {};
-        return card(pLink(p.name), row('ID', esc(info.id || '\u2014')) + row('Pos', esc(info.position || '\u2014')) + row('G/A', p.goals + '/' + p.assists) + row('Runs', p.runs) + row('W-D-L', p.wins + '-' + p.draws + '-' + p.losses) + row('Titles', p.titles));
+        return card(pLink(p.name), row('ID', esc(info.id || '—')) + row('Pos', esc(info.position || '—')) + row('G/A', p.goals + '/' + p.assists) + row('Runs', p.runs) + row('W-D-L', p.wins + '-' + p.draws + '-' + p.losses) + row('Titles', p.titles));
       }).join('') + '</div></div>';
   }
   function playerPage(name) {
@@ -323,11 +250,11 @@
       [].concat(m.gh || [], m.ga || [], m.ah || [], m.aa || []).forEach(function (z) { if (cleanName(z.name).toLowerCase() === display.toLowerCase()) hit = true; });
       if (!hit) return;
       var nm = namesOf(m);
-      last.push(row(esc(x.cfg.name + ' \u00b7 ' + (m.event || '') + ' \u00b7 ' + nm.hn + ' vs ' + nm.an), esc(scoreOf(m))));
+      last.push(row(esc(x.cfg.name + ' · ' + (m.event || '') + ' · ' + nm.hn + ' vs ' + nm.an), esc(scoreOf(m))));
     });
     return '<div class="desktop-page">' + hero('PLAYER RECORD', display.toUpperCase(), esc(ctxOf(display) || 'Archive totals.')) +
       '<div class="desktop-grid2">' +
-      card('REGISTRY', row('ID', esc(info.id || '\u2014')) + row('Clubs', esc((info.clubs || []).join(', ') || '\u2014')) + row('Sports', esc((info.sports || []).join(', ') || '\u2014')) + row('Status', esc(info.status || 'Active'))) +
+      card('REGISTRY', row('ID', esc(info.id || '—')) + row('Clubs', esc((info.clubs || []).join(', ') || '—')) + row('Sports', esc((info.sports || []).join(', ') || '—')) + row('Status', esc(info.status || 'Active'))) +
       card('OUTPUT', row('Goals', p ? p.goals : 0) + row('Assists', p ? p.assists : 0) + row('Runs', p ? p.runs : 0) + row('Hats', p ? p.hatTricks : 0) + row('Matches', p ? p.matches : 0) + row('W-D-L', p ? p.wins + '-' + p.draws + '-' + p.losses : '0-0-0') + row('Titles', p ? p.titles : 0) + row('CS', p ? p.cleanSheets : 0)) +
       '</div>' + card('HONOURS', ((p && p.awards) || []).map(function (a) { return row(esc(a.label || a.code), esc((a.event || '') + ' ' + (a.season || ''))); }).join('')) +
       card('MATCHES', last.slice(-12).reverse().join('')) + '</div>';
@@ -335,7 +262,7 @@
   function teamsPage() {
     return '<div class="desktop-page">' + hero('ARCHIVE', 'CLUB DIRECTORY', 'Championship trophies only.') +
       '<div class="desktop-grid4">' + teams().sort(function (a, b) { return b.titles - a.titles; }).map(function (t) {
-        return card(tLink(t.abbr, t.name), '<div class="desktop-big">' + t.titles + '</div><div class="desktop-muted">titles</div>' + row('Player', t.player ? pLink(t.player) : '\u2014') + row('W-D-L', t.wins + '-' + t.draws + '-' + t.losses) + row('Form', esc((t.form || []).slice(-6).join(' ') || '\u2014')));
+        return card(tLink(t.abbr, t.name), '<div class="desktop-big">' + t.titles + '</div><div class="desktop-muted">titles</div>' + row('Player', t.player ? pLink(t.player) : '—') + row('W-D-L', t.wins + '-' + t.draws + '-' + t.losses) + row('Form', esc((t.form || []).slice(-6).join(' ') || '—')));
       }).join('') + '</div></div>';
   }
   function teamPage(abbr) {
@@ -343,9 +270,9 @@
     var t = teams().find(function (x) { return String(x.abbr) === abbr; });
     if (!t) return simple('CLUB', 'Not found.');
     var matches = allMatches().filter(function (x) { return x.m.home === abbr || x.m.away === abbr; }).slice(-12).reverse().map(function (x) {
-      var nm = namesOf(x.m); return row(esc(x.cfg.name + ' \u00b7 ' + (x.m.event || '') + ' \u00b7 ' + nm.hn + ' vs ' + nm.an), esc(scoreOf(x.m)));
+      var nm = namesOf(x.m); return row(esc(x.cfg.name + ' · ' + (x.m.event || '') + ' · ' + nm.hn + ' vs ' + nm.an), esc(scoreOf(x.m)));
     }).join('');
-    return '<div class="desktop-page">' + hero('CLUB RECORD', String(t.name).toUpperCase(), 'Owner: ' + (t.player || '\u2014')) +
+    return '<div class="desktop-page">' + hero('CLUB RECORD', String(t.name).toUpperCase(), 'Owner: ' + (t.player || '—')) +
       '<div class="desktop-grid2">' + card('RECORD', row('Matches', t.matches) + row('W-D-L', t.wins + '-' + t.draws + '-' + t.losses) + row('Titles', t.titles) + row('GF/GA', t.gf + '/' + t.ga) + row('CS', t.cleanSheets)) +
       card('TROPHIES', (t.trophies || []).map(function (z) { return row(esc(z.label || z.code), esc((z.event || '') + ' ' + (z.season || ''))); }).join('')) + '</div>' + card('RESULTS', matches) + '</div>';
   }
@@ -353,14 +280,14 @@
     var rows = [];
     tourneys().forEach(function (x) {
       Object.keys(x.t.aw || {}).forEach(function (code) {
-        rows.push(row(esc(x.cfg.name) + ' \u00b7 ' + cLink(x.t.meta.id, x.t.meta.e) + ' \u00b7 ' + esc(awardLabel(code)), esc(holderName(x.t, code))));
+        rows.push(row(esc(x.cfg.name) + ' · ' + cLink(x.t.meta.id, x.t.meta.e) + ' · ' + esc(awardLabel(code)), esc(holderName(x.t, code))));
       });
     });
     return '<div class="desktop-page">' + hero('ARCHIVE', 'AWARDS', 'Every CSN award block including seasonal honours.') + card('ROLL', rows.join('')) + '</div>';
   }
   function rankingPage() {
     var club = (typeof globalRanks === 'function' ? globalRanks() : teams().sort(function (a, b) { return b.titles - a.titles; })).map(function (r, i) {
-      return row((i + 1) + '. ' + tLink(r.abbr, r.name), (r.avgRank != null ? Number(r.avgRank).toFixed(2) + ' avg \u00b7 ' : '') + Math.round(r.totalScore || r.titles || 0));
+      return row((i + 1) + '. ' + tLink(r.abbr, r.name), (r.avgRank != null ? Number(r.avgRank).toFixed(2) + ' avg · ' : '') + Math.round(r.totalScore || r.titles || 0));
     }).join('');
     var seasonal = tourneys().filter(function (x) { return isSeasonal(x.t); })[0];
     var pts = seasonal ? (seasonal.t.ranks || []).map(function (r) { return row(r.rank + '. ' + pLink(r.name), r.points != null ? r.points + ' pts' : ''); }).join('') : '';
@@ -369,13 +296,13 @@
   }
   function recordsPage() {
     return '<div class="desktop-page">' + hero('ARCHIVE', 'RECORDS', 'misc.json marks plus live CSN computations.') +
-      card('MARKS', computedRecords().map(function (r) { return row(esc(r.label), esc(r.value + ' \u00b7 ' + r.holder) + (r.context ? '<div class="desktop-muted">' + esc(r.context) + '</div>' : '')); }).join('')) + '</div>';
+      card('MARKS', computedRecords().map(function (r) { return row(esc(r.label), esc(r.value + ' · ' + r.holder) + (r.context ? '<div class="desktop-muted">' + esc(r.context) + '</div>' : '')); }).join('')) + '</div>';
   }
   function statisticsPage() {
     var f = facts();
-    var named = eventScorers().map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G \u00b7 ' + p.assists + ' A \u00b7 ' + p.hats + ' HT'); }).join('');
-    var wr = players().filter(function (p) { return p.matches >= 3; }).sort(function (a, b) { return (b.wins / p.matches) - (a.wins / a.matches); }).map(function (p, i) {
-      return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% \u00b7 ' + p.wins + '-' + p.draws + '-' + p.losses);
+    var named = eventScorers().map(function (p, i) { return row((i + 1) + '. ' + pLink(p.name), p.goals + ' G · ' + p.assists + ' A · ' + p.hats + ' HT'); }).join('');
+    var wr = players().filter(function (p) { return p.matches >= 3; }).sort(function (a, b) { return (b.wins / b.matches) - (a.wins / a.matches); }).map(function (p, i) {
+      return row((i + 1) + '. ' + pLink(p.name), ((p.wins / p.matches) * 100).toFixed(1) + '% · ' + p.wins + '-' + p.draws + '-' + p.losses);
     }).join('');
     return '<div class="desktop-page">' + hero('ARCHIVE', 'STATISTICS', 'Generated from loaded season files.') +
       '<div class="desktop-stats"><div class="desktop-stat"><b>' + f.players + '</b><span>Players</span></div><div class="desktop-stat"><b>' + f.matches + '</b><span>Matches</span></div><div class="desktop-stat"><b>' + f.goals + '</b><span>Goals</span></div><div class="desktop-stat"><b>' + f.pens + '</b><span>Pens</span></div></div>' +
@@ -385,7 +312,7 @@
   function resultsPage() {
     return '<div class="desktop-page">' + hero('RESULTS', 'FULL RESULTS', 'Every stored match.') + card('LIST', allMatches().slice().reverse().map(function (x) {
       var nm = namesOf(x.m);
-      return row(esc(x.cfg.name + ' \u00b7 ' + (x.m.event || '') + ' \u00b7 ' + nm.hn + ' vs ' + nm.an), esc(scoreOf(x.m)));
+      return row(esc(x.cfg.name + ' · ' + (x.m.event || '') + ' · ' + nm.hn + ' vs ' + nm.an), esc(scoreOf(x.m)));
     }).join('')) + '</div>';
   }
   function livePage() {
