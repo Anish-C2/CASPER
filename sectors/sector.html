@@ -3,14 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>CASPER — Sector</title>
+<title>Sector — CASPER</title>
+<link rel="stylesheet" href="../assets/css/wiki.css">
 <script>
-(function(){
-  var q=location.search||'';
-  var h=location.hash||'';
-  location.replace('sectorrender.html'+q+h);
+(function () {
+  var id = new URLSearchParams(location.search).get('id') || 'sector-1';
+  window.CASPER_PAGE = { mode: 'sector-render', sector: id, sport: null, root: '../' };
 })();
 </script>
 </head>
-<body><p>Opening sector archive…</p></body>
-</html>
+<body class="mediawiki vector">
+<div id="content">
+  <h1 id="firstHeading">Sector</h1>
+  <div id="bodyContent">
+    <div id="siteSub">From CASPER, the competitive athletics archive</div>
+    <div id="app"><div id="sector-app"><p>Resolving this sector…</p></div></div>
+  </div>
+</div>
+<script src="../assets/casper-core.js"></script>
+<script src="../assets/js/casper-engine.js"></script>
+<script src="../assets/js/chrome.js"></script>
+<script src="sector-render.js"></script>
+</body></html>
