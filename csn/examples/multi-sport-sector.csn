@@ -1,0 +1,61 @@
+# CSN 2.0 example: multiple sports and sectors
+
+[
+id=fb-s1-2026a;
+sport=football;
+sector=s1;
+season=2026A;
+name=Sector 1 Football League;
+type=league;
+format=round_robin;
+status=Completed;
+
+teams(
+bbu=Black Bird United;
+rsa=Real Saltlake;
+);
+
+matches(
+m001=bbu-rsa:3-2;
+);
+]
+
+[
+id=fs-s1-2026a;
+sport=futsal;
+sector=s1;
+season=2026A;
+name=Pioneer Cup;
+type=cup;
+format=groups_then_knockout;
+status=Completed;
+
+teams(
+bbu=Black Bird United;
+kko=Kolkata Kous;
+);
+
+matches(
+m101=bbu-kko:3-3;
+);
+]
+
+[
+id=cr-s2-2026a;
+sport=cricket;
+sector=s2;
+season=2026A;
+name=Titan Cup;
+type=cup;
+format=knockout;
+status=Completed;
+
+teams(
+bbu=Black Bird United;
+mar=Martians;
+);
+
+matches(
+m201=bbu-mar:26/0(1.0)-0/1(0.1);
+);
+]
